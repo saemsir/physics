@@ -3,381 +3,965 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saem Physics | NEET JEE MIT | Prof. Gilbert Strang</title>
+    <title>Saem Global EdTech - Muhammad Saem Sir | Visual Physics for CBSE, NEET & JEE</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter (UI) & Lora (Mathematical Elegance) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome for Icons -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: STIX Two Text (Math Serif), Inter (Clean Sans), Fira Code (Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#0284c7', // 3Blue1Brown primary cyan
+                            cyanDark: '#0369a1',
+                            amber: '#d97706', // 3Blue1Brown accent gold
+                            bgLight: '#ffffff',
+                            bgOff: '#f8fafc',
+                            cardBg: '#ffffff',
+                            border: '#e2e8f0',
+                            textDark: '#0f172a',
+                            textMuted: '#475569'
+                        }
+                    },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        serif: ['Lora', 'serif'],
-                    },
-                    colors: {
-                        primary: '#1e293b', // Deep Slate
-                        accent: '#2563eb',  // Clean Blue
+                        math: ['STIX Two Text', 'serif'],
+                        mono: ['Fira Code', 'monospace']
                     }
                 }
             }
         }
     </script>
-
     <style>
-        body { background-color: #ffffff; color: #1e293b; }
-        .math-font { font-family: 'Lora', serif; }
-        
-        /* Minimalist shadow for cards */
-        .clean-card {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-        }
-        .clean-card:hover {
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
-            border-color: #cbd5e1;
+        /* 3Blue1Brown Clean Mathematical Grid Pattern */
+        .math-paper-grid {
+            background-color: #ffffff;
+            background-image: 
+                linear-gradient(to right, rgba(226, 232, 240, 0.6) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
+            background-size: 32px 32px;
         }
 
-        /* Subtle grid background for the Hero */
-        .bg-grid-pattern {
-            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
-            background-size: 24px 24px;
+        /* Smooth pulsing ring for WhatsApp CTA */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 16px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
+        .whatsapp-pulse {
+            animation: pulse-ring 2s infinite;
+        }
+
+        /* Custom subtle scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0284c7; }
     </style>
 </head>
-<body class="antialiased selection:bg-accent selection:text-white">
+<body class="bg-white text-slate-800 font-sans antialiased selection:bg-sky-100 selection:text-sky-900">
 
-    <!-- Navigation -->
-    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200 px-6 lg:px-20 py-4 flex justify-between items-center">
-        <a href="#" class="text-xl font-bold font-serif flex items-center gap-2 text-slate-800">
-            <div class="w-8 h-8 bg-slate-900 text-white rounded flex items-center justify-center font-sans text-sm font-bold">SP</div>
-            Saem Physics
-        </a>
-        <div class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
-            <a href="#about" class="hover:text-accent transition">About</a>
-            <a href="#batches" class="hover:text-accent transition">Batches</a>
-            <a href="#lectures" class="hover:text-accent transition">Lectures</a>
-            <a href="#testimonials" class="hover:text-accent transition">Toppers</a>
+    <!-- Top Announcement & Multi-Door Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 transition-all">
+        <!-- Multi-Door Sub-Bar -->
+        <div class="bg-slate-900 text-slate-300 text-[11px] font-mono py-1.5 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center space-x-4">
+                    <span class="text-sky-400 font-semibold"><i class="fa-solid fa-globe mr-1"></i> Global EdTech Ecosystem</span>
+                    <span class="hidden md:inline text-slate-500">|</span>
+                    <span class="hidden md:inline">India (CBSE / JEE / NEET) + UK, USA, GCC & Saudi Arabia</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <a href="#global-gcc" class="hover:text-white transition-colors text-amber-400 font-semibold"><i class="fa-solid fa-kaaba mr-1"></i> Saudi / GCC 1:1 Portal</a>
+                    <span class="text-slate-600">|</span>
+                    <a href="https://t.me/easyphysicsclasses" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-telegram mr-1"></i> Telegram DPPs</a>
+                </div>
+            </div>
         </div>
-        <a href="#enquiry" class="bg-slate-900 text-white px-5 py-2 rounded text-sm font-semibold hover:bg-slate-800 transition">
-            Contact Us
-        </a>
-    </nav>
+
+        <!-- Main Navigation -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                
+                <!-- Logo -->
+                <a href="#home" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-600 group-hover:bg-sky-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-square-root-variable text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold font-math tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors">
+                            Saem Physics
+                        </span>
+                        <span class="block text-[10px] uppercase font-mono tracking-widest text-sky-600 font-semibold">Visual NEET & JEE &bull; Kota Pedagogy</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav (Multi-Door Doors) -->
+                <nav class="hidden lg:flex items-center space-x-5 text-sm font-medium text-slate-600">
+                    <a href="#home" class="hover:text-sky-600 transition-colors">Home</a>
+                    <a href="#physics-9-10" class="hover:text-sky-600 transition-colors">9-10 Foundation</a>
+                    <a href="#physics-11-12" class="hover:text-sky-600 transition-colors">11-12 Board</a>
+                    <a href="#jee-neet" class="hover:text-sky-600 transition-colors">JEE / NEET</a>
+                    <a href="#lectures" class="hover:text-sky-600 transition-colors">Lectures</a>
+                    <a href="#shop" class="hover:text-sky-600 transition-colors">Shop & PDFs</a>
+                    <a href="#global-gcc" class="hover:text-amber-600 font-semibold transition-colors">Global/GCC</a>
+                    <a href="#contact" class="hover:text-sky-600 transition-colors">Contact</a>
+                </nav>
+
+                <!-- Primary CTA -->
+                <div class="hidden sm:flex items-center space-x-3">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="px-4 py-2.5 text-xs font-semibold rounded-lg bg-sky-600 hover:bg-sky-700 text-white shadow-sm hover:shadow-md transition-all flex items-center space-x-2">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Free Physics Class</span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu toggle -->
+                <button id="menu-btn" class="lg:hidden p-2 text-slate-600 hover:text-slate-900 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden border-b border-slate-200 bg-slate-50 px-4 pt-3 pb-6 space-y-2">
+            <a href="#home" class="block py-2 px-3 rounded-lg text-slate-700 hover:bg-white hover:text-sky-600">Home</a>
+            <a href="#physics-9-10" class="block py-2 px-3 rounded-lg text-slate-700 hover:bg-white hover:text-sky-600">School 9-10 Foundation</a>
+            <a href="#physics-11-12" class="block py-2 px-3 rounded-lg text-slate-700 hover:bg-white hover:text-sky-600">Class 11-12 Board</a>
+            <a href="#jee-neet" class="block py-2 px-3 rounded-lg text-slate-700 hover:bg-white hover:text-sky-600">JEE / NEET Exam Tracks</a>
+            <a href="#lectures" class="block py-2 px-3 rounded-lg text-slate-700 hover:bg-white hover:text-sky-600">YouTube Lectures & Playlists</a>
+            <a href="#shop" class="block py-2 px-3 rounded-lg text-slate-700 hover:bg-white hover:text-sky-600">Shop & Digital Library</a>
+            <a href="#global-gcc" class="block py-2 px-3 rounded-lg text-amber-700 bg-amber-50 font-semibold">Global & Saudi GCC 1:1 Tutoring</a>
+            <a href="#contact" class="block py-2 px-3 rounded-lg text-slate-700 hover:bg-white hover:text-sky-600">Contact & Kota Location</a>
+            <div class="pt-2">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" target="_blank" class="block w-full text-center py-2.5 bg-sky-600 text-white font-semibold rounded-lg text-sm">
+                    Book Free Physics Demo Class
+                </a>
+            </div>
+        </div>
+    </header>
 
     <!-- Hero Section -->
-    <section class="relative py-20 px-6 lg:px-20 bg-grid-pattern bg-slate-50 border-b border-slate-200 overflow-hidden">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <!-- Left Text Content -->
-            <div>
-                <div class="inline-block border border-blue-200 bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-6">
-                    NEET | JEE Advanced | CBSE
+    <section id="home" class="relative math-paper-grid border-b border-slate-200 py-16 lg:py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-mono font-medium">
+                        <i class="fa-solid fa-atom text-sky-600"></i>
+                        <span>KOTA PEDAGOGY &bull; CBSE, NEET & JEE &bull; GLOBAL DIASPORA</span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-math text-slate-900 leading-tight">
+                        Mastering Physics through <br/>
+                        <span class="text-sky-600 italic">Visual Intuition</span> & Math Rigor
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Personalized coaching for CBSE, NEET & JEE aspirants by <strong class="text-slate-900 font-semibold">Muhammad Saem Sir</strong> (B.Tech EE, RTU Kota, Class of 2019)[span_8](start_span)[span_8](end_span). Deconstruct vectors, calculus, and field equations with 3Blue1Brown visual clarity.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="w-full sm:w-auto px-6 py-3.5 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-xl shadow-sm hover:shadow-md transition-all text-center flex items-center justify-center space-x-2">
+                            <span>Book a Free Demo Class</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+
+                        <a href="#global-gcc" 
+                           class="w-full sm:w-auto px-6 py-3.5 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-xl transition-all text-center flex items-center justify-center space-x-2 shadow-sm">
+                            <i class="fa-solid fa-kaaba text-sm"></i>
+                            <span>Saudi / GCC 1:1 Tutoring</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="pt-8 border-t border-slate-200 grid grid-cols-3 gap-4">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold font-math text-slate-900">5+ Years</div>
+                            <div class="text-xs text-slate-500 font-medium">Kota Teaching Exp.[span_9](start_span)[span_9](end_span)</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold font-math text-sky-600">1,000+</div>
+                            <div class="text-xs text-slate-500 font-medium">Students Mentored[span_10](start_span)[span_10](end_span)</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold font-math text-amber-600">B.Tech EE</div>
+                            <div class="text-xs text-slate-500 font-medium">RTU Kota (2019)[span_11](start_span)[span_11](end_span)</div>
+                        </div>
+                    </div>
                 </div>
-                <h1 class="text-4xl md:text-5xl font-bold mb-6 font-serif leading-tight text-slate-900">
-                    Master Mathematics & Physics with True Intuition.
-                </h1>
-                <p class="text-lg text-slate-600 mb-8 max-w-xl">
-                    Move beyond rote memorization. We bring MIT-level clarity to competitive exam preparation, helping you visualize concepts just like top global rankers.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <!-- Prominent Demo Button to Google Form -->
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" target="_blank" class="bg-accent text-white px-8 py-3.5 rounded shadow-lg shadow-blue-500/30 font-bold text-center flex items-center justify-center gap-2 hover:bg-blue-700 transition transform hover:-translate-y-0.5">
-                        <i class="fas fa-video"></i> Book a Free Demo Class
-                    </a>
-                    <a href="#batches" class="border border-slate-300 bg-white text-slate-800 px-8 py-3.5 rounded font-bold text-center hover:bg-slate-50 transition">
-                        View Batches
-                    </a>
+
+                <!-- Right Visual: Interactive 3B1B Math Canvas -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="w-full max-w-md bg-white rounded-2xl border border-slate-200 p-4 shadow-sm relative space-y-3">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                            <span class="text-xs font-mono text-slate-500"><i class="fa-solid fa-circle-dot text-sky-500 mr-1"></i> Wave Function Mechanics</span>
+                            <span class="text-[10px] font-mono bg-sky-50 text-sky-700 px-2 py-0.5 rounded">3B1B Engine</span>
+                        </div>
+                        
+                        <!-- Canvas Element -->
+                        <div class="relative bg-slate-50 rounded-xl overflow-hidden border border-slate-200 h-60">
+                            <canvas id="math-canvas" class="w-full h-full block"></canvas>
+                        </div>
+
+                        <!-- Math Formula Box -->
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 font-math text-xs text-slate-700 flex justify-between items-center">
+                            <span>$\Psi(x,t) = A e^{i(kx - \omega t)}$</span>
+                            <span class="text-amber-600 font-mono text-[10px]"><i class="fa-solid fa-check mr-1"></i> Visualized</span>
+                        </div>
+                    </div>
                 </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Multi-Door Product Offer Ladder Section -->
+    <section id="doors" class="py-16 lg:py-20 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <span class="text-sky-600 font-mono text-xs uppercase tracking-wider font-semibold">Structured Offer Ladder</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-math text-slate-900 mt-1">
+                    Choose Your Academic Door
+                </h2>
+                <p class="text-slate-600 text-sm mt-2">Tailored curriculum pathways for foundation, board exams, competitive tracks, and international students[span_12](start_span)[span_12](end_span)[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span).</p>
+                <div class="w-12 h-0.5 bg-sky-600 mx-auto mt-4"></div>
             </div>
 
-            <!-- Right Image Content -->
-            <div class="relative mx-auto w-full max-w-md">
-                <div class="absolute inset-0 bg-slate-200 translate-x-4 translate-y-4 rounded-xl"></div>
-                <!-- Real image of Prof Gilbert Strang -->
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Gilbert_Strang_at_MIT_%28cropped%29.jpg" alt="Prof. Gilbert Strang" class="relative z-10 w-full h-auto rounded-xl shadow-xl object-cover grayscale hover:grayscale-0 transition duration-700">
-                <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-xl border border-slate-100 z-20">
-                    <p class="font-serif italic text-sm text-slate-700">"Mathematics is a beautiful subject... I hope you see it."</p>
-                    <p class="text-xs text-slate-400 mt-1 font-bold">— Prof. Gilbert Strang</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Door 1 -->
+                <div id="physics-9-10" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center text-xl mb-4 font-bold font-math">9-10</div>
+                        <h3 class="text-lg font-bold text-slate-900">School Foundation</h3>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">Early conceptual mechanics, motion equations, and mathematical rigor for classes 8-10[span_15](start_span)[span_15](end_span)[span_16](start_span)[span_16](end_span).</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" target="_blank" class="text-xs font-semibold text-sky-600 hover:text-sky-800 flex items-center justify-between">
+                            <span>Explore Foundation</span> <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Door 2 -->
+                <div id="physics-11-12" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center text-xl mb-4 font-bold font-math">11-12</div>
+                        <h3 class="text-lg font-bold text-slate-900">CBSE / ISC Boards</h3>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">Rigorous derivation mastery, numerical problem-solving, and board exam presentation standards[span_17](start_span)[span_17](end_span)[span_18](start_span)[span_18](end_span).</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" target="_blank" class="text-xs font-semibold text-sky-600 hover:text-sky-800 flex items-center justify-between">
+                            <span>Explore Board Track</span> <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Door 3 -->
+                <div id="jee-neet" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4 font-bold font-math">ENT</div>
+                        <h3 class="text-lg font-bold text-slate-900">JEE & NEET Mastery</h3>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">Kota pedagogy, option elimination shortcuts, NTA PYQ analysis, and high-yield problem solving[span_19](start_span)[span_19](end_span)[span_20](start_span)[span_20](end_span).</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" target="_blank" class="text-xs font-semibold text-amber-600 hover:text-amber-800 flex items-center justify-between">
+                            <span>Explore Exam Tracks</span> <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Door 4 -->
+                <div id="global-gcc" class="bg-white rounded-2xl border-2 border-amber-500/80 p-6 shadow-md transition-all flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-slate-900 text-[9px] font-mono font-bold px-3 py-1 rounded-bl">PREMIUM</div>
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-kaaba"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">Saudi & GCC 1:1</h3>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">English-first instruction with Arabic support as language capability grows, parent reporting, and flexible evening slots[span_21](start_span)[span_21](end_span).</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <a href="https://wa.me/917033131480" target="_blank" class="text-xs font-semibold text-amber-600 hover:text-amber-800 flex items-center justify-between">
+                            <span>Book GCC Trial</span> <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 px-6 lg:px-20 bg-white">
-        <div class="max-w-7xl mx-auto text-center mb-12">
-            <h2 class="text-3xl font-bold font-serif text-slate-900 mb-4">Our Hall of Fame</h2>
-            <p class="text-slate-500">Consistent top ranks across India's toughest examinations.</p>
-        </div>
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Topper 1 -->
-            <div class="clean-card p-8 rounded-xl text-center">
-                <div class="text-accent text-3xl mb-4 font-bold font-serif">AIR 12</div>
-                <h3 class="text-xl font-bold text-slate-800">Aarav Sharma</h3>
-                <p class="text-sm font-semibold text-slate-500 mb-4">JEE Advanced 2024</p>
-                <p class="text-slate-600 italic text-sm">"The visual approach to matrices and calculus fundamentally changed how I solved physics mechanics problems."</p>
+    <!-- Faculty & Mentor Section -->
+    <section id="about" class="py-16 lg:py-24 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <span class="text-sky-600 font-mono text-xs uppercase tracking-wider font-semibold">Faculty Profile</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-math text-slate-900 mt-1">
+                    Meet Muhammad Saem Sir
+                </h2>
+                <p class="text-slate-600 text-sm mt-2">Dedicated Kota Physics Mentor & EdTech Specialist[span_22](start_span)[span_22](end_span)</p>
+                <div class="w-12 h-0.5 bg-sky-600 mx-auto mt-4"></div>
             </div>
-            <!-- Topper 2 -->
-            <div class="clean-card p-8 rounded-xl text-center">
-                <div class="text-accent text-3xl mb-4 font-bold font-serif">695 / 720</div>
-                <h3 class="text-xl font-bold text-slate-800">Neha Gupta</h3>
-                <p class="text-sm font-semibold text-slate-500 mb-4">NEET UG 2024</p>
-                <p class="text-slate-600 italic text-sm">"Clear, noise-free lectures focused entirely on concepts. The best decision I made for my Physics prep."</p>
-            </div>
-            <!-- Topper 3 -->
-            <div class="clean-card p-8 rounded-xl text-center">
-                <div class="text-accent text-3xl mb-4 font-bold font-serif">99.6%</div>
-                <h3 class="text-xl font-bold text-slate-800">Rohan Verma</h3>
-                <p class="text-sm font-semibold text-slate-500 mb-4">CBSE Class 12 Boards</p>
-                <p class="text-slate-600 italic text-sm">"Perfect alignment with NCERT, yet teaches you the 'why' behind every formula. Scored 100 in Math."</p>
+
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- Avatar & Credentials -->
+                <div class="lg:col-span-4 text-center lg:text-left flex flex-col items-center lg:items-start space-y-4">
+                    <div class="w-32 h-32 rounded-2xl bg-sky-100 border border-sky-200 flex items-center justify-center text-sky-600 text-5xl">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold font-math text-slate-900">Muhammad Saem Sir</h3>
+                        <p class="text-sky-600 text-sm font-medium">Physics Specialist[span_23](start_span)[span_23](end_span)</p>
+                        <p class="text-xs text-slate-500 mt-1"><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i> Vigyan Nagar, Kota, Rajasthan - 324005[span_24](start_span)[span_24](end_span)[span_25](start_span)[span_25](end_span)</p>
+                    </div>
+                    <div class="flex space-x-2 pt-2">
+                        <a href="https://youtube.com/@SaemPhysics" target="_blank" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-red-50 hover:text-red-600 transition-colors">
+                            <i class="fa-brands fa-youtube mr-1"></i> YouTube
+                        </a>
+                        <a href="https://t.me/easyphysicsclasses" target="_blank" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-sky-50 hover:text-sky-600 transition-colors">
+                            <i class="fa-brands fa-telegram mr-1"></i> Telegram
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Academic Info -->
+                <div class="lg:col-span-8 space-y-4 text-sm text-slate-600 leading-relaxed border-t lg:border-t-0 lg:border-l border-slate-200 pt-6 lg:pt-0 lg:pl-8">
+                    <p>
+                        Muhammad Saem Sir holds a <strong class="text-slate-900 font-semibold">B.Tech degree in Electrical Engineering</strong> from Rajasthan Technical University (RTU), Kota (Class of 2019)[span_26](start_span)[span_26](end_span).
+                    </p>
+                    <p>
+                        With over <strong class="text-slate-900 font-semibold">5+ years of classroom and online teaching experience</strong> in Kota's premier coaching ecosystem, he has mentored more than 1,000 students for NEET and JEE Main/Advanced[span_27](start_span)[span_27](end_span).
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="block text-slate-900 font-semibold text-xs mb-1"><i class="fa-solid fa-shapes text-sky-600 mr-1"></i> Visual First Methodology</span>
+                            <span class="text-xs text-slate-500">Replacing memory-heavy shortcuts with clear geometric and vector visualizations.</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="block text-slate-900 font-semibold text-xs mb-1"><i class="fa-solid fa-bullseye text-amber-600 mr-1"></i> Targeted Problem Solving</span>
+                            <span class="text-xs text-slate-500">Rigorous focus on NTA PYQs, option elimination, and high-yielding exam topics.</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- YouTube Lectures Section (Linear Algebra MIT 18.06) -->
-    <section id="lectures" class="py-20 px-6 lg:px-20 bg-slate-50 border-y border-slate-200">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+    <!-- Video Lectures Section -->
+    <section id="lectures" class="py-16 lg:py-24 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <span class="text-sky-600 font-mono text-xs uppercase tracking-wider font-semibold">Free Classroom Series</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-math text-slate-900 mt-1">
+                    Featured YouTube Playlists
+                </h2>
+                <p class="text-slate-600 text-sm mt-2">Comprehensive visual lectures from Saem Physics YouTube channel[span_28](start_span)[span_28](end_span)</p>
+                <div class="w-12 h-0.5 bg-sky-600 mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Playlist 1 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="relative pt-[56.25%] bg-slate-100">
+                        <iframe class="absolute inset-0 w-full h-full" 
+                                src="https://www.youtube.com/embed/videoseries?list=PLjEkQ_dvlIGldL1j2dvWCqR-9J_d1rQTv" 
+                                title="Mechanics Playlist" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <span class="text-[10px] font-mono font-semibold text-sky-700 bg-sky-50 px-2 py-0.5 rounded">PLAYLIST 01</span>
+                        <h3 class="text-base font-bold text-slate-900 mt-2">Mechanics & Motion Analysis</h3>
+                        <p class="text-xs text-slate-500 mt-1">Vectors, Kinematics, Laws of Motion & Energy.</p>
+                    </div>
+                </div>
+
+                <!-- Playlist 2 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="relative pt-[56.25%] bg-slate-100">
+                        <iframe class="absolute inset-0 w-full h-full" 
+                                src="https://www.youtube.com/embed/videoseries?list=PLjEkQ_dvlIGmJCQv5QKkfGWBBCLtzgQr1" 
+                                title="Electromagnetism Playlist" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <span class="text-[10px] font-mono font-semibold text-sky-700 bg-sky-50 px-2 py-0.5 rounded">PLAYLIST 02</span>
+                        <h3 class="text-base font-bold text-slate-900 mt-2">Electromagnetism & Circuits</h3>
+                        <p class="text-xs text-slate-500 mt-1">Electrostatics, Current Electricity & Magnetism.</p>
+                    </div>
+                </div>
+
+                <!-- Playlist 3 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="relative pt-[56.25%] bg-slate-100">
+                        <iframe class="absolute inset-0 w-full h-full" 
+                                src="https://www.youtube.com/embed/videoseries?list=PLjEkQ_dvlIGm7bdSxNp61GfEgAgpcb7c3" 
+                                title="Modern Physics Playlist" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <span class="text-[10px] font-mono font-semibold text-sky-700 bg-sky-50 px-2 py-0.5 rounded">PLAYLIST 03</span>
+                        <h3 class="text-base font-bold text-slate-900 mt-2">Modern Physics & Quantum</h3>
+                        <p class="text-xs text-slate-500 mt-1">Dual Nature, Atoms, Nuclei & Semiconductors.</p>
+                    </div>
+                </div>
+
+                <!-- Playlist 4 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="relative pt-[56.25%] bg-slate-100">
+                        <iframe class="absolute inset-0 w-full h-full" 
+                                src="https://www.youtube.com/embed/videoseries?list=PLjEkQ_dvlIGlSG-7nXNKbiVVAdYpspGVS" 
+                                title="Optics Playlist" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <span class="text-[10px] font-mono font-semibold text-sky-700 bg-sky-50 px-2 py-0.5 rounded">PLAYLIST 04</span>
+                        <h3 class="text-base font-bold text-slate-900 mt-2">Ray & Wave Optics</h3>
+                        <p class="text-xs text-slate-500 mt-1">Reflection, Refraction, Lenses & Wave Phenomena.</p>
+                    </div>
+                </div>
+
+                <!-- Playlist 5 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="relative pt-[56.25%] bg-slate-100">
+                        <iframe class="absolute inset-0 w-full h-full" 
+                                src="https://www.youtube.com/embed/videoseries?list=PLjEkQ_dvlIGk-_9QojNMbg6vhRrk1C0Yg" 
+                                title="Waves & Oscillations Playlist" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <span class="text-[10px] font-mono font-semibold text-sky-700 bg-sky-50 px-2 py-0.5 rounded">PLAYLIST 05</span>
+                        <h3 class="text-base font-bold text-slate-900 mt-2">Waves & Oscillations (SHM)</h3>
+                        <p class="text-xs text-slate-500 mt-1">Simple Harmonic Motion, Wave Equations & Sound.</p>
+                    </div>
+                </div>
+
+                <!-- Playlist 6 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="relative pt-[56.25%] bg-slate-100">
+                        <iframe class="absolute inset-0 w-full h-full" 
+                                src="https://www.youtube.com/embed/videoseries?list=PLjEkQ_dvlIGmj-GBjRI7WC_vzYn4-7Si5" 
+                                title="Thermodynamics Playlist" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <span class="text-[10px] font-mono font-semibold text-sky-700 bg-sky-50 px-2 py-0.5 rounded">PLAYLIST 06</span>
+                        <h3 class="text-base font-bold text-slate-900 mt-2">Thermodynamics & Heat</h3>
+                        <p class="text-xs text-slate-500 mt-1">Thermal Properties, Kinetic Theory & Thermo Laws.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Books & Revision Material Section -->
+    <section id="book" class="py-16 lg:py-24 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8 sm:p-12 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- Book Cover Graphic -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="w-60 h-80 bg-slate-900 rounded-xl p-6 border-2 border-amber-500/80 flex flex-col justify-between text-white shadow-lg relative group">
+                        <div>
+                            <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-widest block">REVISION GUIDE</span>
+                            <h3 class="text-3xl font-extrabold font-math text-white mt-4 tracking-tight">PHYSICS FOX</h3>
+                            <p class="text-xs text-slate-400 mt-1">Global Physics Revision Handbook</p>
+                        </div>
+                        <div class="border-t border-slate-800 pt-3">
+                            <span class="text-[10px] text-slate-400 font-mono block">By Muhammad Saem Sir[span_29](start_span)[span_29](end_span)</span>
+                            <span class="text-[10px] text-amber-400 font-mono">NEET &bull; JEE MAIN &bull; ADVANCED</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Details -->
+                <div class="lg:col-span-7 space-y-4">
+                    <span class="px-2.5 py-1 rounded bg-amber-50 text-amber-800 border border-amber-200 text-xs font-semibold font-mono">
+                        <i class="fa-solid fa-star text-amber-500 mr-1"></i> Amazon Official Publication[span_30](start_span)[span_30](end_span)
+                    </span>
+                    <h2 class="text-3xl font-bold font-math text-slate-900">
+                        PHYSICS FOX — Global Physics Revision Book[span_31](start_span)[span_31](end_span)
+                    </h2>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Designed for rapid revision before NEET and JEE exams[span_32](start_span)[span_32](end_span). Contains visual summary maps, formula sheets, common mistake alerts, and solved high-yield problem patterns[span_33](start_span)[span_33](end_span).
+                    </p>
+                    
+                    <ul class="space-y-2 text-xs text-slate-700 font-medium">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-sky-600"></i> <span>100% NCERT & JEE Syllabus Mind Maps</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-sky-600"></i> <span>Previous 15-Years Formula Frequency Analysis</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-sky-600"></i> <span>Quick QR Links for Video Explanations</span></li>
+                    </ul>
+
+                    <div class="pt-2">
+                        <a href="https://amzn.in/d/06cnzCiR" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center space-x-2 px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-xl text-xs uppercase tracking-wider transition-all shadow-sm">
+                            <i class="fa-brands fa-amazon text-sm"></i>
+                            <span>Buy Physics Fox on Amazon[span_34](start_span)[span_34](end_span)[span_35](start_span)[span_35](end_span)</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Material & DPP "Khazana" Storefront -->
+    <section id="shop" class="py-16 lg:py-24 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
                 <div>
-                    <h2 class="text-3xl font-bold font-serif text-slate-900 mb-2">Linear Algebra Masterclass</h2>
-                    <p class="text-slate-500">Essential foundations directly embedded from MIT OpenCourseWare.</p>
+                    <span class="text-sky-600 font-mono text-xs uppercase tracking-wider font-semibold">Study Material Hub</span>
+                    <h2 class="text-3xl font-bold font-math text-slate-900 mt-1">
+                        DPP & Khazana Resource Store[span_36](start_span)[span_36](end_span)
+                    </h2>
+                    <p class="text-slate-600 text-sm mt-1">High-quality PDF study cards secured via AWS S3 and PayPal/Razorpay[span_37](start_span)[span_37](end_span)[span_38](start_span)[span_38](end_span)</p>
                 </div>
-                <a href="https://youtube.com/playlist?list=PL36EC6A6180271B0F&si=GPv7fLWSvTTkngqA" target="_blank" class="text-accent font-semibold hover:underline flex items-center">
-                    View Full Playlist <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                </a>
+                <div class="mt-4 md:mt-0 flex items-center space-x-3 text-xs font-mono text-slate-500">
+                    <span class="px-2.5 py-1 rounded bg-white border border-slate-200"><i class="fa-brands fa-aws text-amber-600 mr-1"></i> AWS Hosted[span_39](start_span)[span_39](end_span)</span>
+                    <span class="px-2.5 py-1 rounded bg-white border border-slate-200"><i class="fa-brands fa-paypal text-sky-600 mr-1"></i> PayPal & Razorpay Secured[span_40](start_span)[span_40](end_span)</span>
+                </div>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Video 1 -->
-                <div class="clean-card rounded-lg overflow-hidden p-2">
-                    <div class="aspect-video relative rounded bg-slate-200">
-                        <iframe class="absolute top-0 left-0 w-full h-full rounded" src="https://www.youtube.com/embed/ZK3O402wf1c?rel=0" title="The Geometry of Linear Equations" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            <!-- PDF Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col justify-between hover:border-sky-300 transition-all shadow-sm">
+                    <div>
+                        <div class="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center text-lg mb-3">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900">Mechanics DPP Vault[span_41](start_span)[span_41](end_span)</h3>
+                        <p class="text-xs text-slate-500 mt-1">50+ Topic-wise Daily Practice Papers with step hints[span_42](start_span)[span_42](end_span).</p>
+                        <span class="inline-block text-[10px] font-mono text-sky-700 bg-sky-50 px-2 py-0.5 rounded mt-3">Class 11 & NEET[span_43](start_span)[span_43](end_span)</span>
                     </div>
-                    <div class="p-3 text-sm font-semibold text-slate-800">Lec 1: Geometry of Linear Equations</div>
-                </div>
-                <!-- Video 2 -->
-                <div class="clean-card rounded-lg overflow-hidden p-2">
-                    <div class="aspect-video relative rounded bg-slate-200">
-                        <iframe class="absolute top-0 left-0 w-full h-full rounded" src="https://www.youtube.com/embed/QVKj3LDF9H4?rel=0" title="Elimination with Matrices" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-sm font-bold font-mono text-slate-900">&dollar;2.99</span>
+                        <button onclick="openModal('Mechanics DPP Vault', '$2.99')" class="text-xs font-semibold text-sky-600 hover:text-sky-800">
+                            Download PDF <i class="fa-solid fa-download ml-1"></i>
+                        </button>
                     </div>
-                    <div class="p-3 text-sm font-semibold text-slate-800">Lec 2: Elimination with Matrices</div>
                 </div>
-                <!-- Video 3 -->
-                <div class="clean-card rounded-lg overflow-hidden p-2">
-                    <div class="aspect-video relative rounded bg-slate-200">
-                        <iframe class="absolute top-0 left-0 w-full h-full rounded" src="https://www.youtube.com/embed/FX4C-JpTFgY?rel=0" title="Multiplication and Inverse Matrices" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col justify-between hover:border-sky-300 transition-all shadow-sm">
+                    <div>
+                        <div class="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center text-lg mb-3">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900">Electrodynamics Pack[span_44](start_span)[span_44](end_span)</h3>
+                        <p class="text-xs text-slate-500 mt-1">Electrostatics, Capacitance & Circuits solved problems[span_45](start_span)[span_45](end_span).</p>
+                        <span class="inline-block text-[10px] font-mono text-sky-700 bg-sky-50 px-2 py-0.5 rounded mt-3">Class 12 & JEE[span_46](start_span)[span_46](end_span)</span>
                     </div>
-                    <div class="p-3 text-sm font-semibold text-slate-800">Lec 3: Multiplication and Inverse</div>
-                </div>
-                <!-- Video 4 -->
-                <div class="clean-card rounded-lg overflow-hidden p-2">
-                    <div class="aspect-video relative rounded bg-slate-200">
-                        <iframe class="absolute top-0 left-0 w-full h-full rounded" src="https://www.youtube.com/embed/kYB8IZa5AuE?rel=0" title="Factorization into A = LU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-sm font-bold font-mono text-slate-900">&dollar;3.49</span>
+                        <button onclick="openModal('Electrodynamics Pack', '$3.49')" class="text-xs font-semibold text-sky-600 hover:text-sky-800">
+                            Download PDF <i class="fa-solid fa-download ml-1"></i>
+                        </button>
                     </div>
-                    <div class="p-3 text-sm font-semibold text-slate-800">Lec 4: Factorization into A = LU</div>
                 </div>
-                <!-- Video 5 -->
-                <div class="clean-card rounded-lg overflow-hidden p-2">
-                    <div class="aspect-video relative rounded bg-slate-200">
-                        <iframe class="absolute top-0 left-0 w-full h-full rounded" src="https://www.youtube.com/embed/8o5Cmfpeo6g?rel=0" title="Transposes, Permutations, Spaces R^n" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col justify-between hover:border-sky-300 transition-all shadow-sm">
+                    <div>
+                        <div class="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center text-lg mb-3">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900">Optics Formula Sheet[span_47](start_span)[span_47](end_span)</h3>
+                        <p class="text-xs text-slate-500 mt-1">Ray & Wave Optics high-yield visual mind maps[span_48](start_span)[span_48](end_span).</p>
+                        <span class="inline-block text-[10px] font-mono text-sky-700 bg-sky-50 px-2 py-0.5 rounded mt-3">Quick Revision[span_49](start_span)[span_49](end_span)</span>
                     </div>
-                    <div class="p-3 text-sm font-semibold text-slate-800">Lec 5: Transposes & Permutations</div>
-                </div>
-                <!-- Video 6 -->
-                <div class="clean-card rounded-lg overflow-hidden p-2">
-                    <div class="aspect-video relative rounded bg-slate-200">
-                        <iframe class="absolute top-0 left-0 w-full h-full rounded" src="https://www.youtube.com/embed/J66x2k-AHAQ?rel=0" title="Column Space and Nullspace" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-sm font-bold font-mono text-slate-900">&dollar;1.99</span>
+                        <button onclick="openModal('Optics Formula Sheet', '$1.99')" class="text-xs font-semibold text-sky-600 hover:text-sky-800">
+                            Download PDF <i class="fa-solid fa-download ml-1"></i>
+                        </button>
                     </div>
-                    <div class="p-3 text-sm font-semibold text-slate-800">Lec 6: Column Space and Nullspace</div>
                 </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col justify-between hover:border-sky-300 transition-all shadow-sm">
+                    <div>
+                        <div class="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center text-lg mb-3">
+                            <i class="fa-solid fa-atom"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900">Modern Physics Vault[span_50](start_span)[span_50](end_span)</h3>
+                        <p class="text-xs text-slate-500 mt-1">Photoelectric, Atoms, Nuclei & Semiconductor notes[span_51](start_span)[span_51](end_span).</p>
+                        <span class="inline-block text-[10px] font-mono text-sky-700 bg-sky-50 px-2 py-0.5 rounded mt-3">High Yield 2026[span_52](start_span)[span_52](end_span)</span>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-sm font-bold font-mono text-slate-900">&dollar;2.99</span>
+                        <button onclick="openModal('Modern Physics Vault', '$2.99')" class="text-xs font-semibold text-sky-600 hover:text-sky-800">
+                            Download PDF <i class="fa-solid fa-download ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Batches Section (Minimalist Enrollment) -->
-    <section id="batches" class="py-20 px-6 lg:px-20 bg-white">
-        <div class="max-w-7xl mx-auto text-center mb-12">
-            <h2 class="text-3xl font-bold font-serif text-slate-900 mb-4">Upcoming Batches</h2>
-            <p class="text-slate-500">Clean structures, transparent pricing, uncompromised quality.</p>
-        </div>
-        
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- JEE Batch -->
-            <div class="clean-card rounded-xl p-8 flex flex-col relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-slate-800"></div>
-                <h3 class="text-2xl font-bold text-slate-900 mb-1">Target JEE 2025</h3>
-                <p class="text-sm font-semibold text-accent mb-6">Class 12 & Droppers</p>
-                <ul class="text-sm text-slate-600 space-y-3 mb-8 flex-1">
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Math & Physics Modules</li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Advanced Level DPPs</li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Weekly AITS</li>
-                </ul>
-                <div class="text-2xl font-bold text-slate-900 mb-4">₹4,500 <span class="text-sm text-slate-400 line-through font-normal">₹9,000</span></div>
-                <!-- WhatsApp Enrollment Forwarding -->
-                <a href="https://wa.me/917033131480?text=Hello,%20I%20would%20like%20to%20enroll%20in%20the%20Target%20JEE%202025%20Batch." target="_blank" class="w-full bg-slate-900 text-white font-bold py-3 rounded text-sm text-center hover:bg-slate-800 transition flex items-center justify-center gap-2">
-                    <i class="fab fa-whatsapp text-green-400 text-lg"></i> Enroll via WhatsApp
-                </a>
+    <!-- Interactive Exam Predicted Questions Section -->
+    <section id="ai-questions" class="py-16 lg:py-24 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <span class="text-sky-600 font-mono text-xs uppercase tracking-wider font-semibold">3B1B AI Predictor Engine[span_53](start_span)[span_53](end_span)</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-math text-slate-900 mt-1">
+                    40 Exam Predicted Questions (2026)[span_54](start_span)[span_54](end_span)
+                </h2>
+                <p class="text-slate-600 text-sm mt-2">Curated high-yielding NEET & JEE questions with step-by-step formula hints[span_55](start_span)[span_55](end_span)</p>
+                <div class="w-12 h-0.5 bg-sky-600 mx-auto mt-4"></div>
             </div>
 
-            <!-- NEET Batch -->
-            <div class="clean-card rounded-xl p-8 flex flex-col relative overflow-hidden transform md:-translate-y-4 border-accent shadow-lg">
-                <div class="absolute top-0 left-0 w-full h-1 bg-accent"></div>
-                <div class="absolute top-4 right-4 bg-accent/10 text-accent text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Popular</div>
-                <h3 class="text-2xl font-bold text-slate-900 mb-1">Target NEET 2025</h3>
-                <p class="text-sm font-semibold text-accent mb-6">Class 11 & 12</p>
-                <ul class="text-sm text-slate-600 space-y-3 mb-8 flex-1">
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Physics Foundation</li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> NCERT Line-by-Line</li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Offline OMR Practice</li>
-                </ul>
-                <div class="text-2xl font-bold text-slate-900 mb-4">₹3,999 <span class="text-sm text-slate-400 line-through font-normal">₹8,000</span></div>
-                <!-- WhatsApp Enrollment Forwarding -->
-                <a href="https://wa.me/917033131480?text=Hello,%20I%20would%20like%20to%20enroll%20in%20the%20Target%20NEET%202025%20Batch." target="_blank" class="w-full bg-accent text-white font-bold py-3 rounded text-sm text-center hover:bg-blue-700 transition flex items-center justify-center gap-2">
-                    <i class="fab fa-whatsapp text-white text-lg"></i> Enroll via WhatsApp
-                </a>
+            <!-- Controls -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex flex-wrap gap-2 justify-center" id="filter-container">
+                    <button onclick="filterTopic('All')" class="filter-tag px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white">All Topics</button>
+                    <button onclick="filterTopic('Electrodynamics')" class="filter-tag px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100">Electrodynamics</button>
+                    <button onclick="filterTopic('Mechanics')" class="filter-tag px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100">Mechanics</button>
+                    <button onclick="filterTopic('Modern Physics')" class="filter-tag px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100">Modern Physics</button>
+                    <button onclick="filterTopic('Optics')" class="filter-tag px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100">Optics</button>
+                </div>
+
+                <div class="w-full md:w-64">
+                    <input type="text" id="question-input" onkeyup="searchQuestion()" placeholder="Search formula / term..." class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-sky-500">
+                </div>
             </div>
 
-            <!-- CBSE Batch -->
-            <div class="clean-card rounded-xl p-8 flex flex-col relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-slate-800"></div>
-                <h3 class="text-2xl font-bold text-slate-900 mb-1">CBSE Boards</h3>
-                <p class="text-sm font-semibold text-accent mb-6">Class 12</p>
-                <ul class="text-sm text-slate-600 space-y-3 mb-8 flex-1">
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Strict CBSE Pattern</li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Subjective Writing Prep</li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 10 Years PYQs</li>
-                </ul>
-                <div class="text-2xl font-bold text-slate-900 mb-4">₹2,500 <span class="text-sm text-slate-400 line-through font-normal">₹5,000</span></div>
-                <!-- WhatsApp Enrollment Forwarding -->
-                <a href="https://wa.me/917033131480?text=Hello,%20I%20would%20like%20to%20enroll%20in%20the%20CBSE%20Boards%20Batch." target="_blank" class="w-full bg-slate-900 text-white font-bold py-3 rounded text-sm text-center hover:bg-slate-800 transition flex items-center justify-center gap-2">
-                    <i class="fab fa-whatsapp text-green-400 text-lg"></i> Enroll via WhatsApp
-                </a>
+            <!-- Question Vault Cards Container -->
+            <div id="questions-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Dynamically populated via JS -->
             </div>
         </div>
     </section>
 
     <!-- Enquiry Form & Map Section -->
-    <section id="enquiry" class="py-20 px-6 lg:px-20 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            
-            <!-- Clean Enquiry Form (Web3Forms) -->
-            <div class="clean-card p-8 md:p-10 rounded-2xl w-full">
-                <h3 class="text-2xl font-bold font-serif mb-2">Have Questions?</h3>
-                <p class="text-slate-500 text-sm mb-6">Leave your details below and our counseling team will get back to you shortly.</p>
+    <section id="contact" class="py-16 lg:py-24 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 
-                <form action="https://api.web3forms.com/submit" method="POST" class="space-y-5">
-                    <!-- Web3Forms Access Key -->
-                    <input type="hidden" name="access_key" value="b2b598ce-2ae0-4a70-8430-c5e51d5fc641">
-                    
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Student Name</label>
-                        <input type="text" name="name" required placeholder="John Doe" class="w-full bg-white border border-slate-300 text-slate-900 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Mobile Number</label>
-                        <input type="tel" name="phone" required placeholder="+91 XXXXX XXXXX" class="w-full bg-white border border-slate-300 text-slate-900 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Select Course</label>
-                        <select name="course" required class="w-full bg-white border border-slate-300 text-slate-900 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition appearance-none">
-                            <option value="" disabled selected>Choose a course...</option>
-                            <option value="JEE">JEE (Mains + Advanced)</option>
-                            <option value="NEET">NEET (UG)</option>
-                            <option value="CBSE">CBSE Boards</option>
-                            <option value="Foundation">Foundation</option>
-                        </select>
-                    </div>
-                    
-                    <!-- Bot Honeypot for spam prevention -->
-                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-                    
-                    <button type="submit" class="w-full bg-slate-900 text-white font-bold py-3 rounded text-sm hover:bg-slate-800 transition mt-2">
-                        Submit Enquiry
-                    </button>
-                </form>
-            </div>
+                <!-- Enquiry Form -->
+                <div class="lg:col-span-6 bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+                    <span class="text-sky-600 font-mono text-xs uppercase tracking-wider font-semibold">Admission Enquiry</span>
+                    <h2 class="text-2xl font-bold font-math text-slate-900 mt-1">Get in Touch</h2>
+                    <p class="text-xs text-slate-500 mb-6">Send your details for Kota offline or online batch counseling[span_56](start_span)[span_56](end_span).</p>
 
-            <!-- Google Map -->
-            <div class="h-full w-full min-h-[350px] bg-white rounded-2xl overflow-hidden border border-slate-200 p-2">
-                <!-- Pointing to Vigyan Nagar, Kota, Rajasthan -->
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14238.163351980316!2d75.84587396030999!3d25.1325997672322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396f849646c05bd9%3A0xdaebcc1ecbf0766c!2sVigyan%20Nagar%2C%20Kota%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" class="w-full h-full rounded" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+                    <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                        <input type="hidden" name="access_key" value="b2b598ce-2ae0-4a70-8430-c5e51d5fc641">
+                        <input type="hidden" name="subject" value="New Student Admission Enquiry - Saem Physics Website[span_57](start_span)[span_57](end_span)">
 
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Student Name *</label>
+                            <input type="text" name="student_name" required placeholder="e.g. Rahul Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:border-sky-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Mobile / WhatsApp Number *</label>
+                            <input type="tel" name="mobile_number" required placeholder="+91 98765 43210" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:border-sky-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Select Target Course *</label>
+                            <select name="target_course" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:border-sky-500">
+                                <option value="">-- Choose Course --</option>
+                                <option value="NEET Physics Batch">NEET Physics Batch</option>
+                                <option value="JEE Main & Advanced">JEE Main & Advanced</option>
+                                <option value="CBSE Class 11-12 Board">CBSE Class 11-12 Board</option>
+                                <option value="Saudi / GCC 1:1 Tutoring">Saudi / GCC 1:1 Tutoring[span_58](start_span)[span_58](end_span)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-lg text-xs uppercase tracking-wider transition-all">
+                            Submit Admission Enquiry
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info & Map -->
+                <div class="lg:col-span-6 flex flex-col justify-between space-y-6">
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 space-y-3 shadow-sm">
+                        <h3 class="text-lg font-bold font-math text-slate-900">Kota Classroom Location[span_59](start_span)[span_59](end_span)</h3>
+                        <p class="text-xs text-slate-600 flex items-start">
+                            <i class="fa-solid fa-location-dot text-sky-600 text-sm mr-2 mt-0.5"></i>
+                            <span><strong>Saem Physics</strong> &bull; Vigyan Nagar, Kota, Rajasthan - 324005[span_60](start_span)[span_60](end_span)[span_61](start_span)[span_61](end_span)</span>
+                        </p>
+                        <p class="text-xs text-slate-600 flex items-center">
+                            <i class="fa-solid fa-phone text-emerald-600 text-sm mr-2"></i>
+                            <a href="tel:+917033131480" class="font-mono font-bold hover:text-sky-600">+91 7033131480[span_62](start_span)[span_62](end_span)[span_63](start_span)[span_63](end_span)</a>
+                        </p>
+                    </div>
+
+                    <!-- Map Embed -->
+                    <div class="bg-slate-200 rounded-2xl border border-slate-200 overflow-hidden h-64 sm:h-72 shadow-sm">
+                        <iframe class="w-full h-full border-0" 
+                                src="https://maps.google.com/maps?q=Vigyan+Nagar,+Kota,+Rajasthan&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                                allowfullscreen="" 
+                                loading="lazy"></iframe>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
-    <!-- Modern Footer -->
-    <footer class="bg-white py-12 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-6 lg:px-20 flex flex-col md:flex-row justify-between items-start gap-8">
-            
-            <!-- Brand & Info -->
-            <div class="max-w-xs">
-                <a href="#" class="text-xl font-bold font-serif flex items-center gap-2 text-slate-900 mb-4">
-                    <div class="w-8 h-8 bg-slate-900 text-white rounded flex items-center justify-center font-sans text-sm font-bold">SP</div>
-                    Saem Physics
-                </a>
-                <p class="text-slate-500 text-sm mb-4">NEET | JEE | MIT Level Physics & Math.<br>Simplifying the universe, one equation at a time.</p>
-            </div>
-            
-            <!-- Contact Address -->
-            <div>
-                <h4 class="font-bold text-slate-900 mb-4 font-serif">Reach Us</h4>
-                <ul class="space-y-3 text-sm text-slate-600">
-                    <li class="flex items-start">
-                        <i class="fas fa-map-marker-alt mt-1 mr-3 text-slate-400"></i>
-                        <span>Vigyan Nagar, Kota,<br>Rajasthan, India</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-phone mr-3 text-slate-400"></i>
-                        <a href="tel:+917033131480" class="hover:text-accent font-semibold transition">+91 7033131480</a>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Clean Social Icons -->
-            <div>
-                <h4 class="font-bold text-slate-900 mb-4 font-serif">Connect</h4>
-                <div class="flex gap-4">
-                    <a href="#" target="_blank" class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition">
-                        <i class="fab fa-youtube text-lg"></i>
-                    </a>
-                    <a href="#" target="_blank" class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition">
-                        <i class="fab fa-instagram text-lg"></i>
-                    </a>
-                    <a href="#" target="_blank" class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition">
-                        <i class="fab fa-facebook-f text-lg"></i>
-                    </a>
-                    <a href="#" target="_blank" class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition">
-                        <i class="fab fa-telegram-plane text-lg"></i>
-                    </a>
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-slate-800">
+                
+                <div>
+                    <span class="text-base font-bold font-math text-white block mb-2">Saem Physics</span>
+                    <p class="text-slate-400 leading-relaxed max-w-sm">
+                        Kota Physics Specialist led by Muhammad Saem Sir (B.Tech EE, RTU Kota). Conceptual visual physics for CBSE, NEET, JEE & Global Students[span_64](start_span)[span_64](end_span).
+                    </p>
                 </div>
+
+                <div>
+                    <span class="text-white font-semibold block mb-2">Quick Contact</span>
+                    <p class="leading-relaxed">
+                        Vigyan Nagar, Kota, Rajasthan[span_65](start_span)[span_65](end_span)[span_66](start_span)[span_66](end_span)<br/>
+                        Phone: <a href="tel:+917033131480" class="text-sky-400 font-mono">+91 7033131480[span_67](start_span)[span_67](end_span)[span_68](start_span)[span_68](end_span)</a>
+                    </p>
+                </div>
+
+                <div>
+                    <span class="text-white font-semibold block mb-2">Social & Global Channels</span>
+                    <div class="flex space-x-3">
+                        <a href="https://youtube.com/@SaemPhysics" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded bg-slate-800 flex items-center justify-center hover:text-red-500 transition-colors">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                        <a href="https://t.me/easyphysicsclasses" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded bg-slate-800 flex items-center justify-center hover:text-sky-400 transition-colors">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+                        <a href="https://wa.me/917033131480" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded bg-slate-800 flex items-center justify-center hover:text-emerald-400 transition-colors">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
             </div>
-        </div>
-        
-        <div class="max-w-7xl mx-auto px-6 lg:px-20 mt-12 pt-6 border-t border-slate-100 text-center text-xs text-slate-400 font-semibold">
-            &copy; 2026 Saem Physics Institute. All rights reserved.
+
+            <div class="flex flex-col sm:flex-row justify-between items-center text-slate-500">
+                <p>&copy; 2026 Saem Physics / Saem Global EdTech. All Rights Reserved[span_69](start_span)[span_69](end_span).</p>
+                <p class="font-mono mt-2 sm:mt-0">Designed in 3Blue1Brown Visual Light Style[span_70](start_span)[span_70](end_span)</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button with Pulse Effect -->
-    <div class="fixed bottom-6 right-6 z-50 flex items-center justify-center group">
-        <!-- Ping Animation Ring -->
-        <span class="absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-60 animate-ping group-hover:opacity-0 transition-opacity"></span>
-        <!-- Actual Button -->
-        <a href="https://wa.me/917033131480" target="_blank" rel="noopener noreferrer" class="relative inline-flex items-center justify-center h-14 w-14 rounded-full bg-[#25D366] text-white shadow-lg shadow-green-500/30 hover:bg-green-600 transition-all hover:scale-105">
-            <i class="fab fa-whatsapp text-3xl"></i>
-        </a>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/917033131480" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Chat on WhatsApp"
+       class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg whatsapp-pulse hover:scale-110 transition-transform">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Download Checkout Modal -->
+    <div id="modal" class="fixed inset-0 z-50 hidden bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white border border-slate-200 rounded-2xl max-w-sm w-full p-6 relative shadow-xl">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center mb-4">
+                <div class="w-10 h-10 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center mx-auto mb-2 text-lg">
+                    <i class="fa-solid fa-cloud-arrow-down"></i>
+                </div>
+                <h3 class="text-base font-bold text-slate-900" id="modal-title">Item Title[span_71](start_span)[span_71](end_span)</h3>
+                <p class="text-xs text-slate-500">Hosted on AWS S3 Cloud[span_72](start_span)[span_72](end_span)</p>
+            </div>
+
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 mb-4 flex justify-between items-center text-xs">
+                <span class="text-slate-600">Price:</span>
+                <span class="font-bold font-mono text-sky-700 text-sm" id="modal-price">$2.99</span>
+            </div>
+
+            <button onclick="closeModal(); alert('Secure download link sent to your registered account via AWS / PayPal!')" class="w-full py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-lg text-xs uppercase tracking-wider transition-all">
+                Download Now[span_73](start_span)[span_73](end_span)
+            </button>
+        </div>
     </div>
 
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 3Blue1Brown Light Canvas Wave Visualizer
+        const canvas = document.getElementById('math-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let t = 0;
+
+            function resize() {
+                canvas.width = canvas.parentElement.clientWidth;
+                canvas.height = canvas.parentElement.clientHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw coordinate axis
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(0, canvas.height / 2);
+                ctx.lineTo(canvas.width, canvas.height / 2);
+                ctx.moveTo(canvas.width / 2, 0);
+                ctx.lineTo(canvas.width / 2, canvas.height);
+                ctx.stroke();
+
+                // Draw Sine wave (3B1B Cyan #0284c7)[span_74](start_span)[span_74](end_span)
+                ctx.strokeStyle = '#0284c7';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                for (let x = 0; x < canvas.width; x++) {
+                    const y = canvas.height / 2 + Math.sin((x + t) * 0.02) * 40;
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                // Draw Cosine wave (3B1B Gold #d97706)[span_75](start_span)[span_75](end_span)
+                ctx.strokeStyle = '#d97706';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                for (let x = 0; x < canvas.width; x++) {
+                    const y = canvas.height / 2 + Math.cos((x - t * 0.5) * 0.015) * 30;
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                t += 1.5;
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        // Predicted Questions Data[span_76](start_span)[span_76](end_span)
+        const questions = [
+            {
+                id: 1,
+                topic: 'Electrodynamics',
+                question: 'Calculate capacitance of a spherical capacitor with outer radius 6 cm, inner radius 5 cm, and dielectric constant K = 8[span_77](start_span)[span_77](end_span).',
+                hint: 'Formula: C = 4πε₀ * K * (r₁ r₂) / (r₂ - r₁)',
+                solution: 'C = 8 * (1 / (9×10⁹)) * (0.05 * 0.06) / 0.01 = 267 pF[span_78](start_span)[span_78](end_span)'
+            },
+            {
+                id: 2,
+                topic: 'Mechanics',
+                question: 'A disk of mass M rolls down an incline of angle θ without slipping. Find linear acceleration[span_79](start_span)[span_79](end_span).',
+                hint: 'Formula: a = g sinθ / (1 + I / MR²)',
+                solution: 'I = 0.5 MR² => a = (2/3) g sinθ[span_80](start_span)[span_80](end_span)'
+            },
+            {
+                id: 3,
+                topic: 'Modern Physics',
+                question: 'Find de-Broglie wavelength of an electron accelerated through V volts[span_81](start_span)[span_81](end_span).',
+                hint: 'Formula: λ = h / √(2meV)',
+                solution: 'λ = 12.27 / √V Angstroms[span_82](start_span)[span_82](end_span)'
+            },
+            {
+                id: 4,
+                topic: 'Optics',
+                question: 'In YDSE, slit separation d = 1 mm, λ = 600 nm. Calculate angular fringe width[span_83](start_span)[span_83](end_span).',
+                hint: 'Formula: θ = λ / d',
+                solution: 'θ = 600×10⁻⁹ / 10⁻³ = 6×10⁻⁴ radians[span_84](start_span)[span_84](end_span)'
+            }
+        ];
+
+        function renderQuestions(items) {
+            const grid = document.getElementById('questions-grid');
+            if (!grid) return;
+            
+            grid.innerHTML = items.map(q => `
+                <div class="bg-slate-50 rounded-xl border border-slate-200 p-5 shadow-sm">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[10px] font-mono text-sky-700 bg-sky-50 px-2 py-0.5 rounded font-semibold">${q.topic}</span>
+                        <span class="text-xs font-mono text-amber-600">Predictor #0${q.id}</span>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-900 leading-relaxed mb-3">${q.question}</p>
+                    <button onclick="toggleHint('hint-${q.id}')" class="text-xs font-semibold text-sky-600 hover:text-sky-800 flex items-center space-x-1">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <span>Show Formula Hint & Solution</span>
+                    </button>
+                    <div id="hint-${q.id}" class="hidden mt-3 p-3 bg-white border border-slate-200 rounded-lg text-xs font-mono text-slate-700 space-y-1">
+                        <p><strong>Hint:</strong> ${q.hint}</p>
+                        <p class="text-emerald-700"><strong>Solution:</strong> ${q.solution}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleHint(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function filterTopic(topic) {
+            document.querySelectorAll('.filter-tag').forEach(btn => {
+                if (btn.innerText.includes(topic)) {
+                    btn.className = 'filter-tag px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white';
+                } else {
+                    btn.className = 'filter-tag px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100';
+                }
+            });
+
+            if (topic === 'All') renderQuestions(questions);
+            else renderQuestions(questions.filter(q => q.topic === topic));
+        }
+
+        function searchQuestion() {
+            const query = document.getElementById('question-input').value.toLowerCase();
+            renderQuestions(questions.filter(q => q.question.toLowerCase().includes(query) || q.topic.toLowerCase().includes(query)));
+        }
+
+        renderQuestions(questions);
+
+        // Modal Functions
+        function openModal(title, price) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-price').textContent = price;
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>
-
