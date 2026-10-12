@@ -21,14 +21,14 @@
                 extend: {
                     colors: {
                         b3b: {
-                            bg: '#0f1115',      // Deep 3B1B Charcoal Canvas
-                            card: '#161922',    // Elevated card surface
-                            border: '#232838',  // Subtle geometric divider
-                            cyan: '#35b0cc',    // Signature 3B1B cyan glow
-                            cyanHover: '#2991a8',
-                            amber: '#e5c07b',   // Signature 3B1B gold/amber
-                            text: '#e2e8f0',    // Soft crisp white text
-                            muted: '#94a3b8'    // Muted slate label text
+                            bg: '#0a0c10',      // Deep immersive mathematical void
+                            card: '#13161f',    // Elevated card surface
+                            border: '#1f2433',  // Precise geometric divider
+                            cyan: '#22d3ee',    // Brilliant Manim cyan glow
+                            cyanHover: '#06b6d4',
+                            amber: '#fbbf24',   // Signature 3B1B gold/amber
+                            text: '#f1f5f9',    // Crisp luminescent white
+                            muted: '#94a3b8'    // Balanced slate label text
                         }
                     },
                     fontFamily: {
@@ -41,21 +41,21 @@
         }
     </script>
     <style>
-        /* 3Blue1Brown Subtle Mathematical Grid Pattern */
+        /* 3Blue1Brown Precision Mathematical Grid Pattern */
         .math-dark-grid {
-            background-color: #0f1115;
+            background-color: #0a0c10;
             background-image: 
-                linear-gradient(to right, rgba(35, 40, 56, 0.4) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(35, 40, 56, 0.4) 1px, transparent 1px);
-            background-size: 40px 40px;
+                linear-gradient(to right, rgba(31, 36, 51, 0.35) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(31, 36, 51, 0.35) 1px, transparent 1px);
+            background-size: 48px 48px;
         }
 
         /* Glowing Accent Effects */
         .glow-cyan {
-            box-shadow: 0 0 25px -5px rgba(53, 176, 204, 0.25);
+            box-shadow: 0 0 30px -8px rgba(34, 211, 238, 0.25);
         }
         .glow-amber {
-            box-shadow: 0 0 25px -5px rgba(229, 192, 123, 0.2);
+            box-shadow: 0 0 30px -8px rgba(251, 191, 36, 0.2);
         }
 
         /* Smooth pulsing ring for WhatsApp CTA */
@@ -70,20 +70,20 @@
 
         /* Custom subtle dark scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f1115; }
-        ::-webkit-scrollbar-thumb { background: #232838; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #35b0cc; }
+        ::-webkit-scrollbar-track { background: #0a0c10; }
+        ::-webkit-scrollbar-thumb { background: #1f2433; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #22d3ee; }
     </style>
 </head>
 <body class="bg-b3b-bg text-b3b-text font-sans antialiased selection:bg-b3b-cyan/20 selection:text-b3b-cyan">
 
     <!-- Top Announcement & Multi-Door Navigation Bar -->
-    <header class="sticky top-0 z-40 bg-b3b-bg/90 backdrop-blur-md border-b border-b3b-border transition-all">
+    <header class="sticky top-0 z-50 bg-b3b-bg/90 backdrop-blur-xl border-b border-b3b-border transition-all">
         <!-- Multi-Door Sub-Bar -->
-        <div class="bg-[#090a0d] text-b3b-muted text-[11px] font-mono py-1.5 px-4 sm:px-6 lg:px-8 border-b border-b3b-border/50">
+        <div class="bg-[#050608] text-b3b-muted text-[11px] font-mono py-2 px-4 sm:px-6 lg:px-8 border-b border-b3b-border/60">
             <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
                 <div class="flex items-center space-x-4">
-                    <span class="text-b3b-cyan font-semibold"><i class="fa-solid fa-atom mr-1.5"></i> Global EdTech Ecosystem</span>
+                    <span class="text-b3b-cyan font-semibold flex items-center"><i class="fa-solid fa-atom mr-1.5 animate-spin" style="animation-duration: 8s;"></i> Global EdTech Ecosystem</span>
                     <span class="hidden md:inline text-b3b-border">|</span>
                     <span class="hidden md:inline text-slate-400">India (CBSE / JEE / NEET) + UK, USA, GCC & Saudi Arabia</span>
                 </div>
@@ -101,7 +101,7 @@
                 
                 <!-- Logo -->
                 <a href="#home" class="flex items-center space-x-3.5 group">
-                    <div class="w-11 h-11 rounded-xl bg-b3b-card border border-b3b-border flex items-center justify-center text-b3b-cyan group-hover:border-b3b-cyan transition-all duration-300">
+                    <div class="w-11 h-11 rounded-xl bg-b3b-card border border-b3b-border flex items-center justify-center text-b3b-cyan group-hover:border-b3b-cyan transition-all duration-300 shadow-lg">
                         <i class="fa-solid fa-square-root-variable text-xl"></i>
                     </div>
                     <div>
@@ -129,7 +129,7 @@
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       class="px-4 py-2.5 text-xs font-semibold rounded-xl bg-b3b-cyan hover:bg-b3b-cyanHover text-slate-950 shadow-sm transition-all flex items-center space-x-2">
+                       class="px-4.5 py-2.5 text-xs font-semibold rounded-xl bg-b3b-cyan hover:bg-b3b-cyanHover text-slate-950 shadow-lg glow-cyan transition-all flex items-center space-x-2">
                         <i class="fa-solid fa-graduation-cap"></i>
                         <span>Free Physics Class</span>
                     </a>
@@ -143,17 +143,17 @@
         </div>
 
         <!-- Mobile Drawer -->
-        <div id="mobile-menu" class="hidden lg:hidden border-b border-b3b-border bg-b3b-card px-4 pt-3 pb-6 space-y-2">
-            <a href="#home" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">Home</a>
-            <a href="#physics-9-10" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">School 9-10 Foundation</a>
-            <a href="#physics-11-12" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">Class 11-12 Board</a>
-            <a href="#jee-neet" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">JEE / NEET Exam Tracks</a>
-            <a href="#lectures" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">YouTube Lectures & Playlists</a>
-            <a href="#shop" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">Shop & Digital Library</a>
-            <a href="#global-gcc" class="block py-2 px-3 rounded-lg text-b3b-amber bg-b3b-amber/10 font-semibold">Global & Saudi GCC 1:1 Tutoring</a>
-            <a href="#contact" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">Contact & Kota Location</a>
-            <div class="pt-2">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" target="_blank" class="block w-full text-center py-2.5 bg-b3b-cyan text-slate-950 font-semibold rounded-xl text-sm">
+        <div id="mobile-menu" class="hidden lg:hidden border-b border-b3b-border bg-b3b-card px-4 pt-3 pb-6 space-y-2 shadow-2xl">
+            <a href="#home" class="block py-2.5 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">Home</a>
+            <a href="#physics-9-10" class="block py-2.5 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">School 9-10 Foundation</a>
+            <a href="#physics-11-12" class="block py-2.5 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">Class 11-12 Board</a>
+            <a href="#jee-neet" class="block py-2.5 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">JEE / NEET Exam Tracks</a>
+            <a href="#lectures" class="block py-2.5 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">YouTube Lectures & Playlists</a>
+            <a href="#shop" class="block py-2.5 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">Shop & Digital Library</a>
+            <a href="#global-gcc" class="block py-2.5 px-3 rounded-lg text-b3b-amber bg-b3b-amber/10 font-semibold">Global & Saudi GCC 1:1 Tutoring</a>
+            <a href="#contact" class="block py-2.5 px-3 rounded-lg text-slate-300 hover:bg-b3b-bg hover:text-b3b-cyan">Contact & Kota Location</a>
+            <div class="pt-3">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" target="_blank" class="block w-full text-center py-3 bg-b3b-cyan text-slate-950 font-semibold rounded-xl text-sm shadow-md">
                     Book Free Physics Demo Class
                 </a>
             </div>
@@ -161,24 +161,24 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="relative math-dark-grid border-b border-b3b-border py-20 lg:py-28 overflow-hidden">
+    <section id="home" class="relative math-dark-grid border-b border-b3b-border py-20 lg:py-32 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
                 <!-- Left Content -->
                 <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-b3b-card border border-b3b-border text-b3b-cyan text-xs font-mono font-medium">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-b3b-card border border-b3b-border text-b3b-cyan text-xs font-mono font-medium shadow-sm">
                         <i class="fa-solid fa-atom text-b3b-cyan"></i>
                         <span>KOTA PEDAGOGY &bull; CBSE, NEET & JEE &bull; GLOBAL DIASPORA</span>
                     </div>
 
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-math text-white leading-[1.15]">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-math text-white leading-[1.12]">
                         Mastering Physics through <br/>
                         <span class="text-b3b-cyan italic">Visual Intuition</span> & Math Rigor
                     </h1>
 
                     <p class="text-base sm:text-lg text-b3b-muted font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                        Personalized coaching for CBSE, NEET & JEE aspirants by <strong class="text-white font-semibold">Muhammad Saem Sir</strong> (B.Tech EE, RTU Kota, Class of 2019)[span_0](start_span)[span_0](end_span). Deconstruct vectors, calculus, and field equations with 3Blue1Brown visual clarity.
+                        Personalized coaching for CBSE, NEET & JEE aspirants by <strong class="text-white font-semibold">Muhammad Saem Sir</strong> (B.Tech EE, RTU Kota, Class of 2019)[span_8](start_span)[span_8](end_span). Deconstruct vectors, calculus, and field equations with 3Blue1Brown visual clarity.
                     </p>
 
                     <!-- CTAs -->
@@ -186,13 +186,13 @@
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" 
                            target="_blank" 
                            rel="noopener noreferrer"
-                           class="w-full sm:w-auto px-7 py-4 bg-b3b-cyan hover:bg-b3b-cyanHover text-slate-950 font-semibold rounded-xl shadow-lg glow-cyan transition-all text-center flex items-center justify-center space-x-2">
+                           class="w-full sm:w-auto px-7 py-4 bg-b3b-cyan hover:bg-b3b-cyanHover text-slate-950 font-semibold rounded-xl shadow-xl glow-cyan transition-all text-center flex items-center justify-center space-x-2">
                             <span>Book a Free Demo Class</span>
                             <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
 
                         <a href="#global-gcc" 
-                           class="w-full sm:w-auto px-7 py-4 bg-b3b-card hover:bg-b3b-border border border-b3b-border text-b3b-amber font-semibold rounded-xl transition-all text-center flex items-center justify-center space-x-2">
+                           class="w-full sm:w-auto px-7 py-4 bg-b3b-card hover:bg-b3b-border border border-b3b-border text-b3b-amber font-semibold rounded-xl transition-all text-center flex items-center justify-center space-x-2 shadow-lg">
                             <i class="fa-solid fa-kaaba text-sm"></i>
                             <span>Saudi / GCC 1:1 Tutoring</span>
                         </a>
@@ -202,36 +202,36 @@
                     <div class="pt-8 border-t border-b3b-border grid grid-cols-3 gap-4">
                         <div>
                             <div class="text-2xl sm:text-3xl font-bold font-math text-white">5+ Years</div>
-                            <div class="text-xs text-b3b-muted font-medium">Kota Teaching Exp.[span_1](start_span)[span_1](end_span)</div>
+                            <div class="text-xs text-b3b-muted font-medium">Kota Teaching Exp.[span_9](start_span)[span_9](end_span)</div>
                         </div>
                         <div>
                             <div class="text-2xl sm:text-3xl font-bold font-math text-b3b-cyan">1,000+</div>
-                            <div class="text-xs text-b3b-muted font-medium">Students Mentored[span_2](start_span)[span_2](end_span)</div>
+                            <div class="text-xs text-b3b-muted font-medium">Students Mentored[span_10](start_span)[span_10](end_span)</div>
                         </div>
                         <div>
                             <div class="text-2xl sm:text-3xl font-bold font-math text-b3b-amber">B.Tech EE</div>
-                            <div class="text-xs text-b3b-muted font-medium">RTU Kota (2019)[span_3](start_span)[span_3](end_span)</div>
+                            <div class="text-xs text-b3b-muted font-medium">RTU Kota (2019)[span_11](start_span)[span_11](end_span)</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Visual: Interactive 3B1B Dark Math Canvas -->
+                <!-- Right Visual: Manim-Style Interactive Dark Math Canvas -->
                 <div class="lg:col-span-5 flex justify-center">
                     <div class="w-full max-w-md bg-b3b-card rounded-2xl border border-b3b-border p-5 shadow-2xl relative space-y-4 glow-cyan">
                         <div class="flex items-center justify-between border-b border-b3b-border pb-3">
-                            <span class="text-xs font-mono text-b3b-muted"><i class="fa-solid fa-circle-dot text-b3b-cyan mr-1.5 animate-pulse"></i> Wave Function Mechanics</span>
+                            <span class="text-xs font-mono text-b3b-muted"><i class="fa-solid fa-circle-dot text-b3b-cyan mr-1.5 animate-pulse"></i> Manim Wave Mechanics</span>
                             <span class="text-[10px] font-mono bg-b3b-cyan/10 text-b3b-cyan px-2 py-0.5 rounded border border-b3b-cyan/20">3B1B Engine</span>
                         </div>
                         
                         <!-- Canvas Element -->
-                        <div class="relative bg-b3b-bg rounded-xl overflow-hidden border border-b3b-border h-64">
-                            <canvas id="math-canvas" class="w-full h-full block"></canvas>
+                        <div class="relative bg-b3b-bg rounded-xl overflow-hidden border border-b3b-border h-64 shadow-inner">
+                            <canvas id="math-canvas" class="w-full h-full block cursor-crosshair"></canvas>
                         </div>
 
                         <!-- Math Formula Box -->
-                        <div class="bg-b3b-bg p-3.5 rounded-xl border border-b3b-border font-math text-xs text-slate-200 flex justify-between items-center">
+                        <div class="bg-b3b-bg p-3.5 rounded-xl border border-b3b-border font-math text-xs text-slate-200 flex justify-between items-center shadow-sm">
                             <span>$\Psi(x,t) = A e^{i(kx - \omega t)}$</span>
-                            <span class="text-b3b-amber font-mono text-[10px]"><i class="fa-solid fa-check mr-1"></i> Visualized</span>
+                            <span class="text-b3b-amber font-mono text-[10px]"><i class="fa-solid fa-check mr-1"></i> Interactive</span>
                         </div>
                     </div>
                 </div>
@@ -241,24 +241,24 @@
     </section>
 
     <!-- Multi-Door Product Offer Ladder Section -->
-    <section id="doors" class="py-20 lg:py-24 bg-b3b-bg border-b border-b3b-border">
+    <section id="doors" class="py-20 lg:py-28 bg-b3b-bg border-b border-b3b-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center mb-16">
                 <span class="text-b3b-cyan font-mono text-xs uppercase tracking-wider font-semibold">Structured Offer Ladder</span>
                 <h2 class="text-3xl sm:text-4xl font-bold font-math text-white mt-2">
                     Choose Your Academic Door
                 </h2>
-                <p class="text-b3b-muted text-sm mt-2">Tailored curriculum pathways for foundation, board exams, competitive tracks, and international students[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span).</p>
+                <p class="text-b3b-muted text-sm mt-2">Tailored curriculum pathways for foundation, board exams, competitive tracks, and international students[span_12](start_span)[span_12](end_span)[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span).</p>
                 <div class="w-12 h-0.5 bg-b3b-cyan mx-auto mt-4"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Door 1 -->
-                <div id="physics-9-10" class="bg-b3b-card rounded-2xl border border-b3b-border p-6 hover:border-b3b-cyan/50 transition-all flex flex-col justify-between group">
+                <div id="physics-9-10" class="bg-b3b-card rounded-2xl border border-b3b-border p-6 hover:border-b3b-cyan/50 transition-all flex flex-col justify-between group shadow-xl">
                     <div>
-                        <div class="w-12 h-12 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-cyan flex items-center justify-center text-xl mb-4 font-bold font-math group-hover:bg-b3b-cyan group-hover:text-slate-950 transition-colors">9-10</div>
+                        <div class="w-12 h-12 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-cyan flex items-center justify-center text-xl mb-4 font-bold font-math group-hover:bg-b3b-cyan group-hover:text-slate-950 transition-colors shadow-sm">9-10</div>
                         <h3 class="text-lg font-bold text-white">School Foundation</h3>
-                        <p class="text-xs text-b3b-muted mt-2 leading-relaxed">Early conceptual mechanics, motion equations, and mathematical rigor for classes 8-10[span_7](start_span)[span_7](end_span)[span_8](start_span)[span_8](end_span).</p>
+                        <p class="text-xs text-b3b-muted mt-2 leading-relaxed">Early conceptual mechanics, motion equations, and mathematical rigor for classes 8-10[span_15](start_span)[span_15](end_span)[span_16](start_span)[span_16](end_span).</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-b3b-border">
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" target="_blank" class="text-xs font-semibold text-b3b-cyan hover:underline flex items-center justify-between">
@@ -268,11 +268,11 @@
                 </div>
 
                 <!-- Door 2 -->
-                <div id="physics-11-12" class="bg-b3b-card rounded-2xl border border-b3b-border p-6 hover:border-b3b-cyan/50 transition-all flex flex-col justify-between group">
+                <div id="physics-11-12" class="bg-b3b-card rounded-2xl border border-b3b-border p-6 hover:border-b3b-cyan/50 transition-all flex flex-col justify-between group shadow-xl">
                     <div>
-                        <div class="w-12 h-12 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-cyan flex items-center justify-center text-xl mb-4 font-bold font-math group-hover:bg-b3b-cyan group-hover:text-slate-950 transition-colors">11-12</div>
+                        <div class="w-12 h-12 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-cyan flex items-center justify-center text-xl mb-4 font-bold font-math group-hover:bg-b3b-cyan group-hover:text-slate-950 transition-colors shadow-sm">11-12</div>
                         <h3 class="text-lg font-bold text-white">CBSE / ISC Boards</h3>
-                        <p class="text-xs text-b3b-muted mt-2 leading-relaxed">Rigorous derivation mastery, numerical problem-solving, and board exam presentation standards[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span).</p>
+                        <p class="text-xs text-b3b-muted mt-2 leading-relaxed">Rigorous derivation mastery, numerical problem-solving, and board exam presentation standards[span_17](start_span)[span_17](end_span)[span_18](start_span)[span_18](end_span).</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-b3b-border">
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" target="_blank" class="text-xs font-semibold text-b3b-cyan hover:underline flex items-center justify-between">
@@ -282,11 +282,11 @@
                 </div>
 
                 <!-- Door 3 -->
-                <div id="jee-neet" class="bg-b3b-card rounded-2xl border border-b3b-border p-6 hover:border-b3b-amber/50 transition-all flex flex-col justify-between group">
+                <div id="jee-neet" class="bg-b3b-card rounded-2xl border border-b3b-border p-6 hover:border-b3b-amber/50 transition-all flex flex-col justify-between group shadow-xl">
                     <div>
-                        <div class="w-12 h-12 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-amber flex items-center justify-center text-xl mb-4 font-bold font-math group-hover:bg-b3b-amber group-hover:text-slate-950 transition-colors">ENT</div>
+                        <div class="w-12 h-12 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-amber flex items-center justify-center text-xl mb-4 font-bold font-math group-hover:bg-b3b-amber group-hover:text-slate-950 transition-colors shadow-sm">ENT</div>
                         <h3 class="text-lg font-bold text-white">JEE & NEET Mastery</h3>
-                        <p class="text-xs text-b3b-muted mt-2 leading-relaxed">Kota pedagogy, option elimination shortcuts, NTA PYQ analysis, and high-yield problem solving[span_11](start_span)[span_11](end_span)[span_12](start_span)[span_12](end_span).</p>
+                        <p class="text-xs text-b3b-muted mt-2 leading-relaxed">Kota pedagogy, option elimination shortcuts, NTA PYQ analysis, and high-yield problem solving[span_19](start_span)[span_19](end_span)[span_20](start_span)[span_20](end_span).</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-b3b-border">
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXiIEqRcGyYHgB42B7ju9SfwtoGofO1gxcr0qcWfXOnxO8Xg/viewform" target="_blank" class="text-xs font-semibold text-b3b-amber hover:underline flex items-center justify-between">
@@ -296,14 +296,14 @@
                 </div>
 
                 <!-- Door 4 -->
-                <div id="global-gcc" class="bg-b3b-card rounded-2xl border-2 border-b3b-amber/80 p-6 glow-amber transition-all flex flex-col justify-between relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-b3b-amber text-slate-950 text-[9px] font-mono font-bold px-3 py-1 rounded-bl">PREMIUM</div>
+                <div id="global-gcc" class="bg-b3b-card rounded-2xl border-2 border-b3b-amber/80 p-6 glow-amber transition-all flex flex-col justify-between relative overflow-hidden shadow-2xl">
+                    <div class="absolute top-0 right-0 bg-b3b-amber text-slate-950 text-[9px] font-mono font-bold px-3 py-1 rounded-bl shadow">PREMIUM</div>
                     <div>
-                        <div class="w-12 h-12 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-amber flex items-center justify-center text-xl mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-amber flex items-center justify-center text-xl mb-4 shadow-sm">
                             <i class="fa-solid fa-kaaba"></i>
                         </div>
                         <h3 class="text-lg font-bold text-white">Saudi & GCC 1:1</h3>
-                        <p class="text-xs text-b3b-muted mt-2 leading-relaxed">English-first instruction with Arabic support as language capability grows, parent reporting, and flexible evening slots[span_13](start_span)[span_13](end_span).</p>
+                        <p class="text-xs text-b3b-muted mt-2 leading-relaxed">English-first instruction with Arabic support as language capability grows, parent reporting, and flexible evening slots[span_21](start_span)[span_21](end_span).</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-b3b-border">
                         <a href="https://wa.me/917033131480" target="_blank" class="text-xs font-semibold text-b3b-amber hover:underline flex items-center justify-between">
@@ -316,14 +316,14 @@
     </section>
 
     <!-- Faculty & Mentor Section -->
-    <section id="about" class="py-20 lg:py-24 bg-b3b-bg border-b border-b3b-border">
+    <section id="about" class="py-20 lg:py-28 bg-b3b-bg border-b border-b3b-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center mb-16">
                 <span class="text-b3b-cyan font-mono text-xs uppercase tracking-wider font-semibold">Faculty Profile</span>
                 <h2 class="text-3xl sm:text-4xl font-bold font-math text-white mt-2">
                     Meet Muhammad Saem Sir
                 </h2>
-                <p class="text-b3b-muted text-sm mt-2">Dedicated Kota Physics Mentor & EdTech Specialist[span_14](start_span)[span_14](end_span)</p>
+                <p class="text-b3b-muted text-sm mt-2">Dedicated Kota Physics Mentor & EdTech Specialist[span_22](start_span)[span_22](end_span)</p>
                 <div class="w-12 h-0.5 bg-b3b-cyan mx-auto mt-4"></div>
             </div>
 
@@ -331,19 +331,19 @@
                 
                 <!-- Avatar & Credentials -->
                 <div class="lg:col-span-4 text-center lg:text-left flex flex-col items-center lg:items-start space-y-4">
-                    <div class="w-36 h-36 rounded-2xl bg-b3b-bg border border-b3b-border flex items-center justify-center text-b3b-cyan text-5xl glow-cyan">
+                    <div class="w-36 h-36 rounded-2xl bg-b3b-bg border border-b3b-border flex items-center justify-center text-b3b-cyan text-5xl glow-cyan shadow-xl">
                         <i class="fa-solid fa-user-graduate"></i>
                     </div>
                     <div>
                         <h3 class="text-2xl font-bold font-math text-white">Muhammad Saem Sir</h3>
-                        <p class="text-b3b-cyan text-sm font-medium">Physics Specialist[span_15](start_span)[span_15](end_span)</p>
-                        <p class="text-xs text-b3b-muted mt-1"><i class="fa-solid fa-location-dot text-slate-500 mr-1"></i> Vigyan Nagar, Kota, Rajasthan - 324005[span_16](start_span)[span_16](end_span)[span_17](start_span)[span_17](end_span)</p>
+                        <p class="text-b3b-cyan text-sm font-medium">Physics Specialist[span_23](start_span)[span_23](end_span)</p>
+                        <p class="text-xs text-b3b-muted mt-1"><i class="fa-solid fa-location-dot text-slate-500 mr-1"></i> Vigyan Nagar, Kota, Rajasthan - 324005[span_24](start_span)[span_24](end_span)[span_25](start_span)[span_25](end_span)</p>
                     </div>
                     <div class="flex space-x-2.5 pt-2">
-                        <a href="https://youtube.com/@SaemPhysics" target="_blank" class="px-3.5 py-2 rounded-lg bg-b3b-bg border border-b3b-border text-slate-300 text-xs font-semibold hover:border-red-500 hover:text-red-400 transition-colors">
+                        <a href="https://youtube.com/@SaemPhysics" target="_blank" class="px-3.5 py-2 rounded-lg bg-b3b-bg border border-b3b-border text-slate-300 text-xs font-semibold hover:border-red-500 hover:text-red-400 transition-colors shadow-sm">
                             <i class="fa-brands fa-youtube mr-1"></i> YouTube
                         </a>
-                        <a href="https://t.me/easyphysicsclasses" target="_blank" class="px-3.5 py-2 rounded-lg bg-b3b-bg border border-b3b-border text-slate-300 text-xs font-semibold hover:border-b3b-cyan hover:text-b3b-cyan transition-colors">
+                        <a href="https://t.me/easyphysicsclasses" target="_blank" class="px-3.5 py-2 rounded-lg bg-b3b-bg border border-b3b-border text-slate-300 text-xs font-semibold hover:border-b3b-cyan hover:text-b3b-cyan transition-colors shadow-sm">
                             <i class="fa-brands fa-telegram mr-1"></i> Telegram
                         </a>
                     </div>
@@ -352,17 +352,17 @@
                 <!-- Academic Info -->
                 <div class="lg:col-span-8 space-y-4 text-sm text-b3b-muted leading-relaxed border-t lg:border-t-0 lg:border-l border-b3b-border pt-6 lg:pt-0 lg:pl-8">
                     <p>
-                        Muhammad Saem Sir holds a <strong class="text-white font-semibold">B.Tech degree in Electrical Engineering</strong> from Rajasthan Technical University (RTU), Kota (Class of 2019)[span_18](start_span)[span_18](end_span).
+                        Muhammad Saem Sir holds a <strong class="text-white font-semibold">B.Tech degree in Electrical Engineering</strong> from Rajasthan Technical University (RTU), Kota (Class of 2019)[span_26](start_span)[span_26](end_span).
                     </p>
                     <p>
-                        With over <strong class="text-white font-semibold">5+ years of classroom and online teaching experience</strong> in Kota's premier coaching ecosystem, he has mentored more than 1,000 students for NEET and JEE Main/Advanced[span_19](start_span)[span_19](end_span).
+                        With over <strong class="text-white font-semibold">5+ years of classroom and online teaching experience</strong> in Kota's premier coaching ecosystem, he has mentored more than 1,000 students for NEET and JEE Main/Advanced[span_27](start_span)[span_27](end_span).
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                        <div class="p-4 bg-b3b-bg rounded-xl border border-b3b-border">
+                        <div class="p-4 bg-b3b-bg rounded-xl border border-b3b-border shadow-sm">
                             <span class="block text-white font-semibold text-xs mb-1"><i class="fa-solid fa-shapes text-b3b-cyan mr-1.5"></i> Visual First Methodology</span>
                             <span class="text-xs text-b3b-muted">Replacing memory-heavy shortcuts with clear geometric and vector visualizations.</span>
                         </div>
-                        <div class="p-4 bg-b3b-bg rounded-xl border border-b3b-border">
+                        <div class="p-4 bg-b3b-bg rounded-xl border border-b3b-border shadow-sm">
                             <span class="block text-white font-semibold text-xs mb-1"><i class="fa-solid fa-bullseye text-b3b-amber mr-1.5"></i> Targeted Problem Solving</span>
                             <span class="text-xs text-b3b-muted">Rigorous focus on NTA PYQs, option elimination, and high-yielding exam topics.</span>
                         </div>
@@ -374,14 +374,14 @@
     </section>
 
     <!-- Video Lectures Section -->
-    <section id="lectures" class="py-20 lg:py-24 bg-b3b-bg border-b border-b3b-border">
+    <section id="lectures" class="py-20 lg:py-28 bg-b3b-bg border-b border-b3b-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center mb-16">
                 <span class="text-b3b-cyan font-mono text-xs uppercase tracking-wider font-semibold">Free Classroom Series</span>
                 <h2 class="text-3xl sm:text-4xl font-bold font-math text-white mt-2">
                     Featured YouTube Playlists
                 </h2>
-                <p class="text-b3b-muted text-sm mt-2">Comprehensive visual lectures from Saem Physics YouTube channel[span_20](start_span)[span_20](end_span)</p>
+                <p class="text-b3b-muted text-sm mt-2">Comprehensive visual lectures from Saem Physics YouTube channel[span_28](start_span)[span_28](end_span)</p>
                 <div class="w-12 h-0.5 bg-b3b-cyan mx-auto mt-4"></div>
             </div>
 
@@ -488,20 +488,20 @@
     </section>
 
     <!-- Books & Revision Material Section -->
-    <section id="book" class="py-20 lg:py-24 bg-b3b-bg border-b border-b3b-border">
+    <section id="book" class="py-20 lg:py-28 bg-b3b-bg border-b border-b3b-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-b3b-card rounded-2xl border border-b3b-border p-8 sm:p-12 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glow-amber">
                 
                 <!-- Book Cover Graphic -->
                 <div class="lg:col-span-5 flex justify-center">
-                    <div class="w-60 h-80 bg-[#090a0d] rounded-xl p-6 border-2 border-b3b-amber flex flex-col justify-between text-white shadow-2xl relative group">
+                    <div class="w-60 h-80 bg-[#050608] rounded-xl p-6 border-2 border-b3b-amber flex flex-col justify-between text-white shadow-2xl relative group">
                         <div>
                             <span class="text-[10px] font-mono text-b3b-amber font-bold uppercase tracking-widest block">REVISION GUIDE</span>
                             <h3 class="text-3xl font-extrabold font-math text-white mt-4 tracking-tight">PHYSICS FOX</h3>
                             <p class="text-xs text-b3b-muted mt-1">Global Physics Revision Handbook</p>
                         </div>
                         <div class="border-t border-b3b-border pt-3">
-                            <span class="text-[10px] text-b3b-muted font-mono block">By Muhammad Saem Sir[span_21](start_span)[span_21](end_span)</span>
+                            <span class="text-[10px] text-b3b-muted font-mono block">By Muhammad Saem Sir[span_29](start_span)[span_29](end_span)</span>
                             <span class="text-[10px] text-b3b-amber font-mono">NEET &bull; JEE MAIN &bull; ADVANCED</span>
                         </div>
                     </div>
@@ -509,14 +509,14 @@
 
                 <!-- Details -->
                 <div class="lg:col-span-7 space-y-5">
-                    <span class="px-3 py-1 rounded bg-b3b-amber/10 text-b3b-amber border border-b3b-amber/20 text-xs font-semibold font-mono">
-                        <i class="fa-solid fa-star text-b3b-amber mr-1"></i> Amazon Official Publication[span_22](start_span)[span_22](end_span)
+                    <span class="px-3 py-1 rounded bg-b3b-amber/10 text-b3b-amber border border-b3b-amber/20 text-xs font-semibold font-mono shadow-sm">
+                        <i class="fa-solid fa-star text-b3b-amber mr-1"></i> Amazon Official Publication[span_30](start_span)[span_30](end_span)
                     </span>
                     <h2 class="text-3xl font-bold font-math text-white">
-                        PHYSICS FOX — Global Physics Revision Book[span_23](start_span)[span_23](end_span)
+                        PHYSICS FOX — Global Physics Revision Book[span_31](start_span)[span_31](end_span)
                     </h2>
                     <p class="text-sm text-b3b-muted leading-relaxed">
-                        Designed for rapid revision before NEET and JEE exams[span_24](start_span)[span_24](end_span). Contains visual summary maps, formula sheets, common mistake alerts, and solved high-yield problem patterns[span_25](start_span)[span_25](end_span).
+                        Designed for rapid revision before NEET and JEE exams[span_32](start_span)[span_32](end_span). Contains visual summary maps, formula sheets, common mistake alerts, and solved high-yield problem patterns[span_33](start_span)[span_33](end_span).
                     </p>
                     
                     <ul class="space-y-2.5 text-xs text-slate-300 font-medium">
@@ -531,7 +531,7 @@
                            rel="noopener noreferrer"
                            class="inline-flex items-center space-x-2.5 px-7 py-3.5 bg-b3b-amber hover:bg-[#d4b068] text-slate-950 font-semibold rounded-xl text-xs uppercase tracking-wider transition-all shadow-lg glow-amber">
                             <i class="fa-brands fa-amazon text-sm"></i>
-                            <span>Buy Physics Fox on Amazon[span_26](start_span)[span_26](end_span)[span_27](start_span)[span_27](end_span)</span>
+                            <span>Buy Physics Fox on Amazon[span_34](start_span)[span_34](end_span)[span_35](start_span)[span_35](end_span)</span>
                         </a>
                     </div>
                 </div>
@@ -541,19 +541,19 @@
     </section>
 
     <!-- Study Material & DPP "Khazana" Storefront -->
-    <section id="shop" class="py-20 lg:py-24 bg-b3b-bg border-b border-b3b-border">
+    <section id="shop" class="py-20 lg:py-28 bg-b3b-bg border-b border-b3b-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
                 <div>
                     <span class="text-b3b-cyan font-mono text-xs uppercase tracking-wider font-semibold">Study Material Hub</span>
                     <h2 class="text-3xl font-bold font-math text-white mt-2">
-                        DPP & Khazana Resource Store[span_28](start_span)[span_28](end_span)
+                        DPP & Khazana Resource Store[span_36](start_span)[span_36](end_span)
                     </h2>
-                    <p class="text-b3b-muted text-sm mt-1">High-quality PDF study cards secured via AWS S3 and PayPal/Razorpay[span_29](start_span)[span_29](end_span)[span_30](start_span)[span_30](end_span)</p>
+                    <p class="text-b3b-muted text-sm mt-1">High-quality PDF study cards secured via AWS S3 and PayPal/Razorpay[span_37](start_span)[span_37](end_span)[span_38](start_span)[span_38](end_span)</p>
                 </div>
                 <div class="mt-4 md:mt-0 flex items-center space-x-3 text-xs font-mono text-b3b-muted">
-                    <span class="px-3 py-1 rounded bg-b3b-card border border-b3b-border"><i class="fa-brands fa-aws text-b3b-amber mr-1"></i> AWS Hosted[span_31](start_span)[span_31](end_span)</span>
-                    <span class="px-3 py-1 rounded bg-b3b-card border border-b3b-border"><i class="fa-brands fa-paypal text-b3b-cyan mr-1"></i> PayPal & Razorpay Secured[span_32](start_span)[span_32](end_span)</span>
+                    <span class="px-3 py-1 rounded bg-b3b-card border border-b3b-border shadow-sm"><i class="fa-brands fa-aws text-b3b-amber mr-1"></i> AWS Hosted[span_39](start_span)[span_39](end_span)</span>
+                    <span class="px-3 py-1 rounded bg-b3b-card border border-b3b-border shadow-sm"><i class="fa-brands fa-paypal text-b3b-cyan mr-1"></i> PayPal & Razorpay Secured[span_40](start_span)[span_40](end_span)</span>
                 </div>
             </div>
 
@@ -563,12 +563,12 @@
                 <!-- Card 1 -->
                 <div class="bg-b3b-card rounded-2xl border border-b3b-border p-6 flex flex-col justify-between hover:border-b3b-cyan/50 transition-all shadow-xl">
                     <div>
-                        <div class="w-11 h-11 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-cyan flex items-center justify-center text-lg mb-4">
+                        <div class="w-11 h-11 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-cyan flex items-center justify-center text-lg mb-4 shadow-sm">
                             <i class="fa-solid fa-file-pdf"></i>
                         </div>
-                        <h3 class="text-base font-bold text-white">Mechanics DPP Vault[span_33](start_span)[span_33](end_span)</h3>
-                        <p class="text-xs text-b3b-muted mt-1">50+ Topic-wise Daily Practice Papers with step hints[span_34](start_span)[span_34](end_span).</p>
-                        <span class="inline-block text-[10px] font-mono text-b3b-cyan bg-b3b-cyan/10 px-2.5 py-1 rounded border border-b3b-cyan/20 mt-4">Class 11 & NEET[span_35](start_span)[span_35](end_span)</span>
+                        <h3 class="text-base font-bold text-white">Mechanics DPP Vault[span_41](start_span)[span_41](end_span)</h3>
+                        <p class="text-xs text-b3b-muted mt-1">50+ Topic-wise Daily Practice Papers with step hints[span_42](start_span)[span_42](end_span).</p>
+                        <span class="inline-block text-[10px] font-mono text-b3b-cyan bg-b3b-cyan/10 px-2.5 py-1 rounded border border-b3b-cyan/20 mt-4">Class 11 & NEET[span_43](start_span)[span_43](end_span)</span>
                     </div>
                     <div class="mt-6 pt-4 border-t border-b3b-border flex items-center justify-between">
                         <span class="text-sm font-bold font-mono text-white">&dollar;2.99</span>
@@ -581,12 +581,12 @@
                 <!-- Card 2 -->
                 <div class="bg-b3b-card rounded-2xl border border-b3b-border p-6 flex flex-col justify-between hover:border-b3b-cyan/50 transition-all shadow-xl">
                     <div>
-                        <div class="w-11 h-11 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-cyan flex items-center justify-center text-lg mb-4">
+                        <div class="w-11 h-11 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-cyan flex items-center justify-center text-lg mb-4 shadow-sm">
                             <i class="fa-solid fa-bolt"></i>
                         </div>
-                        <h3 class="text-base font-bold text-white">Electrodynamics Pack[span_36](start_span)[span_36](end_span)</h3>
-                        <p class="text-xs text-b3b-muted mt-1">Electrostatics, Capacitance & Circuits solved problems[span_37](start_span)[span_37](end_span).</p>
-                        <span class="inline-block text-[10px] font-mono text-b3b-cyan bg-b3b-cyan/10 px-2.5 py-1 rounded border border-b3b-cyan/20 mt-4">Class 12 & JEE[span_38](start_span)[span_38](end_span)</span>
+                        <h3 class="text-base font-bold text-white">Electrodynamics Pack[span_44](start_span)[span_44](end_span)</h3>
+                        <p class="text-xs text-b3b-muted mt-1">Electrostatics, Capacitance & Circuits solved problems[span_45](start_span)[span_45](end_span).</p>
+                        <span class="inline-block text-[10px] font-mono text-b3b-cyan bg-b3b-cyan/10 px-2.5 py-1 rounded border border-b3b-cyan/20 mt-4">Class 12 & JEE[span_46](start_span)[span_46](end_span)</span>
                     </div>
                     <div class="mt-6 pt-4 border-t border-b3b-border flex items-center justify-between">
                         <span class="text-sm font-bold font-mono text-white">&dollar;3.49</span>
@@ -599,12 +599,12 @@
                 <!-- Card 3 -->
                 <div class="bg-b3b-card rounded-2xl border border-b3b-border p-6 flex flex-col justify-between hover:border-b3b-cyan/50 transition-all shadow-xl">
                     <div>
-                        <div class="w-11 h-11 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-cyan flex items-center justify-center text-lg mb-4">
+                        <div class="w-11 h-11 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-cyan flex items-center justify-center text-lg mb-4 shadow-sm">
                             <i class="fa-solid fa-eye"></i>
                         </div>
-                        <h3 class="text-base font-bold text-white">Optics Formula Sheet[span_39](start_span)[span_39](end_span)</h3>
-                        <p class="text-xs text-b3b-muted mt-1">Ray & Wave Optics high-yield visual mind maps[span_40](start_span)[span_40](end_span).</p>
-                        <span class="inline-block text-[10px] font-mono text-b3b-cyan bg-b3b-cyan/10 px-2.5 py-1 rounded border border-b3b-cyan/20 mt-4">Quick Revision[span_41](start_span)[span_41](end_span)</span>
+                        <h3 class="text-base font-bold text-white">Optics Formula Sheet[span_47](start_span)[span_47](end_span)</h3>
+                        <p class="text-xs text-b3b-muted mt-1">Ray & Wave Optics high-yield visual mind maps[span_48](start_span)[span_48](end_span).</p>
+                        <span class="inline-block text-[10px] font-mono text-b3b-cyan bg-b3b-cyan/10 px-2.5 py-1 rounded border border-b3b-cyan/20 mt-4">Quick Revision[span_49](start_span)[span_49](end_span)</span>
                     </div>
                     <div class="mt-6 pt-4 border-t border-b3b-border flex items-center justify-between">
                         <span class="text-sm font-bold font-mono text-white">&dollar;1.99</span>
@@ -617,12 +617,12 @@
                 <!-- Card 4 -->
                 <div class="bg-b3b-card rounded-2xl border border-b3b-border p-6 flex flex-col justify-between hover:border-b3b-cyan/50 transition-all shadow-xl">
                     <div>
-                        <div class="w-11 h-11 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-cyan flex items-center justify-center text-lg mb-4">
+                        <div class="w-11 h-11 rounded-xl bg-b3b-bg border border-b3b-border text-b3b-cyan flex items-center justify-center text-lg mb-4 shadow-sm">
                             <i class="fa-solid fa-atom"></i>
                         </div>
-                        <h3 class="text-base font-bold text-white">Modern Physics Vault[span_42](start_span)[span_42](end_span)</h3>
-                        <p class="text-xs text-b3b-muted mt-1">Photoelectric, Atoms, Nuclei & Semiconductor notes[span_43](start_span)[span_43](end_span).</p>
-                        <span class="inline-block text-[10px] font-mono text-b3b-cyan bg-b3b-cyan/10 px-2.5 py-1 rounded border border-b3b-cyan/20 mt-4">High Yield 2026[span_44](start_span)[span_44](end_span)</span>
+                        <h3 class="text-base font-bold text-white">Modern Physics Vault[span_50](start_span)[span_50](end_span)</h3>
+                        <p class="text-xs text-b3b-muted mt-1">Photoelectric, Atoms, Nuclei & Semiconductor notes[span_51](start_span)[span_51](end_span).</p>
+                        <span class="inline-block text-[10px] font-mono text-b3b-cyan bg-b3b-cyan/10 px-2.5 py-1 rounded border border-b3b-cyan/20 mt-4">High Yield 2026[span_52](start_span)[span_52](end_span)</span>
                     </div>
                     <div class="mt-6 pt-4 border-t border-b3b-border flex items-center justify-between">
                         <span class="text-sm font-bold font-mono text-white">&dollar;2.99</span>
@@ -637,21 +637,21 @@
     </section>
 
     <!-- Interactive Exam Predicted Questions Section -->
-    <section id="ai-questions" class="py-20 lg:py-24 bg-b3b-bg border-b border-b3b-border">
+    <section id="ai-questions" class="py-20 lg:py-28 bg-b3b-bg border-b border-b3b-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center mb-16">
-                <span class="text-b3b-cyan font-mono text-xs uppercase tracking-wider font-semibold">3B1B AI Predictor Engine[span_45](start_span)[span_45](end_span)</span>
+                <span class="text-b3b-cyan font-mono text-xs uppercase tracking-wider font-semibold">3B1B AI Predictor Engine[span_53](start_span)[span_53](end_span)</span>
                 <h2 class="text-3xl sm:text-4xl font-bold font-math text-white mt-2">
-                    40 Exam Predicted Questions (2026)[span_46](start_span)[span_46](end_span)
+                    40 Exam Predicted Questions (2026)[span_54](start_span)[span_54](end_span)
                 </h2>
-                <p class="text-b3b-muted text-sm mt-2">Curated high-yielding NEET & JEE questions with step-by-step formula hints[span_47](start_span)[span_47](end_span)</p>
+                <p class="text-b3b-muted text-sm mt-2">Curated high-yielding NEET & JEE questions with step-by-step formula hints[span_55](start_span)[span_55](end_span)</p>
                 <div class="w-12 h-0.5 bg-b3b-cyan mx-auto mt-4"></div>
             </div>
 
             <!-- Controls -->
-            <div class="bg-b3b-card p-4 rounded-xl border border-b3b-border mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="bg-b3b-card p-4 rounded-xl border border-b3b-border mb-8 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
                 <div class="flex flex-wrap gap-2 justify-center" id="filter-container">
-                    <button onclick="filterTopic('All')" class="filter-tag px-3.5 py-2 rounded-lg text-xs font-semibold bg-b3b-cyan text-slate-950">All Topics</button>
+                    <button onclick="filterTopic('All')" class="filter-tag px-3.5 py-2 rounded-lg text-xs font-semibold bg-b3b-cyan text-slate-950 shadow-md">All Topics</button>
                     <button onclick="filterTopic('Electrodynamics')" class="filter-tag px-3.5 py-2 rounded-lg text-xs font-semibold bg-b3b-bg border border-b3b-border text-b3b-muted hover:text-white">Electrodynamics</button>
                     <button onclick="filterTopic('Mechanics')" class="filter-tag px-3.5 py-2 rounded-lg text-xs font-semibold bg-b3b-bg border border-b3b-border text-b3b-muted hover:text-white">Mechanics</button>
                     <button onclick="filterTopic('Modern Physics')" class="filter-tag px-3.5 py-2 rounded-lg text-xs font-semibold bg-b3b-bg border border-b3b-border text-b3b-muted hover:text-white">Modern Physics</button>
@@ -659,7 +659,7 @@
                 </div>
 
                 <div class="w-full md:w-64">
-                    <input type="text" id="question-input" onkeyup="searchQuestion()" placeholder="Search formula / term..." class="w-full bg-b3b-bg border border-b3b-border text-white rounded-lg px-3.5 py-2 text-xs focus:outline-none focus:border-b3b-cyan">
+                    <input type="text" id="question-input" onkeyup="searchQuestion()" placeholder="Search formula / term..." class="w-full bg-b3b-bg border border-b3b-border text-white rounded-lg px-3.5 py-2 text-xs focus:outline-none focus:border-b3b-cyan shadow-inner">
                 </div>
             </div>
 
@@ -671,7 +671,7 @@
     </section>
 
     <!-- Enquiry Form & Map Section -->
-    <section id="contact" class="py-20 lg:py-24 bg-b3b-bg border-b border-b3b-border">
+    <section id="contact" class="py-20 lg:py-28 bg-b3b-bg border-b border-b3b-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 
@@ -679,11 +679,11 @@
                 <div class="lg:col-span-6 bg-b3b-card rounded-2xl p-8 border border-b3b-border shadow-2xl">
                     <span class="text-b3b-cyan font-mono text-xs uppercase tracking-wider font-semibold">Admission Enquiry</span>
                     <h2 class="text-2xl font-bold font-math text-white mt-2">Get in Touch</h2>
-                    <p class="text-xs text-b3b-muted mb-6">Send your details for Kota offline or online batch counseling[span_48](start_span)[span_48](end_span).</p>
+                    <p class="text-xs text-b3b-muted mb-6">Send your details for Kota offline or online batch counseling[span_56](start_span)[span_56](end_span).</p>
 
                     <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
                         <input type="hidden" name="access_key" value="b2b598ce-2ae0-4a70-8430-c5e51d5fc641">
-                        <input type="hidden" name="subject" value="New Student Admission Enquiry - Saem Physics Website[span_49](start_span)[span_49](end_span)">
+                        <input type="hidden" name="subject" value="New Student Admission Enquiry - Saem Physics Website[span_57](start_span)[span_57](end_span)">
 
                         <div>
                             <label class="block text-xs font-semibold text-slate-300 mb-1">Student Name *</label>
@@ -702,7 +702,7 @@
                                 <option value="NEET Physics Batch" class="bg-b3b-bg">NEET Physics Batch</option>
                                 <option value="JEE Main & Advanced" class="bg-b3b-bg">JEE Main & Advanced</option>
                                 <option value="CBSE Class 11-12 Board" class="bg-b3b-bg">CBSE Class 11-12 Board</option>
-                                <option value="Saudi / GCC 1:1 Tutoring" class="bg-b3b-bg">Saudi / GCC 1:1 Tutoring[span_50](start_span)[span_50](end_span)</option>
+                                <option value="Saudi / GCC 1:1 Tutoring" class="bg-b3b-bg">Saudi / GCC 1:1 Tutoring[span_58](start_span)[span_58](end_span)</option>
                             </select>
                         </div>
 
@@ -715,20 +715,20 @@
                 <!-- Contact Info & Map -->
                 <div class="lg:col-span-6 flex flex-col justify-between space-y-6">
                     <div class="bg-b3b-card rounded-2xl p-6 border border-b3b-border space-y-3 shadow-xl">
-                        <h3 class="text-lg font-bold font-math text-white">Kota Classroom Location[span_51](start_span)[span_51](end_span)</h3>
+                        <h3 class="text-lg font-bold font-math text-white">Kota Classroom Location[span_59](start_span)[span_59](end_span)</h3>
                         <p class="text-xs text-b3b-muted flex items-start">
                             <i class="fa-solid fa-location-dot text-b3b-cyan text-sm mr-2 mt-0.5"></i>
-                            <span><strong>Saem Physics</strong> &bull; Vigyan Nagar, Kota, Rajasthan - 324005[span_52](start_span)[span_52](end_span)[span_53](start_span)[span_53](end_span)</span>
+                            <span><strong>Saem Physics</strong> &bull; Vigyan Nagar, Kota, Rajasthan - 324005[span_60](start_span)[span_60](end_span)[span_61](start_span)[span_61](end_span)</span>
                         </p>
                         <p class="text-xs text-b3b-muted flex items-center">
                             <i class="fa-solid fa-phone text-emerald-500 text-sm mr-2"></i>
-                            <a href="tel:+917033131480" class="font-mono font-bold text-white hover:text-b3b-cyan">+91 7033131480[span_54](start_span)[span_54](end_span)[span_55](start_span)[span_55](end_span)</a>
+                            <a href="tel:+917033131480" class="font-mono font-bold text-white hover:text-b3b-cyan">+91 7033131480[span_62](start_span)[span_62](end_span)[span_63](start_span)[span_63](end_span)</a>
                         </p>
                     </div>
 
                     <!-- Map Embed -->
                     <div class="bg-b3b-card rounded-2xl border border-b3b-border overflow-hidden h-64 sm:h-72 shadow-xl">
-                        <iframe class="w-full h-full border-0 filter invert contrast-125 opacity-80" 
+                        <iframe class="w-full h-full border-0 filter invert contrast-125 opacity-85" 
                                 src="https://maps.google.com/maps?q=Vigyan+Nagar,+Kota,+Rajasthan&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                                 allowfullscreen="" 
                                 loading="lazy"></iframe>
@@ -740,35 +740,35 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[#090a0d] text-b3b-muted py-12 text-xs border-t border-b3b-border">
+    <footer class="bg-[#050608] text-b3b-muted py-12 text-xs border-t border-b3b-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-b3b-border">
                 
                 <div>
                     <span class="text-base font-bold font-math text-white block mb-2">Saem Physics</span>
                     <p class="text-b3b-muted leading-relaxed max-w-sm">
-                        Kota Physics Specialist led by Muhammad Saem Sir (B.Tech EE, RTU Kota). Conceptual visual physics for CBSE, NEET, JEE & Global Students[span_56](start_span)[span_56](end_span).
+                        Kota Physics Specialist led by Muhammad Saem Sir (B.Tech EE, RTU Kota). Conceptual visual physics for CBSE, NEET, JEE & Global Students[span_64](start_span)[span_64](end_span).
                     </p>
                 </div>
 
                 <div>
                     <span class="text-white font-semibold block mb-2">Quick Contact</span>
                     <p class="leading-relaxed">
-                        Vigyan Nagar, Kota, Rajasthan[span_57](start_span)[span_57](end_span)[span_58](start_span)[span_58](end_span)<br/>
-                        Phone: <a href="tel:+917033131480" class="text-b3b-cyan font-mono">+91 7033131480[span_59](start_span)[span_59](end_span)[span_60](start_span)[span_60](end_span)</a>
+                        Vigyan Nagar, Kota, Rajasthan[span_65](start_span)[span_65](end_span)[span_66](start_span)[span_66](end_span)<br/>
+                        Phone: <a href="tel:+917033131480" class="text-b3b-cyan font-mono">+91 7033131480[span_67](start_span)[span_67](end_span)[span_68](start_span)[span_68](end_span)</a>
                     </p>
                 </div>
 
                 <div>
                     <span class="text-white font-semibold block mb-2">Social & Global Channels</span>
                     <div class="flex space-x-3">
-                        <a href="https://youtube.com/@SaemPhysics" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded bg-b3b-card border border-b3b-border flex items-center justify-center text-slate-300 hover:text-red-400 transition-colors">
+                        <a href="https://youtube.com/@SaemPhysics" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded bg-b3b-card border border-b3b-border flex items-center justify-center text-slate-300 hover:text-red-400 transition-colors shadow-sm">
                             <i class="fa-brands fa-youtube"></i>
                         </a>
-                        <a href="https://t.me/easyphysicsclasses" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded bg-b3b-card border border-b3b-border flex items-center justify-center text-slate-300 hover:text-b3b-cyan transition-colors">
+                        <a href="https://t.me/easyphysicsclasses" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded bg-b3b-card border border-b3b-border flex items-center justify-center text-slate-300 hover:text-b3b-cyan transition-colors shadow-sm">
                             <i class="fa-brands fa-telegram"></i>
                         </a>
-                        <a href="https://wa.me/917033131480" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded bg-b3b-card border border-b3b-border flex items-center justify-center text-slate-300 hover:text-emerald-400 transition-colors">
+                        <a href="https://wa.me/917033131480" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded bg-b3b-card border border-b3b-border flex items-center justify-center text-slate-300 hover:text-emerald-400 transition-colors shadow-sm">
                             <i class="fa-brands fa-whatsapp"></i>
                         </a>
                     </div>
@@ -777,8 +777,8 @@
             </div>
 
             <div class="flex flex-col sm:flex-row justify-between items-center text-slate-500">
-                <p>&copy; 2026 Saem Physics / Saem Global EdTech. All Rights Reserved[span_61](start_span)[span_61](end_span).</p>
-                <p class="font-mono mt-2 sm:mt-0 text-b3b-cyan">Designed in 3Blue1Brown Dark Visual Light Style[span_62](start_span)[span_62](end_span)</p>
+                <p>&copy; 2026 Saem Physics / Saem Global EdTech. All Rights Reserved[span_69](start_span)[span_69](end_span).</p>
+                <p class="font-mono mt-2 sm:mt-0 text-b3b-cyan">Designed in Manim 3Blue1Brown Dark Visual Style[span_70](start_span)[span_70](end_span)</p>
             </div>
         </div>
     </footer>
@@ -788,32 +788,32 @@
        target="_blank" 
        rel="noopener noreferrer"
        title="Chat on WhatsApp"
-       class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg whatsapp-pulse hover:scale-110 transition-transform">
+       class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-2xl whatsapp-pulse hover:scale-110 transition-transform">
         <i class="fa-brands fa-whatsapp text-2xl"></i>
     </a>
 
     <!-- Download Checkout Modal -->
-    <div id="modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div id="modal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
         <div class="bg-b3b-card border border-b3b-border rounded-2xl max-w-sm w-full p-6 relative shadow-2xl">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-b3b-muted hover:text-white">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
             <div class="text-center mb-4">
-                <div class="w-10 h-10 bg-b3b-bg border border-b3b-border text-b3b-cyan rounded-xl flex items-center justify-center mx-auto mb-2 text-lg">
+                <div class="w-10 h-10 bg-b3b-bg border border-b3b-border text-b3b-cyan rounded-xl flex items-center justify-center mx-auto mb-2 text-lg shadow-sm">
                     <i class="fa-solid fa-cloud-arrow-down"></i>
                 </div>
-                <h3 class="text-base font-bold text-white" id="modal-title">Item Title[span_63](start_span)[span_63](end_span)</h3>
-                <p class="text-xs text-b3b-muted">Hosted on AWS S3 Cloud[span_64](start_span)[span_64](end_span)</p>
+                <h3 class="text-base font-bold text-white" id="modal-title">Item Title[span_71](start_span)[span_71](end_span)</h3>
+                <p class="text-xs text-b3b-muted">Hosted on AWS S3 Cloud[span_72](start_span)[span_72](end_span)</p>
             </div>
 
-            <div class="bg-b3b-bg p-3.5 rounded-xl border border-b3b-border mb-4 flex justify-between items-center text-xs">
+            <div class="bg-b3b-bg p-3.5 rounded-xl border border-b3b-border mb-4 flex justify-between items-center text-xs shadow-inner">
                 <span class="text-b3b-muted">Price:</span>
                 <span class="font-bold font-mono text-b3b-cyan text-sm" id="modal-price">$2.99</span>
             </div>
 
             <button onclick="closeModal(); alert('Secure download link sent to your registered account via AWS / PayPal!')" class="w-full py-3 bg-b3b-cyan hover:bg-b3b-cyanHover text-slate-950 font-semibold rounded-lg text-xs uppercase tracking-wider transition-all shadow-lg glow-cyan">
-                Download Now[span_65](start_span)[span_65](end_span)
+                Download Now[span_73](start_span)[span_73](end_span)
             </button>
         </div>
     </div>
@@ -826,11 +826,19 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // 3Blue1Brown Dark Canvas Wave Visualizer
+        // 3Blue1Brown Manim-Style Interactive Dark Canvas Wave Visualizer
         const canvas = document.getElementById('math-canvas');
         if (canvas) {
             const ctx = canvas.getContext('2d');
             let t = 0;
+            let mouseX = 0;
+            let mouseY = 0;
+
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+            });
 
             function resize() {
                 canvas.width = canvas.parentElement.clientWidth;
@@ -840,10 +848,11 @@
             resize();
 
             function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(10, 12, 16, 0.2)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
                 // Draw coordinate axis (subtle dark grid lines)
-                ctx.strokeStyle = '#232838';
+                ctx.strokeStyle = '#1f2433';
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(0, canvas.height / 2);
@@ -852,23 +861,26 @@
                 ctx.lineTo(canvas.width / 2, canvas.height);
                 ctx.stroke();
 
-                // Draw Sine wave (3B1B Cyan #35b0cc)
-                ctx.strokeStyle = '#35b0cc';
+                // Interactive distortion factor based on mouse position
+                const freqMod = mouseX ? (mouseX / canvas.width) * 0.03 + 0.01 : 0.02;
+
+                // Draw Sine wave (Manim Cyan #22d3ee)
+                ctx.strokeStyle = '#22d3ee';
                 ctx.lineWidth = 2.5;
                 ctx.beginPath();
                 for (let x = 0; x < canvas.width; x++) {
-                    const y = canvas.height / 2 + Math.sin((x + t) * 0.02) * 45;
+                    const y = canvas.height / 2 + Math.sin((x + t) * freqMod) * 45;
                     if (x === 0) ctx.moveTo(x, y);
                     else ctx.lineTo(x, y);
                 }
                 ctx.stroke();
 
-                // Draw Cosine wave (3B1B Gold #e5c07b)
-                ctx.strokeStyle = '#e5c07b';
+                // Draw Cosine wave (3B1B Gold #fbbf24)
+                ctx.strokeStyle = '#fbbf24';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 for (let x = 0; x < canvas.width; x++) {
-                    const y = canvas.height / 2 + Math.cos((x - t * 0.5) * 0.015) * 35;
+                    const y = canvas.height / 2 + Math.cos((x - t * 0.5) * (freqMod * 0.8)) * 35;
                     if (x === 0) ctx.moveTo(x, y);
                     else ctx.lineTo(x, y);
                 }
@@ -880,35 +892,35 @@
             draw();
         }
 
-        // Predicted Questions Data[span_66](start_span)[span_66](end_span)
+        // Predicted Questions Data[span_74](start_span)[span_74](end_span)
         const questions = [
             {
                 id: 1,
                 topic: 'Electrodynamics',
-                question: 'Calculate capacitance of a spherical capacitor with outer radius 6 cm, inner radius 5 cm, and dielectric constant K = 8[span_67](start_span)[span_67](end_span).',
+                question: 'Calculate capacitance of a spherical capacitor with outer radius 6 cm, inner radius 5 cm, and dielectric constant K = 8[span_75](start_span)[span_75](end_span).',
                 hint: 'Formula: C = 4πε₀ * K * (r₁ r₂) / (r₂ - r₁)',
-                solution: 'C = 8 * (1 / (9×10⁹)) * (0.05 * 0.06) / 0.01 = 267 pF[span_68](start_span)[span_68](end_span)'
+                solution: 'C = 8 * (1 / (9×10⁹)) * (0.05 * 0.06) / 0.01 = 267 pF[span_76](start_span)[span_76](end_span)'
             },
             {
                 id: 2,
                 topic: 'Mechanics',
-                question: 'A disk of mass M rolls down an incline of angle θ without slipping. Find linear acceleration[span_69](start_span)[span_69](end_span).',
+                question: 'A disk of mass M rolls down an incline of angle θ without slipping. Find linear acceleration[span_77](start_span)[span_77](end_span).',
                 hint: 'Formula: a = g sinθ / (1 + I / MR²)',
-                solution: 'I = 0.5 MR² => a = (2/3) g sinθ[span_70](start_span)[span_70](end_span)'
+                solution: 'I = 0.5 MR² => a = (2/3) g sinθ[span_78](start_span)[span_78](end_span)'
             },
             {
                 id: 3,
                 topic: 'Modern Physics',
-                question: 'Find de-Broglie wavelength of an electron accelerated through V volts[span_71](start_span)[span_71](end_span).',
+                question: 'Find de-Broglie wavelength of an electron accelerated through V volts[span_79](start_span)[span_79](end_span).',
                 hint: 'Formula: λ = h / √(2meV)',
-                solution: 'λ = 12.27 / √V Angstroms[span_72](start_span)[span_72](end_span)'
+                solution: 'λ = 12.27 / √V Angstroms[span_80](start_span)[span_80](end_span)'
             },
             {
                 id: 4,
                 topic: 'Optics',
-                question: 'In YDSE, slit separation d = 1 mm, λ = 600 nm. Calculate angular fringe width[span_73](start_span)[span_73](end_span).',
+                question: 'In YDSE, slit separation d = 1 mm, λ = 600 nm. Calculate angular fringe width[span_81](start_span)[span_81](end_span).',
                 hint: 'Formula: θ = λ / d',
-                solution: 'θ = 600×10⁻⁹ / 10⁻³ = 6×10⁻⁴ radians[span_74](start_span)[span_74](end_span)'
+                solution: 'θ = 600×10⁻⁹ / 10⁻³ = 6×10⁻⁴ radians[span_82](start_span)[span_82](end_span)'
             }
         ];
 
@@ -917,7 +929,7 @@
             if (!grid) return;
             
             grid.innerHTML = items.map(q => `
-                <div class="bg-b3b-card rounded-xl border border-b3b-border p-6 shadow-xl">
+                <div class="bg-b3b-card rounded-xl border border-b3b-border p-6 shadow-xl hover:border-b3b-cyan/40 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-[10px] font-mono text-b3b-cyan bg-b3b-cyan/10 px-2.5 py-1 rounded border border-b3b-cyan/25 font-semibold">${q.topic}</span>
                         <span class="text-xs font-mono text-b3b-amber">Predictor #0${q.id}</span>
@@ -927,7 +939,7 @@
                         <i class="fa-solid fa-lightbulb"></i>
                         <span>Show Formula Hint & Solution</span>
                     </button>
-                    <div id="hint-${q.id}" class="hidden mt-3 p-3.5 bg-b3b-bg border border-b3b-border rounded-lg text-xs font-mono text-slate-300 space-y-1.5">
+                    <div id="hint-${q.id}" class="hidden mt-3 p-3.5 bg-b3b-bg border border-b3b-border rounded-lg text-xs font-mono text-slate-300 space-y-1.5 shadow-inner">
                         <p><strong>Hint:</strong> ${q.hint}</p>
                         <p class="text-emerald-400"><strong>Solution:</strong> ${q.solution}</p>
                     </div>
