@@ -1,0 +1,33 @@
+name: Validate content network
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run unit and integration tests
+        run: python -m unittest discover -s tests -v
+      - name: Build the linked database
+        run: python -m content_engine init --database /tmp/saemphysics.sqlite
+      - name: Solve and compile the kinematics lesson
+        run: |
+          python -m content_engine solve \
+            --database /tmp/saemphysics.sqlite \
+            --problem data/kinematics_demo.json
+          python -m content_engine compile-lesson \
+            --database /tmp/saemphysics.sqlite \
+            --problem data/kinematics_demo.json \
+            --output /tmp/kinematics-lesson.json
+      - name: Exercise linked recommendations
+        run: |
+          python -m content_engine recommend \
+            --database /tmp/saemphysics.sqlite \
+            --exam jee-main \
+            --output /tmp/jee-main-briefs.md

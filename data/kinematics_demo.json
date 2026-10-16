@@ -1,0 +1,29 @@
+{
+  "problem_id": "constant-acceleration-demo",
+  "source_id": "project-original",
+  "concept_id": "physics:kinematics",
+  "model_type": "constant-acceleration",
+  "title": "Predicting a projectile's position with constant acceleration",
+  "audience": "JEE learners",
+  "language": "en",
+  "duration_seconds": 45,
+  "central_question": "Where will a moving object be after four seconds if its acceleration stays constant?",
+  "learning_outcome": "Calculate position and velocity from vector initial conditions and verify displacement independently.",
+  "unit_system": "SI",
+  "assumptions": [
+    "Motion is represented in two Cartesian dimensions.",
+    "Acceleration is constant throughout the four-second interval.",
+    "Position, velocity, and acceleration are expressed in SI units."
+  ],
+  "inputs": {
+    "initial_position_m": [0.0, 0.0],
+    "initial_velocity_m_per_s": [5.0, 12.0],
+    "acceleration_m_per_s2": [0.0, -2.0],
+    "time_s": 4.0
+  },
+  "expected_outputs": {
+    "position_m": [20.0, 32.0],
+    "velocity_m_per_s": [5.0, 4.0]
+  },
+  "solution_narration": "The horizontal velocity stays fixed. Vertically, constant downward acceleration changes the velocity from twelve to four metres per second. The average-velocity displacement check independently gives the same final position."
+}

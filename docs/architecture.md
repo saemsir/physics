@@ -28,6 +28,16 @@ config/
 data/
   exam_question_metadata.csv
   physics_topics.csv
+  sources.csv
+  papers.csv
+  questions.csv
+  question_concepts.csv
+  concept_sources.csv
+  content_schema.sql
+content_engine/
+  database.py
+  problem.py
+  lesson.py
 knowledge/
   concepts.csv
   links.csv
@@ -48,6 +58,10 @@ episodes/
     script.md
     storyboard.md
     scenes.py
+  kinematics_001/
+    scenes.py
+notebooks/
+  render_in_colab.ipynb
 library/
   components/
   physics/
@@ -90,6 +104,16 @@ scene-spec archetype. It does not solve arbitrary word problems, infer every
 model from natural language, or guarantee error-free output. Expand one
 well-defined domain at a time, with analytical test cases and independent
 checks before adding a new solver or animation template.
+
+The linked-content pilot builds a disposable SQLite index from the
+version-controlled CSV catalogs. Source files, paper records, question
+metadata, concept relationships, computational runs, lesson IR, and approval
+states use stable IDs and explicit provenance. The seeded JEE papers remain
+unverified source records until their provenance and individual question
+locators are checked. The original kinematics example demonstrates the
+problem-to-lesson path; it is not exam-bank content. See
+`docs/content_network.md` for database refresh, review, and Colab rendering
+commands.
 
 ## Editorial and visual originality
 

@@ -1,0 +1,8 @@
+concept_id,source_id,source_locator,relation,review_status,reviewer,notes
+math:linear-systems,strang-18-085-fall-2008,Chapter 1: Applied Linear Algebra,related-resource,needs-review,,Check source section and license before using in a lesson
+math:matrices,strang-18-085-fall-2008,Chapter 1: Applied Linear Algebra,related-resource,needs-review,,Check source section and license before using in a lesson
+math:linear-maps,strang-18-085-fall-2008,Chapter 1: Applied Linear Algebra,related-resource,needs-review,,Check source section and license before using in a lesson
+math:eigenmodes,strang-18-085-fall-2008,Chapter 1: Applied Linear Algebra,related-resource,needs-review,,Check source section and license before using in a lesson
+math:fourier,strang-18-085-fall-2008,Chapter 4: Fourier Series and Integrals,related-resource,needs-review,,Check source section and license before using in a lesson
+cs:procedural_abstraction,sussman-sicp,Specific section not yet identified,related-resource,needs-review,,Candidate reference only; locate a relevant passage and review rights before use
+cs:state_and_simulation,feynman-lectures-computation,Specific section not yet identified,related-resource,needs-review,,Candidate reference only; locate a relevant passage and review rights before use

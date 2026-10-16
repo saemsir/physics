@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 from dataclasses import dataclass
 from pathlib import Path
+import re
 
 from exam_engine.engine import DataValidationError, Topic
 
@@ -127,9 +128,9 @@ def load_graph(
     for line, row in enumerate(concept_rows, start=2):
         if any(not row[field] for field in CONCEPT_FIELDS if field != "topic_id"):
             raise DataValidationError(f"{concepts_path}:{line}: concept fields cannot be blank")
-        if row["domain"] not in {"mathematics", "physics"}:
+        if not re.fullmatch(r"[a-z][a-z0-9_]*", row["domain"]):
             raise DataValidationError(
-                f"{concepts_path}:{line}: domain must be mathematics or physics"
+                f"{concepts_path}:{line}: domain must be a lowercase stable identifier"
             )
         concept = Concept(**row)
         if concept.concept_id in concepts_by_id:
@@ -152,7 +153,7 @@ def load_graph(
             physics_topic_ids.add(concept.topic_id)
         elif concept.topic_id:
             raise DataValidationError(
-                f"{concepts_path}:{line}: mathematics concepts cannot own an exam topic_id"
+                f"{concepts_path}:{line}: only physics concepts can own an exam topic_id"
             )
         concepts.append(concept)
         concepts_by_id[concept.concept_id] = concept
@@ -186,10 +187,11 @@ def load_graph(
         source = concepts_by_id[link.source_id]
         target = concepts_by_id[link.target_id]
         if link.relation == "uses_math" and (
-            source.domain != "physics" or target.domain != "mathematics"
+            source.domain == "mathematics" or target.domain != "mathematics"
         ):
             raise DataValidationError(
-                f"{links_path}:{line}: uses_math must link physics to mathematics"
+                f"{links_path}:{line}: uses_math must link a non-mathematics concept "
+                "to a mathematics concept"
             )
         key = (link.source_id, link.target_id, link.relation)
         if key in seen_links:
@@ -207,7 +209,7 @@ def load_graph(
     unlinked_math = math_concepts - linked_math
     if unlinked_math:
         raise DataValidationError(
-            "mathematics concepts are not connected to physics: "
+            "mathematics concepts are not connected from another domain: "
             + ", ".join(sorted(unlinked_math))
         )
     _check_acyclic(concepts_by_id, graph.links)

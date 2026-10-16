@@ -33,6 +33,7 @@ episodes/                Episode-specific brief, physics, script and scenes
 templates/               Brief, review, storyboard and release templates
 book/                    Reference material; check source permissions before reuse
 data/                    Exam-question metadata schema and physics topic catalog
+content_engine/          Versioned SQLite index, provenance links and lesson compiler
 exam_engine/             Evidence-labelled topic ranking and video-brief CLI
 knowledge/               Validated concept graph across physics and mathematics
 math_engine/              Deterministic linear algebra primitives
@@ -116,6 +117,28 @@ specification. These are reviewed, testable primitives, not a solver for every
 physics problem. Floating-point calculations and models can fail; they report
 invalid inputs, expose residuals, and require independent physics checks. Use
 `docs/architecture.md` for the staged path toward broader solvers and renders.
+
+## Linked content network and Colab rendering
+
+The Git-tracked CSV records and SQL schema define the source/paper/question/
+concept network. Build the disposable SQLite index and exercise the
+calculation-to-lesson path with the original kinematics integration example:
+
+```bash
+python -m content_engine init
+python -m content_engine papers
+python -m content_engine map-paper --paper-id iitjee-2008-1
+python -m content_engine solve --problem data/kinematics_demo.json
+python -m content_engine compile-lesson --problem data/kinematics_demo.json
+python -m content_engine recommend --exam jee-main
+```
+
+The indexed JEE papers are source placeholders, not verified question-bank
+records. Add question metadata only after manually checking its exact paper
+locator, rights, topic mapping, and answer. Open
+`notebooks/render_in_colab.ipynb` in Google Colab to build the database and
+render a lesson preview. See [docs/content_network.md](docs/content_network.md)
+for the data contract, review gates, and collaboration workflow.
 
 ## Create an episode
 

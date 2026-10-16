@@ -4,11 +4,14 @@ The graph is a small, version-controlled index connecting the Physics topic
 IDs in `../data/physics_topics.csv` to original concept summaries, mathematics
 tools, and prerequisites:
 
-- `concepts.csv`: one stable node per mathematics idea or Physics topic.
+- `concepts.csv`: one stable node per idea, with a lowercase domain identifier
+  (for example `mathematics`, `physics`, or future `computer_science` nodes).
 - `links.csv`: directed `requires` and `uses_math` edges.
 - `../data/exam_question_metadata.csv`: source-linked records attach to their
   Physics concept through `topic_id`; the relation can be followed to its
   mathematical tools.
+- `../data/concept_sources.csv`: source locators attach books/courses to concepts
+  without implying permission to reproduce their contents.
 
 Check and query a mapping from the repository root:
 
@@ -19,8 +22,9 @@ python -m exam_engine map-topic --topic oscillations_waves
 ```
 
 The graph loader checks stable IDs, complete one-to-one Physics-topic
-coverage, relation types, missing nodes, prerequisite cycles, and that every
-mathematics concept is connected to a Physics topic. Tests exercise the same
+coverage, extensible domain identifiers, relation types, missing nodes,
+prerequisite cycles, and that every mathematics concept is connected from a
+non-mathematics concept. Tests exercise the same
 checks. A question is not automatically linked to concepts merely because a
 tag exists: a human must verify its source and topic tag in the question
 metadata ledger.

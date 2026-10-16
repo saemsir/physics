@@ -104,3 +104,13 @@ Run focused checks with:
 ```bash
 python -m unittest discover -s tests -v
 ```
+
+## Source-linked content network
+
+`sources.csv`, `papers.csv`, `questions.csv`, and `question_concepts.csv` are
+the Git-versioned index inputs for the local SQLite network built with
+`python -m content_engine init`. Question rows contain metadata and source
+locators only, not copied question wording. The current JEE paper entries are
+explicitly unreviewed local files; none are considered verified question
+records. Follow [../docs/content_network.md](../docs/content_network.md) before
+adding paper/question records or using a reference in generated content.

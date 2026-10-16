@@ -35,3 +35,5 @@ physics:optics,Geometrical and wave optics,physics,optics,Relate propagation ref
 physics:modern_physics,Modern physics,physics,modern_physics,Model quantized energy exchange and particle-wave observations,syllabus:needs-official-version
 physics:atoms_nuclei,Atomic and nuclear physics,physics,atoms_nuclei,Relate bound-state transitions nuclear structure and energy accounting,syllabus:needs-official-version
 physics:semiconductors,Semiconductor electronics,physics,semiconductors,Model carrier behavior and circuit-level semiconductor devices,syllabus:needs-official-version
+cs:procedural_abstraction,Procedural abstraction,computer_science,,Represent computation as reusable procedures with explicit inputs and outputs,project:software-abstractions
+cs:state_and_simulation,State and simulation,computer_science,,Represent computation as state transitions and test model invariants,project:simulation

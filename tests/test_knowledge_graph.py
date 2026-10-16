@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import csv
 from pathlib import Path
 import tempfile
 import unittest
@@ -61,3 +60,25 @@ class KnowledgeGraphTests(unittest.TestCase):
             )
             with self.assertRaisesRegex(DataValidationError, "contains a cycle"):
                 load_graph(concepts_path, links_path, TOPICS[:2])
+
+    def test_graph_accepts_future_domains_and_general_math_links(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            concepts_path = Path(directory) / "concepts.csv"
+            links_path = Path(directory) / "links.csv"
+            concepts = (ROOT / "knowledge" / "concepts.csv").read_text(
+                encoding="utf-8"
+            ).rstrip("\n")
+            links = (ROOT / "knowledge" / "links.csv").read_text(
+                encoding="utf-8"
+            ).rstrip("\n")
+            concepts_path.write_text(
+                concepts + "\n"
+                + "cs:algorithms,Algorithms,computer_science,,Reason about procedures,project\n",
+                encoding="utf-8",
+            )
+            links_path.write_text(
+                links + "\n" + "cs:algorithms,math:graphs,uses_math\n",
+                encoding="utf-8",
+            )
+            graph = load_graph(concepts_path, links_path, TOPICS)
+            self.assertEqual(graph.by_id()["cs:algorithms"].domain, "computer_science")

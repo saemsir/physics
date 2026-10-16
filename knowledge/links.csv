@@ -76,3 +76,4 @@ math:fourier,math:trigonometry,requires
 math:complex-numbers,math:trigonometry,requires
 math:derivatives,math:graphs,requires
 math:integrals,math:graphs,requires
+cs:state_and_simulation,cs:procedural_abstraction,requires

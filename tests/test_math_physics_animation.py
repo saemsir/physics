@@ -3,7 +3,7 @@ from __future__ import annotations
 import math
 import unittest
 
-from animation_engine import vector_decomposition_spec
+from animation_engine import motion_scene_spec, vector_decomposition_spec
 from math_engine import (
     MathDomainError,
     add,
@@ -82,6 +82,20 @@ class PhysicsAndAnimationTests(unittest.TestCase):
     def test_scene_rejects_zero_resultant(self) -> None:
         with self.assertRaisesRegex(MathDomainError, "zero vector"):
             vector_decomposition_spec((0, 0))
+
+    def test_motion_scene_samples_physical_trajectory_and_endpoints(self) -> None:
+        spec = motion_scene_spec((0, 0), (5, 12), (0, -2), 4, samples=5)
+        self.assertEqual(len(spec.time_s), 5)
+        self.assertEqual(spec.time_s[0], 0.0)
+        self.assertEqual(spec.position_m[0], (0.0, 0.0))
+        self.assertEqual(spec.final_position_m, (20.0, 32.0))
+        self.assertEqual(spec.final_velocity_m_per_s, (5.0, 4.0))
+
+    def test_motion_scene_rejects_dimensions_the_renderer_cannot_show(self) -> None:
+        with self.assertRaisesRegex(MathDomainError, "one or two spatial dimensions"):
+            motion_scene_spec((0, 0, 0), (1, 2, 3), (0, 0, 0), 1)
+        with self.assertRaisesRegex(MathDomainError, "duration_s"):
+            motion_scene_spec((0,), (1,), (0,), -1)
 
 
 if __name__ == "__main__":
