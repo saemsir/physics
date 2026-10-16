@@ -1,0 +1,91 @@
+# SaemPhysics AI Animation Studio
+
+An engineering workspace for producing original, visual physics lessons for
+[SaemPhysics](https://www.youtube.com/@SaemPhysics). The first audience is NEET,
+JEE Main/Advanced, and Olympiad students; explanations should also be useful to
+curious learners beyond those exams.
+
+The teacher owns the physics and pedagogy. AI assists with bounded tasks, code
+makes visuals repeatable, Git records decisions, and explicit teacher approval
+gates protect each lesson. Start with one correct, understandable scene; do
+not try to automate a complete video from a single prompt.
+
+## Production pipeline
+
+| Stage | Input | Output | Approval |
+|---|---|---|---|
+| Editorial | Topic, learner, misconception | Brief and learning objective | Teacher: objective and central question |
+| Physics | Claim and model | Assumptions, derivation, checks, sources | Teacher: physics and derivation |
+| Design | Approved physics | Script, storyboard, scene cards | Teacher: explanation and visual encoding |
+| Animation | Approved scene cards | Manim source and preview | Teacher: preview at normal speed |
+| Post-production | Approved visuals and narration | Edited video, audio, corrected captions | Teacher: synchronization and accessibility |
+| Release | Final export and source | QC-approved video and archived source | Teacher: final export and publication |
+
+A correction at an earlier stage triggers a review of affected later stages.
+AI output is a draft, not an approval.
+
+## Repository map
+
+```text
+config/                  Shared visual identity
+docs/                    Architecture, channel brief, source policy
+episodes/                Episode-specific brief, physics, script and scenes
+templates/               Brief, review, storyboard and release templates
+books/                   Reference material; check source permissions before reuse
+```
+
+The first sample is `episodes/vectors_001/`. Its status is a working draft:
+the physics notes, storyboard and source scene are recorded, but the teacher
+must still approve the lesson and inspect an actual render.
+Extract reusable components into `library/` after the first scene has been
+reviewed and the repeated patterns are clear.
+
+## Set up the environment
+
+Use Python 3.11 or 3.12 with the pinned Manim Community Edition dependency.
+Manim also needs system tools for rendering. Follow the
+[official Manim installation guide](https://docs.manim.community/en/stable/installation.html)
+for your operating system.
+
+```bash
+python --version
+git --version
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+manim --version
+```
+
+Render a low-quality preview of the sample:
+
+```bash
+python -m manim -pql episodes/vectors_001/scenes.py VectorComponents
+```
+
+Watch the complete render at normal speed before approving it. Manim writes
+generated media under `media/`; rendered exports and caches do not belong in
+Git. See `docs/architecture.md` for reproducibility and the approval workflow.
+
+## Create an episode
+
+1. Copy the episode brief and review templates into a descriptively named
+   folder, such as `episodes/electrostatics_001/`.
+2. Get teacher approval for the central question and learning objective.
+3. Record definitions, assumptions, derivation, checks, and traceable sources;
+   get the physics approved before scripting.
+4. Write narration alongside the storyboard and scene cards. Make each scene
+   answer one question.
+5. Implement one scene, render a low-quality preview, and review physics,
+   timing, layout, and mobile legibility.
+6. Record narration, edit, correct captions, and inspect the final export.
+   Publish only after the release checklist is approved.
+7. Commit source, decisions, and small licensed assets. Store large renders
+   and private raw recordings outside normal Git history.
+
+## Using reference books and other sources
+
+The `books/` folder is a source library, not a license to reproduce a book's
+text, figures, or lecture. Record the title, author, edition, location, URL,
+and applicable license or permission with each episode. Learn from ideas and
+verify claims independently; write original explanations, examples, and
+visuals. See `docs/sources.md` before using a source in a published video.

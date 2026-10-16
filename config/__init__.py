@@ -1,0 +1,1 @@
+"""SaemPhysics studio configuration."""
