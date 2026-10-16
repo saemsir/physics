@@ -8,30 +8,43 @@ precise, and unhurried enough for equations. It takes broad production goals
 from cinematic visual education, but it does not copy any particular
 creator's distinctive voice, music, scripts, or sound design.
 
-The requested `saem_voice_sample.wav` was not found in this checkout when this
-profile was drafted. Therefore the EQ ranges are listening-based starting
-points, not measurements or a personalized preset. Do not claim the recording
-has been analyzed until the local WAV analyzer has run on the actual sample.
+The sample has now been analyzed locally. It is a 65-second, 48 kHz,
+16-bit stereo PCM WAV. Channel peaks are -1.82/-1.80 dBFS, RMS is -17.71 dBFS
+per channel, DC offset is about 0.000032, there are no clipped samples, and
+the level-based leading/trailing silence is 0.046/0 seconds. The signal
+measurements are recorded in `config/audio_profile.json`.
 
-## Keep the voice sample private
+The peak is close to digital full scale. There is no clipping, but lower the
+input gain approximately 4–6 dB for future takes to retain recording
+headroom. Do not alter the original sample just to hit that recording target.
+The EQ ranges remain provisional because no auditory judgment of room noise,
+plosives, sibilance, reverberation, or intelligibility has been made.
 
-Voice recordings are personal data. Keep the original sample on a private
-Codespace or local machine; do not commit it, upload it to CI, or send it to an
-external audio service. The repository ignores the specifically named sample.
-The analyzer emits basic technical measurements to the terminal and does not
-copy or modify the WAV.
+## Voice sample handling
 
-After adding the file to the repository workspace (or specifying its actual
-private path), run:
+Voice recordings are personal data. The sample was uploaded to the repository
+as `saem_voice_sample.wav`, so it is currently a tracked repository file and
+will be present in GitHub checkouts. The Git ignore rule only prevents future
+untracked copies; it does not untrack this existing file. The workflow does
+not analyze or otherwise use the audio, and the analyzer emits only technical
+measurements to the terminal without copying or modifying the WAV.
+
+If this repository is public, the uploaded sample is accessible to repository
+visitors. If the sample was meant to remain private, ask to remove it from the
+tracked project; a normal deletion commit will not erase prior Git history.
+Do not send it to an external audio service.
+
+To repeat the read-only analysis on the local sample, run:
 
 ```bash
 python tools/analyze_voice_sample.py /path/to/saem_voice_sample.wav
 ```
 
 Use the output to set recording gain and decide whether cleanup is needed.
-Listen to the sample for room tone, mouth clicks, plosives, sibilance,
-reverberation, and microphone position before changing EQ. Technical metadata
-alone cannot identify an ideal EQ curve or judge vocal performance.
+Listen privately to the sample for room tone, mouth clicks, plosives,
+sibilance, reverberation, and microphone position before changing EQ.
+Technical metadata alone cannot identify an ideal EQ curve or judge vocal
+performance.
 
 ## Suggested recording and processing
 

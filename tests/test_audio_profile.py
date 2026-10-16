@@ -12,15 +12,20 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class AudioProfileTests(unittest.TestCase):
-    def test_profile_is_explicitly_provisional_until_sample_analysis(self) -> None:
+    def test_profile_records_measurements_and_pending_listening_review(self) -> None:
         profile = json.loads((ROOT / "config" / "audio_profile.json").read_text())
         self.assertEqual(
             profile["status"],
-            "provisional-awaiting-private-voice-sample-analysis",
+            "technical-sample-analysis-complete-listening-review-pending",
         )
         self.assertEqual(
             profile["sample_analysis"]["analysis_status"],
-            "not-run-file-not-found-in-workspace",
+            "technical-analysis-complete-listening-review-pending",
+        )
+        self.assertEqual(profile["sample_analysis"]["sample_rate_hz"], 48000)
+        self.assertEqual(
+            profile["sample_analysis"]["channel_measurements"][0]["clipped_samples"],
+            0,
         )
         self.assertEqual(profile["mix_targets"]["true_peak_db_tp_max"], -1.0)
 

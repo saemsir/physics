@@ -1,6 +1,6 @@
 {
   "profile_id": "saem-physics-educational-voice-v1",
-  "status": "provisional-awaiting-private-voice-sample-analysis",
+  "status": "technical-sample-analysis-complete-listening-review-pending",
   "reference": "Owner requested an original, clear, cinematic educational narration profile. This is not an imitation of any individual creator.",
   "delivery": {
     "character": [
@@ -26,6 +26,7 @@
     "position": "slightly off-axis; keep position and room constant across takes",
     "room": "quiet, soft-furnished room; reduce reflections before applying denoising",
     "recording_peak_dbfs_target": [-12, -6],
+    "sample_gain_note": "The analyzed sample peaks near -1.8 dBFS with no clipped samples. For future takes, lower interface/input gain by approximately 4-6 dB to restore safe headroom; do not reduce the stored original just to meet a recording target.",
     "avoid": [
       "clipping",
       "automatic gain control",
@@ -87,12 +88,33 @@
   ],
   "sample_analysis": {
     "sample_path_expected": "saem_voice_sample.wav",
-    "analysis_status": "not-run-file-not-found-in-workspace",
+    "analysis_status": "technical-analysis-complete-listening-review-pending",
+    "analyzed_at": "2026-10-16",
+    "duration_seconds": 65.0,
+    "channels": 2,
+    "sample_rate_hz": 48000,
+    "bit_depth": 16,
+    "encoding": "PCM",
+    "leading_silence_seconds_at_-60dBFS": 0.046,
+    "trailing_silence_seconds_at_-60dBFS": 0.0,
+    "channel_measurements": [
+      {
+        "channel": 1,
+        "peak_dbfs": -1.82,
+        "rms_dbfs": -17.71,
+        "dc_offset": 0.000032,
+        "clipped_samples": 0
+      },
+      {
+        "channel": 2,
+        "peak_dbfs": -1.8,
+        "rms_dbfs": -17.71,
+        "dc_offset": 0.000032,
+        "clipped_samples": 0
+      }
+    ],
+    "interpretation": "Technical signal measurements only; no automated listening, intelligibility, room-noise, plosive, sibilance, or reverberation assessment was performed.",
     "required_before_personalized_eq": [
-      "sample rate",
-      "bit depth and channel count",
-      "peak and RMS level",
-      "clipping and leading/trailing silence checks",
       "listening review for room noise, plosives, sibilance, and reverberation"
     ]
   }

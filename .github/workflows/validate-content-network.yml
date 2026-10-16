@@ -52,7 +52,7 @@ jobs:
           assert all(video["brand_overlay"]["name"] == "Saem Physics" for video in videos)
           assert all(video["brand_overlay"]["tagline"] == "NEET JEE MIT" for video in videos)
           PY
-      - name: Validate narration profile without private audio
+      - name: Validate narration profile metadata without processing audio
         run: |
           python -m json.tool config/audio_profile.json >/dev/null
           python -m compileall -q content_engine animation_engine knowledge episodes/batch_001 tools
