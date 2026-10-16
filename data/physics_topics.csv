@@ -1,0 +1,21 @@
+topic_id,topic_name,unit,horizontal_angle,vertical_hook
+units_measurement,Units and Measurement,Foundations,Build a physical estimate from dimensions and show how units expose hidden assumptions,Can dimensional analysis rule out an attractive answer in seconds?
+kinematics,Kinematics,Mechanics,Reconstruct motion from a graph before reaching for equations,What does the slope of this graph physically mean?
+laws_of_motion,Laws of Motion,Mechanics,Use a free-body diagram to reveal which forces can actually change the motion,Which way does friction point in this situation?
+work_energy,Work Energy and Power,Mechanics,Connect force along a path to energy bookkeeping and test the result at the endpoints,Can energy conservation eliminate most of this calculation?
+rotation,Rotational Motion,Mechanics,Build rotational dynamics from torque and angular momentum instead of memorized analogies,Which point should you choose to calculate torque?
+gravitation,Gravitation,Mechanics,Compare field and potential pictures to understand orbital motion and escape,Is gravitational potential positive or negative here?
+properties_of_matter,Properties of Matter,Mechanics,Connect microscopic interactions to elastic response and fluid behavior,What changes when the same force acts over a smaller area?
+thermodynamics,Thermodynamics,Thermal Physics,Track heat and work with a system boundary and check each sign convention,Which way does heat flow when two bodies meet?
+kinetic_theory,Kinetic Theory of Gases,Thermal Physics,Translate random molecular motion into measurable pressure and temperature,What does temperature tell us about molecular motion?
+oscillations_waves,Oscillations and Waves,Waves,Use phase and energy exchange to explain simple harmonic motion and wave superposition,At what point is a vibrating particle moving fastest?
+electrostatics,Electrostatics,Electricity and Magnetism,Build the field and potential of a charge arrangement using symmetry and superposition,Can the electric field be zero while potential is not?
+capacitance,Capacitance,Electricity and Magnetism,Follow charge and energy when capacitors are connected or a dielectric is inserted,What stays fixed when a capacitor is disconnected?
+current_electricity,Current Electricity,Electricity and Magnetism,Reduce a circuit by identifying constraints before applying Kirchhoff rules,Where does the current split in this circuit?
+magnetism,Magnetism and Magnetic Effects of Current,Electricity and Magnetism,Use symmetry and the force law to predict magnetic fields and particle paths,Can a magnetic force change a particle's speed?
+em_induction,Electromagnetic Induction and AC,Electricity and Magnetism,Connect changing flux to induced fields and energy transfer,Which way will the induced current flow?
+electromagnetic_waves,Electromagnetic Waves,Electricity and Magnetism,Trace how changing electric and magnetic fields sustain a traveling wave,Which fields oscillate in an electromagnetic wave?
+optics,Optics,Optics,Construct an image from rays and use the geometry to test sign conventions,Where does the image move when the object moves?
+modern_physics,Modern Physics,Modern Physics,Connect quantized energy changes to observable spectra and particle properties,What determines the maximum kinetic energy of photoelectrons?
+atoms_nuclei,Atoms and Nuclei,Modern Physics,Compare energy scales in atomic transitions and nuclear processes,Why does a nuclear reaction release binding energy?
+semiconductors,Semiconductor Electronics,Modern Physics,Use carrier motion and junction behavior to explain basic electronic devices,Which way does a diode conduct in this circuit?

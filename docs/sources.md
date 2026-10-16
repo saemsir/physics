@@ -22,6 +22,27 @@ available, date consulted, and applicable license or permission.
 - Never put credentials, private student information, or unrelated personal
   data into the source library or AI prompts.
 
+## Exam-question metadata
+
+The `data/exam_question_metadata.csv` ledger is metadata-only by design. For
+each question record, keep the exam sitting, a question locator, topic tag,
+source publisher and URL, rights status, and human verification status. Do not
+bulk-copy question wording, answer choices, worked solutions, or figures from
+official papers or commercial/coaching sources without a license or written
+permission that covers that use. Public accessibility alone does not establish
+redistribution rights. See `data/README.md` for the schema and import workflow.
+
+The exam engine only uses records whose source and topic tags are marked
+verified. That status does not certify a solution or answer key. Its
+recency-weighted topic shares are descriptive summaries of the supplied
+historical sample, not probabilities that a future exam will contain a topic.
+Sparse or biased source coverage must be disclosed and reviewed before using
+the ranking to plan instruction.
+
+Use original example problems, narration, diagrams, and animation. The
+editorial target is broadly visual, intuitive, and mathematically careful; do
+not imitate any creator's distinctive scripts, artwork, or presentation.
+
 ## Repository inventory caveat
 
 The GitHub `books/` listing includes the SaemPhysics studio textbook PDF. The

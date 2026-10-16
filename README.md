@@ -31,7 +31,10 @@ config/                  Shared visual identity
 docs/                    Architecture, channel brief, source policy
 episodes/                Episode-specific brief, physics, script and scenes
 templates/               Brief, review, storyboard and release templates
-books/                   Reference material; check source permissions before reuse
+book/                    Reference material; check source permissions before reuse
+data/                    Exam-question metadata schema and physics topic catalog
+exam_engine/             Evidence-labelled topic ranking and video-brief CLI
+tests/                   Focused exam-engine tests
 ```
 
 The first sample is `episodes/vectors_001/`. Its status is a working draft:
@@ -65,6 +68,30 @@ python -m manim -pql episodes/vectors_001/scenes.py VectorComponents
 Watch the complete render at normal speed before approving it. Manim writes
 generated media under `media/`; rendered exports and caches do not belong in
 Git. See `docs/architecture.md` for reproducibility and the approval workflow.
+
+## Build exam-focused video briefs
+
+The exam engine uses verified, source-linked question metadata to prioritize
+physics topics and produce ten 16:9 three-minute and ten 9:16 one-minute
+original video briefs:
+
+```bash
+python -m exam_engine recommend --exam jee-main
+python -m exam_engine recommend --exam jee-advanced --as-of-year 2026 \
+  --output output/jee-advanced-video-ideas.md
+python -m exam_engine backtest --exam jee-main
+python -m unittest discover -s tests -v
+```
+
+Start with `data/README.md` before adding records. The metadata ledger is
+intentionally empty until source provenance and topic tags have been verified;
+it does not contain copied exam text. With no observations for a selected exam,
+the command labels its output as a uniform curriculum baseline. With records,
+it reports smoothed historical topic shares, not guaranteed or calibrated
+predictions of upcoming questions. Every proposed explanation remains subject
+to source-rights, physics, and teacher review. Run `backtest` to compare
+rolling-origin topic rankings with a uniform baseline before using the results
+to prioritize study or video production.
 
 ## Create an episode
 
