@@ -60,7 +60,14 @@ question-to-video pipeline. The current input is a reviewed JSON manifest:
    batch ID. Watch both aspect ratios. If approved, run the vertical and
    horizontal high-quality cells separately. Keep `--resume` enabled if
    Colab disconnects.
-7. Review all exports, then add/verify narration and captions and complete
+7. For batch 001, use the timed script in
+   [`episodes/batch_001/narration.json`](../episodes/batch_001/narration.json).
+   The Colab preview cell shows its timed beat cues alongside the vertical and
+   horizontal silent previews for the first episode. Read along and check
+   whether the wording fits each visual beat. Timing aligns to beat boundaries,
+   not frame-level gestures. The lines are not automatically recorded or mixed
+   into the video yet.
+8. Review all exports, then add/verify narration and captions and complete
    physics, editorial, accessibility, and release approval. The current
    Manim output is a silent visual draft with text branding; it is not a
    publish-ready video.
@@ -170,9 +177,10 @@ episode. Those are explicit future capabilities, not current guarantees.
 | Audience | Ages 14–21; define symbols and state assumptions |
 | Brand | `Saem Physics` and `NEET JEE MIT`; text-only until an approved logo asset is supplied |
 | Content input | Versioned JSON manifest; no input form yet |
+| Narration scripts | 20 original draft scripts in `episodes/batch_001/narration.json`, six timed cues per vertical video and seven per horizontal video |
 | Calculation checks | Existing typed constant-acceleration path plus selected formula audits; only supported models execute |
 | Visuals | Original Manim visual drafts; human legibility and scientific review required |
-| Voice | Profile is guidance only; current rendered MP4s are silent |
+| Voice | Spoken-math profile and timed scripts are available; current rendered MP4s are silent and no audio is composed |
 | Captions | Not currently generated; must be authored/synchronized and reviewed |
 | Output validation | MP4 dimensions, FPS, duration, non-empty file, SHA-256 report |
 | Rendering | Colab notebook and Drive export; Colab runtime is temporary and may disconnect |

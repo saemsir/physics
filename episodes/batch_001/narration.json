@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "batch_id": "batch_001",
+  "status": "draft-for-owner-and-physics-review",
+  "language": "English",
+  "profile_id": "saem-physics-educational-voice-v1",
+  "sync_note": "Each cue is aligned to a named animation storyboard beat, not to frame-level gestures. Cue boundaries use the same fixed durations as content_engine.batch.VIDEO_FORMATS; recorded audio is not yet automatically mixed into rendered MP4s.",
+  "review_note": "Original draft narration based on the batch manifest. Physics, pronunciation, timing, and editorial approval are still required before recording or release.",
+  "timecodes_seconds": {
+    "vertical": {
+      "hook": [0, 6],
+      "question": [6, 14],
+      "visual_model": [14, 26],
+      "solution": [26, 46],
+      "recap": [46, 56],
+      "branded_end_card": [56, 60]
+    },
+    "horizontal": {
+      "hook": [0, 12],
+      "question": [12, 30],
+      "visual_model": [30, 60],
+      "solution": [60, 120],
+      "misconception_check": [120, 150],
+      "recap": [150, 168],
+      "branded_end_card": [168, 180]
+    }
+  },
+  "episodes": [
+    {
+      "episode_id": "b001-e01-projectile-components",
+      "vertical": [
+        {"beat": "hook", "text": "One launch, two independent directions. Can we predict both?"},
+        {"beat": "question", "text": "Velocity: six and eight metres per second. Acceleration: zero and negative ten metres per second squared. State after one second?"},
+        {"beat": "visual_model", "text": "Split x and y. Horizontal velocity stays six; gravity reduces the upward component. Watch them recombine."},
+        {"beat": "solution", "text": "Position equals initial position plus velocity times time plus half acceleration times time squared. Horizontally, six times one gives six metres. Vertically, eight minus five gives three metres. Velocity equals initial velocity plus acceleration times time: six horizontally, negative two vertically, metres per second."},
+        {"beat": "recap", "text": "Position: six, three metres. Velocity: six, negative two metres per second. Gravity changes the vertical component, not the horizontal one."},
+        {"beat": "branded_end_card", "text": "Saem Physics. NEET JEE MIT."}
+      ],
+      "horizontal": [
+        {"beat": "hook", "text": "A curved path can look complicated. The trick is to separate it into two simple motions."},
+        {"beat": "question", "text": "A drone starts at the origin: velocity six metres per second horizontally, eight upward. Acceleration is zero horizontally and negative ten metres per second squared vertically. Find its state after one second."},
+        {"beat": "visual_model", "text": "Here is the key idea: treat x and y as separate one-dimensional problems sharing the same clock. In x, there is no acceleration, so the drone keeps moving at six metres per second. In y, it starts upward at eight metres per second, while gravity points downward. The curve combines both components. Solve x and y separately, then combine them into position and velocity."},
+        {"beat": "solution", "text": "Start with position equals initial position plus initial velocity times time plus one half acceleration times time squared. For x, the initial position is zero, the velocity is six, time is one, and acceleration is zero. So x equals six metres. For y, use zero plus eight times one plus one half times negative ten times one squared. That is eight minus five, or three metres. Now use velocity equals initial velocity plus acceleration times time. The horizontal velocity stays six metres per second. The vertical velocity is eight plus negative ten times one, which is negative two metres per second. The negative sign means downward because we chose upward as positive. Check the vertical displacement: average vertical velocity is three metres per second upward, over one second, giving three metres. The result agrees."},
+        {"beat": "misconception_check", "text": "A common mistake is to let gravity reduce both velocity components. In this model, acceleration has no horizontal component, so horizontal velocity remains constant. Also, negative two is a velocity with direction; the speed is two metres per second."},
+        {"beat": "recap", "text": "After one second, the drone is at six metres horizontally and three metres vertically. Its velocity is six metres per second horizontally and two metres per second downward. Always state the axes and signs."},
+        {"beat": "branded_end_card", "text": "That is motion, one axis at a time. Saem Physics. NEET JEE MIT."}
+      ]
+    },
+    {
+      "episode_id": "b001-e02-vector-displacement",
+      "vertical": [
+        {"beat": "hook", "text": "Walk seven metres, but end only five metres from home. How?"},
+        {"beat": "question", "text": "Walk three metres east, then four metres north. Why is displacement five metres, not seven?"},
+        {"beat": "visual_model", "text": "The path follows both arrows, so its length is three plus four, or seven metres. Displacement connects the start directly to the finish."},
+        {"beat": "solution", "text": "East and north are perpendicular, forming a right triangle. Displacement magnitude is the square root of three squared plus four squared: the square root of twenty-five, or five metres. The direction is northeast."},
+        {"beat": "recap", "text": "Distance along the path is seven metres. Displacement magnitude is five metres. Distance follows the route; displacement joins start to finish."},
+        {"beat": "branded_end_card", "text": "Vectors make direction count. Saem Physics. NEET JEE MIT."}
+      ],
+      "horizontal": [
+        {"beat": "hook", "text": "Suppose you walk east, turn north, and stop. Your journey and your displacement describe different things."},
+        {"beat": "question", "text": "You walk three metres east, then four metres north. The path length is seven metres. Why is the magnitude of the displacement only five metres?"},
+        {"beat": "visual_model", "text": "Follow the first arrow three metres east. From its tip, turn ninety degrees and walk four metres north. This tip-to-tail drawing records the route. Now draw one arrow from the original starting point directly to the final point. That diagonal is the displacement vector. The two legs and diagonal make a right triangle, so the Pythagorean theorem applies. East and north are perpendicular directions, which is why they form the right angle."},
+        {"beat": "solution", "text": "Let the east component be three metres and the north component be four metres. Because the directions are perpendicular, the squared magnitude of the displacement is three squared plus four squared. Three squared is nine; four squared is sixteen; their sum is twenty-five square metres. Taking the square root gives five metres. The direction is northeast. If we want its angle north of east, use inverse tangent of four divided by three, about fifty-three degrees. The route length is three plus four, or seven metres. The diagonal is shorter because it connects the same endpoints directly instead of following both legs. This three-four-five triangle is also a useful check on the calculation."},
+        {"beat": "misconception_check", "text": "Do not add component magnitudes when the question asks for the straight-line displacement magnitude. And do not confuse distance with displacement: distance is a scalar route length; displacement is a vector with magnitude and direction. If the path turned back or curved, distance would follow that whole route while displacement would still connect only the start and finish."},
+        {"beat": "recap", "text": "Path length: seven metres. Displacement: five metres toward the northeast. Draw the component arrows before choosing the calculation. Add magnitudes for this right angle only through the Pythagorean theorem."},
+        {"beat": "branded_end_card", "text": "Think in vectors. Saem Physics. NEET JEE MIT."}
+      ]
+    },
+    {
+      "episode_id": "b001-e03-dropped-stone",
+      "vertical": [
+        {"beat": "hook", "text": "A stone falls forty-five metres. When does it land?"},
+        {"beat": "question", "text": "Released from rest, forty-five metres above ground, with gravity ten metres per second squared. Ignore air resistance."},
+        {"beat": "visual_model", "text": "Choose upward as positive. Height begins at forty-five metres, velocity begins at zero, and acceleration is negative ten."},
+        {"beat": "solution", "text": "Height equals forty-five minus five t squared. At the ground, zero equals forty-five minus five t squared, so t squared is nine and elapsed time is three seconds. Velocity is zero minus ten times three: negative thirty metres per second."},
+        {"beat": "recap", "text": "It lands after three seconds, moving downward at thirty metres per second. The negative sign describes direction."},
+        {"beat": "branded_end_card", "text": "Signs tell the story. Saem Physics. NEET JEE MIT."}
+      ],
+      "horizontal": [
+        {"beat": "hook", "text": "A falling object speeds up, but a sign convention keeps the calculation simple and consistent."},
+        {"beat": "question", "text": "A stone is released from rest, forty-five metres above the ground. Take gravitational acceleration as ten metres per second squared downward, and neglect air resistance. Find its impact time and velocity just before impact."},
+        {"beat": "visual_model", "text": "Set the ground at height zero and choose upward as the positive direction. The initial height is forty-five metres. Released from rest means initial velocity is zero. Gravity points downward, so acceleration is negative ten metres per second squared. The height-time curve bends downward, and the velocity arrow points downward as the stone falls."},
+        {"beat": "solution", "text": "Use the constant-acceleration position equation: final height equals initial height plus initial velocity times time plus one half acceleration times time squared. At impact, final height is zero. Substitute: zero equals forty-five plus zero times t plus one half times negative ten times t squared. That simplifies to zero equals forty-five minus five t squared. Move terms: five t squared equals forty-five, so t squared equals nine. Time is positive, so t equals three seconds. Now calculate velocity: initial velocity plus acceleration times time. That is zero plus negative ten times three, or negative thirty metres per second. The stone is moving downward at thirty metres per second just before impact."},
+        {"beat": "misconception_check", "text": "The negative velocity does not mean a negative speed. Velocity includes direction; speed is the nonnegative magnitude. Also, the equation for time gives a positive and negative mathematical root, but only the positive elapsed time describes the fall after release."},
+        {"beat": "recap", "text": "Impact occurs at three seconds. Velocity is negative thirty metres per second with upward positive, so the speed is thirty metres per second downward. Substituting three seconds back into the height equation returns zero, which confirms ground contact."},
+        {"beat": "branded_end_card", "text": "Choose axes, then keep the signs. Saem Physics. NEET JEE MIT."}
+      ]
+    },
+    {
+      "episode_id": "b001-e04-velocity-graph",
+      "vertical": [
+        {"beat": "hook", "text": "A graph can show acceleration and displacement at once."},
+        {"beat": "question", "text": "On a velocity-time graph, what does the slope tell us? What does signed area tell us?"},
+        {"beat": "visual_model", "text": "Slope compares change in velocity with change in time. Area adds velocity across time, including its sign."},
+        {"beat": "solution", "text": "Velocity changes in metres per second; divide by seconds and the units become metres per second squared. That is acceleration. For area, metres per second times seconds gives metres: displacement. The region above the time axis contributes positive displacement. The region below contributes negative displacement."},
+        {"beat": "recap", "text": "Slope means acceleration. Signed area means displacement. Below the axis is not negative distance."},
+        {"beat": "branded_end_card", "text": "Read the units. Saem Physics. NEET JEE MIT."}
+      ],
+      "horizontal": [
+        {"beat": "hook", "text": "A velocity-time graph is more than a picture. Its slope and its area each answer a different physics question."},
+        {"beat": "question", "text": "On a velocity-time graph, what does the slope tell us? And what does the signed area between the graph and the time axis represent?"},
+        {"beat": "visual_model", "text": "The horizontal axis is time and the vertical axis is velocity. First, look at the tilt of the line. A steeper line means velocity changes more quickly. Next, look at the area between the line and the time axis. The graph may lie above or below that axis, so the area carries a sign. The shaded regions show why direction matters."},
+        {"beat": "solution", "text": "Slope is change in the vertical quantity divided by change in the horizontal quantity: change in velocity divided by change in time. The units are metres per second divided by seconds, which is metres per second squared. That is acceleration. Now consider area. A small strip has height velocity and width a time interval, so its area is velocity times time. The units are metres per second times seconds, giving metres. Adding these signed strips over an interval gives displacement. Area above the axis is positive displacement for the chosen positive direction. Area below the axis is negative displacement. If you want total distance, add the magnitudes of the separate areas instead."},
+        {"beat": "misconception_check", "text": "A region below the time axis does not represent negative distance. It represents motion opposite to the positive direction, so its contribution to displacement is negative. Distance cannot be negative and requires adding the magnitudes of travel. A flat line has zero slope and therefore zero acceleration, even if its velocity is not zero."},
+        {"beat": "recap", "text": "On a velocity-time graph, slope gives acceleration; signed area gives displacement. Use units to check each interpretation."},
+        {"beat": "branded_end_card", "text": "Let units guide your reading. Saem Physics. NEET JEE MIT."}
+      ]
+    },
+    {
+      "episode_id": "b001-e05-upward-throw",
+      "vertical": [
+        {"beat": "hook", "text": "Thrown upward does not mean slowing down immediately to zero."},
+        {"beat": "question", "text": "A ball leaves upward at twenty metres per second. Find its position and velocity after one second."},
+        {"beat": "visual_model", "text": "Up is positive. The ball moves upward while its velocity arrow shrinks; gravity still points down."},
+        {"beat": "solution", "text": "Displacement equals initial velocity times time plus one half acceleration times time squared. That is twenty times one minus five times one squared: fifteen metres up. Velocity is twenty minus ten times one: ten metres per second upward."},
+        {"beat": "recap", "text": "After one second, it is fifteen metres higher and still moving upward at ten metres per second."},
+        {"beat": "branded_end_card", "text": "Acceleration is not velocity. Saem Physics. NEET JEE MIT."}
+      ],
+      "horizontal": [
+        {"beat": "hook", "text": "At the top of a throw, velocity is briefly zero. Before that, a ball can still rise while accelerating downward."},
+        {"beat": "question", "text": "A ball leaves a player's hand at twenty metres per second upward. With gravity ten metres per second squared downward, find its position relative to release and its velocity after one second."},
+        {"beat": "visual_model", "text": "Choose upward as positive. The initial velocity is positive twenty metres per second; acceleration is negative ten metres per second squared. The trajectory rises, while the upward velocity arrow becomes shorter. Position tells us where the ball is relative to its starting point. Velocity tells us how fast and in which direction it moves at that instant."},
+        {"beat": "solution", "text": "For displacement under constant acceleration, use initial velocity times time plus one half acceleration times time squared. Substitute twenty times one plus one half times negative ten times one squared. This is twenty minus five, giving fifteen metres above the release point. For velocity, use initial velocity plus acceleration times time: twenty plus negative ten times one equals ten metres per second. Since this is positive under our convention, it is still moving upward. The acceleration remains downward throughout the flight. We can predict the top time by setting vertical velocity to zero: zero equals twenty minus ten t, so t is two seconds. At one second, the ball is still rising."},
+        {"beat": "misconception_check", "text": "Do not assume downward acceleration means downward motion. Acceleration tells how velocity changes, not the current direction of motion. At one second the ball is still going upward, just more slowly. It reaches the top later, when its vertical velocity becomes zero. After the top, velocity points downward and the ball speeds up as it falls."},
+        {"beat": "recap", "text": "After one second: fifteen metres above the release point, moving upward at ten metres per second. Position and velocity are different quantities."},
+        {"beat": "branded_end_card", "text": "Track position and velocity separately. Saem Physics. NEET JEE MIT."}
+      ]
+    },
+    {
+      "episode_id": "b001-e06-newtons-third-law",
+      "vertical": [
+        {"beat": "hook", "text": "Push a wall. The wall pushes back—but on what?"},
+        {"beat": "question", "text": "If the forces are equal and opposite, why do they not cancel on you?"},
+        {"beat": "visual_model", "text": "Draw one free-body diagram for the person and another for the wall. The arrows act on different objects."},
+        {"beat": "solution", "text": "Your hands push on the wall; the wall pushes equally back on you. To find your net force, sum forces acting on you only. Your push belongs on the wall's diagram, not yours."},
+        {"beat": "recap", "text": "Action and reaction are equal and opposite, but act on different objects. They do not cancel in one object's force sum."},
+        {"beat": "branded_end_card", "text": "Choose the object first. Saem Physics. NEET JEE MIT."}
+      ],
+      "horizontal": [
+        {"beat": "hook", "text": "You push a wall; the wall pushes back. If those forces are equal and opposite, why don't they cancel on you?"},
+        {"beat": "question", "text": "Identify the reaction force when you push a wall, then explain why the two forces are not a canceling pair on your free-body diagram."},
+        {"beat": "visual_model", "text": "Separate the person and the wall. Draw one free-body diagram around the person and another around the wall. Your push arrow points from the person onto the wall. The wall's contact-force arrow points back onto the person. The arrows have equal magnitude and opposite direction, but they terminate on different objects."},
+        {"beat": "solution", "text": "Newton's third law pairs forces in an interaction. If object A exerts a force on object B, object B exerts an equal-magnitude, opposite-direction force on object A. Here, your hand pushes the wall, and the wall pushes your hand. To calculate the net force on you, include forces acting on you: the wall's contact force, the floor's forces, and any other external forces. Do not include your push on the wall in your own force sum, because that force acts on the wall. For the wall's diagram, include your push and the other forces acting on the wall. Label each force by its source and the object it acts on. That simple habit prevents most action-reaction pairing errors."},
+        {"beat": "misconception_check", "text": "Equal and opposite does not mean they cancel automatically. Forces cancel in a net-force sum only when they act on the same chosen object. The third-law partner is on the other object's diagram. Do not confuse this pair with your weight and the floor's normal force, which act on the same person and may balance."},
+        {"beat": "recap", "text": "Action-reaction forces are equal, opposite, simultaneous, and on different objects. Draw the system boundary before adding forces."},
+        {"beat": "branded_end_card", "text": "One interaction, two objects. Saem Physics. NEET JEE MIT."}
+      ]
+    },
+    {
+      "episode_id": "b001-e07-sticking-carts",
+      "vertical": [
+        {"beat": "hook", "text": "Two carts stick together. Momentum survives; kinetic energy does not."},
+        {"beat": "question", "text": "Two-kilogram cart, three metres per second, hits one-kilogram cart at rest. They stick. Find their speed."},
+        {"beat": "visual_model", "text": "Before impact, momentum points forward. After impact, the combined three-kilogram mass moves together."},
+        {"beat": "solution", "text": "Momentum gives two times three equals three times shared velocity, so velocity is two metres per second. Initial kinetic energy is nine joules; final is six joules. Three joules become other forms."},
+        {"beat": "recap", "text": "Shared speed: two metres per second. Momentum is conserved; three joules of kinetic energy are transformed."},
+        {"beat": "branded_end_card", "text": "Check each conservation law. Saem Physics. NEET JEE MIT."}
+      ],
+      "horizontal": [
+        {"beat": "hook", "text": "A collision can preserve one quantity while changing another. These carts will stick together, so let's track momentum and kinetic energy separately."},
+        {"beat": "question", "text": "A two-kilogram cart moves at three metres per second and hits a one-kilogram cart at rest. They stick. Find their common speed just after impact and the kinetic energy transformed."},
+        {"beat": "visual_model", "text": "Take the initial direction of the moving cart as positive. Before impact, only the first cart has momentum. After impact, the carts form one three-kilogram object with a shared velocity. The momentum ledger should balance across the collision. The kinetic-energy bars need not: sticking collisions are inelastic."},
+        {"beat": "solution", "text": "Assume the external impulse on the two-cart system is negligible during the short collision. Initial momentum is mass one times velocity one, plus mass two times velocity two: two times three plus one times zero, or six kilogram metres per second. After impact, the combined mass is three kilograms, so three times the shared velocity equals six. The shared velocity is two metres per second. Now calculate kinetic energy before: one half times two times three squared equals nine joules. After: one half times three times two squared equals six joules. The difference is three joules. That energy has not vanished; it has been transformed into internal energy, sound, deformation, and other forms."},
+        {"beat": "misconception_check", "text": "Do not apply conservation of kinetic energy to a perfectly inelastic collision. Momentum is conserved for the system under the stated external-impulse assumption. Kinetic energy decreases here, while total energy remains conserved when all forms are counted."},
+        {"beat": "recap", "text": "The carts leave together at two metres per second. Total momentum is six kilogram metres per second both before and after; kinetic energy falls from nine joules to six joules. The three-joule difference appears in other energy forms."},
+        {"beat": "branded_end_card", "text": "Momentum and kinetic energy are not the same. Saem Physics. NEET JEE MIT."}
+      ]
+    },
+    {
+      "episode_id": "b001-e08-momentum-boundary",
+      "vertical": [
+        {"beat": "hook", "text": "Momentum conservation depends on what you include in the system."},
+        {"beat": "question", "text": "Two carts exchange momentum in a collision. Why can their total stay constant while each changes?"},
+        {"beat": "visual_model", "text": "Draw a boundary around both carts. Their interaction forces are internal to that combined system."},
+        {"beat": "solution", "text": "The carts exert equal and opposite forces on each other during impact. Across the same time interval, the internal impulses cancel in the combined momentum balance. If net external impulse is zero or negligible, total system momentum before equals total after."},
+        {"beat": "recap", "text": "Conservation applies to the chosen system when external impulse is negligible—not automatically to each cart."},
+        {"beat": "branded_end_card", "text": "Draw the boundary first. Saem Physics. NEET JEE MIT."}
+      ],
+      "horizontal": [
+        {"beat": "hook", "text": "One cart's momentum changes sharply during a collision. Yet the combined momentum of both carts can remain unchanged. The system boundary explains why."},
+        {"beat": "question", "text": "Two carts collide and exchange momentum. Why can each cart change momentum while the total for both carts remains constant?"},
+        {"beat": "visual_model", "text": "First draw a boundary around only cart A. The force from cart B crosses that boundary, so it is external to this one-cart system. Now move the boundary outward to include both carts. The contact forces are now internal interactions inside the chosen system. Also identify any external forces, such as friction or a push from outside."},
+        {"beat": "solution", "text": "During the short collision, cart A pushes cart B and cart B pushes cart A with equal and opposite forces. Those forces act over the same time interval, so their impulses are equal and opposite. For the combined two-cart system, the internal impulse contributions cancel in the total momentum change. The remaining change in total momentum is due to external impulse. If the net external impulse during the collision is zero or small enough to neglect, total momentum before equals total momentum after. Each cart can still gain or lose momentum individually. This is the impulse form of momentum accounting: final total momentum minus initial total momentum equals external impulse. It also tells us when the conservation approximation is reasonable."},
+        {"beat": "misconception_check", "text": "Momentum is not automatically conserved for any object you happen to inspect. Define the system, then assess external impulse. Also distinguish equal internal forces from zero force on each cart: each cart still experiences a force and changes its own momentum. If an outside push or friction gives a significant impulse, the combined momentum changes too."},
+        {"beat": "recap", "text": "For both carts together, internal impulses cancel. Negligible net external impulse means conserved total momentum. The system boundary is part of the physics model."},
+        {"beat": "branded_end_card", "text": "Choose the system before the equation. Saem Physics. NEET JEE MIT."}
+      ]
+    },
+    {
+      "episode_id": "b001-e09-falling-energy",
+      "vertical": [
+        {"beat": "hook", "text": "How can height turn into speed without knowing the mass?"},
+        {"beat": "question", "text": "A one-kilogram object falls five metres from rest. Take gravity as ten metres per second squared."},
+        {"beat": "visual_model", "text": "The gravitational potential-energy bar shrinks as the kinetic-energy bar grows. Total mechanical energy stays constant in this ideal model."},
+        {"beat": "solution", "text": "Set m g h equal to one half m v squared. Mass cancels. So v equals the square root of two g h: square root of two times ten times five, or square root of one hundred. The speed is ten metres per second."},
+        {"beat": "recap", "text": "Just before impact: ten metres per second downward. The mass cancels when air resistance is ignored."},
+        {"beat": "branded_end_card", "text": "Follow the energy. Saem Physics. NEET JEE MIT."}
+      ],
+      "horizontal": [
+        {"beat": "hook", "text": "A falling object loses height and gains speed. Energy lets us connect those endpoints without tracking every moment of the fall."},
+        {"beat": "question", "text": "A one-kilogram object starts from rest five metres above the ground. With gravitational acceleration ten metres per second squared and negligible air resistance, find its speed just before it reaches the ground."},
+        {"beat": "visual_model", "text": "At the top, the object has gravitational potential energy, measured relative to the ground. Just before impact, that energy has become kinetic energy. In this idealized model, mechanical energy is conserved. The animation shows one energy bar shrinking while the other grows; the total remains fixed."},
+        {"beat": "solution", "text": "Write initial gravitational potential energy equals final kinetic energy: m g h equals one half m v squared. The mass appears on both sides, so for positive mass it cancels. Multiply both sides by two, giving v squared equals two g h. Take the positive square root for speed: v equals the square root of two times ten metres per second squared times five metres. The product inside the root is one hundred metres squared per second squared. Its square root is ten metres per second. The velocity is downward just before impact, but the question asks for speed, so the answer is ten metres per second. Check the units: gravity times height gives metres squared per second squared, and the square root gives metres per second. The direction comes from the falling motion."},
+        {"beat": "misconception_check", "text": "The mass cancellation is a result of this ideal model, not a claim that air resistance never matters. If drag is significant, mechanical energy transfers to other forms and this simple prediction no longer applies exactly. Also, gravitational potential energy depends on the chosen reference height, although the predicted speed difference does not."},
+        {"beat": "recap", "text": "Ignoring air resistance, a five-metre fall from rest gives speed ten metres per second just before impact. State the energy assumptions."},
+        {"beat": "branded_end_card", "text": "Height becomes speed through energy. Saem Physics. NEET JEE MIT."}
+      ]
+    },
+    {
+      "episode_id": "b001-e10-kinetic-energy-collision",
+      "vertical": [
+        {"beat": "hook", "text": "If energy is conserved, why does kinetic energy shrink when carts stick?"},
+        {"beat": "question", "text": "Two colliding carts stick together. Where does the missing kinetic energy go?"},
+        {"beat": "visual_model", "text": "Kinetic energy decreases while internal energy, sound, and deformation increase. Track energy forms, not just one bar."},
+        {"beat": "solution", "text": "In a perfectly inelastic collision, kinetic energy is not conserved. Some organized motion becomes internal energy, sound, and deformation. Total energy remains conserved when the system includes those forms and transfers."},
+        {"beat": "recap", "text": "Total energy is conserved; kinetic energy alone can change. Keep momentum and energy claims separate."},
+        {"beat": "branded_end_card", "text": "Energy changes form. Saem Physics. NEET JEE MIT."}
+      ],
+      "horizontal": [
+        {"beat": "hook", "text": "The carts stick, and their organized motion decreases. That does not mean energy disappears. It means kinetic energy is only one part of the energy account."},
+        {"beat": "question", "text": "If total energy is conserved, why does the kinetic energy decrease when two carts collide and stick together?"},
+        {"beat": "visual_model", "text": "Watch the kinetic-energy bar shrink. Other indicators grow: internal energy from deformation and heating, plus sound. A complete energy account includes these forms and any transfers across the chosen system boundary. The total-energy outline stays fixed when the system is sufficiently complete and isolated."},
+        {"beat": "solution", "text": "Kinetic energy describes energy associated with bulk motion: one half mass times speed squared for each object. In a perfectly inelastic collision, the objects move together afterward, and their final kinetic energy is lower than the initial total kinetic energy. The difference is transformed into other forms, including deformation, internal energy, and sound. Conservation of total energy says the full accounting remains balanced; it does not say every individual form stays constant. Momentum is a separate quantity with a separate conservation condition. For the two-cart system, total momentum is conserved when net external impulse is negligible, even though kinetic energy changes. If sound and heat cross the boundary of the two-cart system, include those transfers or expand the system to account for them. The bookkeeping boundary determines what counts as energy inside."},
+        {"beat": "misconception_check", "text": "Do not say energy has been lost without specifying the system and the energy form. Here, kinetic energy decreases; total energy does not vanish. Some mechanical energy becomes internal energy and sound. In a real setup, heat and sound can leave a narrowly defined system, so include the surroundings if you need a complete energy balance. That is why conservation claims must name both the system and the quantity being tracked."},
+        {"beat": "recap", "text": "Sticking collisions can conserve momentum while reducing kinetic energy. Total energy remains conserved when all relevant forms and transfers are counted."},
+        {"beat": "branded_end_card", "text": "Separate the quantity from the whole account. Saem Physics. NEET JEE MIT."}
+      ]
+    }
+  ]
+}

@@ -30,6 +30,14 @@ internationally understandable English and SI unit names. Keep the speaker's
 natural accent; consistency and correct mathematical meaning matter more
 than imitating a particular accent.
 
+The original first-batch scripts are in
+[`episodes/batch_001/narration.json`](../episodes/batch_001/narration.json).
+Each episode has separate vertical and horizontal lines keyed to the matching
+storyboard beats and their fixed time windows. These are drafts for review,
+not approved recordings or physics sign-off. The Colab notebook displays the
+first episode's timed cues alongside each silent preview to let you rehearse
+and check fit. It does not record or mix the voice.
+
 ### Script every equation before recording
 
 Write the spoken line next to the displayed equation. Define each variable
