@@ -155,3 +155,7 @@ small source artifacts and approvals in Git, and store large renders elsewhere.
 Colab rendering is a documented workflow but must be exercised in a real
 Colab runtime before relying on it for a release. The release process still
 requires a complete render review and corrected captions/audio.
+
+For the step-by-step input procedure, narration guidance, current system
+boundaries, specifications, and upgrade roadmap, see
+[`video_production_architecture.md`](video_production_architecture.md).
