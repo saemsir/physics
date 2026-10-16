@@ -34,7 +34,11 @@ templates/               Brief, review, storyboard and release templates
 book/                    Reference material; check source permissions before reuse
 data/                    Exam-question metadata schema and physics topic catalog
 exam_engine/             Evidence-labelled topic ranking and video-brief CLI
-tests/                   Focused exam-engine tests
+knowledge/               Validated concept graph across physics and mathematics
+math_engine/              Deterministic linear algebra primitives
+physics_engine/           Validated physics model functions
+animation_engine/         Calculation-backed visual specifications
+tests/                   Focused engine tests
 ```
 
 The first sample is `episodes/vectors_001/`. Its status is a working draft:
@@ -80,6 +84,10 @@ python -m exam_engine recommend --exam jee-main
 python -m exam_engine recommend --exam jee-advanced --as-of-year 2026 \
   --output output/jee-advanced-video-ideas.md
 python -m exam_engine backtest --exam jee-main
+python -m exam_engine map-topic --topic electrostatics
+python -m math_engine solve-linear --matrix '[[2,1],[1,3]]' --rhs '[5,7]'
+python -m physics_engine constant-acceleration --position-m '[0,0]' \
+  --velocity-m-per-s '[3,2]' --acceleration-m-per-s2 '[0,-9.8]' --time-s 1
 python -m unittest discover -s tests -v
 ```
 
@@ -92,6 +100,22 @@ predictions of upcoming questions. Every proposed explanation remains subject
 to source-rights, physics, and teacher review. Run `backtest` to compare
 rolling-origin topic rankings with a uniform baseline before using the results
 to prioritize study or video production.
+
+## Mathematics, physics, and animation foundation
+
+The concept graph in `knowledge/` connects each exam topic to math prerequisites
+and related concepts; each verified question record is attached through its
+`topic_id`. The Gilbert Strang reference present here is the MIT OCW
+18.085 Fall 2008 course material, whose first chapter is **Applied Linear
+Algebra**—not a separately verified edition of a book with that exact title.
+See `knowledge/README.md` for the scope, source notes, and mapping workflow.
+
+The initial calculation layer contains small dense linear algebra routines,
+constant-acceleration kinematics, and a calculation-backed vector-animation
+specification. These are reviewed, testable primitives, not a solver for every
+physics problem. Floating-point calculations and models can fail; they report
+invalid inputs, expose residuals, and require independent physics checks. Use
+`docs/architecture.md` for the staged path toward broader solvers and renders.
 
 ## Create an episode
 
@@ -111,7 +135,7 @@ to prioritize study or video production.
 
 ## Using reference books and other sources
 
-The `books/` folder is a source library, not a license to reproduce a book's
+The `book/` folder is a source library, not a license to reproduce a book's
 text, figures, or lecture. Record the title, author, edition, location, URL,
 and applicable license or permission with each episode. Learn from ideas and
 verify claims independently; write original explanations, examples, and

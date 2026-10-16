@@ -20,11 +20,23 @@ preview, narration/edit, quality review, and publication package. If an
 upstream claim or assumption changes, recheck every downstream artifact that
 depends on it. A model's agreement is not scientific evidence or approval.
 
-## First project structure
+## Project structure
 
 ```text
 config/
   brand.py
+data/
+  exam_question_metadata.csv
+  physics_topics.csv
+knowledge/
+  concepts.csv
+  links.csv
+math_engine/
+  linear_algebra.py
+physics_engine/
+  kinematics.py
+animation_engine/
+  vector_scene.py
 docs/
   architecture.md
   channel_brief.md
@@ -50,6 +62,42 @@ Add abstractions only when a visual or physics model has been reused enough to
 show which inputs genuinely need to vary. Keep screen coordinates separate
 from physical quantities; label schematic diagrams as schematic, and do not
 imply quantitative scale unless the code preserves it.
+
+## Concept-to-animation path
+
+1. Record a source-linked exam question as metadata, with a human-verified
+   topic tag. Keep protected question text and figures out of the public
+   metadata ledger unless reuse rights are explicit.
+2. Resolve its `topic_id` to a physics concept in `knowledge/concepts.csv`.
+   `knowledge/links.csv` records mathematical tools and prerequisite concepts.
+   Keep syllabus references versioned and source-checked; a topic catalog alone
+   is not proof of alignment to a particular year's official syllabus.
+3. Formulate a typed model with explicit assumptions, units, coordinate
+   conventions, and domain of validity. Use deterministic math/physics
+   primitives for supported cases; reject invalid or unsupported inputs.
+4. Independently check derivations, dimensions, limiting cases, and numerical
+   residuals. A small residual is a numerical diagnostic, not proof that the
+   model or answer is physically correct.
+5. Generate an animation specification from model outputs. Map model
+   coordinates into screen coordinates separately, label schematic scales,
+   and test invariants before rendering.
+6. Render a preview and require teacher review of the physics, visual
+   encoding, narration, and final export. Never auto-approve a generated scene.
+
+The first numerical implementation supports vectors, small dense linear
+systems, and constant-acceleration motion, plus a 2D vector decomposition
+scene-spec archetype. It does not solve arbitrary word problems, infer every
+model from natural language, or guarantee error-free output. Expand one
+well-defined domain at a time, with analytical test cases and independent
+checks before adding a new solver or animation template.
+
+## Editorial and visual originality
+
+Aim for original lessons that use clear visual reasoning, intuition, careful
+derivations, meaningful motion, and accessible sound. These are broad
+educational qualities, not a request to copy any particular creator's
+distinctive scripts, artwork, narration, or visual identity. Physics, content
+rights, and publication remain human approval gates.
 
 ## Reproducibility and assets
 

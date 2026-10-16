@@ -15,6 +15,7 @@ from .engine import (
     load_topics,
     render_video_batch,
 )
+from knowledge.graph import load_graph
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -74,6 +75,26 @@ def build_parser() -> argparse.ArgumentParser:
         default=date.today().year,
         help="final calendar year eligible for held-out evaluation",
     )
+    map_topic = subparsers.add_parser(
+        "map-topic",
+        help="show the math concepts and prerequisites linked to an exam topic",
+    )
+    map_topic.add_argument("--topic", required=True)
+    map_topic.add_argument(
+        "--topics",
+        type=Path,
+        default=Path("data/physics_topics.csv"),
+    )
+    map_topic.add_argument(
+        "--concepts",
+        type=Path,
+        default=Path("knowledge/concepts.csv"),
+    )
+    map_topic.add_argument(
+        "--links",
+        type=Path,
+        default=Path("knowledge/links.csv"),
+    )
     return parser
 
 
@@ -81,6 +102,31 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     try:
+        if args.command == "map-topic":
+            topics = load_topics(args.topics)
+            if args.topic not in {topic.topic_id for topic in topics}:
+                raise DataValidationError(f"unknown topic_id {args.topic!r}")
+            graph = load_graph(args.concepts, args.links, topics)
+            physics, mathematics, prerequisites = graph.for_topic(args.topic)
+            print(f"# {physics.concept_name}")
+            print()
+            print(f"- **Topic ID:** `{physics.topic_id}`")
+            print(f"- **Concept:** {physics.summary}")
+            print("- **Math connections:**")
+            for concept in mathematics:
+                print(f"  - `{concept.concept_id}` — {concept.concept_name}")
+            if prerequisites:
+                print("- **Prerequisites:**")
+                for concept in prerequisites:
+                    print(f"  - `{concept.concept_id}` — {concept.concept_name}")
+            print(
+                "- **Exam questions:** metadata records connect through their "
+                f"`topic_id = {args.topic}` tag in "
+                "`data/exam_question_metadata.csv`."
+            )
+            print(f"- **Reference note:** {physics.reference}")
+            return 0
+
         topics = load_topics(args.topics)
         if args.command == "backtest":
             result = load_backtest(

@@ -1,0 +1,37 @@
+concept_id,concept_name,domain,topic_id,summary,reference
+math:dimensions,Dimensions and units,mathematics,,Use physical dimensions and units to constrain models and audit results,project:dimensional-analysis
+math:scalars-vectors,Scalars and vectors,mathematics,,Represent magnitude and direction separately and preserve signed components,project:vector-models
+math:geometry,Euclidean geometry,mathematics,,Use geometric constraints and coordinate representations to relate physical quantities,project:geometry
+math:trigonometry,Trigonometry,mathematics,,Relate angles and projections using a declared convention,project:trigonometry
+math:graphs,Functions and graphs,mathematics,,Interpret values slopes areas and asymptotic behavior of physical graphs,project:graphs
+math:derivatives,Derivatives,mathematics,,Represent local rates of change and connect position velocity and acceleration,project:calculus
+math:integrals,Integrals,mathematics,,Accumulate a varying quantity over an interval with limits and units,project:calculus
+math:linear-systems,Linear systems and elimination,mathematics,,Solve coupled linear constraints while checking rank consistency and conditioning,Strang 18.085 Fall 2008 Ch 1 Applied Linear Algebra
+math:matrices,Matrix operations,mathematics,,Represent linear maps and coupled equations as arrays with explicit dimensions,Strang 18.085 Fall 2008 Ch 1 Applied Linear Algebra
+math:linear-maps,Linear transformations,mathematics,,Track how a linear map transforms coordinates and geometric objects,Strang 18.085 Fall 2008 Ch 1 Applied Linear Algebra
+math:eigenmodes,Eigenvalues and modes,mathematics,,Identify invariant directions and mode-specific response of linear systems,Strang 18.085 Fall 2008 Ch 1 Applied Linear Algebra
+math:least-squares,Least-squares fitting,mathematics,,Estimate model parameters from overdetermined measurements and inspect residuals,Strang 18.085 Fall 2008 18.085 Computational Science and Engineering I
+math:fourier,Fourier representation,mathematics,,Represent periodic behavior through frequency components and verify conventions,Strang 18.085 Fall 2008 Ch 4 Fourier Series and Integrals
+math:complex-numbers,Complex numbers and phasors,mathematics,,Encode rotations and phase while keeping real physical observables explicit,project:complex-numbers
+math:probability,Probability and statistics,mathematics,,Represent uncertainty with defined sample spaces and normalized distributions,project:probability
+math:optimization,Optimization,mathematics,,Find extrema subject to stated constraints and test boundary cases,project:optimization
+physics:units_measurement,Measurement and dimensional consistency,physics,units_measurement,Connect measured quantities to models with unit and scale checks,syllabus:needs-official-version
+physics:kinematics,Kinematics,physics,kinematics,Relate position velocity acceleration and time in a specified reference frame,syllabus:needs-official-version
+physics:laws_of_motion,Newtonian dynamics,physics,laws_of_motion,Relate net force and momentum change under a stated model,syllabus:needs-official-version
+physics:work_energy,Work energy and power,physics,work_energy,Connect work and energy changes while stating conservative and dissipative forces,syllabus:needs-official-version
+physics:rotation,Rotational dynamics,physics,rotation,Relate torque angular momentum and rotational energy about a declared axis,syllabus:needs-official-version
+physics:gravitation,Gravitational fields and orbits,physics,gravitation,Use field potential and energy consistently for gravitating systems,syllabus:needs-official-version
+physics:properties_of_matter,Elasticity and fluids,physics,properties_of_matter,Model material response and fluid behavior with constitutive assumptions,syllabus:needs-official-version
+physics:thermodynamics,Thermodynamics,physics,thermodynamics,Track heat work and state changes under an explicit sign convention,syllabus:needs-official-version
+physics:kinetic_theory,Kinetic theory,physics,kinetic_theory,Connect statistical molecular motion to macroscopic gas observables,syllabus:needs-official-version
+physics:oscillations_waves,Oscillations and waves,physics,oscillations_waves,Describe periodic motion propagation phase and superposition,syllabus:needs-official-version
+physics:electrostatics,Electrostatics,physics,electrostatics,Relate charge distributions to electric field potential and energy,syllabus:needs-official-version
+physics:capacitance,Capacitance,physics,capacitance,Relate stored charge voltage geometry and energy for capacitive systems,syllabus:needs-official-version
+physics:current_electricity,Current electricity,physics,current_electricity,Model circuit constraints and current voltage relationships,syllabus:needs-official-version
+physics:magnetism,Magnetism,physics,magnetism,Relate currents and moving charges to magnetic fields and forces,syllabus:needs-official-version
+physics:em_induction,Electromagnetic induction and AC,physics,em_induction,Relate changing flux to induced emf and time-dependent circuit response,syllabus:needs-official-version
+physics:electromagnetic_waves,Electromagnetic waves,physics,electromagnetic_waves,Describe coupled fields propagating with a phase and energy flow,syllabus:needs-official-version
+physics:optics,Geometrical and wave optics,physics,optics,Relate propagation reflection refraction and image formation with declared approximations,syllabus:needs-official-version
+physics:modern_physics,Modern physics,physics,modern_physics,Model quantized energy exchange and particle-wave observations,syllabus:needs-official-version
+physics:atoms_nuclei,Atomic and nuclear physics,physics,atoms_nuclei,Relate bound-state transitions nuclear structure and energy accounting,syllabus:needs-official-version
+physics:semiconductors,Semiconductor electronics,physics,semiconductors,Model carrier behavior and circuit-level semiconductor devices,syllabus:needs-official-version

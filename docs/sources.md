@@ -1,6 +1,6 @@
 # Source library and attribution policy
 
-The `books/` directory is intended as a research library, not as a source of
+The `book/` directory is intended as a research library, not as a source of
 material to copy into scripts, images, or videos. For every episode, record
 the specific source, author, edition, section or page, stable URL when
 available, date consulted, and applicable license or permission.
@@ -43,22 +43,11 @@ Use original example problems, narration, diagrams, and animation. The
 editorial target is broadly visual, intuitive, and mathematically careful; do
 not imitate any creator's distinctive scripts, artwork, or presentation.
 
-## Repository inventory caveat
+## Local reference inventory
 
-The GitHub `books/` listing includes the SaemPhysics studio textbook PDF. The
-other listed book PDFs were returned by GitHub as only 2 bytes, so their
-contents were not readable through the repository API when this project was
-inspected:
-
-- `Electrics & Magnetics by Scott Huges (1).pdf`
-- `Feynman Lectures vol 3 on Quantum Mechanics (1).pdf`
-- `MIT-801-StudyGuide- alan guth.pdf`
-- `QED_ The Strange Theory of Light and Matter by Feynman.pdf`
-- `Statistical Mechanics_ feynmann.pdf`
-- `The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics-1.pdf`
-- `computation-Richard_P._Feynman-Feynman_Lectures_on_Computation__-Addison-Wesley(1996).pdf`
-- `feynman-lectures-on-physics-vol 2 -electromagnetism-and-matter (1).pdf`
-
-Check and restore the actual files before treating them as available research
-sources; do not infer their contents from their filenames. The studio textbook
-was readable and informed the current repository workflow and templates.
+The local Gilbert Strang course file identifies itself as MIT OpenCourseWare
+18.085, Computational Science and Engineering I, Fall 2008; Chapter 1 is
+Applied Linear Algebra. The concept graph uses section-level citations and
+short original summaries only. See `knowledge/README.md` for the specific
+resource URL and syllabus caveats. Verify the exact resource terms before
+redistributing the source file or a derivative.
