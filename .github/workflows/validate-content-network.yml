@@ -3,10 +3,15 @@ name: Validate content network
 on:
   push:
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -31,3 +36,24 @@ jobs:
             --database /tmp/saemphysics.sqlite \
             --exam jee-main \
             --output /tmp/jee-main-briefs.md
+      - name: Validate the proposed first video batch
+        run: |
+          python -m content_engine batch-plan \
+            --manifest data/video_batches/batch_001.json \
+            --output /tmp/batch_001_plan.json
+          python - <<'PY'
+          import json
+          with open("/tmp/batch_001_plan.json", encoding="utf-8") as stream:
+              plan = json.load(stream)
+          videos = plan["deliverables"]
+          assert len(videos) == 20
+          assert sum(video["format"] == "vertical" for video in videos) == 10
+          assert sum(video["format"] == "horizontal" for video in videos) == 10
+          assert all(video["brand_overlay"]["name"] == "Saem Physics" for video in videos)
+          assert all(video["brand_overlay"]["tagline"] == "NEET JEE MIT" for video in videos)
+          PY
+      - name: Validate narration profile without private audio
+        run: |
+          python -m json.tool config/audio_profile.json >/dev/null
+          python -m compileall -q content_engine animation_engine knowledge episodes/batch_001 tools
+          python -m json.tool notebooks/render_in_colab.ipynb >/dev/null

@@ -83,12 +83,71 @@ references stop the workflow rather than producing a success-shaped fallback.
 Add new solver dispatch only with model-specific analytical tests, units,
 assumptions, and failure cases.
 
+## Fixed 20-video batch workflow
+
+`data/video_batches/batch_001.json` is an owner-approved-for-storyboarding
+batch of ten original questions: five calculation problems and five concept
+explainers. It links each item to the relevant Feynman section without copying
+book questions, prose, or figures. The Feynman conversions have unknown rights
+status; citations are research pointers, not permission to reuse their
+material. The JEE scan catalog remains separate and contributes no unverified
+exam questions. Owner approval here is not exam-source verification or final
+physics/release approval.
+
+Validate and expand the content into twenty render briefs:
+
+```bash
+python -m content_engine batch-plan
+python -m content_engine batch-plan --output /tmp/batch_001_plan.json
+```
+
+The batch contract enforces 10 vertical 9:16 videos at 60 seconds and 10
+horizontal 16:9 videos at 180 seconds, ages 14–21, mixed problem/concept
+content, exact `Saem Physics` / `NEET JEE MIT` text branding, and timed
+storyboard beats. Three constant-acceleration solutions are checked by the
+existing physics engine. Collision and energy examples have independent
+formula audits; those are not substitutes for physics-teacher approval. The
+approved plan contains twenty render briefs. Render selected briefs with Manim;
+the batch renderer verifies each MP4's dimensions and duration and writes a
+SHA-256 report:
+
+```bash
+python tools/render_video_batch.py \
+  --quality preview \
+  --video-ids b001-e01-projectile-components-vertical \
+               b001-e01-projectile-components-horizontal \
+  --output-dir /tmp/batch_001_preview
+python tools/render_video_batch.py \
+  --quality high --formats vertical --resume \
+  --output-dir /tmp/batch_001_vertical
+python tools/render_video_batch.py \
+  --quality high --formats horizontal --resume \
+  --output-dir /tmp/batch_001_horizontal
+```
+
+The Manim template animates an original diagram for each concept/problem. The
+current exports are silent, branded visual drafts with on-screen explanations;
+they do not contain recorded narration, final captions, physics-release
+approval, or the user's image logo. Finish these in post-production and review
+all exports before release. `--resume` verifies and reuses completed videos
+after an interrupted Colab session.
+
+The owner approved English and the text-only brand lockup because no image
+logo asset has been supplied. Provide an approved transparent PNG or SVG logo
+before release rendering. The visual direction is original to Saem Physics
+rather than an imitation of another creator. Add a recorded narration track,
+correct captions, review all scenes, and obtain physics/release approval before
+publishing.
+
 ## GitHub/Codespaces and Google Colab
 
 Use Codespaces/GitHub for editing and review. Open
 `notebooks/render_in_colab.ipynb` in Google Colab to clone a selected Git
 revision, install Manim's pinned Python dependencies and system tools, rebuild
-the disposable database, compile the lesson, and render a low-quality preview.
+the disposable database, validate the reviewed batch, compile the lesson, and
+render a low-quality preview. CI validates the audio profile metadata but does
+not read voice recordings; see `docs/audio_profile.md` for the private
+sample-analysis procedure.
 For a reproducible release candidate, set the notebook's `REVISION` to a
 reviewed commit SHA rather than `main`. Colab outputs are temporary; keep only
 small source artifacts and approvals in Git, and store large renders elsewhere.

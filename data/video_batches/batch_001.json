@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "batch_id": "batch_001",
+  "status": "approved-for-storyboarding",
+  "review": {
+    "decision": "approved-for-storyboarding",
+    "reviewer": "owner",
+    "reviewed_at": "2026-10-16",
+    "notes": "Owner approved the ten draft questions for storyboarding; no wording changes requested. This is not exam-source verification or final physics-release approval."
+  },
+  "narration_language": "English",
+  "source_file": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md",
+  "originality_note": "Question wording, examples, solutions, and visuals in this batch are original. Feynman references identify the underlying ideas only; no textbook question, prose, or figure is reproduced.",
+  "audience": {
+    "minimum_age": 14,
+    "maximum_age": 21,
+    "level": "school physics through JEE/NEET foundation; define symbols and state assumptions"
+  },
+  "brand": {
+    "name": "Saem Physics",
+    "tagline": "NEET JEE MIT",
+    "logo_asset": "",
+    "logo_asset_status": "text-only-pending-user-supplied-logo"
+  },
+  "video_outputs": [
+    {
+      "format": "vertical",
+      "count": 10,
+      "duration_seconds": 60,
+      "aspect_ratio": "9:16"
+    },
+    {
+      "format": "horizontal",
+      "count": 10,
+      "duration_seconds": 180,
+      "aspect_ratio": "16:9"
+    }
+  ],
+  "visual_direction": "Create an original Saem Physics visual identity: clean geometric diagrams, animated vectors and graphs, meaningful equations, clear physical units, strong contrast, and purposeful motion. Keep the question and key equation legible on a phone. Do not imitate another creator's signature style, compositions, narration, or graphics. Show the Saem Physics text lockup and NEET JEE MIT tagline throughout; replace the text-only mark when the owner supplies an approved logo asset.",
+  "episodes": [
+    {
+      "id": "b001-e01-projectile-components",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "A projectile, solved one axis at a time",
+      "topic_id": "kinematics",
+      "question": "A drone starts at the origin with velocity (6, 8) m/s and constant acceleration (0, -10) m/s^2. Where is it, and what is its velocity, after 1 s?",
+      "answer": "Position (6, 3) m; velocity (6, -2) m/s.",
+      "solution": "Use r = r0 + v0 t + 1/2 a t^2 and v = v0 + a t component by component. The horizontal motion has zero acceleration; the vertical component changes under gravity. Keep the sign convention explicit.",
+      "solution_review_status": "engine-checked-pending-owner-physics-review",
+      "visual_hook": "Split the screen into x and y motion, then recombine both components into one moving dot and velocity arrow.",
+      "misconception": "Gravity changes the vertical velocity here, not the horizontal velocity.",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 8, Motion",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "problem_spec": {
+        "problem_id": "b001-e01-projectile-components",
+        "source_id": "project-original",
+        "concept_id": "physics:kinematics",
+        "model_type": "constant-acceleration",
+        "unit_system": "SI",
+        "assumptions": [
+          "The drone is represented by a point particle.",
+          "Acceleration is constant over the one-second interval.",
+          "Air resistance is omitted and coordinates are Cartesian."
+        ],
+        "inputs": {
+          "initial_position_m": [0, 0],
+          "initial_velocity_m_per_s": [6, 8],
+          "acceleration_m_per_s2": [0, -10],
+          "time_s": 1
+        },
+        "expected_outputs": {
+          "position_m": [6, 3],
+          "velocity_m_per_s": [6, -2]
+        }
+      }
+    },
+    {
+      "id": "b001-e02-vector-displacement",
+      "type": "concept",
+      "status": "approved-for-storyboarding",
+      "title": "Why 3 m east plus 4 m north is not 7 m",
+      "topic_id": "vectors",
+      "question": "A student walks 3 m east, then 4 m north. Why is the displacement magnitude 5 m rather than 7 m?",
+      "answer": "The two perpendicular components form a right triangle, so the displacement magnitude is sqrt(3^2 + 4^2) = 5 m. The path length is 7 m; displacement is the straight vector from start to finish.",
+      "solution": "Draw the two directed steps tip-to-tail. Distinguish total path length from the magnitude of the net displacement vector, then use the Pythagorean theorem.",
+      "solution_review_status": "formula-checked-pending-owner-review",
+      "visual_hook": "Let a 3-4-5 right triangle assemble from two walking paths while the path-length and displacement labels diverge.",
+      "misconception": "Path length and displacement are different quantities, even when both use metres.",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 8, Motion; vector components are an original teaching representation",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      }
+    },
+    {
+      "id": "b001-e03-dropped-stone",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "When does a dropped stone reach the ground?",
+      "topic_id": "kinematics",
+      "question": "A stone is released from rest 45 m above the ground. Taking g = 10 m/s^2 and neglecting air resistance, when does it hit, and what is its velocity just before impact?",
+      "answer": "It hits after 3 s with velocity 30 m/s downward.",
+      "solution": "Choose upward as positive: y0 = 45 m, v0 = 0, a = -10 m/s^2. Solve 0 = 45 - 5t^2 for the positive time t = 3 s, then v = -10(3) = -30 m/s.",
+      "solution_review_status": "engine-checked-pending-owner-physics-review",
+      "visual_hook": "Track height and velocity together; the height reaches zero as the downward velocity arrow grows.",
+      "misconception": "A negative velocity sign gives direction relative to the chosen axis; speed itself is not negative.",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 8, Motion",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "problem_spec": {
+        "problem_id": "b001-e03-dropped-stone",
+        "source_id": "project-original",
+        "concept_id": "physics:kinematics",
+        "model_type": "constant-acceleration",
+        "unit_system": "SI",
+        "assumptions": [
+          "The stone is released from rest.",
+          "Gravitational acceleration is a constant 10 m/s^2 downward.",
+          "Air resistance is neglected and ground level is y = 0."
+        ],
+        "inputs": {
+          "initial_position_m": [45],
+          "initial_velocity_m_per_s": [0],
+          "acceleration_m_per_s2": [-10],
+          "time_s": 3
+        },
+        "expected_outputs": {
+          "position_m": [0],
+          "velocity_m_per_s": [-30]
+        }
+      }
+    },
+    {
+      "id": "b001-e04-velocity-graph",
+      "type": "concept",
+      "status": "approved-for-storyboarding",
+      "title": "Read motion from a velocity-time graph",
+      "topic_id": "kinematics",
+      "question": "On a velocity-time graph, what does the slope tell you, and what does signed area tell you?",
+      "answer": "Slope is acceleration. Signed area over a time interval is displacement; areas below the time axis count negatively for the chosen positive direction.",
+      "solution": "Compare units: (m/s)/s = m/s^2 for slope and (m/s)s = m for area. A negative velocity contributes negative displacement, not negative distance.",
+      "solution_review_status": "concept-checked-pending-owner-review",
+      "visual_hook": "Tilt a velocity-time graph so its slope becomes a visible acceleration arrow, then shade signed areas with opposite directions.",
+      "misconception": "Area below the time axis is negative displacement, not negative distance.",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 8, Motion",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      }
+    },
+    {
+      "id": "b001-e05-upward-throw",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "A ball thrown upward after one second",
+      "topic_id": "kinematics",
+      "question": "A ball leaves a player's hand at 20 m/s upward. With g = 10 m/s^2 downward, where is it after 1 s, and how fast is it moving?",
+      "answer": "It is 15 m above the release point and still moving upward at 10 m/s.",
+      "solution": "Take upward as positive. At t = 1 s, y - y0 = 20(1) - 1/2(10)(1)^2 = 15 m and v = 20 - 10(1) = 10 m/s.",
+      "solution_review_status": "engine-checked-pending-owner-physics-review",
+      "visual_hook": "Show the upward velocity arrow shrink while the ball continues upward; separate position from velocity.",
+      "misconception": "The ball is still moving upward after one second; its downward acceleration has not reversed its velocity yet.",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 8, Motion",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "problem_spec": {
+        "problem_id": "b001-e05-upward-throw",
+        "source_id": "project-original",
+        "concept_id": "physics:kinematics",
+        "model_type": "constant-acceleration",
+        "unit_system": "SI",
+        "assumptions": [
+          "Upward is the positive vertical direction.",
+          "Gravitational acceleration is constant at 10 m/s^2 downward.",
+          "Air resistance is neglected."
+        ],
+        "inputs": {
+          "initial_position_m": [0],
+          "initial_velocity_m_per_s": [20],
+          "acceleration_m_per_s2": [-10],
+          "time_s": 1
+        },
+        "expected_outputs": {
+          "position_m": [15],
+          "velocity_m_per_s": [10]
+        }
+      }
+    },
+    {
+      "id": "b001-e06-newtons-third-law",
+      "type": "concept",
+      "status": "approved-for-storyboarding",
+      "title": "The wall pushes back",
+      "topic_id": "laws_of_motion",
+      "question": "When you push a wall, what is the reaction force, and why do the two forces not cancel on you?",
+      "answer": "The wall pushes on you with an equal-magnitude, opposite-direction contact force. Your push acts on the wall; the wall's force acts on you, so they act on different objects.",
+      "solution": "Draw one force diagram for the person and one for the wall. Only forces on the same chosen object can be summed in that object's net force.",
+      "solution_review_status": "concept-checked-pending-owner-review",
+      "visual_hook": "Separate person and wall into two free-body diagrams; animate the equal-and-opposite contact arrows on different bodies.",
+      "misconception": "The action-reaction pair acts on different objects, so it is not a pair of forces on one free-body diagram.",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 10, Newton's Third Law",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      }
+    },
+    {
+      "id": "b001-e07-sticking-carts",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "Two carts stick together",
+      "topic_id": "laws_of_motion",
+      "question": "A 2 kg cart moving at 3 m/s hits and sticks to a 1 kg cart initially at rest. What is their shared speed just after impact, and how much kinetic energy is lost?",
+      "answer": "The carts move at 2 m/s. Initial kinetic energy is 9 J and final kinetic energy is 6 J, so 3 J of kinetic energy is transformed into other forms.",
+      "solution": "For the two-cart system with negligible external impulse, (2)(3) + (1)(0) = (2 + 1)v, giving v = 2 m/s. The initial kinetic energy is 9 J; the final kinetic energy is 1/2(3)(2^2) = 6 J. Thus 3 J of kinetic energy is transformed into internal energy, sound, and deformation.",
+      "solution_review_status": "formula-checked-pending-owner-review",
+      "visual_hook": "Animate momentum bars before and after; preserve total momentum while visibly reducing the kinetic-energy bar.",
+      "misconception": "Momentum is conserved for the isolated two-cart system; kinetic energy is not conserved in this sticking collision.",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 10, Conservation of momentum; Momentum and energy",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "manual_audit": {
+        "model": "perfectly-inelastic-collision",
+        "mass_1_kg": 2,
+        "velocity_1_m_per_s": 3,
+        "mass_2_kg": 1,
+        "velocity_2_m_per_s": 0,
+        "expected_common_velocity_m_per_s": 2,
+        "expected_initial_kinetic_energy_j": 9,
+        "expected_final_kinetic_energy_j": 6
+      }
+    },
+    {
+      "id": "b001-e08-momentum-boundary",
+      "type": "concept",
+      "status": "approved-for-storyboarding",
+      "title": "When is momentum conserved?",
+      "topic_id": "laws_of_motion",
+      "question": "Why can two colliding carts conserve total momentum even though each cart changes its own momentum?",
+      "answer": "The carts exert internal forces on each other. For the combined system, those internal impulses cancel; total momentum stays constant when the net external impulse is zero or negligible.",
+      "solution": "Draw a boundary around both carts, identify external forces and their impulse over the short collision, and compare total momentum of the combined system before and after.",
+      "solution_review_status": "concept-checked-pending-owner-review",
+      "visual_hook": "Move the system boundary from one cart to both carts; internal impulse arrows disappear from the combined-system ledger.",
+      "misconception": "Momentum conservation applies to the defined system when net external impulse is negligible, not automatically to each object.",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 10, Conservation of momentum",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      }
+    },
+    {
+      "id": "b001-e09-falling-energy",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "How fast after a 5 m fall?",
+      "topic_id": "work_energy",
+      "question": "A 1 kg object starts from rest 5 m above the ground. If g = 10 m/s^2 and air resistance is negligible, what is its speed just before reaching the ground?",
+      "answer": "10 m/s downward.",
+      "solution": "The lost gravitational potential energy mgh becomes kinetic energy: mgh = 1/2 mv^2. Mass cancels, so v = sqrt(2gh) = sqrt(100) = 10 m/s.",
+      "solution_review_status": "formula-checked-pending-owner-review",
+      "visual_hook": "Transform a height bar into a speed arrow while the total mechanical-energy bar remains constant.",
+      "misconception": "The mass cancels in this idealized energy equation, so the predicted speed does not depend on the object's mass.",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 13, Energy of a falling body",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "manual_audit": {
+        "model": "falling-energy",
+        "mass_kg": 1,
+        "height_m": 5,
+        "gravity_m_per_s2": 10,
+        "expected_speed_m_per_s": 10,
+        "expected_initial_potential_energy_j": 50,
+        "expected_final_kinetic_energy_j": 50
+      }
+    },
+    {
+      "id": "b001-e10-kinetic-energy-collision",
+      "type": "concept",
+      "status": "approved-for-storyboarding",
+      "title": "Where does kinetic energy go when carts stick?",
+      "topic_id": "work_energy",
+      "question": "If total energy is conserved, why does the kinetic energy decrease when two carts collide and stick?",
+      "answer": "Kinetic energy is not conserved in a perfectly inelastic collision. Some mechanical energy becomes internal energy, sound, and deformation; total energy for a sufficiently complete system remains conserved.",
+      "solution": "Track the system's energy forms rather than treating kinetic energy as the only energy. Keep the momentum and energy claims separate: momentum can be conserved while kinetic energy changes.",
+      "solution_review_status": "concept-checked-pending-owner-review",
+      "visual_hook": "Show kinetic-energy bars shrinking as internal-energy, sound, and deformation indicators grow; keep a total-energy outline fixed.",
+      "misconception": "Conservation of total energy does not imply conservation of kinetic energy by itself.",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 10, Momentum and energy; Chapter 4, Conservation of energy",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      }
+    }
+  ]
+}

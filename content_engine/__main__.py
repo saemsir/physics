@@ -19,6 +19,7 @@ from exam_engine.engine import (
     render_video_batch,
 )
 
+from .batch import load_batch, validate_batch, write_batch_plan
 from .database import ContentDatabase, ROOT
 from .lesson import compile_lesson, persist_lesson, write_lesson
 from .problem import load_problem, record_problem_run, solve_problem
@@ -75,6 +76,15 @@ def build_parser() -> argparse.ArgumentParser:
     backtest.add_argument("--exam", choices=EXAMS, required=True)
     backtest.add_argument("--as-of-year", type=int, default=date.today().year)
     backtest.add_argument("--database", type=Path, default=ROOT / "data" / "saemphysics.sqlite")
+    batch = subparsers.add_parser(
+        "batch-plan", help="validate a 10-episode batch and expand its 20 video deliverables"
+    )
+    batch.add_argument(
+        "--manifest",
+        type=Path,
+        default=ROOT / "data" / "video_batches" / "batch_001.json",
+    )
+    batch.add_argument("--output", type=Path)
     return parser
 
 
@@ -122,6 +132,37 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Initialized {database.path}")
             for name, count in database.summary().items():
                 print(f"{name}: {count}")
+            return 0
+        if args.command == "batch-plan":
+            manifest = load_batch(args.manifest)
+            plan = validate_batch(manifest, ROOT)
+            if args.output:
+                write_batch_plan(manifest, plan, args.output)
+                print(
+                    f"Wrote {len(plan)} {manifest['status']} video render briefs "
+                    f"to {args.output}"
+                )
+            else:
+                print(json.dumps({
+                    "batch_id": manifest["batch_id"],
+                    "status": manifest["status"],
+                    "deliverable_count": len(plan),
+                    "vertical_60s": sum(item["format"] == "vertical" for item in plan),
+                    "horizontal_180s": sum(item["format"] == "horizontal" for item in plan),
+                    "problem_episodes": sum(
+                        item["type"] == "problem" and item["format"] == "vertical"
+                        for item in plan
+                    ),
+                    "concept_episodes": sum(
+                        item["type"] == "concept" and item["format"] == "vertical"
+                        for item in plan
+                    ),
+                    "engine_checked_solutions": sum(
+                        episode.get("problem_spec") is not None
+                        for episode in manifest["episodes"]
+                    ),
+                    "owner_review_required": True,
+                }, indent=2))
             return 0
         if args.command == "summary":
             _require_initialized(database)

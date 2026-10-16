@@ -1,0 +1,99 @@
+{
+  "profile_id": "saem-physics-educational-voice-v1",
+  "status": "provisional-awaiting-private-voice-sample-analysis",
+  "reference": "Owner requested an original, clear, cinematic educational narration profile. This is not an imitation of any individual creator.",
+  "delivery": {
+    "character": [
+      "warm",
+      "clear",
+      "curious",
+      "confident but unhurried",
+      "precise with scientific terminology"
+    ],
+    "pace_words_per_minute": {
+      "vertical_explainer": [125, 150],
+      "horizontal_explainer": [115, 140]
+    },
+    "performance": [
+      "Leave short pauses around equations, assumptions, and the final answer.",
+      "Use emphasis for contrast and reasoning, not constant high energy.",
+      "Record separate takes for errors; do not aggressively time-compress speech."
+    ]
+  },
+  "recording": {
+    "format": "mono PCM WAV, 48 kHz, 24-bit preferred",
+    "microphone_distance_cm": [12, 18],
+    "position": "slightly off-axis; keep position and room constant across takes",
+    "room": "quiet, soft-furnished room; reduce reflections before applying denoising",
+    "recording_peak_dbfs_target": [-12, -6],
+    "avoid": [
+      "clipping",
+      "automatic gain control",
+      "noise gates that cut word endings",
+      "heavy denoising or de-reverberation"
+    ]
+  },
+  "processing_chain": [
+    {
+      "stage": "edit",
+      "settings": "Remove handling noise and mistakes with short room-tone crossfades; keep natural breaths where useful."
+    },
+    {
+      "stage": "high_pass_filter",
+      "settings": "Start near 70 Hz, 12 dB/octave; sweep between 60 and 100 Hz by listening. Do not remove natural voice fundamentals."
+    },
+    {
+      "stage": "noise_reduction",
+      "settings": "Use only when needed, with a room-tone profile and gentle reduction (about 3-6 dB); stop if consonants sound watery."
+    },
+    {
+      "stage": "corrective_eq",
+      "settings": "Make small, voice-specific cuts only after listening. If muddy, test a broad 1-2 dB cut around 180-350 Hz. If intelligibility needs help, test a broad 1-2 dB lift around 2-4 kHz. Do not apply both blindly."
+    },
+    {
+      "stage": "de_esser",
+      "settings": "Use a split-band or transparent de-esser only if sibilants are harsh; find the voice's actual sibilance band, often in the 5-9 kHz region."
+    },
+    {
+      "stage": "compression",
+      "settings": "Gentle 2:1 to 2.5:1 ratio; medium attack (15-30 ms), release (80-150 ms), soft knee, typically 2-4 dB gain reduction on strong phrases. Adjust threshold to the recording."
+    },
+    {
+      "stage": "level",
+      "settings": "Automate phrase-to-phrase level before adding makeup gain; do not normalize clipped source audio."
+    },
+    {
+      "stage": "limiter",
+      "settings": "True-peak ceiling at -1.0 dBTP for the final stereo program; preserve transient clarity."
+    }
+  ],
+  "mix_targets": {
+    "narration_lufs_i": {
+      "target": -16,
+      "tolerance_lu": 1,
+      "note": "Practical starting target for a stereo web-video mix; confirm platform and delivery requirements."
+    },
+    "true_peak_db_tp_max": -1.0,
+    "music_under_narration": "Start 18-24 dB below speech and automate by ear; duck further under equations and dense explanations.",
+    "music_rule": "Use original or properly licensed music. Do not let music mask consonants or scientific terms.",
+    "mono_compatibility": "Check the complete mix in mono and on phone speakers."
+  },
+  "quality_checks": [
+    "No clipped samples or harsh denoising artifacts.",
+    "Voice remains intelligible at low playback volume and on a phone speaker.",
+    "No audible pumping, abrupt room-tone changes, or chopped breaths.",
+    "Captions match spoken units, symbols, names, and numerical values.",
+    "Keep the original voice sample private; store only reviewed processing settings and derived non-identifying quality metrics."
+  ],
+  "sample_analysis": {
+    "sample_path_expected": "saem_voice_sample.wav",
+    "analysis_status": "not-run-file-not-found-in-workspace",
+    "required_before_personalized_eq": [
+      "sample rate",
+      "bit depth and channel count",
+      "peak and RMS level",
+      "clipping and leading/trailing silence checks",
+      "listening review for room noise, plosives, sibilance, and reverberation"
+    ]
+  }
+}

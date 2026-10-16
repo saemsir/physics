@@ -73,6 +73,8 @@ python -m manim -pql episodes/vectors_001/scenes.py VectorComponents
 Watch the complete render at normal speed before approving it. Manim writes
 generated media under `media/`; rendered exports and caches do not belong in
 Git. See `docs/architecture.md` for reproducibility and the approval workflow.
+See `docs/audio_profile.md` for the original narration direction and the
+private, local voice-sample analysis procedure.
 
 ## Build exam-focused video briefs
 

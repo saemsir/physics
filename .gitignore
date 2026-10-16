@@ -9,3 +9,5 @@ output/
 .pytest_cache/
 **/exports/
 **/assets/audio/raw/
+/saem_voice_sample.wav
+/audio/private/
