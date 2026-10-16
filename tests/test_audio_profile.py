@@ -28,6 +28,17 @@ class AudioProfileTests(unittest.TestCase):
             0,
         )
         self.assertEqual(profile["mix_targets"]["true_peak_db_tp_max"], -1.0)
+        spoken_math = profile["spoken_math"]
+        self.assertIn("numbers", spoken_math)
+        self.assertIn("notation_rules", spoken_math)
+        self.assertIn("greek_letter_names", spoken_math)
+        self.assertIn("ambiguity_checks", spoken_math)
+        examples = {item["notation"]: item["spoken"] for item in spoken_math["numbers"]["examples"]}
+        self.assertEqual(examples["-2.5"], "negative two point five")
+        self.assertEqual(
+            examples["6.02 x 10^23"],
+            "six point zero two times ten to the power of twenty-three",
+        )
 
     def test_analyzer_reports_pcm_levels_without_changing_source_file(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

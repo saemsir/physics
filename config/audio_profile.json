@@ -20,6 +20,94 @@
       "Record separate takes for errors; do not aggressively time-compress speech."
     ]
   },
+  "spoken_math": {
+    "profile_version": 1,
+    "language": "English",
+    "standard": "Use clear, internationally understandable mathematical English. Prefer unambiguous spoken phrases over reading punctuation or symbol names aloud.",
+    "script_policy": [
+      "Write the spoken form beside every equation, formula, symbol, abbreviation, and nontrivial number before recording.",
+      "Read the notation as written; never silently change a sign, exponent, unit, significant digit, or value.",
+      "Define a symbol by its meaning and spoken letter name the first time it appears; use the same name throughout the lesson.",
+      "When notation has multiple valid readings, state the intended grouping in words before simplifying.",
+      "Speak at a measured pace, with a short pause before and after a complete equation; do not pause inside a number or unit."
+    ],
+    "numbers": {
+      "integer_style": "Say whole numbers in full words; group large numbers by thousands. Avoid saying 'oh' for the digit zero.",
+      "decimal_style": "Say 'point' and then each written digit separately when precision matters; preserve trailing zeros.",
+      "negative_style": "Use 'negative' for a signed value, and 'subtract' for an operation.",
+      "fraction_style": "Use named fractions for simple values when clear; otherwise say numerator over denominator and state grouping if needed.",
+      "scientific_notation_style": "Read a times ten to the power of n; say negative n explicitly for a negative exponent.",
+      "rounding_style": "Say 'approximately' for rounded values and preserve the stated precision; do not imply equality.",
+      "examples": [
+        {"notation": "0", "spoken": "zero"},
+        {"notation": "0.04", "spoken": "zero point zero four"},
+        {"notation": "3.050", "spoken": "three point zero five zero"},
+        {"notation": "-2.5", "spoken": "negative two point five"},
+        {"notation": "3/4", "spoken": "three quarters; in a derivation, three over four"},
+        {"notation": "1/2 m v^2", "spoken": "one half m v squared"},
+        {"notation": "6.02 x 10^23", "spoken": "six point zero two times ten to the power of twenty-three"}
+      ]
+    },
+    "notation_rules": [
+      {"pattern": "a + b; a - b; a x b; a / b", "spoken": "a plus b; a minus b; a times b; a divided by b"},
+      {"pattern": "a = b; a != b; a approximately equals b", "spoken": "a equals b; a is not equal to b; a is approximately equal to b"},
+      {"pattern": "(a + b) / c", "spoken": "the quantity a plus b, all divided by c"},
+      {"pattern": "a/b + c/d", "spoken": "a over b, plus c over d; keep each fraction grouping explicit"},
+      {"pattern": "x^2; x^3; x^n", "spoken": "x squared; x cubed; x to the power of n"},
+      {"pattern": "sqrt(x); nth_root(x)", "spoken": "the square root of x; the n-th root of x"},
+      {"pattern": "f(x); f(g(x))", "spoken": "f of x; f of g of x; identify function names and nested grouping"},
+      {"pattern": "sin(x), cos(x), tan(x)", "spoken": "sine of x, cosine of x, tangent of x"},
+      {"pattern": "sin^-1(x)", "spoken": "inverse sine of x, or arcsine of x; do not say sine to the minus one"},
+      {"pattern": "(sin x)^2; sin(x^2)", "spoken": "sine squared of x; sine of x squared; distinguish the two forms explicitly"},
+      {"pattern": "ln(x); log_b(x)", "spoken": "natural log of x; logarithm base b of x"},
+      {"pattern": "e^x; 10^-3", "spoken": "e to the power of x; ten to the power of negative three"},
+      {"pattern": "lim_(x->a) f(x)", "spoken": "the limit of f of x as x approaches a"},
+      {"pattern": "dy/dx; d^2y/dx^2", "spoken": "dee y by dee x; the second derivative of y with respect to x"},
+      {"pattern": "integral_a^b f(x) dx", "spoken": "the integral from a to b of f of x, with respect to x"},
+      {"pattern": "sum_(i=1)^n a_i", "spoken": "the sum from i equals one to n of a sub i"},
+      {"pattern": "vector v; v_x; x-hat", "spoken": "vector v; v sub x; x hat"},
+      {"pattern": "(x, y); [a, b]", "spoken": "the ordered pair x, y; the interval from a to b, with endpoint inclusion stated when relevant"},
+      {"pattern": "30 degrees; pi/2 radians", "spoken": "thirty degrees; pi over two radians"}
+    ],
+    "greek_letter_names": {
+      "alpha": "AL-fuh",
+      "beta": "BAY-tuh",
+      "gamma": "GAM-uh",
+      "delta": "DEL-tuh",
+      "epsilon": "EP-sih-lon",
+      "theta": "THAY-tuh",
+      "lambda": "LAM-duh",
+      "mu": "myoo",
+      "nu": "noo",
+      "pi": "pie",
+      "rho": "row",
+      "sigma": "SIG-muh",
+      "phi": "fie",
+      "psi": "sigh",
+      "omega": "oh-MAY-guh"
+    },
+    "units_and_symbols": [
+      {"notation": "m/s", "spoken": "metres per second"},
+      {"notation": "m/s^2", "spoken": "metres per second squared"},
+      {"notation": "kg m/s", "spoken": "kilogram metres per second"},
+      {"notation": "N", "spoken": "newtons"},
+      {"notation": "J", "spoken": "joules"},
+      {"notation": "degrees C", "spoken": "degrees Celsius"},
+      {"notation": "Delta x", "spoken": "change in x, or delta x after defining delta"},
+      {"notation": "infinity", "spoken": "infinity"}
+    ],
+    "ambiguity_checks": [
+      "Distinguish a negative number from subtraction: 'negative three' versus 'subtract three'.",
+      "Distinguish a minus sign in an exponent from subtraction: 'ten to the power of negative three'.",
+      "Do not call the reciprocal of sine 'inverse sine'; use 'one over sine' or 'cosecant'.",
+      "For inverse trigonometric functions, prefer 'inverse sine/cosine/tangent' or 'arcsine/arccosine/arctangent'.",
+      "Read units with exponents and denominators fully; do not omit 'squared', 'cubed', or 'per'.",
+      "Distinguish the letter O from zero, and lowercase l from one, by naming the symbol in context.",
+      "Say 'approximately' for an approximation and 'equals' only for exact equality.",
+      "For vectors, matrices, intervals, and nested expressions, say grouping and component order explicitly."
+    ],
+    "review_gate": "A second person should compare each recorded equation and numerical result against the approved source/solution and captions. TTS or pronunciation rules do not replace physics or mathematics review."
+  },
   "recording": {
     "format": "mono PCM WAV, 48 kHz, 24-bit preferred",
     "microphone_distance_cm": [12, 18],
@@ -83,7 +171,8 @@
     "No clipped samples or harsh denoising artifacts.",
     "Voice remains intelligible at low playback volume and on a phone speaker.",
     "No audible pumping, abrupt room-tone changes, or chopped breaths.",
-    "Captions match spoken units, symbols, names, and numerical values.",
+    "Captions match the approved spoken form of equations, units, symbols, names, and numerical values.",
+    "A reviewer checks ambiguous notation, signs, exponents, function names, grouping, and numerical precision against the approved solution.",
     "Keep the original voice sample private; store only reviewed processing settings and derived non-identifying quality metrics."
   ],
   "sample_analysis": {

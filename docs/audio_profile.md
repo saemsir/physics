@@ -20,6 +20,83 @@ headroom. Do not alter the original sample just to hit that recording target.
 The EQ ranges remain provisional because no auditory judgment of room noise,
 plosives, sibilance, reverberation, or intelligibility has been made.
 
+## Spoken mathematics and number pronunciation
+
+The canonical, machine-readable rules are in
+[`config/audio_profile.json`](../config/audio_profile.json), under
+`spoken_math`. They are a script-writing and recording standard for English
+educational narration, not an automatic text-to-speech system. Use clear,
+internationally understandable English and SI unit names. Keep the speaker's
+natural accent; consistency and correct mathematical meaning matter more
+than imitating a particular accent.
+
+### Script every equation before recording
+
+Write the spoken line next to the displayed equation. Define each variable
+the first time it appears, keep its spoken name consistent, and read all
+signs, grouping, exponents, units, and precision. Never silently repair or
+round a value in the spoken track. Pause between mathematical phrases, not
+inside a number or unit.
+
+| Written form | Say |
+| --- | --- |
+| `0.04` | “zero point zero four” |
+| `3.050` | “three point zero five zero” (preserve the written precision) |
+| `-2.5` | “negative two point five” |
+| `a - b` | “a minus b” or “subtract b from a”, as the sentence requires |
+| `(a + b) / c` | “the quantity a plus b, all divided by c” |
+| `x^2`, `x^3`, `x^n` | “x squared”, “x cubed”, “x to the power of n” |
+| `sqrt(x)` | “the square root of x” |
+| `sin^-1(x)` | “inverse sine of x” or “arcsine of x”; not “sine to the minus one” |
+| `(sin x)^2` vs `sin(x^2)` | “sine squared of x” vs “sine of x squared” |
+| `log_b(x)` | “logarithm base b of x” |
+| `dy/dx` | “dee y by dee x”; then explain it as the derivative of y with respect to x |
+| `integral_a^b f(x) dx` | “the integral from a to b of f of x, with respect to x” |
+| `6.02 x 10^23` | “six point zero two times ten to the power of twenty-three” |
+| `m/s^2` | “metres per second squared” |
+
+For numbers, say “zero,” never “oh” for the digit 0. Read decimal digits
+individually when precision matters and preserve trailing zeros. Use
+“negative” for a signed value and “subtract” for an operation. Read a
+scientific-notation exponent explicitly, including “negative” where present.
+Say “approximately” for rounded results. Use familiar names such as “one
+half” only when they cannot hide the grouping; otherwise say “one over two”
+or “the quantity … divided by …”.
+
+### Functions, symbols, and units
+
+- Say **sine**, **cosine**, and **tangent** (or “sine of theta”), not letter
+  names. For inverse trig functions say **inverse sine** / **arcsine**,
+  **inverse cosine** / **arccosine**, or **inverse tangent** / **arctangent**.
+  Reserve “one over sine” or “cosecant” for the reciprocal.
+- Say **natural log** for `ln`. For `log`, say the base if it is shown or
+  relevant; do not assume every audience uses the same convention.
+- Name Greek letters on first use: alpha, beta, gamma, delta, epsilon,
+  theta, lambda, mu, nu, pi, rho, sigma, phi, psi, omega. The profile lists a
+  consistent approximate English pronunciation for each. These spellings
+  guide performance; do not pronounce the capital/lowercase glyph difference
+  unless it matters.
+- Say unit names fully in explanations: metres, seconds, metres per second,
+  metres per second squared, kilograms, newtons, joules. Keep the value-unit
+  pairing together; for example, “ten metres per second squared.”
+- Say subscripts as “sub”: `v_0` is “v sub zero,” and `a_x` is “a sub x.”
+  Say vector labels explicitly (“vector v”); explain components and order
+  before reading a tuple or matrix.
+- Say “change in x” for `Delta x` when explaining meaning; say “delta x”
+  when reading the symbol itself. State whether angles are in degrees or
+  radians.
+
+### Mandatory ambiguity check
+
+Before recording and caption approval, check negative values versus
+subtraction; negative exponents; inverse versus reciprocal functions;
+parentheses and fraction scope; squared function values versus squared
+inputs; zero versus the letter O; exact equality versus approximation; unit
+exponents; vector component order; and every numerical digit/unit against
+the approved solution. A pronunciation guide or TTS engine cannot verify
+the mathematics. Have a reviewer compare the spoken take and captions to the
+approved equation and result.
+
 ## Voice sample handling
 
 Voice recordings are personal data. The sample was uploaded to the repository
@@ -70,6 +147,9 @@ For 60-second clips, a starting delivery pace of 125–150 words/minute gives
 roughly 110–145 spoken words after allowing for pauses and visual beats. For
 three-minute lessons, use roughly 115–140 words/minute and leave deliberate
 space for calculations. Do not time-compress dense derivations just to fit.
+Read a representative equation aloud during rehearsal; if the correct,
+unhurried explanation does not fit, simplify the teaching scope rather than
+speeding up or dropping mathematical detail.
 
 ## Workflow validation
 
