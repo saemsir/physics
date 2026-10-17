@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "batch_id": "batch_002",
+  "status": "draft-owner-review",
+  "narration_language": "English",
+  "source_file": "data/practice_papers/jee_advanced_2027_physics_set_01.json",
+  "originality_note": "All episode questions, examples, explanations, and visual directions are original drafts. The local syllabus catalog identifies subject areas; cited textbooks are conceptual references only. Review every claim and source before storyboarding.",
+  "audience": {
+    "minimum_age": 14,
+    "maximum_age": 21,
+    "level": "senior-secondary Physics through JEE Advanced practice; define symbols, assumptions, signs, and units"
+  },
+  "brand": {
+    "name": "Saem Physics",
+    "tagline": "NEET JEE MIT",
+    "logo_asset": "",
+    "logo_asset_status": "text-only-pending-user-supplied-logo"
+  },
+  "video_outputs": [
+    {
+      "format": "vertical",
+      "count": 10,
+      "duration_seconds": 60,
+      "aspect_ratio": "9:16"
+    },
+    {
+      "format": "horizontal",
+      "count": 10,
+      "duration_seconds": 180,
+      "aspect_ratio": "16:9"
+    }
+  ],
+  "visual_direction": "Create original Saem Physics visuals: a deep, high-contrast canvas; a small, consistent semantic color palette; animated geometric diagrams; equations that appear only when their physical meaning is clear; and unit checks visible in the reasoning. Build each explanation from an intuitive physical question, then derive and check the result in plain language. For wave and optics topics, make phase or ray geometry visible; for mechanics, show vectors, boundaries, and energy ledgers; for circuits, show branch constraints. This is an original direction, not an imitation of any creator's signature drawings, pacing, voice, scripts, or compositions. Sound/music suggestions are not audio output. All episodes remain drafts pending teacher review.",
+  "episodes": [
+    {
+      "id": "b002-e01-collision-spring",
+      "type": "problem",
+      "status": "proposed",
+      "title": "One collision, then one compression",
+      "topic_id": "work_energy",
+      "question": "A 1 kg cart moving at 6 m/s sticks to a stationary 2 kg cart. The combined carts then compress a spring of constant 600 N/m on a frictionless track. The spring impulse during impact is negligible. Find the maximum compression.",
+      "answer": "The carts move at 2 m/s just after impact; the maximum spring compression is 0.141 m, about 0.14 m.",
+      "solution": "First isolate the short collision: momentum gives (1)(6) = (1 + 2)v, so v = 2 m/s. The joined carts then have 6 J of kinetic energy. During compression that energy becomes spring energy, (1/2)(600)x^2 = 6, so x = sqrt(0.02) = 0.141 m. Momentum is used for the impact; mechanical energy is used after it.",
+      "solution_review_status": "assistant-calculation-checked-pending-owner-subject-review",
+      "visual_hook": "Separate the event into two panels: an impulse-and-momentum snapshot for the collision, then a growing spring-energy bar for the later compression.",
+      "misconception": "Do not conserve kinetic energy through the sticking collision; do not apply the later spring-energy equation during impact.",
+      "reference": {
+        "title": "JEE Advanced 2027 Physics Practice Set 01 (original draft)",
+        "section": "Question 1: collision followed by spring compression",
+        "local_path": "data/practice_papers/jee_advanced_2027_physics_set_01.json"
+      },
+      "manual_audit": {
+        "model": "perfectly-inelastic-collision",
+        "mass_1_kg": 1,
+        "velocity_1_m_per_s": 6,
+        "mass_2_kg": 2,
+        "velocity_2_m_per_s": 0,
+        "expected_common_velocity_m_per_s": 2,
+        "expected_initial_kinetic_energy_j": 18,
+        "expected_final_kinetic_energy_j": 6
+      }
+    },
+    {
+      "id": "b002-e02-rotating-rod",
+      "type": "concept",
+      "status": "proposed",
+      "title": "A falling rod does not rotate at a steady rate",
+      "topic_id": "rotation",
+      "question": "A uniform rod is released from horizontal about a frictionless hinge. What sets its initial angular acceleration, and why does that acceleration change as it falls?",
+      "answer": "At release, gravity exerts torque MgL/2 about the hinge and I = ML^2/3, so alpha = 3g/(2L). As the rod turns, the lever arm of gravity changes, so the angular acceleration is not constant.",
+      "solution": "Put the system boundary around the rod and take moments about the hinge. The centre of mass begins L/2 from the hinge, so the initial torque magnitude is MgL/2. Divide by the hinge-axis moment of inertia ML^2/3. The changing angle changes the perpendicular lever arm, which changes torque and angular acceleration.",
+      "solution_review_status": "formula-checked-pending-owner-subject-review",
+      "visual_hook": "Rotate a rod from horizontal while a gravity arrow stays vertical; show the perpendicular lever arm shrinking as the angle changes.",
+      "misconception": "Angular acceleration is not constant just because gravitational acceleration is constant.",
+      "reference": {
+        "title": "SaemPhysics Physics Topic Catalog",
+        "section": "Rotational Motion",
+        "local_path": "data/physics_topics.csv"
+      }
+    },
+    {
+      "id": "b002-e03-charge-symmetry",
+      "type": "concept",
+      "status": "proposed",
+      "title": "Zero field can coexist with nonzero potential",
+      "topic_id": "electrostatics",
+      "question": "At the midpoint between two identical positive charges, why can the electric field be zero while the electric potential is positive?",
+      "answer": "The equal field vectors point in opposite directions and cancel. The two positive scalar potentials add, so the midpoint potential is positive.",
+      "solution": "Draw one field arrow from each charge to the midpoint: equal lengths, opposite directions. Then calculate potential separately as a scalar: V = kq/r + kq/r = 2kq/r. A zero vector sum does not imply a zero scalar sum.",
+      "solution_review_status": "concept-checked-pending-owner-subject-review",
+      "visual_hook": "Bring two equal outward field arrows to a midpoint where they cancel, then stack two positive potential contributions into one nonzero bar.",
+      "misconception": "Electric field and electric potential are different quantities and obey different addition rules.",
+      "reference": {
+        "title": "SaemPhysics Physics Topic Catalog",
+        "section": "Electrostatics",
+        "local_path": "data/physics_topics.csv"
+      }
+    },
+    {
+      "id": "b002-e04-circuit-branches",
+      "type": "problem",
+      "status": "proposed",
+      "title": "Find the current in the smaller branch",
+      "topic_id": "current_electricity",
+      "question": "A 12 V battery feeds a 2 ohm resistor in series with parallel 6 ohm and 3 ohm branches. Find the current in the 3 ohm branch.",
+      "answer": "2 A.",
+      "solution": "The parallel pair is 2 ohm, so the total circuit resistance is 4 ohm and the series current is 3 A. The 2 ohm series resistor drops 6 V, leaving 6 V across each parallel branch. The 3 ohm branch current is therefore 6/3 = 2 A.",
+      "solution_review_status": "assistant-calculation-checked-pending-owner-subject-review",
+      "visual_hook": "Collapse the parallel network into one equivalent resistor, then expand it and show the same branch voltage across both paths.",
+      "misconception": "Parallel branches share voltage, not current; the branch currents are set by their individual resistances.",
+      "reference": {
+        "title": "JEE Advanced 2027 Physics Practice Set 01 (original draft)",
+        "section": "Question 4: series and parallel resistors",
+        "local_path": "data/practice_papers/jee_advanced_2027_physics_set_01.json"
+      }
+    },
+    {
+      "id": "b002-e05-first-law-boundary",
+      "type": "concept",
+      "status": "proposed",
+      "title": "Heat enters; work leaves; energy stays accounted for",
+      "topic_id": "thermodynamics",
+      "question": "When a monatomic ideal gas expands at constant pressure while absorbing heat, how much energy raises its internal energy and how much becomes expansion work?",
+      "answer": "For one mole, deltaU = (3/2)R deltaT and work by the gas is R deltaT, so Q = (5/2)R deltaT. Three fifths of Q raises internal energy and two fifths leaves as work.",
+      "solution": "Choose the gas as the system and define work done by the gas as positive. At constant pressure W = p deltaV = nR deltaT. For a monatomic ideal gas deltaU = (3/2)nR deltaT. The first law is Q = deltaU + W, giving Q = (5/2)nR deltaT. The split follows from the model and path; heat is energy transferred across the boundary, not a substance stored inside.",
+      "solution_review_status": "concept-checked-pending-owner-subject-review",
+      "visual_hook": "Draw a system boundary around the gas; animate incoming heat splitting into an internal-energy bar and the shaded area under a pressure-volume path.",
+      "misconception": "Heat is energy in transit across a system boundary; it is not a state variable stored inside the gas.",
+      "reference": {
+        "title": "SaemPhysics Physics Topic Catalog",
+        "section": "Thermodynamics",
+        "local_path": "data/physics_topics.csv"
+      }
+    },
+    {
+      "id": "b002-e06-shm-kinematics",
+      "type": "concept",
+      "status": "proposed",
+      "title": "At the midpoint, the oscillator is not half-speed",
+      "topic_id": "oscillations_waves",
+      "question": "At displacement x = A/2 in simple harmonic motion, what fraction of the total energy is kinetic, and why is the speed not simply half its maximum?",
+      "answer": "The kinetic-energy fraction is 3/4 and the speed is sqrt(3)/2 of the maximum speed omega A.",
+      "solution": "For a spring oscillator, total energy is (1/2)kA^2 and potential energy at x is (1/2)kx^2. At x = A/2, potential energy is one quarter of the total, leaving three quarters kinetic. Using v^2 = omega^2(A^2 - x^2) gives speed sqrt(3)/2 omega A, not omega A/2.",
+      "solution_review_status": "formula-checked-pending-owner-subject-review",
+      "visual_hook": "Move a dot on a sinusoidal position graph while a pair of energy bars exchange height; keep total bar height constant.",
+      "misconception": "Displacement is not proportional to speed in SHM; speed is greatest at equilibrium and zero at the turning points.",
+      "reference": {
+        "title": "SaemPhysics Physics Topic Catalog",
+        "section": "Oscillations and Waves",
+        "local_path": "data/physics_topics.csv"
+      }
+    },
+    {
+      "id": "b002-e07-thin-lens",
+      "type": "problem",
+      "status": "proposed",
+      "title": "The image is twice as tall and inverted",
+      "topic_id": "optics",
+      "question": "A 3 cm object is 30 cm from a converging lens with focal length 20 cm. Find the image distance, orientation, and image height.",
+      "answer": "The real image is 60 cm on the far side, inverted, and 6 cm tall.",
+      "solution": "The lens equation gives 1/v = 1/20 - 1/30 = 1/60, so v = 60 cm. Magnification is -v/u = -2, so the image is inverted and twice the object's height: -6 cm relative to the chosen upward direction.",
+      "solution_review_status": "assistant-calculation-checked-pending-owner-subject-review",
+      "visual_hook": "Construct the image with two rays; move the object across the focal point and watch the image cross from virtual to real.",
+      "misconception": "The negative magnification marks inversion; the image height magnitude is 6 cm, not negative physical size.",
+      "reference": {
+        "title": "JEE Advanced 2027 Physics Practice Set 01 (original draft)",
+        "section": "Question 7: thin converging lens",
+        "local_path": "data/practice_papers/jee_advanced_2027_physics_set_01.json"
+      }
+    },
+    {
+      "id": "b002-e08-isobaric-gas-work",
+      "type": "problem",
+      "status": "proposed",
+      "title": "Read work from a constant-pressure path",
+      "topic_id": "thermodynamics",
+      "question": "Two moles of an ideal gas warm from 300 K to 450 K at constant pressure. With R = 8.31 J/(mol K), find the work done by the gas.",
+      "answer": "2.49 kJ.",
+      "solution": "At constant pressure, W = p deltaV. From the ideal-gas law, p deltaV = nR deltaT. Thus W = (2)(8.31)(150) = 2493 J, or 2.49 kJ. Expansion means the work done by the gas is positive.",
+      "solution_review_status": "assistant-calculation-checked-pending-owner-subject-review",
+      "visual_hook": "Show the gas path as a horizontal line on a pressure-volume graph; shade the rectangular area under the path and label it as work.",
+      "misconception": "Work is the signed area under the p-V path, not simply the final pressure or the temperature change.",
+      "reference": {
+        "title": "JEE Advanced 2027 Physics Practice Set 01 (original draft)",
+        "section": "Question 8: isobaric ideal-gas expansion",
+        "local_path": "data/practice_papers/jee_advanced_2027_physics_set_01.json"
+      }
+    },
+    {
+      "id": "b002-e09-photoelectric-stop",
+      "type": "problem",
+      "status": "proposed",
+      "title": "Which voltage stops the fastest photoelectrons?",
+      "topic_id": "modern_physics",
+      "question": "Photons of energy 5.0 eV illuminate a metal with a 2.0 eV work function. Find the maximum electron kinetic energy and the magnitude of the stopping potential.",
+      "answer": "3.0 eV and 3.0 V.",
+      "solution": "One photon supplies 5.0 eV; 2.0 eV is required to escape the metal. The maximum kinetic energy is 5.0 - 2.0 = 3.0 eV. A stopping potential of 3.0 V removes 3.0 eV of kinetic energy per electron charge.",
+      "solution_review_status": "assistant-calculation-checked-pending-owner-subject-review",
+      "visual_hook": "Show a photon-energy bar split into work-function and electron-kinetic parts, then use a retarding voltage to reduce the electron's kinetic-energy bar to zero.",
+      "misconception": "The work function is an energy threshold; it is subtracted from photon energy before finding the stopping voltage.",
+      "reference": {
+        "title": "JEE Advanced 2027 Physics Practice Set 01 (original draft)",
+        "section": "Question 9: photoelectric effect",
+        "local_path": "data/practice_papers/jee_advanced_2027_physics_set_01.json"
+      }
+    },
+    {
+      "id": "b002-e10-electron-wavelength",
+      "type": "concept",
+      "status": "proposed",
+      "title": "A particle can carry a wavelength",
+      "topic_id": "modern_physics",
+      "question": "Why does an electron accelerated through a voltage acquire a shorter de Broglie wavelength as the voltage increases?",
+      "answer": "The electron gains kinetic energy eV and momentum sqrt(2meV) in the non-relativistic limit. Since lambda = h/p, its wavelength decreases as 1/sqrt(V).",
+      "solution": "Treat the electric field as an energy transfer: eV = p^2/(2m). Solve for momentum, p = sqrt(2meV), then use lambda = h/p. Doubling the accelerating voltage does not halve the wavelength; it changes it by a factor 1/sqrt(2).",
+      "solution_review_status": "formula-checked-pending-owner-subject-review",
+      "visual_hook": "Increase the accelerating-voltage slider; draw the electron's momentum arrow longer while the wave crests squeeze closer together.",
+      "misconception": "Momentum grows with the square root of voltage, so wavelength does too in the inverse direction; the dependence is not 1/V.",
+      "reference": {
+        "title": "Feynman Lectures on Physics, Volume III",
+        "section": "Quantum behavior of particles; de Broglie wavelength",
+        "local_path": "book/V3- Feynman Lectures vol 3 on Quantum Mechanics 3.md"
+      }
+    }
+  ]
+}

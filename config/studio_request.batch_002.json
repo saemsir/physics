@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "run_id": "jee-advanced-2027-first-batch-complete",
+  "output_dir": "output/studio",
+  "tasks": [
+    {
+      "id": "matrix",
+      "action": "matrix.build",
+      "params": {
+        "exam_papers": "exam_papers",
+        "books": "book"
+      }
+    },
+    {
+      "id": "video_plan",
+      "action": "video.batch_plan",
+      "depends_on": ["matrix"],
+      "params": {
+        "manifest": "data/video_batches/batch_002.json",
+        "matrix": {
+          "$ref": "matrix#/network"
+        }
+      }
+    },
+    {
+      "id": "exam_topic_baseline",
+      "action": "exam.forecast",
+      "params": {
+        "exam": "jee-advanced",
+        "target_year": 2027,
+        "question_count": 10,
+        "simulations": 10000,
+        "seed": 2027
+      }
+    },
+    {
+      "id": "paper_pdfs",
+      "action": "exam.render_practice_paper",
+      "params": {
+        "paper": "data/practice_papers/jee_advanced_2027_physics_set_01.json"
+      }
+    }
+  ]
+}

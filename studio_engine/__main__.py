@@ -44,6 +44,7 @@ def main(argv: list[str] | None = None) -> int:
                         "exam.backtest",
                         "exam.forecast",
                         "exam.import_candidates",
+                        "exam.render_practice_paper",
                         "matrix.build",
                         "audio.analyze_reference",
                         "production.index_references",

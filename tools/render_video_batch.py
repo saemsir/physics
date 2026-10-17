@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from content_engine.batch import load_batch, validate_batch, write_batch_plan
+from content_engine.narration import narration_text, synthesize_google_mp3
 from exam_engine.engine import DataValidationError
 
 SCENE = ROOT / "episodes" / "batch_001" / "scenes.py"
@@ -32,7 +33,7 @@ def _probe(path: Path) -> dict[str, Any]:
         completed = subprocess.run(
             [
                 executable, "-v", "error", "-show_entries",
-                "format=duration:stream=width,height,avg_frame_rate",
+                "format=duration:stream=codec_type,width,height,avg_frame_rate",
                 "-of", "json", str(path),
             ],
             check=True,
@@ -42,14 +43,23 @@ def _probe(path: Path) -> dict[str, Any]:
         result = json.loads(completed.stdout)
         duration = float(result["format"]["duration"])
         video_stream = next(
-            stream for stream in result["streams"]
-            if "width" in stream and "height" in stream
+            (
+                stream for stream in result["streams"]
+                if stream.get("codec_type") == "video"
+            ),
+            None,
         )
         return {
             "duration_seconds": duration,
-            "width": int(video_stream["width"]),
-            "height": int(video_stream["height"]),
-            "fps": float(Fraction(video_stream["avg_frame_rate"])),
+            "width": int(video_stream["width"]) if video_stream else 0,
+            "height": int(video_stream["height"]) if video_stream else 0,
+            "fps": (
+                float(Fraction(video_stream["avg_frame_rate"]))
+                if video_stream else 0.0
+            ),
+            "has_audio": any(
+                stream.get("codec_type") == "audio" for stream in result["streams"]
+            ),
         }
     except (
         OSError, subprocess.CalledProcessError, KeyError, ValueError,
@@ -75,6 +85,8 @@ def render(
     quality: str,
     fps: int,
     resume: bool = False,
+    narration: str = "off",
+    voice_name: str = "en-US-Neural2-J",
 ) -> Path:
     batch = load_batch(manifest_path)
     plan = validate_batch(batch, ROOT)
@@ -99,6 +111,8 @@ def render(
         "status": "rendering",
         "quality": quality,
         "fps": fps,
+        "narration": narration,
+        "voice_name": voice_name if narration == "google" else None,
         "completed": [],
     }
     with tempfile.TemporaryDirectory(prefix="saemphysics-batch-plan-") as plan_dir:
@@ -107,37 +121,73 @@ def render(
         with tempfile.TemporaryDirectory(prefix="saemphysics-manim-") as media_dir:
             for item in selected:
                 destination = output_dir / f"{item['video_id']}.mp4"
+                narration_script = (
+                    narration_text(item) if narration == "google" else None
+                )
+                narration_signature = (
+                    hashlib.sha256(
+                        f"{voice_name}\0{narration_script}".encode("utf-8")
+                    ).hexdigest()
+                    if narration_script is not None
+                    else None
+                )
                 if resume and destination.is_file():
                     metadata = _probe(destination)
-                    if (metadata["width"], metadata["height"]) != (
+                    contract_matches = (metadata["width"], metadata["height"]) == (
                         item["width"], item["height"]
-                    ) or abs(metadata["duration_seconds"] - item["duration_seconds"]) > (
-                        1 / fps + 0.02
-                    ) or abs(metadata["fps"] - fps) > 0.01:
+                    ) and abs(
+                        metadata["duration_seconds"] - item["duration_seconds"]
+                    ) <= (1 / fps + 0.02) and abs(metadata["fps"] - fps) <= 0.01
+                    if not contract_matches:
                         raise DataValidationError(
                             f"existing output {destination} does not match this batch contract"
                         )
-                    report["completed"].append(
-                        {
-                            "video_id": item["video_id"],
-                            "path": destination.name,
-                            **metadata,
-                            "sha256": _sha256(destination),
-                            "resumed": True,
-                        }
+                    narration_matches = not metadata["has_audio"]
+                    sidecar = destination.with_suffix(".narration.json")
+                    if narration == "google" and metadata["has_audio"]:
+                        try:
+                            sidecar_data = json.loads(
+                                sidecar.read_text(encoding="utf-8")
+                            )
+                            narration_matches = isinstance(
+                                sidecar_data, dict
+                            ) and (
+                                sidecar_data.get("voice_name") == voice_name
+                                and sidecar_data.get("script_sha256")
+                                == narration_signature
+                            )
+                        except (OSError, json.JSONDecodeError):
+                            narration_matches = False
+                    if narration_matches:
+                        report["completed"].append(
+                            {
+                                "video_id": item["video_id"],
+                                "path": destination.name,
+                                **metadata,
+                                "narration": narration,
+                                "voice_name": (
+                                    voice_name if narration == "google" else None
+                                ),
+                                "sha256": _sha256(destination),
+                                "resumed": True,
+                            }
+                        )
+                        report["selected_count"] = len(selected)
+                        report["status"] = (
+                            "complete"
+                            if len(report["completed"]) == len(selected)
+                            else "rendering"
+                        )
+                        report_path.write_text(
+                            json.dumps(report, indent=2) + "\n",
+                            encoding="utf-8",
+                        )
+                        print(f"Keeping verified existing render {destination}")
+                        continue
+                    print(
+                        f"Existing render {destination} has a different audio "
+                        "configuration; rendering it again."
                     )
-                    report["selected_count"] = len(selected)
-                    report["status"] = (
-                        "complete"
-                        if len(report["completed"]) == len(selected)
-                        else "rendering"
-                    )
-                    report_path.write_text(
-                        json.dumps(report, indent=2) + "\n",
-                        encoding="utf-8",
-                    )
-                    print(f"Keeping verified existing render {destination}")
-                    continue
                 temp_media = Path(media_dir) / item["video_id"]
                 temp_media.mkdir()
                 environment = os.environ.copy()
@@ -184,12 +234,112 @@ def render(
                         f"{item['video_id']} rendered at {metadata['fps']:.2f} fps; "
                         f"expected {fps} fps"
                     )
+                narration_metadata: dict[str, Any] = {
+                    "narration": "off",
+                    "narration_duration_seconds": 0.0,
+                    "narration_words": 0,
+                    "voice_name": None,
+                    "narration_cached": False,
+                }
+                if narration == "google":
+                    text = narration_script or ""
+                    language = batch["narration_language"]
+                    language_code = {
+                        "english": "en-US",
+                        "hindi": "hi-IN",
+                    }.get(language.lower())
+                    if language_code is None:
+                        language_code = language
+                    audio_path, cached = synthesize_google_mp3(
+                        text,
+                        voice_name=voice_name,
+                        language_code=language_code,
+                        output_dir=output_dir / ".narration-cache",
+                    )
+                    audio_metadata = _probe(audio_path)
+                    if audio_metadata["duration_seconds"] > (
+                        item["duration_seconds"] + tolerance
+                    ):
+                        raise DataValidationError(
+                            f"{item['video_id']} narration is "
+                            f"{audio_metadata['duration_seconds']:.1f}s, longer than "
+                            f"the {item['duration_seconds']}s video; shorten the "
+                            f"narration.{item['format']} script or choose a faster voice"
+                        )
+                    muxed = destination.with_suffix(".narrated.mp4")
+                    subprocess.run(
+                        [
+                            shutil.which("ffmpeg") or "ffmpeg",
+                            "-v", "error", "-y",
+                            "-i", str(rendered),
+                            "-i", str(audio_path),
+                            "-map", "0:v:0",
+                            "-map", "1:a:0",
+                            "-c:v", "copy",
+                            "-c:a", "aac",
+                            "-b:a", "192k",
+                            "-af", "apad",
+                            "-t", str(item["duration_seconds"]),
+                            str(muxed),
+                        ],
+                        check=True,
+                        cwd=ROOT,
+                    )
+                    muxed_metadata = _probe(muxed)
+                    if not muxed_metadata["has_audio"]:
+                        raise DataValidationError(
+                            f"narration audio is missing from muxed video {muxed}"
+                        )
+                    if abs(
+                        muxed_metadata["duration_seconds"] - item["duration_seconds"]
+                    ) > tolerance:
+                        raise DataValidationError(
+                            f"narrated video {muxed} does not match the duration contract"
+                        )
+                    rendered = muxed
+                    metadata = muxed_metadata
+                    narration_metadata = {
+                        "narration": "google-cloud-text-to-speech",
+                        "narration_duration_seconds": audio_metadata["duration_seconds"],
+                        "narration_words": len(text.split()),
+                        "narration_coverage": round(
+                            audio_metadata["duration_seconds"]
+                            / item["duration_seconds"],
+                            3,
+                        ),
+                        "voice_name": voice_name,
+                        "narration_cached": cached,
+                    }
+                    if narration_metadata["narration_coverage"] < 0.75:
+                        print(
+                            f"Warning: {item['video_id']} narration covers "
+                            f"{narration_metadata['narration_coverage']:.0%} of the "
+                            "video; add a fuller format-specific script if desired.",
+                            file=sys.stderr,
+                        )
                 shutil.copy2(rendered, destination)
+                if narration == "google":
+                    destination.with_suffix(".narration.json").write_text(
+                        json.dumps(
+                            {
+                                "voice_name": voice_name,
+                                "script_sha256": narration_signature,
+                                "narration_duration_seconds": (
+                                    narration_metadata["narration_duration_seconds"]
+                                ),
+                            },
+                            indent=2,
+                        ) + "\n",
+                        encoding="utf-8",
+                    )
+                else:
+                    destination.with_suffix(".narration.json").unlink(missing_ok=True)
                 report["completed"].append(
                     {
                         "video_id": item["video_id"],
                         "path": destination.name,
                         **metadata,
+                        **narration_metadata,
                         "sha256": _sha256(destination),
                     }
                 )
@@ -223,6 +373,17 @@ def main() -> int:
         default=["vertical", "horizontal"],
     )
     parser.add_argument("--quality", choices=("preview", "high"), default="preview")
+    parser.add_argument(
+        "--narration",
+        choices=("off", "google"),
+        default="off",
+        help="synthesize and mux a Google Cloud TTS narration track",
+    )
+    parser.add_argument(
+        "--voice-name",
+        default="en-US-Neural2-J",
+        help="Google Cloud TTS voice name (used only with --narration google)",
+    )
     parser.add_argument("--fps", type=int, choices=(15, 30), default=None)
     parser.add_argument(
         "--resume",
@@ -240,6 +401,8 @@ def main() -> int:
             quality=args.quality,
             fps=fps,
             resume=args.resume,
+            narration=args.narration,
+            voice_name=args.voice_name,
         )
     except (DataValidationError, OSError, subprocess.CalledProcessError) as exc:
         print(f"render_video_batch: error: {exc}", file=sys.stderr)

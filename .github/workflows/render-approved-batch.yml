@@ -6,7 +6,7 @@ on:
       manifest:
         description: Repository path to an approved batch JSON manifest
         required: true
-        default: data/video_batches/batch_001.json
+        default: data/video_batches/batch_002.json
         type: string
       formats:
         description: Output aspect ratios to render
@@ -25,6 +25,19 @@ on:
         options:
           - preview
           - high
+      narration:
+        description: Generate Google Cloud spoken narration (requires credentials)
+        required: true
+        default: google
+        type: choice
+        options:
+          - google
+          - off
+      voice_name:
+        description: Google Cloud Text-to-Speech voice name
+        required: true
+        default: en-US-Neural2-J
+        type: string
 
 permissions:
   contents: read
@@ -73,10 +86,35 @@ jobs:
           if sys.argv[2] == "high" and plan["status"] != "approved-for-storyboarding":
               raise SystemExit("high-quality rendering requires storyboard approval")
           PY
+      - name: Configure Google Cloud TTS credentials
+        if: inputs.narration == 'google'
+        env:
+          GOOGLE_TTS_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_TTS_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          secret = os.environ.get("GOOGLE_TTS_SERVICE_ACCOUNT_JSON", "")
+          if not secret:
+              raise SystemExit(
+                  "Set the GOOGLE_TTS_SERVICE_ACCOUNT_JSON repository secret, "
+                  "or run with narration=off."
+              )
+          json.loads(secret)
+          credential_file = Path(os.environ["RUNNER_TEMP"]) / "google-tts-service-account.json"
+          credential_file.write_text(secret, encoding="utf-8")
+          credential_file.chmod(0o600)
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
+              env.write(f"GOOGLE_APPLICATION_CREDENTIALS={credential_file}\n")
+          PY
       - name: Render selected deliverables
         env:
           FORMATS: ${{ inputs.formats }}
           QUALITY: ${{ inputs.quality }}
+          NARRATION: ${{ inputs.narration }}
+          VOICE_NAME: ${{ inputs.voice_name }}
         run: |
           case "$FORMATS" in
             both) set -- vertical horizontal ;;
@@ -87,6 +125,8 @@ jobs:
             --manifest "$BATCH_MANIFEST" \
             --formats "$@" \
             --quality "$QUALITY" \
+            --narration "$NARRATION" \
+            --voice-name "$VOICE_NAME" \
             --resume \
             --output-dir "output/github-${GITHUB_RUN_ID}"
       - uses: actions/upload-artifact@v4

@@ -74,6 +74,7 @@ are applied by the coordinator.
 | `exam.backtest` | Same selection parameters as `exam.recommend` |
 | `exam.forecast` | `exam`, `target_year` (current year default), `question_count` (10), `simulations` (10000), `seed` (2026), `topics`, `data` |
 | `exam.import_candidates` | No parameters. Writes pending candidate records to the tracked data catalogs; this is an explicit data-import operation, not a read-only forecast. |
+| `exam.render_practice_paper` | `paper` (default `data/practice_papers/jee_advanced_2027_physics_set_01.json`); writes a candidate PDF and separate solution PDF into the run artifacts. |
 | `matrix.build` | `exam_papers` (default `exam_papers`), `books` (default `book`) |
 | `audio.analyze_reference` | `wav` (repository-local PCM WAV; read-only signal measurements) |
 | `production.index_references` | `videos_dir` (repository-local reference folder), `database` (default `output/production_knowledge.sqlite`) |

@@ -259,11 +259,18 @@ def _verified_records(
     exam: str,
     as_of_year: int,
     first_year: int | None = None,
+    allow_future_as_of: bool = False,
 ) -> tuple[ExamRecord, ...]:
     if exam not in EXAMS:
         raise DataValidationError(f"exam must be one of {', '.join(EXAMS)}")
-    if not 1900 <= as_of_year <= date.today().year:
-        raise DataValidationError("as_of_year must be a valid past or current calendar year")
+    latest_as_of_year = 2200 if allow_future_as_of else date.today().year
+    if (
+        not isinstance(as_of_year, int)
+        or isinstance(as_of_year, bool)
+        or not 1900 <= as_of_year <= latest_as_of_year
+    ):
+        qualifier = "supported" if allow_future_as_of else "past or current"
+        raise DataValidationError(f"as_of_year must be a valid {qualifier} calendar year")
     topic_ids = {topic.topic_id for topic in topics}
     rows = _read_csv(path, REQUIRED_RECORD_FIELDS)
     records = []
@@ -401,6 +408,7 @@ def forecast_test(
         exam=exam,
         as_of_year=target_year,
         first_year=1900,
+        allow_future_as_of=True,
     )
     shares = _rank_records(records, topics, as_of_year=target_year)
     probabilities = [item.historical_share for item in shares]

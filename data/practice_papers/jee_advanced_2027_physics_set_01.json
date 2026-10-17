@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "paper_id": "jee-advanced-2027-physics-practice-01",
+  "title": "JEE Advanced 2027 Physics Practice Set 01",
+  "target_exam": "JEE Advanced",
+  "target_year": 2027,
+  "subject": "Physics",
+  "status": "original-practice-mock-prior-only",
+  "time_limit_minutes": 75,
+  "question_count": 10,
+  "question_type_mix": {
+    "single_correct": 4,
+    "multiple_correct": 3,
+    "numerical": 3
+  },
+  "forecast_basis": {
+    "status": "prior-only-no-verified-exam-records",
+    "method": "The repository exam engine's seeded topic sampler uses a uniform prior because there are no verified source-linked JEE Advanced question records.",
+    "topic_selection": "Teacher-requested balanced practice coverage across five Physics areas; this is not a claim that the same topics or questions will appear on the exam.",
+    "seed": 2027,
+    "simulations": 10000
+  },
+  "notice": "This is an original Physics practice mock, not an official paper and not a reliable prediction of the actual JEE Advanced 2027 exam. The topic sampler is prior-only and has no verified records. All question wording and numerical values here are original.",
+  "instructions": [
+    "Attempt all 10 questions. Suggested time: 75 minutes.",
+    "Questions 1, 3, 7, and 9 have one correct option.",
+    "Questions 2, 5, and 6 may have more than one correct option; select every correct option.",
+    "Questions 4, 8, and 10 require a numerical answer.",
+    "Use g = 10 m/s^2 where specified. Use R = 8.31 J/(mol K), h = 6.626 x 10^-34 J s, electron mass = 9.11 x 10^-31 kg, and electron charge magnitude = 1.602 x 10^-19 C where needed.",
+    "This custom practice set does not reproduce the official exam format or marking scheme."
+  ],
+  "questions": [
+    {
+      "id": "q01",
+      "type": "single_correct",
+      "area": "Mechanics",
+      "topic_id": "work_energy",
+      "prompt": "A 1 kg cart moving at 6 m/s collides with a stationary 2 kg cart, and the carts stick together. The combined carts then compress an initially uncompressed spring of constant 600 N/m on a frictionless track. The spring's impulse during the short collision is negligible. What is the maximum compression?",
+      "choices": [
+        "A. 0.10 m",
+        "B. 0.14 m",
+        "C. 0.20 m",
+        "D. 0.28 m"
+      ],
+      "answer": "B",
+      "solution": "Conserve momentum during the short collision: (1)(6) = (1 + 2)v, so v = 2 m/s. The joined carts have kinetic energy (1/2)(3)(2^2) = 6 J. At maximum compression this becomes spring energy: (1/2)(600)x^2 = 6, giving x = sqrt(0.02) = 0.141 m, approximately 0.14 m.",
+      "checks": [
+        "The collision is inelastic, so kinetic energy is not conserved during impact.",
+        "The spring impulse is negligible during impact, as stated.",
+        "After impact, mechanical energy is conserved on the frictionless track."
+      ]
+    },
+    {
+      "id": "q02",
+      "type": "multiple_correct",
+      "area": "Mechanics",
+      "topic_id": "rotation",
+      "prompt": "A uniform rod of mass M and length L is hinged at one end, held horizontal, and released from rest in a vertical plane. The hinge is frictionless. Which statements are correct?",
+      "choices": [
+        "A. The magnitude of the initial gravitational torque about the hinge is MgL/2.",
+        "B. The initial angular acceleration has magnitude 3g/(2L).",
+        "C. The angular acceleration remains constant throughout the fall.",
+        "D. When the rod first reaches the vertically downward position, its angular speed is sqrt(3g/L)."
+      ],
+      "answer": "A, B, D",
+      "solution": "Initially the weight acts at the centre of mass, L/2 from the hinge, so the torque magnitude is MgL/2. The moment of inertia about the hinge is ML^2/3, hence the initial angular acceleration is torque/I = 3g/(2L). As the rod falls the torque changes with angle, so the angular acceleration is not constant. From horizontal to downward vertical the centre of mass drops by L/2; MgL/2 = (1/2)(ML^2/3)omega^2 gives omega = sqrt(3g/L).",
+      "checks": [
+        "Torque, moment of inertia, and angular acceleration are evaluated about the hinge.",
+        "The energy equation is applied between release and the first downward vertical position."
+      ]
+    },
+    {
+      "id": "q03",
+      "type": "single_correct",
+      "area": "Electricity and Magnetism",
+      "topic_id": "electrostatics",
+      "prompt": "Two point charges, each +2.0 nC, are fixed at x = -0.10 m and x = +0.10 m. Take the electric potential to be zero at infinity and k = 9.0 x 10^9 N m^2/C^2. What are the electric field magnitude and electric potential at the origin?",
+      "choices": [
+        "A. E = 0; V = 0 V",
+        "B. E = 0; V = 360 V",
+        "C. E = 360 V/m; V = 0 V",
+        "D. E = 360 V/m; V = 360 V"
+      ],
+      "answer": "B",
+      "solution": "The two field vectors at the origin have equal magnitudes and opposite directions, so the net field is zero. Potential is a scalar and adds: V = 2kq/a = 2(9.0 x 10^9)(2.0 x 10^-9)/0.10 = 360 V.",
+      "checks": [
+        "Electric field is a vector sum; electric potential is a scalar sum.",
+        "The sign of each point charge is positive."
+      ]
+    },
+    {
+      "id": "q04",
+      "type": "numerical",
+      "area": "Electricity and Magnetism",
+      "topic_id": "current_electricity",
+      "prompt": "An ideal 12 V battery is connected to a 2 ohm resistor in series with a parallel combination of 6 ohm and 3 ohm resistors. Find the current, in amperes, through the 3 ohm resistor.",
+      "answer": "2",
+      "unit": "A",
+      "solution": "The parallel equivalent is (6 x 3)/(6 + 3) = 2 ohm. The total resistance is 2 + 2 = 4 ohm, so the battery current is 12/4 = 3 A. The voltage across the parallel pair is 12 - (3)(2) = 6 V. The 3 ohm branch current is 6/3 = 2 A.",
+      "checks": [
+        "The branch currents add to the 3 A series current: 1 A through 6 ohm and 2 A through 3 ohm."
+      ]
+    },
+    {
+      "id": "q05",
+      "type": "multiple_correct",
+      "area": "Thermal Physics",
+      "topic_id": "thermodynamics",
+      "prompt": "One mole of a monatomic ideal gas expands at constant pressure while its temperature rises by deltaT. Use the convention that W is work done by the gas and Q is heat supplied to the gas. Which statements are correct?",
+      "choices": [
+        "A. The work done by the gas is R deltaT.",
+        "B. The change in internal energy is (3/2)R deltaT.",
+        "C. The heat supplied is (5/2)R deltaT.",
+        "D. The heat supplied equals the change in internal energy."
+      ],
+      "answer": "A, B, C",
+      "solution": "At constant pressure, W = p deltaV = nR deltaT, which is R deltaT for one mole. For a monatomic ideal gas, deltaU = (3/2)nR deltaT. The first law with work done by the gas is Q = deltaU + W = (5/2)nR deltaT. Thus the heat supplied is greater than the internal-energy increase because some energy leaves as expansion work.",
+      "checks": [
+        "The gas is ideal, monatomic, and follows a constant-pressure path.",
+        "The work sign convention is explicitly work done by the gas."
+      ]
+    },
+    {
+      "id": "q06",
+      "type": "multiple_correct",
+      "area": "Waves and Optics",
+      "topic_id": "oscillations_waves",
+      "prompt": "A particle performs simple harmonic motion with displacement x = A cos(omega t), measured from equilibrium. At an instant when x = +A/2 and the particle is moving toward equilibrium, which statements are correct?",
+      "choices": [
+        "A. Its speed is (sqrt(3)/2) omega A.",
+        "B. Its acceleration points toward equilibrium and has magnitude omega^2 A/2.",
+        "C. Its kinetic energy is three quarters of its total mechanical energy.",
+        "D. Its speed is omega A/2."
+      ],
+      "answer": "A, B, C",
+      "solution": "For SHM, v^2 = omega^2(A^2 - x^2). At x = A/2, the speed is omega A sqrt(3/4) = (sqrt(3)/2)omega A. Acceleration is -omega^2x, so it points toward equilibrium with magnitude omega^2A/2. The potential-energy fraction is x^2/A^2 = 1/4, leaving 3/4 as kinetic energy. Statement D confuses displacement fraction with speed fraction.",
+      "checks": [
+        "The sign of acceleration follows a = -omega^2 x.",
+        "The speed is the magnitude; direction is specified separately."
+      ]
+    },
+    {
+      "id": "q07",
+      "type": "single_correct",
+      "area": "Waves and Optics",
+      "topic_id": "optics",
+      "prompt": "An object is placed 30 cm in front of a thin converging lens of focal length 20 cm. Using the usual real-is-positive image convention for a real object, where is the image and what is its transverse magnification?",
+      "choices": [
+        "A. 12 cm on the object side; +0.40",
+        "B. 60 cm on the opposite side; -2.0",
+        "C. 60 cm on the object side; +2.0",
+        "D. 30 cm on the opposite side; -1.0"
+      ],
+      "answer": "B",
+      "solution": "The thin-lens equation gives 1/f = 1/v + 1/u, with f = 20 cm and u = 30 cm. Thus 1/v = 1/20 - 1/30 = 1/60, so v = 60 cm on the opposite side of the lens. Magnification m = -v/u = -2, indicating an inverted image twice the object's height.",
+      "checks": [
+        "The image is real because the object is beyond the focal point.",
+        "The negative magnification denotes inversion under the stated convention."
+      ]
+    },
+    {
+      "id": "q08",
+      "type": "numerical",
+      "area": "Thermal Physics",
+      "topic_id": "thermodynamics",
+      "prompt": "Two moles of a monatomic ideal gas are heated from 300 K to 450 K at constant pressure. Use R = 8.31 J/(mol K). What work is done by the gas, in kilojoules?",
+      "answer": "2.49",
+      "unit": "kJ",
+      "solution": "For an ideal gas at constant pressure, work done by the gas is W = p deltaV = nR deltaT. Here deltaT = 150 K, so W = (2)(8.31)(150) = 2493 J = 2.493 kJ, approximately 2.49 kJ.",
+      "checks": [
+        "This is work done by the gas, positive for expansion.",
+        "The monatomic assumption is not needed to calculate this work, but it would be needed to find the internal-energy change."
+      ]
+    },
+    {
+      "id": "q09",
+      "type": "single_correct",
+      "area": "Modern Physics",
+      "topic_id": "modern_physics",
+      "prompt": "Light of photon energy 5.0 eV falls on a metal with work function 2.0 eV. What is the maximum photoelectron kinetic energy and the stopping potential magnitude?",
+      "choices": [
+        "A. 2.0 eV and 2.0 V",
+        "B. 3.0 eV and 3.0 V",
+        "C. 5.0 eV and 5.0 V",
+        "D. 7.0 eV and 3.0 V"
+      ],
+      "answer": "B",
+      "solution": "Einstein's photoelectric equation gives K_max = E_photon - phi = 5.0 - 2.0 = 3.0 eV. The stopping potential satisfies eV_stop = K_max, so its magnitude is 3.0 V.",
+      "checks": [
+        "The work function is subtracted from photon energy.",
+        "The stopping potential is a magnitude; the retarding polarity is chosen to stop emitted electrons."
+      ]
+    },
+    {
+      "id": "q10",
+      "type": "numerical",
+      "area": "Modern Physics",
+      "topic_id": "modern_physics",
+      "prompt": "An electron starts from rest and is accelerated through a potential difference of 150 V. In the non-relativistic approximation, use lambda = h/sqrt(2 m e V), with h = 6.626 x 10^-34 J s, m = 9.11 x 10^-31 kg, and e = 1.602 x 10^-19 C. Find the de Broglie wavelength in angstroms (1 angstrom = 10^-10 m), to three significant figures.",
+      "answer": "1.00",
+      "unit": "angstrom",
+      "solution": "The gained kinetic energy is eV, so p = sqrt(2meV) and lambda = h/p. Substitution gives lambda approximately 1.002 x 10^-10 m, or 1.00 angstrom to three significant figures.",
+      "checks": [
+        "The non-relativistic formula is appropriate at 150 eV compared with the electron rest energy.",
+        "1 angstrom equals 10^-10 m."
+      ]
+    }
+  ]
+}

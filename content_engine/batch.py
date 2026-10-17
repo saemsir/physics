@@ -161,6 +161,18 @@ def validate_batch(batch: dict[str, Any], root: Path = ROOT) -> list[dict[str, A
             "misconception",
         ):
             _require_text(episode.get(field), f"{episode_id}.{field}")
+        narration = episode.get("narration")
+        if narration is not None:
+            if not isinstance(narration, dict) or not narration:
+                raise DataValidationError(
+                    f"{episode_id}.narration must be a non-empty format-to-script object"
+                )
+            if not set(narration).issubset({"vertical", "horizontal"}):
+                raise DataValidationError(
+                    f"{episode_id}.narration has an unsupported video format"
+                )
+            for format_name, script in narration.items():
+                _require_text(script, f"{episode_id}.narration.{format_name}")
         reference = episode.get("reference")
         if not isinstance(reference, dict):
             raise DataValidationError(f"{episode_id}: reference must be an object")
@@ -229,6 +241,7 @@ def validate_batch(batch: dict[str, Any], root: Path = ROOT) -> list[dict[str, A
                     "answer": episode["answer"],
                     "solution": episode["solution"],
                     "misconception": episode["misconception"],
+                    "narration": episode.get("narration"),
                     "reference": episode["reference"],
                     "status": batch["status"],
                     "narration_language": batch["narration_language"],

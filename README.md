@@ -147,6 +147,13 @@ demonstration rather than a data-driven forecast. Add reviewed metadata before
 interpreting forecast weights; use rolling-origin `backtest` to test the model
 on held-out historical papers.
 
+The first mixed video batch and its separate original 10-question Physics
+practice set are documented in
+[docs/first_batch_guide.md](docs/first_batch_guide.md). The predictor currently
+has no verified JEE Advanced records, so that paper labels its baseline
+prior-only and is not a reliable prediction of the actual exam. Review all
+questions and storyboards before rendering.
+
 ## Mathematics, physics, and animation foundation
 
 The concept graph in `knowledge/` connects each exam topic to math prerequisites
@@ -201,14 +208,19 @@ manifest. The episode count can be 1–10; `--formats` accepts `both`,
 For rendering, push the approved manifest and either:
 
 * In GitHub, open **Actions → Render approved video batch → Run workflow**,
-  select the manifest path, formats, and preview/high quality. Download the
+  select the manifest path, formats, preview/high quality, and Google narration
+  voice. Set the `GOOGLE_TTS_SERVICE_ACCOUNT_JSON` repository secret first;
+  choose narration off if you do not want to use Google Cloud TTS. Download the
   resulting artifact. High-quality renders require `approved-for-storyboarding`.
 * In Colab, set `BATCH_MANIFEST` to the manifest path and `REVISION` to its
   reviewed commit SHA in `notebooks/render_in_colab.ipynb`, then run the cells.
+  For narrated output, configure Google Cloud Application Default Credentials
+  and run `tools/render_video_batch.py` with `--narration google`.
 
-Both paths require a complete validated manifest. They render silent visual
-drafts, not finished narrated videos; inspect the render and complete narration,
-caption, accessibility, and release review separately.
+Both paths require a complete validated manifest. The renderer adds spoken
+Google Cloud narration when requested. Review timing, audio coverage, physics,
+captions, accessibility, and release readiness; music and sound effects are
+not generated automatically.
 
 The indexed JEE papers are source placeholders, not verified question-bank
 records. Add question metadata only after manually checking its exact paper
@@ -320,8 +332,8 @@ the notebook saves the kinematics preview and optional 20-video batch under
 `/content/saemphysics` in the temporary Colab runtime. Watch the preview before
 setting `RENDER_FULL_BATCH = True`. Run the notebook's download cell and save
 the files before ending or deleting the runtime; upload them to Drive manually
-if desired. The batch renders are silent visual drafts, not final narrated or
-release-approved videos.
+if desired. Use the workflow in `docs/first_batch_guide.md` to configure Google
+Cloud credentials and generate narrated batch outputs.
 
 ## Create an episode
 

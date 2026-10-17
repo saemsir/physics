@@ -29,6 +29,7 @@ SUPPORTED_ACTIONS = {
     "exam.backtest",
     "exam.forecast",
     "exam.import_candidates",
+    "exam.render_practice_paper",
     "matrix.build",
     "audio.analyze_reference",
     "production.index_references",
@@ -62,6 +63,7 @@ ACTION_PARAMETERS = {
         "data",
     },
     "exam.import_candidates": set(),
+    "exam.render_practice_paper": {"paper"},
     "matrix.build": {"exam_papers", "books"},
     "audio.analyze_reference": {"wav"},
     "production.index_references": {"videos_dir", "database"},
@@ -560,6 +562,26 @@ class StudioEngine:
 
         if action in {"exam.recommend", "exam.backtest", "exam.forecast"}:
             return self._exam(action, params)
+
+        if action == "exam.render_practice_paper":
+            from tools.render_practice_paper import render_pair
+
+            paper_path = self._repo_path(
+                params.get(
+                    "paper",
+                    "data/practice_papers/jee_advanced_2027_physics_set_01.json",
+                ),
+                "paper",
+            )
+            questions_pdf, solutions_pdf = render_pair(
+                paper_path,
+                output_root / "practice_papers",
+            )
+            return {
+                "questions_pdf": questions_pdf.relative_to(output_root).as_posix(),
+                "solutions_pdf": solutions_pdf.relative_to(output_root).as_posix(),
+                "status": "rendered",
+            }
 
         if action == "exam.import_candidates":
             from tools.import_exam_candidates import import_candidates

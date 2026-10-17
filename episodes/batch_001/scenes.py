@@ -8,6 +8,7 @@ from pathlib import Path
 import textwrap
 
 from manim import *
+import numpy as np
 
 from config.brand import BACKGROUND, GRID, TEXT, VECTOR, X_COMPONENT, Y_COMPONENT
 
@@ -182,6 +183,187 @@ def _diagram(episode_id: str) -> VGroup:
             bars.add(bar)
             labels.add(Text(label, font_size=17, color=color).next_to(bar, DOWN))
         return VGroup(bars, labels)
+    if episode_id == "b002-e01-collision-spring":
+        track = Line(LEFT * 5 + DOWN, RIGHT * 5 + DOWN, color=GRID, stroke_width=4)
+        cart_a = Rectangle(width=1.1, height=0.8, color=X_COMPONENT, fill_opacity=0.35)
+        cart_a.move_to(LEFT * 2.5 + DOWN * 0.5)
+        cart_b = Rectangle(width=1.4, height=0.8, color=Y_COMPONENT, fill_opacity=0.35)
+        cart_b.move_to(RIGHT * 1.2 + DOWN * 0.5)
+        motion = Arrow(LEFT * 3.7 + DOWN * 0.5, LEFT * 2.9 + DOWN * 0.5,
+                       buff=0, color=VECTOR, stroke_width=6)
+        spring = VGroup(
+            *[
+                Line(
+                    RIGHT * (2.2 + 0.22 * index) + DOWN * 0.5 + (UP * 0.24 if index % 2 else DOWN * 0.24),
+                    RIGHT * (2.2 + 0.22 * (index + 1)) + DOWN * 0.5
+                    + (DOWN * 0.24 if index % 2 else UP * 0.24),
+                    color=VECTOR,
+                    stroke_width=3,
+                )
+                for index in range(7)
+            ]
+        )
+        label = Text("momentum first  |  spring energy second", font_size=18, color=TEXT).to_edge(UP)
+        return VGroup(track, cart_a, cart_b, motion, spring, label)
+    if episode_id == "b002-e02-rotating-rod":
+        pivot = Dot(LEFT * 2 + DOWN * 0.3, color=TEXT, radius=0.12)
+        rod = Line(pivot.get_center(), RIGHT * 2.6 + DOWN * 0.3, color=Y_COMPONENT, stroke_width=9)
+        mass = Dot(rod.get_end(), color=VECTOR, radius=0.18)
+        gravity = Arrow(mass.get_center() + UP * 1.1, mass.get_center() + UP * 0.2,
+                        buff=0, color=X_COMPONENT, stroke_width=5)
+        lever = DashedLine(pivot.get_center(), pivot.get_center() + UP * 1.3, color=GRID)
+        labels = VGroup(
+            Text("hinge", font_size=18, color=TEXT).next_to(pivot, DOWN),
+            Text("centre of mass", font_size=17, color=VECTOR).next_to(mass, DOWN),
+            Text("perpendicular lever arm", font_size=17, color=GRID).next_to(lever, LEFT),
+        )
+        return VGroup(rod, pivot, mass, gravity, lever, labels)
+    if episode_id == "b002-e03-charge-symmetry":
+        left = Dot(LEFT * 3, color=X_COMPONENT, radius=0.22)
+        right = Dot(RIGHT * 3, color=X_COMPONENT, radius=0.22)
+        center = Dot(ORIGIN, color=TEXT, radius=0.12)
+        charges = VGroup(
+            Text("+q", font_size=22, color=X_COMPONENT).next_to(left, UP),
+            Text("+q", font_size=22, color=X_COMPONENT).next_to(right, UP),
+            Text("E = 0", font_size=22, color=Y_COMPONENT).next_to(center, DOWN),
+            Text("V = 2kq/r", font_size=22, color=VECTOR).to_edge(UP),
+        )
+        field_left = Arrow(LEFT * 0.25, LEFT * 1.1, buff=0, color=Y_COMPONENT, stroke_width=6)
+        field_right = Arrow(RIGHT * 0.25, RIGHT * 1.1, buff=0, color=Y_COMPONENT, stroke_width=6)
+        return VGroup(left, right, center, field_left, field_right, charges)
+    if episode_id == "b002-e04-circuit-branches":
+        left = Line(LEFT * 3 + UP * 1.8, LEFT * 3 + DOWN * 1.8, color=TEXT, stroke_width=3)
+        top = Line(LEFT * 3 + UP * 1.8, LEFT * 1.5 + UP * 1.8, color=GRID, stroke_width=3)
+        bottom = Line(LEFT * 3 + DOWN * 1.8, LEFT * 1.5 + DOWN * 1.8, color=GRID, stroke_width=3)
+        battery = VGroup(
+            Line(LEFT * 3.3, LEFT * 2.7, color=VECTOR, stroke_width=5),
+            Line(LEFT * 3.45 + UP * 0.35, LEFT * 2.55 + UP * 0.35, color=VECTOR, stroke_width=2),
+        )
+        series = Rectangle(width=1.1, height=0.55, color=X_COMPONENT, fill_opacity=0.25)
+        series_label = Text("2 ohm", font_size=17, color=TEXT).move_to(series)
+        series_group = VGroup(series, series_label).move_to(LEFT * 0.8 + UP * 1.8)
+        upper = Rectangle(width=1.0, height=0.55, color=Y_COMPONENT, fill_opacity=0.25)
+        upper_label = Text("6 ohm", font_size=16, color=TEXT).move_to(upper)
+        upper_group = VGroup(upper, upper_label).move_to(RIGHT * 1.8 + UP * 0.8)
+        lower = Rectangle(width=1.0, height=0.55, color=Y_COMPONENT, fill_opacity=0.25)
+        lower_label = Text("3 ohm", font_size=16, color=TEXT).move_to(lower)
+        lower_group = VGroup(lower, lower_label).move_to(RIGHT * 1.8 + DOWN * 0.8)
+        right = Line(RIGHT * 2.3 + UP * 0.8, RIGHT * 3 + UP * 0.8, color=GRID, stroke_width=3)
+        right_down = Line(RIGHT * 3 + UP * 0.8, RIGHT * 3 + DOWN * 0.8, color=GRID, stroke_width=3)
+        right_bottom = Line(RIGHT * 3 + DOWN * 0.8, RIGHT * 2.3 + DOWN * 0.8, color=GRID, stroke_width=3)
+        branches = VGroup(
+            Line(LEFT * 1.5 + UP * 1.8, RIGHT * 1.3 + UP * 1.8, color=GRID, stroke_width=3),
+            Line(LEFT * 1.5 + DOWN * 1.8, RIGHT * 1.3 + DOWN * 1.8, color=GRID, stroke_width=3),
+            Line(LEFT * 1.5 + UP * 1.8, LEFT * 1.5 + DOWN * 1.8, color=GRID, stroke_width=3),
+            Line(RIGHT * 2.3 + UP * 0.8, RIGHT * 2.3 + DOWN * 0.8, color=GRID, stroke_width=3),
+        )
+        return VGroup(left, top, bottom, battery, series_group, upper_group, lower_group, right, right_down, right_bottom, branches)
+    if episode_id == "b002-e05-first-law-boundary":
+        boundary = RoundedRectangle(width=5.8, height=3.0, corner_radius=0.18, color=GRID)
+        gas = Ellipse(width=2.0, height=1.2, color=VECTOR, fill_opacity=0.2).move_to(ORIGIN)
+        heat = Arrow(LEFT * 4 + DOWN * 0.3, LEFT * 1.2 + DOWN * 0.3,
+                     buff=0, color=X_COMPONENT, stroke_width=6)
+        work = Arrow(RIGHT * 1.2 + DOWN * 0.3, RIGHT * 4 + DOWN * 0.3,
+                     buff=0, color=Y_COMPONENT, stroke_width=6)
+        labels = VGroup(
+            Text("Q in", font_size=21, color=X_COMPONENT).next_to(heat, DOWN),
+            Text("gas", font_size=20, color=VECTOR).move_to(gas),
+            Text("W out", font_size=21, color=Y_COMPONENT).next_to(work, DOWN),
+            Text("Q = deltaU + W", font_size=22, color=TEXT).to_edge(UP),
+        )
+        internal = Rectangle(width=1.5, height=0.7, color=VECTOR, fill_opacity=0.3)
+        internal_label = Text("deltaU", font_size=18, color=TEXT).move_to(internal)
+        internal_group = VGroup(internal, internal_label).move_to(UP * 1.25)
+        return VGroup(boundary, gas, heat, work, labels, internal_group)
+    if episode_id == "b002-e06-shm-kinematics":
+        axes = Axes(
+            x_range=[0, 2 * PI, PI / 2],
+            y_range=[-1.2, 1.2, 1],
+            x_length=7,
+            y_length=3.2,
+            tips=False,
+            axis_config={"color": GRID, "include_numbers": False},
+        )
+        curve = axes.plot(lambda t: np.cos(t), x_range=[0, 2 * PI], color=VECTOR, stroke_width=5)
+        marker = Dot(axes.c2p(PI / 3, 0.5), color=Y_COMPONENT)
+        labels = VGroup(
+            Text("position x", font_size=18, color=TEXT).next_to(axes.y_axis, UP),
+            Text("time", font_size=18, color=TEXT).next_to(axes.x_axis, RIGHT),
+            Text("K + U = constant", font_size=20, color=Y_COMPONENT).to_edge(UP),
+        )
+        return VGroup(axes, curve, marker, labels)
+    if episode_id == "b002-e07-thin-lens":
+        lens = Ellipse(width=0.65, height=3.7, color=VECTOR, stroke_width=5)
+        axis = Line(LEFT * 4 + DOWN * 0.6, RIGHT * 4 + DOWN * 0.6, color=GRID)
+        object_arrow = Arrow(LEFT * 3 + DOWN * 0.6, LEFT * 3 + UP * 1.2, buff=0, color=X_COMPONENT, stroke_width=5)
+        image_arrow = Arrow(RIGHT * 2.5 + DOWN * 0.6, RIGHT * 2.5 + DOWN * 1.6, buff=0, color=Y_COMPONENT, stroke_width=5)
+        rays = VGroup(
+            Line(LEFT * 3 + UP * 1.2, ORIGIN, color=TEXT, stroke_width=2),
+            Line(ORIGIN, RIGHT * 2.5 + DOWN * 1.6, color=TEXT, stroke_width=2),
+            Line(LEFT * 3 + UP * 1.2, RIGHT * 2.5 + DOWN * 1.6, color=GRID, stroke_width=2),
+        )
+        focal_marks = VGroup(
+            Dot(LEFT * 1.5 + DOWN * 0.6, color=GRID),
+            Dot(RIGHT * 1.5 + DOWN * 0.6, color=GRID),
+            Text("F", font_size=18, color=GRID).next_to(LEFT * 1.5 + DOWN * 0.6, DOWN),
+            Text("F", font_size=18, color=GRID).next_to(RIGHT * 1.5 + DOWN * 0.6, DOWN),
+        )
+        return VGroup(lens, axis, object_arrow, image_arrow, rays, focal_marks)
+    if episode_id == "b002-e08-isobaric-gas-work":
+        axes = Axes(
+            x_range=[0, 5, 1],
+            y_range=[0, 4, 1],
+            x_length=6.5,
+            y_length=3.2,
+            tips=False,
+            axis_config={"color": GRID, "include_numbers": True},
+        )
+        path = axes.plot(lambda volume: 2.8, x_range=[1, 4], color=VECTOR, stroke_width=5)
+        work_area = axes.get_area(path, x_range=[1, 4], color=Y_COMPONENT, opacity=0.4)
+        labels = VGroup(
+            Text("pressure", font_size=18, color=TEXT).next_to(axes.y_axis, UP),
+            Text("volume", font_size=18, color=TEXT).next_to(axes.x_axis, RIGHT),
+            Text("area = work", font_size=20, color=Y_COMPONENT).to_edge(UP),
+        )
+        return VGroup(axes, work_area, path, labels)
+    if episode_id == "b002-e09-photoelectric-stop":
+        plate = Rectangle(width=0.25, height=3.2, color=Y_COMPONENT, fill_opacity=0.4).shift(RIGHT * 1.4)
+        light = VGroup(
+            *[
+                Arrow(LEFT * 3 + UP * y, RIGHT * 0.8 + UP * y, buff=0, color=VECTOR, stroke_width=3)
+                for y in (0.8, 0, -0.8)
+            ]
+        )
+        electrons = VGroup(
+            *[
+                Arrow(RIGHT * 1.7 + UP * y, RIGHT * 2.8 + UP * y, buff=0, color=X_COMPONENT, stroke_width=3)
+                for y in (0.55, -0.25)
+            ]
+        )
+        bars = VGroup(
+            Rectangle(width=1.0, height=1.0, color=VECTOR, fill_opacity=0.3).shift(LEFT * 2.2 + DOWN * 1.5),
+            Rectangle(width=1.0, height=0.6, color=X_COMPONENT, fill_opacity=0.3).shift(LEFT * 0.8 + DOWN * 1.7),
+            Text("photon", font_size=17, color=VECTOR).shift(LEFT * 2.2 + DOWN * 2.3),
+            Text("escape + K", font_size=17, color=X_COMPONENT).shift(LEFT * 0.8 + DOWN * 2.3),
+        )
+        return VGroup(plate, light, electrons, bars)
+    if episode_id == "b002-e10-electron-wavelength":
+        axes = Axes(
+            x_range=[0, 4 * PI, PI],
+            y_range=[-1.3, 1.3, 1],
+            x_length=7,
+            y_length=2.8,
+            tips=False,
+            axis_config={"color": GRID, "include_numbers": False},
+        )
+        wave = axes.plot(lambda x: np.sin(x), x_range=[0, 4 * PI], color=VECTOR, stroke_width=4)
+        electron = Dot(axes.c2p(2 * PI, 0), color=Y_COMPONENT, radius=0.15)
+        arrow = Arrow(LEFT * 2, RIGHT * 1.5, buff=0, color=X_COMPONENT, stroke_width=5)
+        labels = VGroup(
+            Text("accelerating voltage increases", font_size=18, color=TEXT).next_to(arrow, UP),
+            Text("lambda = h/p", font_size=22, color=VECTOR).to_edge(UP),
+        )
+        return VGroup(axes, wave, electron, arrow, labels)
     raise ValueError(f"no original diagram is defined for {episode_id!r}")
 
 

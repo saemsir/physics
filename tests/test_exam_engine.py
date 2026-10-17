@@ -276,6 +276,21 @@ class ExamEngineTests(unittest.TestCase):
         report = render_test_forecast(forecast)
         self.assertIn("uniform prior", " ".join(report["limitations"]))
 
+    def test_forecast_accepts_future_target_year_without_future_records(self) -> None:
+        advanced_record = record("1", 2025, "paper-a", "kinematics")
+        advanced_record["exam"] = "jee-advanced"
+        self.write_records([advanced_record])
+        forecast = forecast_test(
+            self.data_path,
+            VIDEO_TOPICS,
+            target_year=2027,
+            question_count=3,
+            simulations=100,
+        )
+        self.assertEqual(forecast.target_year, 2027)
+        self.assertEqual(forecast.status, "historical-data-informed")
+        self.assertEqual(forecast.last_verified_year, 2025)
+
     def test_forecast_rejects_invalid_simulation_parameters(self) -> None:
         self.write_records([])
         with self.assertRaisesRegex(DataValidationError, "question_count"):

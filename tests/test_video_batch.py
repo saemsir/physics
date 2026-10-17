@@ -99,6 +99,27 @@ class VideoBatchTests(unittest.TestCase):
         with self.assertRaisesRegex(DataValidationError, "cannot imply question-bank verification"):
             validate_batch(batch, ROOT)
 
+    def test_format_specific_narration_is_validated_and_added_to_the_plan(self) -> None:
+        batch = copy.deepcopy(self.batch)
+        batch["episodes"][0]["narration"] = {
+            "vertical": "A short spoken script.",
+            "horizontal": "A longer spoken script.",
+        }
+        plan = validate_batch(batch, ROOT)
+        self.assertEqual(
+            [item["narration"] for item in plan[:2]],
+            [
+                {"vertical": "A short spoken script.", "horizontal": "A longer spoken script."},
+                {"vertical": "A short spoken script.", "horizontal": "A longer spoken script."},
+            ],
+        )
+
+    def test_invalid_format_specific_narration_is_rejected(self) -> None:
+        batch = copy.deepcopy(self.batch)
+        batch["episodes"][0]["narration"] = {"square": "Unsupported format."}
+        with self.assertRaisesRegex(DataValidationError, "unsupported video format"):
+            validate_batch(batch, ROOT)
+
 
 if __name__ == "__main__":
     unittest.main()
