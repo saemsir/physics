@@ -138,9 +138,16 @@ python -m content_engine recommend --exam jee-main
 The indexed JEE papers are source placeholders, not verified question-bank
 records. Add question metadata only after manually checking its exact paper
 locator, rights, topic mapping, and answer. Open
-`notebooks/render_in_colab.ipynb` in Google Colab to build the database and
-render a lesson preview. See [docs/content_network.md](docs/content_network.md)
-for the data contract, review gates, and collaboration workflow.
+`notebooks/render_in_colab.ipynb` in Google Colab and run its cells from top
+to bottom. It installs the Manim system dependencies and pinned Python
+requirements, validates the example problem batch, builds a disposable
+database under `/content`, compiles the original kinematics demo, renders and
+verifies one low-resolution MP4, and saves it to Google Drive. Watch that
+preview before setting `RENDER_FULL_BATCH = True`; the optional high-quality
+20-video batch can take a long time. For repeatable renders, set the notebook's
+`REVISION` to a reviewed commit SHA. See
+[docs/content_network.md](docs/content_network.md) for the data contract,
+review gates, and collaboration workflow.
 
 ## Index exam papers and study books as concept matrices
 
@@ -168,6 +175,11 @@ is preferred, followed by `.mmd`, `.md`, and `.txt`.
 It also emits prerequisite/math-link matrices and domain-to-engine/output
 route matrices in `output/matrix_network.json`. Override the input/output
 paths with `--exam-papers`, `--books`, and `--output`.
+
+`.mmd` is accepted as Markdown-like text; the indexer does not interpret
+Mermaid diagrams as physics models. Keep original documents and structured
+project files in their suitable formats rather than renaming everything to
+`.mmd`.
 
 These are inspectable, keyword-based candidate mappings, not automatic
 solutions or verified classifications. The currently implemented solvers
