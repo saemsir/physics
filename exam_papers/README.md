@@ -1,7 +1,10 @@
 # Exam-paper inputs
 
-Put text-based exam papers in this folder. `matrix_pipeline.py` reads `.md`,
-`.txt`, and `.docx` files recursively; it splits questions at numbered lines
+Put text-based exam papers in this folder. `convert_pdfs.py` creates
+page-labelled `.md` text extractions from PDFs under `exam_papers/` and
+`book/`; pages without embedded text are marked for OCR/manual review.
+`matrix_pipeline.py` reads `.mmd`, `.md`, `.txt`, and `.docx` files recursively;
+it splits questions at numbered lines
 such as `Question 1.` or `Q2:`. If no numbered question headings are found,
 the file is treated as one question. Keep source citations and usage rights
 outside the question wording where appropriate.

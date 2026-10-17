@@ -121,6 +121,37 @@ class MatrixPipelineTests(unittest.TestCase):
         self.assertEqual(matrix["row_labels"], ["guide-docx-s001"])
         self.assertGreater(matrix["values"][0][matrix["column_labels"].index("chemistry:kinetics")], 0)
 
+    def test_indexes_markdown_sources_with_page_headings(self) -> None:
+        (self.papers / "paper.md").write_text(
+            "# JEE Advanced\n\n## Page 4\nQuestion 1. A projectile has velocity and acceleration.\n",
+            encoding="utf-8",
+        )
+        (self.books / "notes.md").write_text(
+            "# Notes\n\n## Page 2\nMatrix transformations and eigenvalue modes.\n",
+            encoding="utf-8",
+        )
+
+        report, unsupported = build_network(self.papers, self.books)
+
+        self.assertEqual(unsupported, [])
+        self.assertEqual(report["counts"]["questions"], 1)
+        self.assertEqual(report["counts"]["book_files"], 1)
+        self.assertEqual(report["counts"]["book_sections"], 2)
+        paper_columns = report["question_concept_matrix"]["column_labels"]
+        self.assertGreater(
+            report["question_concept_matrix"]["values"][0][
+                paper_columns.index("physics:kinematics")
+            ],
+            0,
+        )
+        book_columns = report["book_concept_matrix"]["column_labels"]
+        self.assertTrue(
+            any(
+                row[book_columns.index("math:eigenmodes")] > 0
+                for row in report["book_concept_matrix"]["values"]
+            )
+        )
+
     def test_records_invalid_docx_and_continues_with_valid_sources(self) -> None:
         (self.books / "broken.docx").write_bytes(b"no")
         (self.books / "valid.txt").write_text("Chemical equilibrium", encoding="utf-8")
@@ -133,6 +164,11 @@ class MatrixPipelineTests(unittest.TestCase):
 
     def test_reports_unsupported_files_and_writes_output(self) -> None:
         (self.papers / "scan.pdf").write_bytes(b"not OCR'd")
+        (self.papers / "scan.md").write_text(
+            "# Scan transcription\n\nQuestion 1. A vector has magnitude and direction.\n",
+            encoding="utf-8",
+        )
+        (self.papers / "unconverted.pdf").write_bytes(b"not OCR'd")
         (self.books / "kinematics.txt").write_text("Kinematics and velocity", encoding="utf-8")
         output = self.root / "network.json"
         self.assertEqual(
@@ -147,7 +183,7 @@ class MatrixPipelineTests(unittest.TestCase):
         )
         payload = json.loads(output.read_text(encoding="utf-8"))
         self.assertEqual(payload["counts"]["unsupported_files"], 1)
-        self.assertEqual(payload["unsupported_files"], ["exam_papers/scan.pdf"])
+        self.assertEqual(payload["unsupported_files"], ["exam_papers/unconverted.pdf"])
 
     def test_question_ranking_explains_evidence_and_only_routes_to_typed_solver(self) -> None:
         graph = load_concept_graph()

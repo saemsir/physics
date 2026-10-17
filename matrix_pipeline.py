@@ -24,7 +24,7 @@ from knowledge.graph import ConceptGraph, load_graph
 
 ROOT = Path(__file__).resolve().parent
 ROUTES_PATH = ROOT / "knowledge" / "solution_routes.csv"
-SUPPORTED_SUFFIXES = {".md", ".txt", ".docx"}
+SUPPORTED_SUFFIXES = {".md", ".mmd", ".txt", ".docx"}
 UNSUPPORTED_DOCUMENT_SUFFIXES = {
     ".pdf", ".doc", ".odt", ".rtf", ".epub",
     ".png", ".jpg", ".jpeg", ".tif", ".tiff", ".bmp", ".webp",
@@ -162,6 +162,10 @@ def _discover(
             continue
         if path.suffix.lower() in SUPPORTED_SUFFIXES:
             supported.append(path)
+        elif path.suffix.lower() == ".pdf":
+            converted = path.with_suffix(".md")
+            if not converted.is_file() or converted.stat().st_mtime < path.stat().st_mtime:
+                unsupported.append(path.relative_to(directory).as_posix())
         elif path.suffix.lower() in UNSUPPORTED_DOCUMENT_SUFFIXES:
             unsupported.append(path.relative_to(directory).as_posix())
     return supported, unsupported
@@ -415,7 +419,7 @@ def _matrix(row_labels: Sequence[str], column_labels: Sequence[str], values: lis
 
 
 def _prefer_docx_over_converted_copy(paths: Sequence[Path]) -> list[Path]:
-    priority = {".docx": 0, ".md": 1, ".txt": 2}
+    priority = {".docx": 0, ".mmd": 1, ".md": 2, ".txt": 3}
     chosen: dict[tuple[Path, str], Path] = {}
     for path in paths:
         key = (path.parent, path.stem.casefold())

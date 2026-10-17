@@ -148,6 +148,7 @@ Add text-based exam papers to `exam_papers/` and study material to `book/`.
 Then run:
 
 ```bash
+python convert_pdfs.py
 python matrix_pipeline.py
 python matrix_pipeline.py --question \
   "A projectile has initial velocity and constant acceleration. Find its position."
@@ -155,13 +156,15 @@ python matrix_pipeline.py --question-file exam_papers/sample_question.md \
   --output output/question_analysis.json
 ```
 
-The local pipeline reads Markdown, UTF-8 text, and DOCX directly (no conversion
-is required); it splits numbered question headings into question rows and
-book chapter/section headings into book rows, then creates normalized
+`convert_pdfs.py` converts PDFs under `exam_papers/` and `book/` into
+page-labelled `.md` files using local text extraction; pages without embedded
+text are marked for OCR/manual review. It requires PyMuPDF, installed from
+`requirements.txt`. The matrix pipeline reads `.mmd`, Markdown, UTF-8 text,
+and DOCX; it splits numbered question headings into question rows and
+book chapter/section/page headings into book rows, then creates normalized
 question/book-to-concept matrices from the curated physics, chemistry, and
-mathematics graph. If `.docx` and converted `.md` copies share a filename, the
-`.docx` is indexed so a newly added Word source is not shadowed by an older
-conversion.
+mathematics graph. If source and converted copies share a filename, the DOCX
+is preferred, followed by `.mmd`, `.md`, and `.txt`.
 It also emits prerequisite/math-link matrices and domain-to-engine/output
 route matrices in `output/matrix_network.json`. Override the input/output
 paths with `--exam-papers`, `--books`, and `--output`.
