@@ -141,10 +141,12 @@ locator, rights, topic mapping, and answer. Open
 `notebooks/render_in_colab.ipynb` in Google Colab and run its cells from top
 to bottom. It installs the Manim system dependencies and pinned Python
 requirements, validates the example problem batch, builds a disposable
-database under `/content`, compiles the original kinematics demo, renders and
-verifies one low-resolution MP4, and saves it to Google Drive. Watch that
-preview before setting `RENDER_FULL_BATCH = True`; the optional high-quality
-20-video batch can take a long time. For repeatable renders, set the notebook's
+database under `/content`, compiles the original kinematics demo, and renders
+and verifies one low-resolution MP4. Outputs are stored locally under
+`/content/saemphysics`; run the notebook's download cell before the runtime
+ends, then upload the files to Drive manually if desired. Watch the preview
+before setting `RENDER_FULL_BATCH = True`; the optional high-quality 20-video
+batch can take a long time. For repeatable renders, set the notebook's
 `REVISION` to a reviewed commit SHA. See
 [docs/content_network.md](docs/content_network.md) for the data contract,
 review gates, and collaboration workflow.
@@ -204,13 +206,13 @@ automatically while no session is running.
 ## Render the first batch in Google Colab
 
 Open [`notebooks/render_in_colab.ipynb`](notebooks/render_in_colab.ipynb)
-in Google Colab, run its cells from top to bottom, and mount Google Drive when
-prompted. The notebook checks out this repository, installs Manim and system
-dependencies, validates `data/video_batches/batch_001.json`, and saves renders
-under `MyDrive/SaemPhysics/batch_001/`. It renders one vertical and one
-horizontal preview first; inspect both before starting the separate full
-vertical and horizontal passes. Those 20 renders are silent visual drafts,
-not final narrated or release-approved videos.
+in Google Colab and run its cells from top to bottom. No Drive mount is needed:
+the notebook saves the kinematics preview and optional 20-video batch under
+`/content/saemphysics` in the temporary Colab runtime. Watch the preview before
+setting `RENDER_FULL_BATCH = True`. Run the notebook's download cell and save
+the files before ending or deleting the runtime; upload them to Drive manually
+if desired. The batch renders are silent visual drafts, not final narrated or
+release-approved videos.
 
 ## Create an episode
 

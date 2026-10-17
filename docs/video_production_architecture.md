@@ -15,8 +15,9 @@ Use each service for a different job:
 
 **Recommended now:** prepare and review the content in Codespaces/GitHub, then
 open [`notebooks/render_in_colab.ipynb`](../notebooks/render_in_colab.ipynb)
-in Colab to render. Save renders to a private Drive folder. Use GitHub Actions
-as the validation gate, not as the renderer.
+in Colab to render. The notebook writes to temporary runtime storage; download
+the files before ending the runtime, then upload them to a private Drive folder
+if desired. Use GitHub Actions as the validation gate, not as the renderer.
 
 ## How to provide input for a video batch today
 
@@ -54,19 +55,22 @@ question-to-video pipeline. The current input is a reviewed JSON manifest:
    rendering. For a reproducible render, use the reviewed commit SHA in the
    notebook's `REVISION` cell instead of `main`.
 6. In Google Colab, open the notebook from GitHub, set `BATCH_MANIFEST` to
-   your committed batch JSON path, run setup and validation, mount Drive, and
-   render the two preview videos first. The notebook previews the first
-   episode in both formats and names the Drive folder from the manifest's
-   batch ID. Watch both aspect ratios. If approved, run the vertical and
-   horizontal high-quality cells separately. Keep `--resume` enabled if
-   Colab disconnects.
+   your committed batch JSON path, and run setup and validation. The notebook
+   renders a low-quality kinematics lesson preview locally; watch it before
+   setting `RENDER_FULL_BATCH = True`. The optional high-quality renderer
+   creates all 20 batch videos and a verification report under
+   `/content/saemphysics`. Keep `--resume` enabled if rendering is interrupted
+   while the same runtime and files are still available. Run the notebook's
+   download cell and save the outputs before ending the runtime; Colab's local
+   files are lost when the runtime is deleted or reset. Upload downloaded files
+   to a private Drive folder manually if desired.
 7. For batch 001, use the timed script in
    [`episodes/batch_001/narration.json`](../episodes/batch_001/narration.json).
-   The Colab preview cell shows its timed beat cues alongside the vertical and
-   horizontal silent previews for the first episode. Read along and check
-   whether the wording fits each visual beat. Timing aligns to beat boundaries,
-   not frame-level gestures. The lines are not automatically recorded or mixed
-   into the video yet.
+   Compare it with the rendered batch videos and check whether the wording fits
+   each visual beat. The notebook's initial preview is a separate kinematics
+   demo; it does not render the batch narration or show the first episode in
+   both formats. Timing aligns to beat boundaries, not frame-level gestures.
+   The lines are not automatically recorded or mixed into the video yet.
 8. Review all exports, then add/verify narration and captions and complete
    physics, editorial, accessibility, and release approval. The current
    Manim output is a silent visual draft with text branding; it is not a
