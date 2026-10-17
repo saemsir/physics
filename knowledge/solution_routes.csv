@@ -1,0 +1,5 @@
+concept_id,engine_id,capability_id,required_input_schema,solution_approach,visual_approach,visual_status,narration_approach,narration_status,readiness
+math:linear-systems,math_engine,solve_linear_system,linear-system-v1,Gaussian elimination with partial pivoting and residual check,matrix-row-operations,planned,explain-equations-pivots-and-residual,planned,typed-inputs-only
+math:matrices,math_engine,matvec,matrix-vector-v1,Apply a dimension-checked linear transformation to a state vector,show-input-vector-matrix-and-output-vector,planned,explain-each-component-and-units,planned,typed-inputs-only
+physics:kinematics,physics_engine,constant_acceleration,constant-acceleration-v1,Compute position and velocity component-wise then check an independent displacement identity,trajectory-and-velocity-vectors,available,explain-knowns-model-equations-and-check,available,typed-inputs-only
+math:scalars-vectors,animation_engine,vector_decomposition,vector-2d-v1,Resolve components and verify their sum equals the resultant,vector-components-and-resultant,available,explain-axis-components-and-recombination,available,typed-inputs-only

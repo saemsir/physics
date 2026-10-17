@@ -37,3 +37,14 @@ physics:atoms_nuclei,Atomic and nuclear physics,physics,atoms_nuclei,Relate boun
 physics:semiconductors,Semiconductor electronics,physics,semiconductors,Model carrier behavior and circuit-level semiconductor devices,syllabus:needs-official-version
 cs:procedural_abstraction,Procedural abstraction,computer_science,,Represent computation as reusable procedures with explicit inputs and outputs,project:software-abstractions
 cs:state_and_simulation,State and simulation,computer_science,,Represent computation as state transitions and test model invariants,project:simulation
+chemistry:stoichiometry,Stoichiometry,chemistry,,Relate chemical amounts through balanced reaction equations and conserved atoms,project:chemistry-curriculum
+chemistry:atomic_structure,Atomic structure,chemistry,,Relate electron configurations and quantized energy levels to atomic behavior,project:chemistry-curriculum
+chemistry:periodicity,Periodic trends,chemistry,,Compare recurring properties across periods and groups using electronic structure,project:chemistry-curriculum
+chemistry:bonding,Chemical bonding,chemistry,,Model ionic covalent and metallic bonding with structure and energy,project:chemistry-curriculum
+chemistry:states_of_matter,States of matter,chemistry,,Relate particle models to measurable gas liquid and solid properties,project:chemistry-curriculum
+chemistry:thermodynamics,Chemical thermodynamics,chemistry,,Track energy and spontaneity under stated thermodynamic conventions,project:chemistry-curriculum
+chemistry:equilibrium,Chemical equilibrium,chemistry,,Analyze reversible reactions using equilibrium constants and concentration relationships,project:chemistry-curriculum
+chemistry:kinetics,Chemical kinetics,chemistry,,Relate reaction rates to concentration time and rate laws,project:chemistry-curriculum
+chemistry:solutions,Solutions,chemistry,,Describe composition concentration and colligative behavior of mixtures,project:chemistry-curriculum
+chemistry:electrochemistry,Electrochemistry,chemistry,,Connect redox reactions electrical potential and charge transfer,project:chemistry-curriculum
+chemistry:organic,Organic chemistry,chemistry,,Classify organic structures reactions and functional-group transformations,project:chemistry-curriculum

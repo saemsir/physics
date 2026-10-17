@@ -142,6 +142,44 @@ locator, rights, topic mapping, and answer. Open
 render a lesson preview. See [docs/content_network.md](docs/content_network.md)
 for the data contract, review gates, and collaboration workflow.
 
+## Index exam papers and study books as concept matrices
+
+Add text-based exam papers to `exam_papers/` and study material to `book/`.
+Then run:
+
+```bash
+python matrix_pipeline.py
+python matrix_pipeline.py --question \
+  "A projectile has initial velocity and constant acceleration. Find its position."
+python matrix_pipeline.py --question-file exam_papers/sample_question.md \
+  --output output/question_analysis.json
+```
+
+The local pipeline reads Markdown, UTF-8 text, and DOCX; it splits numbered
+question headings into question rows and book chapter/section headings into
+book rows, then creates normalized question/book-to-concept matrices from the
+curated physics, chemistry, and mathematics graph.
+It also emits prerequisite/math-link matrices and domain-to-engine/output
+route matrices in `output/matrix_network.json`. When a Markdown book and DOCX
+share a filename, the Markdown version is preferred to avoid indexing the
+same converted source twice. Override the input/output paths with
+`--exam-papers`, `--books`, and `--output`.
+
+These are inspectable, keyword-based candidate mappings, not automatic
+solutions or verified classifications. The currently implemented solvers
+cover small dense linear systems and constant-acceleration kinematics; there
+is no chemistry solver or audio renderer. The report labels supported
+capabilities and unavailable routes explicitly. PDFs/scans are reported as
+unsupported (there is no OCR); convert them to reviewed text first. Question
+and book text is processed locally and is not copied into the generated
+matrix report. Review source rights, concept matches, assumptions, and answers
+before using any result in a lesson. A one-question analysis ranks direct
+phrase evidence, propagates scores to graph-linked concepts, and lists
+data-defined solver/explanation/visual routes from
+`knowledge/solution_routes.csv`. Its scores are relative rankings, not
+probabilities. Routes currently require typed inputs; concept recognition
+does not parse equations or execute a solver.
+
 ## Create an episode
 
 1. Copy the episode brief and review templates into a descriptively named

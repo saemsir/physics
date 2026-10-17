@@ -12,6 +12,12 @@ tools, and prerequisites:
   mathematical tools.
 - `../data/concept_sources.csv`: source locators attach books/courses to concepts
   without implying permission to reproduce their contents.
+- Chemistry concepts are also included as a starter vocabulary for the local
+  matrix index; they do not imply a reviewed exam syllabus or an implemented
+  chemistry solver.
+- `solution_routes.csv` lists typed-input solver capabilities and the planned
+  or available visual/narration approaches for concepts. Add a route only
+  when its engine capability exists and its required input contract is known.
 
 Check and query a mapping from the repository root:
 
