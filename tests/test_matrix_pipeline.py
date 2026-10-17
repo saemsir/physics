@@ -96,7 +96,7 @@ class MatrixPipelineTests(unittest.TestCase):
         matrix = report["book_concept_matrix"]
         self.assertGreater(matrix["values"][0][matrix["column_labels"].index("math:matrices")], 0)
 
-    def test_ignores_readmes_and_prefers_markdown_to_same_name_docx(self) -> None:
+    def test_ignores_readmes_and_prefers_docx_to_same_name_markdown(self) -> None:
         (self.papers / "README.md").write_text(
             "Question 1. This setup note is not an exam question.", encoding="utf-8"
         )
@@ -108,7 +108,7 @@ class MatrixPipelineTests(unittest.TestCase):
             archive.writestr(
                 "word/document.xml",
                 '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
-                "<w:body><w:p><w:r><w:t>Velocity kinematics</w:t></w:r></w:p>"
+                "<w:body><w:p><w:r><w:t>Reaction rate chemical kinetics</w:t></w:r></w:p>"
                 "</w:body></w:document>",
             )
 
@@ -116,13 +116,10 @@ class MatrixPipelineTests(unittest.TestCase):
 
         self.assertEqual(report["counts"]["questions"], 0)
         self.assertEqual(report["counts"]["book_files"], 1)
-        self.assertEqual(report["counts"]["book_sections"], 2)
+        self.assertEqual(report["counts"]["book_sections"], 1)
         matrix = report["book_concept_matrix"]
-        self.assertEqual(matrix["row_labels"], ["guide-md-s001", "guide-md-s002"])
-        self.assertGreater(matrix["values"][0][matrix["column_labels"].index("math:matrices")], 0)
-        self.assertGreater(
-            matrix["values"][1][matrix["column_labels"].index("math:scalars-vectors")], 0
-        )
+        self.assertEqual(matrix["row_labels"], ["guide-docx-s001"])
+        self.assertGreater(matrix["values"][0][matrix["column_labels"].index("chemistry:kinetics")], 0)
 
     def test_records_invalid_docx_and_continues_with_valid_sources(self) -> None:
         (self.books / "broken.docx").write_bytes(b"no")

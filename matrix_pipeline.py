@@ -414,8 +414,8 @@ def _matrix(row_labels: Sequence[str], column_labels: Sequence[str], values: lis
     }
 
 
-def _prefer_markdown_over_docx(paths: Sequence[Path]) -> list[Path]:
-    priority = {".md": 0, ".txt": 1, ".docx": 2}
+def _prefer_docx_over_converted_copy(paths: Sequence[Path]) -> list[Path]:
+    priority = {".docx": 0, ".md": 1, ".txt": 2}
     chosen: dict[tuple[Path, str], Path] = {}
     for path in paths:
         key = (path.parent, path.stem.casefold())
@@ -435,7 +435,7 @@ def build_network(exam_papers_dir: Path, books_dir: Path) -> tuple[dict, list[st
     routes = _load_solution_routes(ROUTES_PATH, graph)
     paper_paths, unsupported_papers = _discover(exam_papers_dir)
     book_paths, unsupported_books = _discover(books_dir, ignore_book_assets=True)
-    book_paths = _prefer_markdown_over_docx(book_paths)
+    book_paths = _prefer_docx_over_converted_copy(book_paths)
     input_errors: list[dict[str, str]] = []
     questions: list[SourceRow] = []
     indexed_paper_files = 0

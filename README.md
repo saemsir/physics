@@ -155,15 +155,16 @@ python matrix_pipeline.py --question-file exam_papers/sample_question.md \
   --output output/question_analysis.json
 ```
 
-The local pipeline reads Markdown, UTF-8 text, and DOCX; it splits numbered
-question headings into question rows and book chapter/section headings into
-book rows, then creates normalized question/book-to-concept matrices from the
-curated physics, chemistry, and mathematics graph.
+The local pipeline reads Markdown, UTF-8 text, and DOCX directly (no conversion
+is required); it splits numbered question headings into question rows and
+book chapter/section headings into book rows, then creates normalized
+question/book-to-concept matrices from the curated physics, chemistry, and
+mathematics graph. If `.docx` and converted `.md` copies share a filename, the
+`.docx` is indexed so a newly added Word source is not shadowed by an older
+conversion.
 It also emits prerequisite/math-link matrices and domain-to-engine/output
-route matrices in `output/matrix_network.json`. When a Markdown book and DOCX
-share a filename, the Markdown version is preferred to avoid indexing the
-same converted source twice. Override the input/output paths with
-`--exam-papers`, `--books`, and `--output`.
+route matrices in `output/matrix_network.json`. Override the input/output
+paths with `--exam-papers`, `--books`, and `--output`.
 
 These are inspectable, keyword-based candidate mappings, not automatic
 solutions or verified classifications. The currently implemented solvers
@@ -178,7 +179,23 @@ phrase evidence, propagates scores to graph-linked concepts, and lists
 data-defined solver/explanation/visual routes from
 `knowledge/solution_routes.csv`. Its scores are relative rankings, not
 probabilities. Routes currently require typed inputs; concept recognition
-does not parse equations or execute a solver.
+does not parse equations or execute a solver. Every rebuild reloads the concept
+graph and solution-route catalog, validates referenced concepts and
+prerequisite cycles, and regenerates relationship matrices for all indexed
+inputs. When you add a book, tell me and I can inspect newly matched concepts
+and whether reviewed edges/routes need updating; the folder is not watched
+automatically while no session is running.
+
+## Render the first batch in Google Colab
+
+Open [`notebooks/render_in_colab.ipynb`](notebooks/render_in_colab.ipynb)
+in Google Colab, run its cells from top to bottom, and mount Google Drive when
+prompted. The notebook checks out this repository, installs Manim and system
+dependencies, validates `data/video_batches/batch_001.json`, and saves renders
+under `MyDrive/SaemPhysics/batch_001/`. It renders one vertical and one
+horizontal preview first; inspect both before starting the separate full
+vertical and horizontal passes. Those 20 renders are silent visual drafts,
+not final narrated or release-approved videos.
 
 ## Create an episode
 
