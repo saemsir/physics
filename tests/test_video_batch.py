@@ -70,13 +70,28 @@ class VideoBatchTests(unittest.TestCase):
     def test_output_duration_and_audience_are_fixed_contracts(self) -> None:
         batch = copy.deepcopy(self.batch)
         batch["video_outputs"][0]["duration_seconds"] = 61
-        with self.assertRaisesRegex(DataValidationError, "vertical must have 10 videos"):
+        with self.assertRaisesRegex(DataValidationError, "vertical must have exactly 10 videos"):
             validate_batch(batch, ROOT)
 
         batch = copy.deepcopy(self.batch)
         batch["audience"]["maximum_age"] = 22
         with self.assertRaisesRegex(DataValidationError, "audience must cover ages"):
             validate_batch(batch, ROOT)
+
+    def test_single_episode_can_target_one_format(self) -> None:
+        batch = copy.deepcopy(self.batch)
+        batch["episodes"] = batch["episodes"][:1]
+        batch["video_outputs"] = [
+            {
+                "format": "vertical",
+                "count": 1,
+                "duration_seconds": 60,
+                "aspect_ratio": "9:16",
+            }
+        ]
+        plan = validate_batch(batch, ROOT)
+        self.assertEqual(len(plan), 1)
+        self.assertEqual(plan[0]["format"], "vertical")
 
     def test_approved_questions_cannot_be_marked_verified_by_the_batch_tool(self) -> None:
         batch = copy.deepcopy(self.batch)

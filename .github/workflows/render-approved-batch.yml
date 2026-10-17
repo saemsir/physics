@@ -1,0 +1,97 @@
+name: Render approved video batch
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest:
+        description: Repository path to an approved batch JSON manifest
+        required: true
+        default: data/video_batches/batch_001.json
+        type: string
+      formats:
+        description: Output aspect ratios to render
+        required: true
+        default: both
+        type: choice
+        options:
+          - both
+          - vertical
+          - horizontal
+      quality:
+        description: Preview first; high uses full render settings
+        required: true
+        default: preview
+        type: choice
+        options:
+          - preview
+          - high
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install render dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libcairo2-dev libpango1.0-dev \
+            texlive-latex-extra texlive-fonts-recommended dvisvgm
+          python -m pip install -r requirements.txt
+      - name: Validate selected manifest path
+        env:
+          BATCH_MANIFEST: ${{ inputs.manifest }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          root = Path.cwd().resolve()
+          manifest = (root / os.environ["BATCH_MANIFEST"]).resolve()
+          if not manifest.is_relative_to(root) or not manifest.is_file():
+              raise SystemExit("manifest must be an existing repository file")
+          if manifest.suffix.lower() != ".json":
+              raise SystemExit("manifest must be a JSON file")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
+              env.write(f"BATCH_MANIFEST={manifest}\n")
+          PY
+      - name: Validate batch manifest
+        run: |
+          python -m content_engine batch-plan \
+            --manifest "$BATCH_MANIFEST" \
+            --output "$RUNNER_TEMP/batch-plan.json"
+          python - "$RUNNER_TEMP/batch-plan.json" "${{ inputs.quality }}" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          plan = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+          if sys.argv[2] == "high" and plan["status"] != "approved-for-storyboarding":
+              raise SystemExit("high-quality rendering requires storyboard approval")
+          PY
+      - name: Render selected deliverables
+        env:
+          FORMATS: ${{ inputs.formats }}
+          QUALITY: ${{ inputs.quality }}
+        run: |
+          case "$FORMATS" in
+            both) set -- vertical horizontal ;;
+            vertical|horizontal) set -- "$FORMATS" ;;
+            *) echo "Unsupported format selection" >&2; exit 2 ;;
+          esac
+          python tools/render_video_batch.py \
+            --manifest "$BATCH_MANIFEST" \
+            --formats "$@" \
+            --quality "$QUALITY" \
+            --resume \
+            --output-dir "output/github-${GITHUB_RUN_ID}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: saemphysics-render-${{ github.run_id }}
+          path: output/github-${{ github.run_id }}/
+          if-no-files-found: error
+          retention-days: 14

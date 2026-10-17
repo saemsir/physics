@@ -138,6 +138,38 @@ python -m content_engine compile-lesson --problem data/kinematics_demo.json
 python -m content_engine recommend --exam jee-main
 ```
 
+### Start a batch from a plain-language request
+
+Use the interactive gateway, or pass the brief directly. It saves an editable
+JSON request with concept-match candidates, episode count, chosen formats, and
+creative/review requirements; it does not invent answers or claim to render a
+finished video.
+
+```bash
+python -m content_engine studio
+python -m content_engine studio \
+  --brief "Make an original JEE kinematics batch about reading motion graphs" \
+  --episodes 6 --formats both
+```
+
+The request is saved under `requests/` by default. Commit it and give that file
+to the assistant to author an original episode manifest. Review the physics,
+sources, scripts, and storyboards; then run `batch-plan` on that completed
+manifest. The episode count can be 1–10; `--formats` accepts `both`,
+`vertical`, or `horizontal`.
+
+For rendering, push the approved manifest and either:
+
+* In GitHub, open **Actions → Render approved video batch → Run workflow**,
+  select the manifest path, formats, and preview/high quality. Download the
+  resulting artifact. High-quality renders require `approved-for-storyboarding`.
+* In Colab, set `BATCH_MANIFEST` to the manifest path and `REVISION` to its
+  reviewed commit SHA in `notebooks/render_in_colab.ipynb`, then run the cells.
+
+Both paths require a complete validated manifest. They render silent visual
+drafts, not finished narrated videos; inspect the render and complete narration,
+caption, accessibility, and release review separately.
+
 The indexed JEE papers are source placeholders, not verified question-bank
 records. Add question metadata only after manually checking its exact paper
 locator, rights, topic mapping, and answer. Open
@@ -148,8 +180,8 @@ database under `/content`, compiles the original kinematics demo, and renders
 and verifies one low-resolution MP4. Outputs are stored locally under
 `/content/saemphysics`; run the notebook's download cell before the runtime
 ends, then upload the files to Drive manually if desired. Watch the preview
-before setting `RENDER_FULL_BATCH = True`; the optional high-quality 20-video
-batch can take a long time. For repeatable renders, set the notebook's
+before setting `RENDER_FULL_BATCH = True`; a full high-quality batch can take
+a long time. For repeatable renders, set the notebook's
 `REVISION` to a reviewed commit SHA. See
 [docs/content_network.md](docs/content_network.md) for the data contract,
 review gates, and collaboration workflow.

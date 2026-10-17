@@ -8,7 +8,7 @@ Use each service for a different job:
 | --- | --- | --- |
 | GitHub | Permanent source, reviewed episode data, code, and version history | Storing generated MP4s or treating CI as a video renderer |
 | Codespaces | Editing episode JSON, code, captions, and review changes; running fast validation | Long, high-resolution Manim renders |
-| GitHub Actions | Automatically running tests, checking the batch contract, and catching broken changes | Rendering the 20-video batch; the current workflow does not render |
+| GitHub Actions | Automatically running tests and validation; manually rendering a selected manifest (approval required for high quality) | Treating a render as a finished, narrated release |
 | Google Colab | Running the Manim notebook, previews, and batch renders on a temporary compute runtime | The permanent source of truth or a guaranteed always-on render service |
 | Google Drive | Persisting rendered MP4s, reports, and approved production audio outside Git | Public source storage unless sharing permissions are intentionally configured |
 | Local audio workstation | Recording and editing narration privately using the voice profile | Automatically generating a voice from the profile |
@@ -21,24 +21,37 @@ if desired. Use GitHub Actions as the validation gate, not as the renderer.
 
 ## How to provide input for a video batch today
 
-There is not yet a web form, conversational intake app, or automatic
-question-to-video pipeline. The current input is a reviewed JSON manifest:
+The `studio` command is the plain-language intake gateway. It creates a
+request file for authoring; it does not fabricate answers or auto-produce
+finished videos. The final input to the renderer remains a reviewed JSON manifest:
 [`data/video_batches/batch_001.json`](../data/video_batches/batch_001.json).
 
-1. In Codespaces, create a new batch JSON by following the existing manifest's
+1. Start an intake request interactively, or give it a direct brief:
+
+   ```bash
+   python -m content_engine studio
+   python -m content_engine studio \
+     --brief "Original JEE kinematics lessons on motion graphs" \
+     --episodes 6 --formats both
+   ```
+
+   It writes `requests/<request-id>.json`. Concept suggestions are keyword
+   evidence only. Commit the request and ask the assistant to draft the final
+   episode manifest from it.
+2. In Codespaces, create the final batch JSON by following the existing manifest's
    shape. Keep one episode per idea and provide its ID, type (`problem` or
    `concept`), title, topic, question, answer, solution, visual hook,
    misconception, source reference, and review status. For a problem supported
    by the computation engine, also provide a typed `problem_spec`, units,
    assumptions, input values, and expected outputs.
-2. Use original wording and visuals. A book section or exam-paper locator is
+3. Use original wording and visuals. A book section or exam-paper locator is
    provenance, not permission to reproduce a copyrighted question, paragraph,
    or figure. Keep unverified material marked as unverified.
-3. Set the batch review state to `draft-owner-review` while editing. Ask for
+4. Set the batch review state to `draft-owner-review` while editing. Ask for
    editorial and physics review; only mark it
    `approved-for-storyboarding` after approving the storyboards. That status
    does not mean exam verification or release approval.
-4. Validate before committing:
+5. Validate before committing:
 
    ```bash
    python -m content_engine batch-plan \
@@ -46,32 +59,34 @@ question-to-video pipeline. The current input is a reviewed JSON manifest:
      --output /tmp/batch_plan.json
    ```
 
-   The current batch contract expects exactly 10 episodes and expands them to
-   10 vertical 9:16, 60-second deliverables and 10 horizontal 16:9,
-   180-second deliverables. It checks selected problem calculations and
-   formula audits, but human review is still required.
-5. Commit and push the reviewed source to GitHub. GitHub Actions runs tests,
-   database/lesson checks, and batch validation. Fix any failure before
-   rendering. For a reproducible render, use the reviewed commit SHA in the
-   notebook's `REVISION` cell instead of `main`.
-6. In Google Colab, open the notebook from GitHub, set `BATCH_MANIFEST` to
+   Batches contain 1–10 episodes and declare one or both output formats.
+   `both` expands each episode into a vertical 9:16 60-second and horizontal
+   16:9 180-second deliverable. The validator checks selected problem
+   calculations and formula audits, but human review is still required.
+6. Commit and push the reviewed source to GitHub. The push workflow runs tests,
+   database/lesson checks, and batch validation. For a render, open
+   **Actions → Render approved video batch → Run workflow**, select the
+   manifest, output formats, and quality. High-quality renders require
+   storyboard approval; download the resulting artifact. For reproducibility,
+   render a reviewed commit.
+7. In Google Colab, open the notebook from GitHub, set `BATCH_MANIFEST` to
    your committed batch JSON path, and run setup and validation. The notebook
    renders a low-quality kinematics lesson preview locally; watch it before
    setting `RENDER_FULL_BATCH = True`. The optional high-quality renderer
-   creates all 20 batch videos and a verification report under
+   creates the declared batch deliverables and a verification report under
    `/content/saemphysics`. Keep `--resume` enabled if rendering is interrupted
    while the same runtime and files are still available. Run the notebook's
    download cell and save the outputs before ending the runtime; Colab's local
    files are lost when the runtime is deleted or reset. Upload downloaded files
    to a private Drive folder manually if desired.
-7. For batch 001, use the timed script in
+8. For batch 001, use the timed script in
    [`episodes/batch_001/narration.json`](../episodes/batch_001/narration.json).
    Compare it with the rendered batch videos and check whether the wording fits
    each visual beat. The notebook's initial preview is a separate kinematics
    demo; it does not render the batch narration or show the first episode in
    both formats. Timing aligns to beat boundaries, not frame-level gestures.
    The lines are not automatically recorded or mixed into the video yet.
-8. Review all exports, then add/verify narration and captions and complete
+9. Review all exports, then add/verify narration and captions and complete
    physics, editorial, accessibility, and release approval. The current
    Manim output is a silent visual draft with text branding; it is not a
    publish-ready video.

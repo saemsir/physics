@@ -134,8 +134,8 @@ def validate_batch(batch: dict[str, Any], root: Path = ROOT) -> list[dict[str, A
         raise DataValidationError("batch audience must cover ages 14 through 21")
 
     episodes = batch.get("episodes")
-    if not isinstance(episodes, list) or len(episodes) != 10:
-        raise DataValidationError("a video batch must contain exactly 10 content episodes")
+    if not isinstance(episodes, list) or not 1 <= len(episodes) <= 10:
+        raise DataValidationError("a video batch must contain 1 to 10 content episodes")
     seen: set[str] = set()
     for episode in episodes:
         if not isinstance(episode, dict):
@@ -181,7 +181,9 @@ def validate_batch(batch: dict[str, Any], root: Path = ROOT) -> list[dict[str, A
         _validate_manual_audit(episode)
         _require_text(episode.get("solution_review_status"), f"{episode_id}.solution_review_status")
 
-    if not {"problem", "concept"}.issubset({episode["type"] for episode in episodes}):
+    if len(episodes) > 1 and not {"problem", "concept"}.issubset(
+        {episode["type"] for episode in episodes}
+    ):
         raise DataValidationError("batch must mix concept and problem episodes")
     if batch["status"] == "approved-for-storyboarding" and any(
         episode["status"] != "approved-for-storyboarding" for episode in episodes
@@ -190,27 +192,32 @@ def validate_batch(batch: dict[str, Any], root: Path = ROOT) -> list[dict[str, A
             "an approved storyboard batch must contain only owner-approved episodes"
         )
     declared_outputs = batch.get("video_outputs")
-    if not isinstance(declared_outputs, list) or len(declared_outputs) != 2:
-        raise DataValidationError("video_outputs must declare the batch delivery formats")
+    if (
+        not isinstance(declared_outputs, list)
+        or not 1 <= len(declared_outputs) <= len(VIDEO_FORMATS)
+    ):
+        raise DataValidationError("video_outputs must declare one or both delivery formats")
     declared = {item.get("format"): item for item in declared_outputs if isinstance(item, dict)}
-    if set(declared) != set(VIDEO_FORMATS):
-        raise DataValidationError("video_outputs must declare vertical and horizontal formats")
-    for format_name, spec in VIDEO_FORMATS.items():
+    if len(declared) != len(declared_outputs) or not set(declared).issubset(VIDEO_FORMATS):
+        raise DataValidationError("video_outputs contain an unknown or duplicate format")
+    for format_name in declared:
+        spec = VIDEO_FORMATS[format_name]
         expected = {
-            "count": 10,
+            "count": len(episodes),
             "duration_seconds": spec["duration_seconds"],
             "aspect_ratio": spec["aspect_ratio"],
         }
         actual = declared[format_name]
         if any(actual.get(key) != value for key, value in expected.items()):
             raise DataValidationError(
-                f"{format_name} must have 10 videos at {spec['duration_seconds']} seconds "
+                f"{format_name} must have exactly {len(episodes)} videos at {spec['duration_seconds']} seconds "
                 f"and {spec['aspect_ratio']}"
             )
 
     plan: list[dict[str, Any]] = []
     for episode in episodes:
-        for format_name, spec in VIDEO_FORMATS.items():
+        for format_name, output in declared.items():
+            spec = VIDEO_FORMATS[format_name]
             plan.append(
                 {
                     "video_id": f"{episode['id']}-{format_name}",
@@ -244,12 +251,19 @@ def validate_batch(batch: dict[str, Any], root: Path = ROOT) -> list[dict[str, A
                     ],
                 }
             )
-    if len(plan) != 20:
-        raise DataValidationError("batch expansion must produce exactly 20 video deliverables")
-    for format_name, spec in VIDEO_FORMATS.items():
+    expected_deliverables = len(episodes) * len(declared)
+    if len(plan) != expected_deliverables:
+        raise DataValidationError(
+            f"batch expansion must produce exactly {expected_deliverables} deliverables"
+        )
+    for format_name, spec in (
+        (name, VIDEO_FORMATS[name]) for name in declared
+    ):
         matching = [item for item in plan if item["format"] == format_name]
-        if len(matching) != 10:
-            raise DataValidationError(f"{format_name} output count must be exactly 10")
+        if len(matching) != len(episodes):
+            raise DataValidationError(
+                f"{format_name} output count must be exactly {len(episodes)}"
+            )
         if any(
             sum(beat["duration_seconds"] for beat in item["story_beats"])
             != spec["duration_seconds"]

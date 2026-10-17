@@ -150,6 +150,20 @@ PRACTICE_RULES: tuple[dict[str, Any], ...] = (
 )
 
 
+def _batch_formats(manifest: dict[str, Any]) -> list[str]:
+    outputs = manifest.get("video_outputs")
+    if outputs is None:
+        return ["vertical", "horizontal"]
+    if not isinstance(outputs, list) or not outputs:
+        raise DataValidationError("batch manifest needs at least one declared video format")
+    formats = [item.get("format") for item in outputs if isinstance(item, dict)]
+    if len(formats) != len(outputs) or any(
+        format_name not in {"vertical", "horizontal"} for format_name in formats
+    ) or len(formats) != len(set(formats)):
+        raise DataValidationError("batch manifest contains an invalid video format")
+    return formats
+
+
 def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -611,7 +625,7 @@ class ProductionKnowledge:
                     ],
                     "advice_by_area": _group_rules(rules),
                     "local_reference_measurements": reference_summary,
-                    "formats": ["vertical", "horizontal"],
+                    "formats": _batch_formats(manifest),
                     "video_specific_capture": False,
                     "review_required": True,
                 }
@@ -633,7 +647,7 @@ class ProductionKnowledge:
                 "Matrix matches and source question tags do not verify a PYQ or its answer.",
                 "Use only videos that you have the right to analyze; the database stores derived measurements and local paths only.",
             ],
-            "deliverable_count": len(advice_items) * 2,
+            "deliverable_count": len(advice_items) * len(_batch_formats(manifest)),
             "episode_count": len(advice_items),
             "episodes": advice_items,
         }

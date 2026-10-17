@@ -23,6 +23,7 @@ from .batch import load_batch, validate_batch, write_batch_plan
 from .database import ContentDatabase, ROOT
 from .lesson import compile_lesson, persist_lesson, write_lesson
 from .problem import load_problem, record_problem_run, solve_problem
+from .request import main_from_args as create_batch_request
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -77,7 +78,7 @@ def build_parser() -> argparse.ArgumentParser:
     backtest.add_argument("--as-of-year", type=int, default=date.today().year)
     backtest.add_argument("--database", type=Path, default=ROOT / "data" / "saemphysics.sqlite")
     batch = subparsers.add_parser(
-        "batch-plan", help="validate a 10-episode batch and expand its 20 video deliverables"
+        "batch-plan", help="validate a reviewed batch and expand its video deliverables"
     )
     batch.add_argument(
         "--manifest",
@@ -99,6 +100,25 @@ def build_parser() -> argparse.ArgumentParser:
         "--production-advice-output",
         type=Path,
         default=ROOT / "output" / "production_batch_advice.json",
+    )
+    studio = subparsers.add_parser(
+        "studio", help="turn a plain-language brief into an editable batch request"
+    )
+    studio.add_argument(
+        "--brief",
+        help="lesson request; omit to enter it interactively",
+    )
+    studio.add_argument("--batch-id")
+    studio.add_argument("--episodes", type=int, choices=range(1, 11), default=10)
+    studio.add_argument(
+        "--formats",
+        choices=("both", "vertical", "horizontal"),
+        default="both",
+    )
+    studio.add_argument(
+        "--output",
+        type=Path,
+        help="request JSON path (defaults to requests/<request-id>.json)",
     )
     return parser
 
@@ -142,6 +162,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     database = ContentDatabase(args.database) if hasattr(args, "database") else None
     try:
+        if args.command == "studio":
+            return create_batch_request(args)
         if args.command == "init":
             database.initialize(ROOT)
             print(f"Initialized {database.path}")
