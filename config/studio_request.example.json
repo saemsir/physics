@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "run_id": "jee-video-planning-demo",
+  "output_dir": "output/studio",
+  "tasks": [
+    {
+      "id": "matrix",
+      "action": "matrix.build",
+      "params": {
+        "exam_papers": "exam_papers",
+        "books": "book"
+      }
+    },
+    {
+      "id": "lesson",
+      "action": "video.lesson_plan",
+      "depends_on": ["matrix"],
+      "params": {
+        "matrix": {"$ref": "matrix#/network"},
+        "concept_ids": ["physics:kinematics"],
+        "seed": 2026,
+        "history": "output/video_learning_history.json"
+      }
+    },
+    {
+      "id": "forecast",
+      "action": "exam.forecast",
+      "params": {
+        "exam": "jee-advanced",
+        "target_year": 2026,
+        "question_count": 10,
+        "simulations": 10000,
+        "seed": 2026
+      }
+    }
+  ]
+}

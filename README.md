@@ -34,6 +34,7 @@ templates/               Brief, review, storyboard and release templates
 book/                    Reference material; check source permissions before reuse
 data/                    Exam-question metadata schema and physics topic catalog
 content_engine/          Versioned SQLite index, provenance links and lesson compiler
+studio_engine/           Versioned JSON coordinator for supported repository engines
 exam_engine/             Evidence-labelled topic ranking and video-brief CLI
 knowledge/               Validated concept graph across physics and mathematics
 math_engine/              Deterministic linear algebra primitives
@@ -78,6 +79,31 @@ generated media under `media/`; rendered exports and caches do not belong in
 Git. See `docs/architecture.md` for reproducibility and the approval workflow.
 See `docs/audio_profile.md` for the original narration direction and the
 private, local voice-sample analysis procedure.
+
+## Unified Studio coordinator
+
+`studio_engine` is the portable, versioned JSON interface for running several
+existing engines in one request. It records a run manifest and one JSON result
+per task, supports deterministic seeds and explicit task dependencies, and
+works anywhere the repository's Python dependencies are installed:
+
+```bash
+python -m studio_engine actions
+python -m studio_engine validate --request config/studio_request.example.json
+python -m studio_engine run --request config/studio_request.example.json
+```
+
+The request contract is documented in
+[docs/studio_engine.md](docs/studio_engine.md) and
+[schemas/studio_request.schema.json](schemas/studio_request.schema.json).
+This is an orchestrator, not a new solver: it delegates to existing modules,
+keeps review gates intact, and reports unsupported generation honestly.
+In particular, it can plan audio but cannot synthesize or mix it; the batch
+renderer makes silent visual drafts and is currently tied to its fixed Manim
+scene. A task succeeding is not approval for academic correctness, rights,
+accessibility, final rendering, or publication.
+For audio, the coordinator can measure local PCM WAV technical properties and
+include lesson sound-design guidance; it cannot synthesize or mix audio.
 
 ## Build exam-focused video briefs
 
