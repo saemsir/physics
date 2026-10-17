@@ -28,7 +28,7 @@ AI output is a draft, not an approval.
 
 ```text
 config/                  Shared visual identity
-docs/                    Architecture, channel brief, source policy
+docs/                    Architecture, channel brief, source policy, visual teaching principles
 episodes/                Episode-specific brief, physics, script and scenes
 templates/               Brief, review, storyboard and release templates
 book/                    Reference material; check source permissions before reuse
@@ -45,6 +45,9 @@ tests/                   Focused engine tests
 The first sample is `episodes/vectors_001/`. Its status is a working draft:
 the physics notes, storyboard and source scene are recorded, but the teacher
 must still approve the lesson and inspect an actual render.
+`episodes/laplace_001/` is a separate, source-grounded lesson-design pilot
+that demonstrates the representation-bridge storyboard pattern; it is not
+physics-approved or rendered yet.
 Extract reusable components into `library/` after the first scene has been
 reviewed and the repeated patterns are clear.
 
@@ -202,6 +205,21 @@ prerequisite cycles, and regenerates relationship matrices for all indexed
 inputs. When you add a book, tell me and I can inspect newly matched concepts
 and whether reviewed edges/routes need updating; the folder is not watched
 automatically while no session is running.
+
+Create an original, matrix-informed lesson-design draft with a weighted,
+non-repeating combination of teaching approach, visual treatment, and optional
+sound suggestions:
+
+```bash
+python video_learning.py --matrix output/matrix_network.json \
+  --question-id "<question row ID from the matrix report>"
+python video_learning.py --concepts math:derivatives math:integrals
+```
+
+The planner can incorporate human-rated observations about local videos; it
+does not analyze raw video/audio or imitate any creator. See
+[`docs/video_learning.md`](docs/video_learning.md) for the observation format,
+source limits, and review requirements.
 
 ## Render the first batch in Google Colab
 

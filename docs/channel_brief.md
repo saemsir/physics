@@ -28,6 +28,10 @@ through companion segments rather than trying to teach every level at once.
 - **Visual identity:** use the original color and typography tokens in
   `config/brand.py`. Motion should reveal a physical or mathematical
   relationship, not decorate it.
+- **Academic standard:** ground lessons in Feynman, MIT-level professor
+  lectures and materials, and established books; use 3Blue1Brown as a
+  mathematical-visualization reference while checking claims against scholarly
+  sources. See [`visual_teaching_principles.md`](visual_teaching_principles.md).
 
 ## What makes an episode SaemPhysics
 

@@ -7,6 +7,12 @@ available, date consulted, and applicable license or permission.
 
 ## Rules for research use
 
+- Use Richard Feynman's lectures and books, MIT-level professor lectures and
+  course materials, and established scholarly books as the channel's academic
+  foundation. 3Blue1Brown may inform mathematical visualization and
+  explanatory sequencing; verify the underlying claims against trusted
+  lectures, course materials, or books. Do not use unrelated creator styles as
+  a production standard.
 - Verify important claims against a derivation, an independent source, or a
   trusted reference. An AI-generated summary is not verification.
 - Distinguish the source's statement from the episode's original explanation
