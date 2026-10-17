@@ -221,6 +221,25 @@ does not analyze raw video/audio or imitate any creator. See
 [`docs/video_learning.md`](docs/video_learning.md) for the observation format,
 source limits, and review requirements.
 
+For separate local profiling of reference-video editing/audio metadata and
+matrix-informed batch guidance, run:
+
+```bash
+python -m production_knowledge index --videos 3b1b
+python -m production_knowledge advise \
+  --manifest data/video_batches/batch_001.json \
+  --matrix output/matrix_network.json
+python -m content_engine batch-plan \
+  --manifest data/video_batches/batch_001.json \
+  --matrix output/matrix_network.json \
+  --output output/video_batch_plan.json
+```
+
+This stores derived measurements, original production principles, human
+ratings, and batch advice in `output/production_knowledge.sqlite`. It does not
+transcribe videos or copy a creator's distinctive style. See
+[`docs/production_knowledge.md`](docs/production_knowledge.md).
+
 ## Render the first batch in Google Colab
 
 Open [`notebooks/render_in_colab.ipynb`](notebooks/render_in_colab.ipynb)

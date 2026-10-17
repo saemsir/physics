@@ -259,13 +259,21 @@ def validate_batch(batch: dict[str, Any], root: Path = ROOT) -> list[dict[str, A
     return plan
 
 
-def write_batch_plan(batch: dict[str, Any], plan: list[dict[str, Any]], path: Path) -> None:
+def write_batch_plan(
+    batch: dict[str, Any],
+    plan: list[dict[str, Any]],
+    path: Path,
+    *,
+    production_advice: dict[str, Any] | None = None,
+) -> None:
     result = {
         "batch_id": batch["batch_id"],
         "status": batch["status"],
         "source_file": batch.get("source_file", ""),
         "deliverables": plan,
     }
+    if production_advice is not None:
+        result["production_advice"] = production_advice
     try:
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         Path(path).write_text(

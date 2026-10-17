@@ -85,6 +85,21 @@ def build_parser() -> argparse.ArgumentParser:
         default=ROOT / "data" / "video_batches" / "batch_001.json",
     )
     batch.add_argument("--output", type=Path)
+    batch.add_argument(
+        "--matrix",
+        type=Path,
+        help="matrix report; when supplied, attach persistent production advice to this batch",
+    )
+    batch.add_argument(
+        "--production-database",
+        type=Path,
+        default=ROOT / "output" / "production_knowledge.sqlite",
+    )
+    batch.add_argument(
+        "--production-advice-output",
+        type=Path,
+        default=ROOT / "output" / "production_batch_advice.json",
+    )
     return parser
 
 
@@ -136,14 +151,44 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "batch-plan":
             manifest = load_batch(args.manifest)
             plan = validate_batch(manifest, ROOT)
+            production_advice = None
+            if args.matrix:
+                try:
+                    matrix = json.loads(args.matrix.read_text(encoding="utf-8"))
+                except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+                    raise DataValidationError(
+                        f"cannot read matrix report {args.matrix}: {exc}"
+                    ) from exc
+                from production_knowledge import ProductionKnowledge
+
+                production_advice = ProductionKnowledge(
+                    args.production_database
+                ).advise_batch(manifest, matrix)
+                args.production_advice_output.parent.mkdir(
+                    parents=True, exist_ok=True
+                )
+                args.production_advice_output.write_text(
+                    json.dumps(production_advice, indent=2, ensure_ascii=False) + "\n",
+                    encoding="utf-8",
+                )
             if args.output:
-                write_batch_plan(manifest, plan, args.output)
+                write_batch_plan(
+                    manifest,
+                    plan,
+                    args.output,
+                    production_advice=production_advice,
+                )
                 print(
                     f"Wrote {len(plan)} {manifest['status']} video render briefs "
                     f"to {args.output}"
                 )
+                if production_advice is not None:
+                    print(
+                        "Attached matrix-informed production advice and saved its "
+                        f"standalone report to {args.production_advice_output}"
+                    )
             else:
-                print(json.dumps({
+                summary = {
                     "batch_id": manifest["batch_id"],
                     "status": manifest["status"],
                     "deliverable_count": len(plan),
@@ -162,7 +207,15 @@ def main(argv: list[str] | None = None) -> int:
                         for episode in manifest["episodes"]
                     ),
                     "owner_review_required": True,
-                }, indent=2))
+                }
+                if production_advice is not None:
+                    summary["production_advice"] = {
+                        "status": production_advice["status"],
+                        "episodes": production_advice["episode_count"],
+                        "deliverables": production_advice["deliverable_count"],
+                        "report": str(args.production_advice_output),
+                    }
+                print(json.dumps(summary, indent=2))
             return 0
         if args.command == "summary":
             _require_initialized(database)

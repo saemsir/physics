@@ -84,3 +84,7 @@ distinctive voice, script, artwork, or signature presentation. A subject
 expert and teacher must review every claim, derivation, source, and preview.
 Sampling probabilities describe only the planner's remaining weighted
 options; they do not predict learning, correctness, or exam appearance.
+
+For persistent review ratings, technical reference-video measurements, and
+advice attached to every matrix-backed batch plan, use the separate
+[`production_knowledge` workflow](./production_knowledge.md).

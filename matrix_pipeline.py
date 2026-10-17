@@ -246,6 +246,11 @@ def _concept_evidence(text: str, graph: ConceptGraph) -> dict[str, dict]:
     return evidence
 
 
+def match_concepts(text: str, graph: ConceptGraph) -> dict[str, dict]:
+    """Return inspectable keyword evidence for concepts mentioned in text."""
+    return _concept_evidence(text, graph)
+
+
 def _score_matrix(
     rows: Sequence[SourceRow], concept_ids: Sequence[str], graph: ConceptGraph
 ) -> tuple[list[list[float]], list[dict[str, dict]]]:
