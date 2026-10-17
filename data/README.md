@@ -1,9 +1,11 @@
 # Exam-question metadata
 
 `exam_question_metadata.csv` is the normalized ledger used by the local
-recommendation command. It currently contains only its header: the repository
-does not yet contain an independently verified, source-linked 30-year exam
-dataset. Do not fill the ledger with guessed questions, tags, or source URLs.
+recommendation command. Local JEE Advanced PDFs have been cataloged and
+machine-generated Physics topic candidates are present, but the candidate rows
+are pending review and do not count as verified exam data. The repository
+still has no independently verified, source-linked JEE Advanced question
+dataset.
 
 ## One metadata row per question
 
@@ -44,6 +46,7 @@ papers.
 From the repository root, add source-checked metadata rows, then run:
 
 ```bash
+python tools/import_exam_candidates.py
 python -m exam_engine recommend --exam jee-main
 python -m exam_engine recommend --exam neet --as-of-year 2026 \
   --output output/neet-video-ideas.md
@@ -52,6 +55,22 @@ python -m exam_engine predict-test --exam jee-advanced --as-of-year 2026 \
   --questions 10 --simulations 10000 --seed 2026 \
   --output output/jee-advanced-physics-blueprint.json
 ```
+
+The importer catalogs the local JEE Advanced PDF copies and extracts question
+locators plus keyword-based topic candidates from their Markdown conversions.
+It records only metadata, never question text. Source covers identify Career
+Point on 28 copies; two 2025 copies have no publisher mark. Exact original
+download URLs and paper integrity are not recorded, so paper records remain
+`needs-source-review`; candidate topic rows remain `pending`, with unknown
+rights and unverified answers. Duplicate copies are not double-counted.
+Review the source, PDF, locator, and topic for each candidate before changing
+its status to `verified`. The importer cannot certify that a source is
+official, that a coaching answer is correct, or that a keyword match is the
+right topic.
+No local cover identifies Allen, Motion, PW, or NTA. JEE Advanced is conducted
+by an IIT organizing institute; do not attribute these papers to NTA without
+paper-specific evidence. Provide exact source links and file mappings to
+replace the provisional attributions.
 
 The command emits ten 16:9, approximately three-minute lesson briefs and ten
 9:16, approximately one-minute lesson briefs. The brief uses original

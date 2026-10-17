@@ -25,7 +25,7 @@ class ContentDatabaseTests(unittest.TestCase):
     def test_initialization_indexes_papers_without_inventing_questions(self) -> None:
         summary = self.database.summary()
         self.assertEqual(summary["schema_version"], 3)
-        self.assertEqual(summary["papers"], 9)
+        self.assertEqual(summary["papers"], 35)
         self.assertEqual(summary["concept_sources"], 7)
         self.assertEqual(summary["questions"], 0)
         self.assertEqual(summary["question_concepts"], 0)
@@ -34,6 +34,10 @@ class ContentDatabaseTests(unittest.TestCase):
             papers["iitjee-2007-1"]["extraction_status"], "invalid-file"
         )
         self.assertEqual(papers["iitjee-2008-1"]["rights_status"], "unknown")
+        self.assertEqual(
+            papers["jee-advanced-2025-paper-1"]["review_status"],
+            "needs-source-review",
+        )
 
     def test_reinitialization_refreshes_canonical_data_safely(self) -> None:
         first = self.database.summary()

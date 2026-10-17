@@ -100,15 +100,15 @@ python -m physics_engine constant-acceleration --position-m '[0,0]' \
 python -m unittest discover -s tests -v
 ```
 
-Start with `data/README.md` before adding records. The metadata ledger is
-intentionally empty until source provenance and topic tags have been verified;
-it does not contain copied exam text. With no observations for a selected exam,
-the command labels its output as a uniform curriculum baseline. With records,
-it reports smoothed historical topic shares, not guaranteed or calibrated
-predictions of upcoming questions. Every proposed explanation remains subject
-to source-rights, physics, and teacher review. Run `backtest` to compare
-rolling-origin topic rankings with a uniform baseline before using the results
-to prioritize study or video production.
+Start with `data/README.md` before adding records. The metadata ledger can
+contain pending source and keyword-topic candidates, but only manually verified
+records contribute to predictions; it does not contain copied exam text. With
+no observations for a selected exam, the command labels its output as a uniform
+curriculum baseline. With records, it reports smoothed historical topic shares,
+not guaranteed or calibrated predictions of upcoming questions. Every proposed
+explanation remains subject to source-rights, physics, and teacher review. Run
+`backtest` to compare rolling-origin topic rankings with a uniform baseline
+before using the results to prioritize study or video production.
 
 `predict-test` samples a repeatable, topic-only Physics practice-test blueprint
 using verified source-linked records for the selected exam, an eight-year
