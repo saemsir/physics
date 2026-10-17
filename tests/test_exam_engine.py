@@ -9,9 +9,11 @@ from exam_engine.engine import (
     DataValidationError,
     REQUIRED_RECORD_FIELDS,
     Topic,
+    forecast_test,
     load_backtest,
     load_recommendations,
     load_topics,
+    render_test_forecast,
     render_video_batch,
 )
 
@@ -195,6 +197,91 @@ class ExamEngineTests(unittest.TestCase):
             load_backtest(
                 self.data_path, VIDEO_TOPICS, exam="jee-main", as_of_year=2026
             )
+
+    def test_forecast_is_seeded_and_uses_verified_target_exam_records(self) -> None:
+        rows = [
+            record("1", 2024, "paper-a", "kinematics"),
+            record("2", 2024, "paper-a", "kinematics"),
+            record("3", 2025, "paper-b", "kinematics"),
+            record("4", 2025, "paper-b", "optics", review_status="pending"),
+            record("6", 2000, "historic-paper", "optics"),
+        ]
+        for row in rows:
+            row["exam"] = "jee-advanced"
+        unrelated_exam = record("5", 2025, "main-paper", "optics")
+        self.write_records(rows + [unrelated_exam])
+
+        forecast = forecast_test(
+            self.data_path,
+            VIDEO_TOPICS,
+            target_year=2026,
+            question_count=8,
+            simulations=2_000,
+            seed=17,
+        )
+        repeated = forecast_test(
+            self.data_path,
+            VIDEO_TOPICS,
+            target_year=2026,
+            question_count=8,
+            simulations=2_000,
+            seed=17,
+        )
+        self.assertEqual(forecast.sampled_topic_ids, repeated.sampled_topic_ids)
+        self.assertEqual(
+            forecast.topic_appearance_probabilities,
+            repeated.topic_appearance_probabilities,
+        )
+        self.assertEqual(forecast.status, "historical-data-informed")
+        self.assertEqual(forecast.verified_question_records, 4)
+        self.assertEqual(forecast.verified_papers, 3)
+        self.assertEqual((forecast.first_verified_year, forecast.last_verified_year), (2000, 2025))
+        self.assertEqual(len(forecast.sampled_topic_ids), 8)
+        forecast_by_topic = {
+            item.topic.topic_id: item.historical_share
+            for item in forecast.topic_shares
+        }
+        self.assertGreater(
+            forecast_by_topic["kinematics"],
+            forecast_by_topic["optics"],
+        )
+        appearance_by_topic = dict(forecast.topic_appearance_probabilities)
+        self.assertGreater(
+            appearance_by_topic["kinematics"],
+            appearance_by_topic["optics"],
+        )
+        self.assertTrue(
+            all(0 <= probability <= 1 for probability in appearance_by_topic.values())
+        )
+        self.assertEqual(
+            render_test_forecast(forecast)["scope"],
+            "Physics topic blueprint only; not an exact-question or full-exam prediction",
+        )
+
+    def test_empty_history_is_explicitly_labeled_prior_only(self) -> None:
+        self.write_records([])
+        forecast = forecast_test(
+            self.data_path,
+            VIDEO_TOPICS,
+            target_year=2026,
+            question_count=3,
+            simulations=100,
+        )
+        self.assertEqual(forecast.status, "prior-only-no-verified-exam-records")
+        self.assertEqual(forecast.verified_papers, 0)
+        self.assertAlmostEqual(
+            sum(item.historical_share for item in forecast.topic_shares),
+            1.0,
+        )
+        report = render_test_forecast(forecast)
+        self.assertIn("uniform prior", " ".join(report["limitations"]))
+
+    def test_forecast_rejects_invalid_simulation_parameters(self) -> None:
+        self.write_records([])
+        with self.assertRaisesRegex(DataValidationError, "question_count"):
+            forecast_test(self.data_path, VIDEO_TOPICS, question_count=0)
+        with self.assertRaisesRegex(DataValidationError, "simulations"):
+            forecast_test(self.data_path, VIDEO_TOPICS, simulations=99)
 
 
 if __name__ == "__main__":

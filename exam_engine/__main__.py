@@ -4,15 +4,18 @@ from __future__ import annotations
 
 import argparse
 from datetime import date
+import json
 from pathlib import Path
 import sys
 
 from .engine import (
     EXAMS,
     DataValidationError,
+    forecast_test,
     load_backtest,
     load_recommendations,
     load_topics,
+    render_test_forecast,
     render_video_batch,
 )
 from knowledge.graph import load_graph
@@ -75,6 +78,42 @@ def build_parser() -> argparse.ArgumentParser:
         default=date.today().year,
         help="final calendar year eligible for held-out evaluation",
     )
+    predict = subparsers.add_parser(
+        "predict-test",
+        help="sample a probabilistic physics topic blueprint from verified exam history",
+    )
+    predict.add_argument("--exam", choices=EXAMS, default="jee-advanced")
+    predict.add_argument(
+        "--data",
+        type=Path,
+        default=Path("data/exam_question_metadata.csv"),
+        help="source-checked question metadata CSV",
+    )
+    predict.add_argument(
+        "--topics",
+        type=Path,
+        default=Path("data/physics_topics.csv"),
+    )
+    predict.add_argument(
+        "--as-of-year",
+        type=int,
+        default=date.today().year,
+        help="forecast target year (defaults to the current calendar year)",
+    )
+    predict.add_argument(
+        "--questions",
+        type=int,
+        default=10,
+        help="number of topic slots in the practice blueprint (default: 10)",
+    )
+    predict.add_argument(
+        "--simulations",
+        type=int,
+        default=10_000,
+        help="Monte Carlo test samples (100–100000; default: 10000)",
+    )
+    predict.add_argument("--seed", type=int, default=2026)
+    predict.add_argument("--output", type=Path)
     map_topic = subparsers.add_parser(
         "map-topic",
         help="show the math concepts and prerequisites linked to an exam topic",
@@ -128,6 +167,44 @@ def main(argv: list[str] | None = None) -> int:
             return 0
 
         topics = load_topics(args.topics)
+        if args.command == "predict-test":
+            forecast = forecast_test(
+                args.data,
+                topics,
+                exam=args.exam,
+                target_year=args.as_of_year,
+                question_count=args.questions,
+                simulations=args.simulations,
+                seed=args.seed,
+            )
+            report = render_test_forecast(forecast)
+            rendered = json.dumps(report, indent=2, ensure_ascii=False) + "\n"
+            if args.output:
+                args.output.parent.mkdir(parents=True, exist_ok=True)
+                args.output.write_text(rendered, encoding="utf-8")
+                print(f"Wrote {args.exam} topic practice-test forecast to {args.output}")
+            else:
+                print(rendered, end="")
+            if forecast.status == "prior-only-no-verified-exam-records":
+                print(
+                    "WARNING: no verified records exist for this exam in the selected "
+                    "history; this is a uniform-prior demonstration, not a data-driven forecast.",
+                    file=sys.stderr,
+                )
+            else:
+                print(
+                    f"Evidence: {forecast.verified_question_records} verified question records "
+                    f"from {forecast.verified_papers} papers "
+                    f"({forecast.first_verified_year}–{forecast.last_verified_year}).",
+                    file=sys.stderr,
+                )
+            print(
+                "Test performance with: "
+                f"python -m exam_engine backtest --exam {args.exam} "
+                f"--as-of-year {args.as_of_year}",
+                file=sys.stderr,
+            )
+            return 0
         if args.command == "backtest":
             result = load_backtest(
                 args.data,

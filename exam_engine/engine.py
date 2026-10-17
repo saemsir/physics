@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from datetime import date
 import math
 from pathlib import Path
+import random
 from typing import Iterable
 
 EXAMS = ("neet", "jee-main", "jee-advanced")
@@ -103,6 +104,24 @@ class BacktestResult:
     model_brier_score: float
     uniform_brier_score: float
     mean_top_ten_coverage: float
+
+
+@dataclass(frozen=True)
+class ForecastResult:
+    exam: str
+    target_year: int
+    question_count: int
+    simulation_count: int
+    seed: int
+    status: str
+    model: str
+    verified_question_records: int
+    verified_papers: int
+    first_verified_year: int | None
+    last_verified_year: int | None
+    topic_shares: tuple[Recommendation, ...]
+    topic_appearance_probabilities: tuple[tuple[str, float], ...]
+    sampled_topic_ids: tuple[str, ...]
 
 
 def _read_csv(path: Path, required_fields: tuple[str, ...]) -> list[dict[str, str]]:
@@ -347,6 +366,149 @@ def load_recommendations(
         as_of_year=as_of_year,
     )
     return _rank_records(records, topics, as_of_year=as_of_year)
+
+
+def forecast_test(
+    data_path: Path,
+    topics: tuple[Topic, ...],
+    *,
+    exam: str = "jee-advanced",
+    target_year: int | None = None,
+    question_count: int = 10,
+    simulations: int = 10_000,
+    seed: int = 2026,
+) -> ForecastResult:
+    """Sample a physics practice-test topic blueprint from verified history.
+
+    Topic shares are smoothed historical paper mixtures, not calibrated chances
+    of exact questions appearing on a future exam. The sample is a topic-only
+    practice blueprint and does not reproduce an official exam format.
+    """
+    if target_year is None:
+        target_year = date.today().year
+    if not isinstance(question_count, int) or isinstance(question_count, bool) or not 1 <= question_count <= 200:
+        raise DataValidationError("question_count must be an integer from 1 to 200")
+    if not isinstance(simulations, int) or isinstance(simulations, bool) or not 100 <= simulations <= 100_000:
+        raise DataValidationError("simulations must be an integer from 100 to 100000")
+    if not isinstance(seed, int) or isinstance(seed, bool):
+        raise DataValidationError("seed must be an integer")
+    if not topics:
+        raise DataValidationError("topic catalog must contain at least one topic")
+
+    records = _verified_records(
+        data_path,
+        topics,
+        exam=exam,
+        as_of_year=target_year,
+        first_year=1900,
+    )
+    shares = _rank_records(records, topics, as_of_year=target_year)
+    probabilities = [item.historical_share for item in shares]
+    cumulative: list[float] = []
+    running_total = 0.0
+    for probability in probabilities:
+        running_total += probability
+        cumulative.append(running_total)
+    cumulative[-1] = 1.0
+
+    rng = random.Random(seed)
+    appearances = [0] * len(topics)
+    sampled_topics: list[str] = []
+    for simulation in range(simulations):
+        seen: set[int] = set()
+        for _ in range(question_count):
+            draw = rng.random()
+            index = next(
+                (position for position, boundary in enumerate(cumulative) if draw < boundary),
+                len(cumulative) - 1,
+            )
+            seen.add(index)
+            if simulation == 0:
+                sampled_topics.append(topics[index].topic_id)
+        for index in seen:
+            appearances[index] += 1
+
+    paper_keys = {record.paper_key for record in records}
+    years = [record.year for record in records]
+    return ForecastResult(
+        exam=exam,
+        target_year=target_year,
+        question_count=question_count,
+        simulation_count=simulations,
+        seed=seed,
+        status=(
+            "historical-data-informed"
+            if records
+            else "prior-only-no-verified-exam-records"
+        ),
+        model=(
+            "8-year-half-life paper-normalized topic shares with symmetric "
+            "Dirichlet smoothing; seeded categorical Monte Carlo"
+        ),
+        verified_question_records=len(records),
+        verified_papers=len(paper_keys),
+        first_verified_year=min(years) if years else None,
+        last_verified_year=max(years) if years else None,
+        topic_shares=shares,
+        topic_appearance_probabilities=tuple(
+            (topic.topic_id, appearances[index] / simulations)
+            for index, topic in enumerate(topics)
+        ),
+        sampled_topic_ids=tuple(sampled_topics),
+    )
+
+
+def render_test_forecast(forecast: ForecastResult) -> dict[str, object]:
+    """Return a JSON-compatible report without implying exact-question certainty."""
+    topic_appearance = dict(forecast.topic_appearance_probabilities)
+    return {
+        "schema_version": 1,
+        "exam": forecast.exam,
+        "target_year": forecast.target_year,
+        "scope": "Physics topic blueprint only; not an exact-question or full-exam prediction",
+        "status": forecast.status,
+        "model": forecast.model,
+        "simulation": {
+            "question_slots": forecast.question_count,
+            "runs": forecast.simulation_count,
+            "seed": forecast.seed,
+        },
+        "data_coverage": {
+            "verified_question_records": forecast.verified_question_records,
+            "verified_papers": forecast.verified_papers,
+            "first_verified_year": forecast.first_verified_year,
+            "last_verified_year": forecast.last_verified_year,
+        },
+        "limitations": [
+            "Only human-verified source-linked records for the selected exam through the target year are used.",
+            "JEE Main and historic IIT-JEE data are not pooled into JEE Advanced because exam formats and distributions differ.",
+            "Topic shares and simulated test coverage are not calibrated probabilities of future questions.",
+            "The sampled blueprint contains topic IDs only; it does not create, reproduce, or solve questions.",
+            "Question count is user-selected and does not imply the official exam pattern.",
+            (
+                "No verified records were available; the output uses only a uniform prior and is not a data-driven forecast."
+                if forecast.status == "prior-only-no-verified-exam-records"
+                else "Historical coverage may be incomplete or inconsistent; validate forecasts with rolling-origin backtests."
+            ),
+        ],
+        "topic_forecast": [
+            {
+                "topic_id": item.topic.topic_id,
+                "topic_name": item.topic.topic_name,
+                "estimated_historical_share": item.historical_share,
+                "estimated_probability_present_in_sampled_test": topic_appearance[
+                    item.topic.topic_id
+                ],
+                "verified_question_records": item.question_records,
+                "verified_papers": item.supported_papers,
+            }
+            for item in forecast.topic_shares
+        ],
+        "sampled_practice_blueprint": [
+            {"slot": index, "topic_id": topic_id}
+            for index, topic_id in enumerate(forecast.sampled_topic_ids, start=1)
+        ],
+    }
 
 
 def load_backtest(

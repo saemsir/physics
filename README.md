@@ -90,6 +90,9 @@ python -m exam_engine recommend --exam jee-main
 python -m exam_engine recommend --exam jee-advanced --as-of-year 2026 \
   --output output/jee-advanced-video-ideas.md
 python -m exam_engine backtest --exam jee-main
+python -m exam_engine predict-test --exam jee-advanced --as-of-year 2026 \
+  --questions 10 --simulations 10000 --seed 2026 \
+  --output output/jee-advanced-physics-blueprint.json
 python -m exam_engine map-topic --topic electrostatics
 python -m math_engine solve-linear --matrix '[[2,1],[1,3]]' --rhs '[5,7]'
 python -m physics_engine constant-acceleration --position-m '[0,0]' \
@@ -106,6 +109,17 @@ predictions of upcoming questions. Every proposed explanation remains subject
 to source-rights, physics, and teacher review. Run `backtest` to compare
 rolling-origin topic rankings with a uniform baseline before using the results
 to prioritize study or video production.
+
+`predict-test` samples a repeatable, topic-only Physics practice-test blueprint
+using verified source-linked records for the selected exam, an eight-year
+recency half-life, symmetric Dirichlet smoothing, and a seeded Monte Carlo
+simulation. It does not predict exact questions, pool JEE Main/IIT-JEE records
+into JEE Advanced, or reproduce the official exam format. The slot count is a
+user-selected practice setting. The repository currently has no verified
+question records, so the JEE Advanced command reports a uniform-prior
+demonstration rather than a data-driven forecast. Add reviewed metadata before
+interpreting forecast weights; use rolling-origin `backtest` to test the model
+on held-out historical papers.
 
 ## Mathematics, physics, and animation foundation
 

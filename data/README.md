@@ -48,6 +48,9 @@ python -m exam_engine recommend --exam jee-main
 python -m exam_engine recommend --exam neet --as-of-year 2026 \
   --output output/neet-video-ideas.md
 python -m exam_engine backtest --exam jee-advanced --as-of-year 2026
+python -m exam_engine predict-test --exam jee-advanced --as-of-year 2026 \
+  --questions 10 --simulations 10000 --seed 2026 \
+  --output output/jee-advanced-physics-blueprint.json
 ```
 
 The command emits ten 16:9, approximately three-minute lesson briefs and ten
@@ -63,6 +66,18 @@ the verified historical paper mix. These shares describe the supplied sample;
 they are not calibrated probabilities that a topic or question will appear on
 an upcoming exam. Use `backtest` to compare held-out historical papers with a
 uniform-catalog baseline before relying on rankings.
+
+`predict-test` uses the selected exam's verified metadata to create a seeded
+Monte Carlo, topic-only Physics practice-test blueprint and estimates how often
+each topic appears across simulated tests. It normalizes topic counts within
+each paper, applies the same eight-year recency half-life and symmetric
+Dirichlet smoothing, then samples topics from that distribution. JEE Main and
+historic IIT-JEE rows are not mixed into JEE Advanced. The requested number of
+question slots is a practice setting, not an official-paper pattern. The
+reported shares and simulated coverage are not calibrated chances of exact
+future questions; validate with the rolling-origin `backtest` command. When
+there are no verified records, the CLI explicitly labels the output as
+prior-only and warns that it is not a data-driven forecast.
 
 ## Ranking model and limitations
 
