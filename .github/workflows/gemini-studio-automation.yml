@@ -1,0 +1,68 @@
+name: Gemini studio automation
+
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: "Plain-language brief for the studio request"
+        required: true
+        default: "Create a JEE kinematics lesson plan for reading motion graphs."
+      commit_request:
+        description: "Commit the generated request for teacher review?"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: gemini-automation   # 🔐 Aapki API key is environment se aayegi
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Existing dependencies
+          python -m pip install -r requirements.txt
+          # External dependency for this specific workflow ONLY
+          python -m pip install "google-generativeai>=0.8,<1"
+
+      - name: Generate studio_request.json via Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_PROMPT: ${{ inputs.prompt }}
+          REQUEST_OUTPUT_PATH: config/generated_request.json
+        run: python scripts/gemini_generate_request.py
+
+      - name: Validate generated request
+        run: |
+          python -m studio_engine validate --request config/generated_request.json
+
+      - name: Run studio engine
+        run: |
+          python -m studio_engine run --request config/generated_request.json
+
+      - name: Upload run artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: studio-run-output
+          path: output/studio/
+
+      - name: Commit generated request (optional)
+        if: ${{ inputs.commit_request }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add config/generated_request.json
+          git commit -m "chore: add Gemini-generated studio request"
+          git push
