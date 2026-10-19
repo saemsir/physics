@@ -1,0 +1,55 @@
+{
+  "batch_id": "batch_10_concepts_problems",
+  "status": "draft-owner-review",
+  "narration_language": "en",
+  "brand": {
+    "name": "Saem Physics",
+    "tagline": "NEET JEE MIT"
+  },
+  "audience": {
+    "minimum_age": 14,
+    "maximum_age": 21
+  },
+  "video_outputs": [
+    { "format": "horizontal", "count": 2, "duration_seconds": 180, "aspect_ratio": "16:9" },
+    { "format": "vertical", "count": 2, "duration_seconds": 60, "aspect_ratio": "9:16" }
+  ],
+  "episodes": [
+    {
+      "id": "kinematics-vt-graph",
+      "status": "proposed",
+      "type": "concept",
+      "title": "Reading Velocity-Time Graphs",
+      "topic_id": "kinematics",
+      "question": "How do we read motion from a velocity-time graph?",
+      "answer": "The slope is acceleration, area is displacement.",
+      "solution": "Explain that slope = change in v / change in t.",
+      "visual_hook": "A car moving with changing velocity.",
+      "misconception": "Thinking slope is distance.",
+      "solution_review_status": "pending",
+      "reference": {
+        "title": "NCERT Physics",
+        "section": "Kinematics",
+        "local_path": "book/sample.pdf"
+      }
+    },
+    {
+      "id": "vectors-dot-product",
+      "status": "proposed",
+      "type": "problem",
+      "title": "Dot Product and Projections",
+      "topic_id": "vectors",
+      "question": "Find the angle between two vectors using dot product.",
+      "answer": "Use cos(theta) = (A.B) / (|A||B|).",
+      "solution": "Calculate dot product and magnitudes.",
+      "visual_hook": "Two arrows and the shadow of one on the other.",
+      "misconception": "Thinking dot product is a vector.",
+      "solution_review_status": "pending",
+      "reference": {
+        "title": "HC Verma",
+        "section": "Vectors",
+        "local_path": "book/sample.pdf"
+      }
+    }
+  ]
+}
