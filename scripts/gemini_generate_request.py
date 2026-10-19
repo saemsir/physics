@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate a studio_request.json using Gemini based on a plain-language brief.
-Updated to use the new google-genai SDK and active models.
+Updated to use the new google-genai SDK and the stable "gemini-flash-latest" model.
 """
 
 import json
@@ -44,9 +44,9 @@ def main():
     print(f"Generating request for prompt: {prompt}")
 
     try:
-        # Naya model use karein (gemini-2.5-flash)
+        # Yahan model ka naam update kiya gaya hai
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-flash-latest", 
             contents=f"{system_instruction}\n\nUser brief: {prompt}"
         )
         raw_text = response.text.strip()
