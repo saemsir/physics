@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate a studio_request.json using Gemini based on a plain-language brief.
-This is an isolated script and does not modify any core engines.
+Updated to use the new google-genai SDK and active models.
 """
 
 import json
@@ -9,10 +9,11 @@ import os
 import sys
 from pathlib import Path
 
+# Naye package ko import karein
 try:
-    import google.generativeai as genai
+    from google import genai
 except ImportError:
-    print("Error: google-generativeai module not found. Please install it.", file=sys.stderr)
+    print("Error: google-genai module not found. Please install it.", file=sys.stderr)
     sys.exit(1)
 
 def main():
@@ -28,10 +29,8 @@ def main():
         print("Error: GEMINI_API_KEY secret is not set.", file=sys.stderr)
         sys.exit(1)
 
-    genai.configure(api_key=api_key)
-
-    # Using flash model for faster, structured generation
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    # Naye client ko initialize karein
+    client = genai.Client(api_key=api_key)
 
     system_instruction = (
         "You are an assistant that generates a valid studio_request.json for the SaemPhysics repository. "
@@ -45,15 +44,17 @@ def main():
     print(f"Generating request for prompt: {prompt}")
 
     try:
-        response = model.generate_content(
-            f"{system_instruction}\n\nUser brief: {prompt}"
+        # Naya model use karein (gemini-2.5-flash)
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=f"{system_instruction}\n\nUser brief: {prompt}"
         )
         raw_text = response.text.strip()
     except Exception as e:
         print(f"Error calling Gemini API: {e}", file=sys.stderr)
         sys.exit(1)
 
-    # Clean up Markdown formatting if present
+    # Markdown formatting clean karein
     if raw_text.startswith("```json"):
         raw_text = raw_text[7:]
     if raw_text.startswith("```"):
