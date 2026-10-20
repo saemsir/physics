@@ -1,18 +1,23 @@
 # Core animation engine
 manim>=0.18.0
 
-# PDF handling (lightweight, offline)
+# PDF handling
+PyMuPDF>=1.24,<2
 pypdf>=3.0.0
 
 # Video processing
-imageio-ffmpeg>=0.5.0
+imageio-ffmpeg>=0.5,<1
+
+# Google AI & Cloud APIs
+google-genai>=1.0.0
+google-cloud-texttospeech>=2.25,<3
 
 # Testing
 pytest>=7.0.0
 
-# Scientific computing (required by manim but explicit is better)
+# Scientific computing
 numpy>=1.24.0
 scipy>=1.10.0
 
-# Audio processing (optional, for advanced features)
+# Audio processing
 soundfile>=0.12.0
