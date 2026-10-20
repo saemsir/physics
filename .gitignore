@@ -1,13 +1,50 @@
-.venv/
+# --- Python ---
 __pycache__/
 *.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+
+# --- Virtual Environments ---
+.venv/
+venv/
+env/
+
+# --- IDE & OS ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Project Specific (Generated Assets) ---
 media/
-data/*.sqlite
-data/*.sqlite-shm
-data/*.sqlite-wal
 output/
 .pytest_cache/
 **/exports/
 **/assets/audio/raw/
-/saem_voice_sample.wav
 /audio/private/
+
+# --- Databases (Generated Locally) ---
+data/*.sqlite
+data/*.sqlite-shm
+data/*.sqlite-wal
+*.db
+
+# --- Logs ---
+*.log
+
+# --- CRITICAL: Voice Privacy ---
+# This prevents your voice sample from being uploaded to GitHub.
+# You must keep a local copy in the root folder to run the pipeline.
+/saem_voice_sample.wav
+
+# --- Large Assets (Optional but Recommended) ---
+# If your '3b1b' folder contains reference videos, they will bloat your repo.
+# Consider ignoring them or using Git LFS.
+# 3b1b/*.mp4
