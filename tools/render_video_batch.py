@@ -22,7 +22,7 @@ from content_engine.batch import load_batch, validate_batch, write_batch_plan
 from content_engine.narration import narration_text, synthesize_google_mp3
 from exam_engine.engine import DataValidationError
 
-SCENE = ROOT / "episodes" / "batch_001" / "scenes.py"
+DEFAULT_SCENE = ROOT / "episodes" / "batch_001" / "scenes.py"
 
 
 def _probe(path: Path) -> dict[str, Any]:
@@ -76,6 +76,30 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _scene_for_batch(batch: dict[str, Any], override: Path | None = None) -> Path:
+    """Resolve the Manim scene module: --scene override first, then
+    episodes/<batch_id>/scenes.py, then the legacy batch_001 scene."""
+    batch_id = str(batch.get("batch_id", "")).strip()
+    candidates: list[Path] = []
+    if override is not None:
+        candidates.append(Path(override))
+    if batch_id:
+        candidates.append(ROOT / "episodes" / batch_id / "scenes.py")
+    candidates.append(DEFAULT_SCENE)
+    for candidate in candidates:
+        if candidate.is_file():
+            if candidate == DEFAULT_SCENE and batch_id not in ("", "batch_001"):
+                print(
+                    f"warning: no scene module for {batch_id}; "
+                    f"falling back to {DEFAULT_SCENE}",
+                    file=sys.stderr,
+                )
+            return candidate
+    raise DataValidationError(
+        "batch scene module not found; tried: " + ", ".join(str(c) for c in candidates)
+    )
+
+
 def render(
     manifest_path: Path,
     output_dir: Path,
@@ -87,6 +111,7 @@ def render(
     resume: bool = False,
     narration: str = "off",
     voice_name: str = "en-US-Neural2-J",
+    scene_override: Path | None = None,
 ) -> Path:
     batch = load_batch(manifest_path)
     plan = validate_batch(batch, ROOT)
@@ -100,8 +125,7 @@ def render(
         raise DataValidationError("unknown or filtered video ID(s): " + ", ".join(missing))
     if not selected:
         raise DataValidationError("no deliverables selected for rendering")
-    if not SCENE.is_file():
-        raise DataValidationError(f"batch scene module not found: {SCENE}")
+    scene = _scene_for_batch(batch, scene_override)
 
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -202,7 +226,7 @@ def render(
                     "--format", "mp4",
                     "--disable_caching",
                     "--output_file", item["video_id"],
-                    str(SCENE),
+                    str(scene),
                     "BatchEpisode",
                 ]
                 subprocess.run(command, check=True, cwd=ROOT, env=environment)
@@ -390,6 +414,12 @@ def main() -> int:
         action="store_true",
         help="reuse existing MP4s after verifying their size and duration contract",
     )
+    parser.add_argument(
+        "--scene",
+        type=Path,
+        default=None,
+        help="override the Manim scene module (default: episodes/<batch_id>/scenes.py)",
+    )
     args = parser.parse_args()
     fps = args.fps or (15 if args.quality == "preview" else 30)
     try:
@@ -403,6 +433,7 @@ def main() -> int:
             resume=args.resume,
             narration=args.narration,
             voice_name=args.voice_name,
+            scene_override=args.scene,
         )
     except (DataValidationError, OSError, subprocess.CalledProcessError) as exc:
         print(f"render_video_batch: error: {exc}", file=sys.stderr)
