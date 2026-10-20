@@ -17,10 +17,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      
+      # FIX: Install PyMuPDF so test_practice_paper.py can import it
+      - name: Install test-only dependency
+        run: python -m pip install --quiet "PyMuPDF>=1.24,<2"
+      
       - name: Run unit and integration tests
         run: python -m unittest discover -s tests -v
+      
       - name: Build the linked database
         run: python -m content_engine init --database /tmp/saemphysics.sqlite
+      
       - name: Solve and compile the kinematics lesson
         run: |
           python -m content_engine solve \
@@ -30,12 +37,14 @@ jobs:
             --database /tmp/saemphysics.sqlite \
             --problem data/kinematics_demo.json \
             --output /tmp/kinematics-lesson.json
+      
       - name: Exercise linked recommendations
         run: |
           python -m content_engine recommend \
             --database /tmp/saemphysics.sqlite \
             --exam jee-main \
             --output /tmp/jee-main-briefs.md
+      
       - name: Validate the proposed first video batch
         run: |
           python -m content_engine batch-plan \
@@ -52,6 +61,7 @@ jobs:
           assert all(video["brand_overlay"]["name"] == "Saem Physics" for video in videos)
           assert all(video["brand_overlay"]["tagline"] == "NEET JEE MIT" for video in videos)
           PY
+      
       - name: Validate narration profile metadata without processing audio
         run: |
           python -m json.tool config/audio_profile.json >/dev/null
