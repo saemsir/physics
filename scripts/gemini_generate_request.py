@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
 Generate a studio_request.json using Gemini based on a plain-language brief.
-Updated to use the new google-genai SDK and the stable "gemini-flash-latest" model.
 """
 
 import json
@@ -9,7 +8,6 @@ import os
 import sys
 from pathlib import Path
 
-# Naye package ko import karein
 try:
     from google import genai
 except ImportError:
@@ -29,7 +27,6 @@ def main():
         print("Error: GEMINI_API_KEY secret is not set.", file=sys.stderr)
         sys.exit(1)
 
-    # Naye client ko initialize karein
     client = genai.Client(api_key=api_key)
 
     system_instruction = (
@@ -44,9 +41,8 @@ def main():
     print(f"Generating request for prompt: {prompt}")
 
     try:
-        # Yahan model ka naam update kiya gaya hai
         response = client.models.generate_content(
-            model="gemini-flash-latest", 
+            model="gemini-1.5-flash",
             contents=f"{system_instruction}\n\nUser brief: {prompt}"
         )
         raw_text = response.text.strip()
@@ -54,7 +50,7 @@ def main():
         print(f"Error calling Gemini API: {e}", file=sys.stderr)
         sys.exit(1)
 
-    # Markdown formatting clean karein
+    # Clean markdown formatting if present
     if raw_text.startswith("```json"):
         raw_text = raw_text[7:]
     if raw_text.startswith("```"):
@@ -70,7 +66,7 @@ def main():
         sys.exit(1)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    output_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     print(f"Successfully wrote generated request to {output_path}")
 
 if __name__ == "__main__":
