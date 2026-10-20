@@ -1,0 +1,22 @@
+{
+  "batch_id": "batch_collision",
+  "narration_language": "english",
+  "episodes": [
+    {
+      "id": "collision_01",
+      "title": "The Physics of Perfect Collisions",
+      "type": "concept",
+      "topic_id": "laws_of_motion",
+      "concept_ids": ["physics:laws_of_motion", "math:vectors"],
+      "duration_seconds": 45,
+      "narration": {
+        "vertical": "When two objects crash, momentum is never lost, only transferred. In a perfectly elastic collision, they bounce apart with the exact same total energy they started with.",
+        "horizontal": "Let's visualize a perfectly elastic collision. Imagine two identical billiard balls. One is moving, the other is still. When they collide, the first ball stops completely, and the second ball shoots forward with the exact same speed. Why? Because both momentum and kinetic energy must be conserved. The universe doesn't lose energy; it just passes it along."
+      }
+    }
+  ],
+  "video_outputs": [
+    { "format": "vertical" },
+    { "format": "horizontal" }
+  ]
+}
