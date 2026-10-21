@@ -41,8 +41,9 @@ def main():
     print(f"Generating request for prompt: {prompt}")
 
     try:
+        # FIXED: Using the correct, valid model name
         response = client.models.generate_content(
-            model="gemini-1.5-flash",
+            model="gemini-1.5-flash-latest", 
             contents=f"{system_instruction}\n\nUser brief: {prompt}"
         )
         raw_text = response.text.strip()
