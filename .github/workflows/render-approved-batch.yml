@@ -26,13 +26,14 @@ on:
           - preview
           - high
       narration:
-        description: Generate Google Cloud spoken narration (requires credentials)
+        description: Narration source (off=silent, google=Cloud TTS, local=XTTS clone)
         required: true
-        default: google
+        default: off
         type: choice
         options:
-          - google
           - off
+          - google
+          - local
       voice_name:
         description: Google Cloud Text-to-Speech voice name
         required: true
