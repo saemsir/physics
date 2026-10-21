@@ -1,56 +1,205 @@
 {
+  "schema_version": 1,
   "batch_id": "batch_003",
   "status": "approved-for-storyboarding",
   "narration_language": "english",
-  "brand": {
-    "name": "Saem Physics",
-    "tagline": "NEET JEE MIT"
-  },
+  "source_file": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md",
+  "originality_note": "All episode questions, examples, explanations, and visual directions are original drafts. Feynman references identify underlying ideas only; no textbook question, prose, or figure is reproduced.",
   "audience": {
     "minimum_age": 14,
-    "maximum_age": 21
+    "maximum_age": 21,
+    "level": "senior-secondary Physics through JEE/NEET foundation; define symbols, assumptions, signs, and units"
   },
-  "episodes": [
-    {
-      "id": "collision_01",
-      "status": "approved-for-storyboarding",
-      "type": "concept",
-      "title": "The Physics of Perfect Collisions",
-      "topic_id": "laws_of_motion",
-      "question": "What happens to momentum and kinetic energy when two identical objects collide elastically?",
-      "answer": "Momentum and kinetic energy are both conserved. The moving object stops, and the stationary object takes all the momentum and energy.",
-      "solution": "By conservation of momentum: m*v1 = m*v2'. By conservation of kinetic energy: 0.5*m*v1^2 = 0.5*m*v2'^2. Solving both equations gives v1' = 0 and v2' = v1.",
-      "visual_hook": "Two identical billiard balls on a frictionless surface, one moving toward the other.",
-      "misconception": "Students often think both balls bounce back or that energy is lost in the collision.",
-      "solution_review_status": "concept-checked-pending-owner-review",
-      "concept_ids": [
-        "physics:laws_of_motion",
-        "math:vectors"
-      ],
-      "duration_seconds": 45,
-      "reference": {
-        "title": "The Feynman Lectures on Physics, Volume I",
-        "section": "Chapter 10, Conservation of momentum",
-        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
-      },
-      "narration": {
-        "vertical": "When two objects crash, momentum is never lost, only transferred. In a perfectly elastic collision, they bounce apart with the exact same total energy they started with.",
-        "horizontal": "Let's visualize a perfectly elastic collision. Imagine two identical billiard balls. One is moving, the other is still. When they collide, the first ball stops completely, and the second ball shoots forward with the exact same speed. Why? Because both momentum and kinetic energy must be conserved. The universe doesn't lose energy; it just passes it along."
-      }
-    }
-  ],
+  "brand": {
+    "name": "Saem Physics",
+    "tagline": "NEET JEE MIT",
+    "logo_asset": "",
+    "logo_asset_status": "text-only-pending-user-supplied-logo"
+  },
   "video_outputs": [
     {
       "format": "vertical",
-      "count": 1,
+      "count": 5,
       "duration_seconds": 60,
       "aspect_ratio": "9:16"
     },
     {
       "format": "horizontal",
-      "count": 1,
+      "count": 5,
       "duration_seconds": 180,
       "aspect_ratio": "16:9"
+    }
+  ],
+  "visual_direction": "Create original Saem Physics visuals: a deep, high-contrast canvas; a small, consistent semantic color palette; animated geometric diagrams; equations that appear only when their physical meaning is clear; and unit checks visible in the reasoning. Build each explanation from an intuitive physical question, then derive and check the result in plain language.",
+  "episodes": [
+    {
+      "id": "b003-e01-satellite-orbit",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "How fast must a satellite move to stay in orbit?",
+      "topic_id": "gravitation",
+      "question": "A satellite orbits Earth at a height equal to Earth's radius R. If surface gravity is g, what is its orbital speed?",
+      "answer": "sqrt(gR/2).",
+      "solution": "At height R, distance from center is 2R. Gravity provides centripetal force: GMm/(2R)^2 = mv^2/(2R). Since g = GM/R^2, v = sqrt(GM/2R) = sqrt(gR^2/2R) = sqrt(gR/2).",
+      "visual_hook": "Show Earth and the satellite at distance 2R. Animate the gravitational arrow bending the straight-line velocity into a circular path.",
+      "misconception": "Gravity is not zero in orbit; it is the exact force required to bend the satellite's path into a circle.",
+      "solution_review_status": "engine-checked-pending-owner-physics-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 9, Newton's Laws of Dynamics",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "problem_spec": {
+        "problem_id": "b003-e01-satellite-orbit",
+        "source_id": "project-original",
+        "concept_id": "physics:gravitation",
+        "model_type": "circular-orbit",
+        "unit_system": "SI",
+        "assumptions": [
+          "Earth is a uniform sphere of radius R.",
+          "The satellite is a point mass.",
+          "Only gravitational force from Earth acts on the satellite."
+        ],
+        "inputs": {
+          "central_mass_radius_m": "R",
+          "orbit_height_m": "R",
+          "surface_gravity_m_per_s2": "g"
+        },
+        "expected_outputs": {
+          "orbital_speed_m_per_s": "sqrt(g*R/2)"
+        }
+      },
+      "narration": {
+        "vertical": "A satellite stays in orbit because gravity pulls it into a circle. At a height equal to Earth's radius, its speed must be exactly sqrt(gR/2).",
+        "horizontal": "To stay in a circular orbit, a satellite's velocity must be exactly right so that the curve of its fall matches the curve of the Earth. At a height equal to Earth's radius R, the distance from the center is 2R. Gravity provides the centripetal force. Using Newton's law of gravitation and the formula for surface gravity g, we find the orbital speed is the square root of gR over 2."
+      }
+    },
+    {
+      "id": "b003-e02-fluid-continuity",
+      "type": "concept",
+      "status": "approved-for-storyboarding",
+      "title": "Why does water speed up in a narrow pipe?",
+      "topic_id": "properties_of_matter",
+      "question": "Why does water speed up when it flows from a wide pipe into a narrow pipe, and what happens to the pressure?",
+      "answer": "Speed increases to conserve mass flow rate (continuity). Pressure decreases to conserve energy (Bernoulli).",
+      "solution": "A1v1 = A2v2. If A2 < A1, v2 > v1. Bernoulli: P + 1/2 rho v^2 = constant. If v increases, P must decrease.",
+      "visual_hook": "Animate water particles flowing from a wide tube into a narrow one. Show them speeding up, then show a pressure gauge dropping as speed rises.",
+      "misconception": "Faster fluid does not mean higher pressure; in a horizontal flow, faster fluid means lower pressure.",
+      "solution_review_status": "concept-checked-pending-owner-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 40, The flow of wet water",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "narration": {
+        "vertical": "When water enters a narrow pipe, it must speed up to keep the flow rate constant. As it speeds up, its pressure actually drops.",
+        "horizontal": "This is the continuity equation and Bernoulli's principle in action. Because water is incompressible, the same volume must pass through every cross-section per second. So when the pipe narrows, the water must move faster. But energy must be conserved. Bernoulli's equation tells us that for a horizontal flow, an increase in kinetic energy (speed) must be balanced by a decrease in pressure energy. This is why fast-moving fluids exert less pressure."
+      }
+    },
+    {
+      "id": "b003-e03-magnetic-radius",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "The circular path of a moving electron",
+      "topic_id": "magnetism",
+      "question": "An electron moves at 10^6 m/s perpendicular to a 0.1 T magnetic field. What is the radius of its circular path? (m=9x10^-31 kg, e=1.6x10^-19 C)",
+      "answer": "5.6 x 10^-5 m.",
+      "solution": "Magnetic force provides centripetal force: qvB = mv^2/r => r = mv/qB. r = (9e-31 * 1e6) / (1.6e-19 * 0.1) = 5.625e-5 m.",
+      "visual_hook": "Show the electron entering the magnetic field region. The velocity arrow and force arrow are always perpendicular, tracing a perfect circle.",
+      "misconception": "A magnetic field does no work; it changes the direction of velocity, not the speed.",
+      "solution_review_status": "assistant-calculation-checked-pending-owner-subject-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume II",
+        "section": "Chapter 29, The motion of charges in electric and magnetic fields",
+        "local_path": "book/V2 - feynman-lectures-on-physics-vol 2 -electromagnetism-and-matter - volume 2 (1).md"
+      },
+      "problem_spec": {
+        "problem_id": "b003-e03-magnetic-radius",
+        "source_id": "project-original",
+        "concept_id": "physics:magnetism",
+        "model_type": "charged-particle-in-b-field",
+        "unit_system": "SI",
+        "assumptions": [
+          "The magnetic field is uniform.",
+          "The velocity is exactly perpendicular to the field.",
+          "Relativistic effects are negligible."
+        ],
+        "inputs": {
+          "velocity_m_per_s": 1000000,
+          "magnetic_field_T": 0.1,
+          "mass_kg": 9e-31,
+          "charge_C": 1.6e-19
+        },
+        "expected_outputs": {
+          "radius_m": 5.625e-5
+        }
+      },
+      "narration": {
+        "vertical": "A magnetic field bends the path of a moving charge into a circle. The radius depends on the mass, speed, charge, and field strength.",
+        "horizontal": "When a charged particle moves perpendicular to a magnetic field, the magnetic force is always perpendicular to its velocity. This force acts as a centripetal force, bending the path into a circle without changing the speed. Setting the magnetic force qvB equal to the centripetal force mv^2/r, we solve for the radius r = mv/qB. Plugging in the values for the electron gives a radius of about 56 micrometers."
+      }
+    },
+    {
+      "id": "b003-e04-lenz-law",
+      "type": "concept",
+      "status": "approved-for-storyboarding",
+      "title": "Why does a changing magnetic field push back?",
+      "topic_id": "em_induction",
+      "question": "When a magnet's north pole approaches a conducting loop, why does the loop repel the magnet?",
+      "answer": "The changing flux induces a current that creates a magnetic field opposing the change (Lenz's Law). The loop acts like a north pole facing the magnet.",
+      "solution": "Flux into the loop increases. Induced current creates a field pointing out of the loop to oppose the increase. By right-hand rule, this current makes the near face a north pole, repelling the approaching north pole.",
+      "visual_hook": "Animate a bar magnet moving toward a loop. Show the increasing field lines, then the induced current arrows, and finally the repulsive force arrow pushing back on the magnet.",
+      "misconception": "Induction doesn't just create current; it creates a magnetic field that actively fights the change that caused it.",
+      "solution_review_status": "concept-checked-pending-owner-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume II",
+        "section": "Chapter 16, Induced currents",
+        "local_path": "book/V2 - feynman-lectures-on-physics-vol 2 -electromagnetism-and-matter - volume 2 (1).md"
+      },
+      "narration": {
+        "vertical": "Lenz's Law says nature hates change. When a magnet approaches a loop, the loop creates its own magnetic field to push the magnet away.",
+        "horizontal": "This is Lenz's Law, a consequence of the conservation of energy. As the north pole of a magnet approaches a conducting loop, the magnetic flux through the loop increases. The loop responds by inducing a current that creates its own magnetic field pointing in the opposite direction, trying to cancel the increase. By the right-hand rule, this induced current makes the face of the loop nearest the magnet act like a north pole. Two north poles repel, so you must do work to push the magnet in. That work is exactly what becomes the electrical energy in the loop."
+      }
+    },
+    {
+      "id": "b003-e05-critical-angle",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "When does light get trapped inside glass?",
+      "topic_id": "optics",
+      "question": "Light travels from glass (n=1.5) to water (n=1.33). What is the critical angle for total internal reflection?",
+      "answer": "62.5 degrees.",
+      "solution": "sin(c) = n2/n1 = 1.33/1.5 = 0.8867. c = arcsin(0.8867) ≈ 62.5°.",
+      "visual_hook": "Show a light ray hitting the boundary. As the angle increases, the refracted ray bends closer to the surface until it disappears and the ray reflects entirely back into the glass.",
+      "misconception": "Total internal reflection only happens when light moves from a higher refractive index to a lower one.",
+      "solution_review_status": "formula-checked-pending-owner-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 27, Geometrical optics",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "problem_spec": {
+        "problem_id": "b003-e05-critical-angle",
+        "source_id": "project-original",
+        "concept_id": "physics:optics",
+        "model_type": "snells-law",
+        "unit_system": "SI",
+        "assumptions": [
+          "The boundary between glass and water is flat.",
+          "Light travels from the optically denser medium (glass) to the rarer medium (water)."
+        ],
+        "inputs": {
+          "refractive_index_1": 1.5,
+          "refractive_index_2": 1.33
+        },
+        "expected_outputs": {
+          "critical_angle_degrees": 62.46
+        }
+      },
+      "narration": {
+        "vertical": "When light tries to leave glass for water at a steep angle, it bounces back entirely. This is total internal reflection.",
+        "horizontal": "When light travels from a medium with a higher refractive index, like glass, to one with a lower index, like water, it bends away from the normal. As you increase the angle of incidence, the refracted ray bends more and more until it skims the surface. This specific angle is the critical angle. Beyond it, no light can escape; it is all reflected back inside. Using Snell's law, sin(c) = n2/n1 = 1.33/1.5, which gives a critical angle of about 62.5 degrees. This is the principle behind fiber optic cables."
+      }
     }
   ]
 }
