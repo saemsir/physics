@@ -2,12 +2,26 @@
   "batch_id": "batch_003",
   "status": "approved-for-storyboarding",
   "narration_language": "english",
+  "brand": {
+    "name": "Saem Physics",
+    "tagline": "NEET JEE MIT"
+  },
+  "audience": {
+    "minimum_age": 14,
+    "maximum_age": 21
+  },
   "episodes": [
     {
       "id": "collision_01",
-      "title": "The Physics of Perfect Collisions",
+      "status": "approved-for-storyboarding",
       "type": "concept",
+      "title": "The Physics of Perfect Collisions",
       "topic_id": "laws_of_motion",
+      "question": "What happens to momentum and kinetic energy when two identical objects collide elastically?",
+      "answer": "Momentum and kinetic energy are both conserved. The moving object stops, and the stationary object takes all the momentum and energy.",
+      "solution": "By conservation of momentum: m*v1 = m*v2'. By conservation of kinetic energy: 0.5*m*v1^2 = 0.5*m*v2'^2. Solving both equations gives v1' = 0 and v2' = v1.",
+      "visual_hook": "Two identical billiard balls on a frictionless surface, one moving toward the other.",
+      "misconception": "Students often think both balls bounce back or that energy is lost in the collision.",
       "concept_ids": ["physics:laws_of_motion", "math:vectors"],
       "duration_seconds": 45,
       "narration": {
@@ -17,7 +31,17 @@
     }
   ],
   "video_outputs": [
-    { "format": "vertical" },
-    { "format": "horizontal" }
+    {
+      "format": "vertical",
+      "count": 1,
+      "duration_seconds": 60,
+      "aspect_ratio": "9:16"
+    },
+    {
+      "format": "horizontal",
+      "count": 1,
+      "duration_seconds": 180,
+      "aspect_ratio": "16:9"
+    }
   ]
 }
