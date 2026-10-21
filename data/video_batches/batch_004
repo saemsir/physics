@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "batch_id": "batch_002",
+  "status": "approved-for-storyboarding",
+  "narration_language": "english",
+  "source_file": "data/practice_papers/jee_advanced_2027_physics_set_01.json",
+  "originality_note": "All episode questions, examples, explanations, and visual directions are original drafts. Feynman references identify underlying ideas only; no textbook question, prose, or figure is reproduced.",
+  "audience": {
+    "minimum_age": 14,
+    "maximum_age": 21,
+    "level": "senior-secondary Physics through JEE Advanced practice; define symbols, assumptions, signs, and units"
+  },
+  "brand": {
+    "name": "Saem Physics",
+    "tagline": "NEET JEE MIT",
+    "logo_asset": "",
+    "logo_asset_status": "text-only-pending-user-supplied-logo"
+  },
+  "video_outputs": [
+    {
+      "format": "vertical",
+      "count": 10,
+      "duration_seconds": 60,
+      "aspect_ratio": "9:16"
+    },
+    {
+      "format": "horizontal",
+      "count": 10,
+      "duration_seconds": 180,
+      "aspect_ratio": "16:9"
+    }
+  ],
+  "visual_direction": "Create original Saem Physics visuals: a deep, high-contrast canvas; a small, consistent semantic color palette; animated geometric diagrams; equations that appear only when their physical meaning is clear; and unit checks visible in the reasoning. Build each explanation from an intuitive physical question, then derive and check the result in plain language.",
+  "episodes": [
+    {
+      "id": "b002-e01-collision-spring",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "One collision, then one compression",
+      "topic_id": "work_energy",
+      "question": "A 1 kg cart moving at 6 m/s sticks to a stationary 2 kg cart. The combined carts then compress a spring of constant 600 N/m on a frictionless track. Find the maximum compression.",
+      "answer": "The carts move at 2 m/s just after impact; the maximum spring compression is 0.141 m.",
+      "solution": "Momentum gives (1)(6) = (1 + 2)v, so v = 2 m/s. The joined carts have 6 J of kinetic energy. During compression (1/2)(600)x^2 = 6, so x = sqrt(0.02) = 0.141 m.",
+      "visual_hook": "Separate the event into two panels: an impulse-and-momentum snapshot for the collision, then a growing spring-energy bar for the later compression.",
+      "misconception": "Do not conserve kinetic energy through the sticking collision; do not apply the later spring-energy equation during impact.",
+      "solution_review_status": "assistant-calculation-checked-pending-owner-subject-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 10, Conservation of momentum",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "manual_audit": {
+        "model": "perfectly-inelastic-collision",
+        "mass_1_kg": 1,
+        "velocity_1_m_per_s": 6,
+        "mass_2_kg": 2,
+        "velocity_2_m_per_s": 0,
+        "expected_common_velocity_m_per_s": 2,
+        "expected_initial_kinetic_energy_j": 18,
+        "expected_final_kinetic_energy_j": 6
+      },
+      "narration": {
+        "vertical": "A moving cart hits a stationary one and they stick. Momentum is conserved but kinetic energy is not. The combined mass then compresses a spring, converting kinetic energy to spring energy.",
+        "horizontal": "Let's solve this in two stages. First, the collision: momentum is conserved because external impulse is negligible. The two carts stick, so kinetic energy is lost. Second, the compression: now mechanical energy is conserved as kinetic energy becomes spring potential energy. We must use the right conservation law at each stage."
+      }
+    },
+    {
+      "id": "b002-e02-rotating-rod",
+      "type": "concept",
+      "status": "approved-for-storyboarding",
+      "title": "A falling rod does not rotate at a steady rate",
+      "topic_id": "rotation",
+      "question": "A uniform rod is released from horizontal about a frictionless hinge. What sets its initial angular acceleration, and why does that acceleration change as it falls?",
+      "answer": "At release, alpha = 3g/(2L). As the rod turns, the lever arm of gravity changes, so angular acceleration is not constant.",
+      "solution": "Initial torque is MgL/2 about the hinge. Moment of inertia is ML^2/3. So alpha = (MgL/2)/(ML^2/3) = 3g/(2L). The changing angle changes the perpendicular lever arm.",
+      "visual_hook": "Rotate a rod from horizontal while a gravity arrow stays vertical; show the perpendicular lever arm shrinking as the angle changes.",
+      "misconception": "Angular acceleration is not constant just because gravitational acceleration is constant.",
+      "solution_review_status": "formula-checked-pending-owner-subject-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 18, Rotation in two dimensions",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "narration": {
+        "vertical": "A hinged rod falls, but not at a steady rate. The torque depends on the angle, so angular acceleration changes as it rotates.",
+        "horizontal": "Consider a uniform rod hinged at one end, released from horizontal. The torque about the hinge is Mg times the perpendicular distance from the hinge to the line of gravity. Initially that distance is L/2, giving maximum torque. As the rod falls, the lever arm shrinks, so torque and angular acceleration both decrease."
+      }
+    },
+    {
+      "id": "b002-e03-charge-symmetry",
+      "type": "concept",
+      "status": "approved-for-storyboarding",
+      "title": "Zero field can coexist with nonzero potential",
+      "topic_id": "electrostatics",
+      "question": "At the midpoint between two identical positive charges, why can the electric field be zero while the electric potential is positive?",
+      "answer": "The equal field vectors point in opposite directions and cancel. The two positive scalar potentials add, so the midpoint potential is positive.",
+      "solution": "Field vectors from each charge are equal and opposite at the midpoint, so they cancel. Potential is a scalar: V = kq/r + kq/r = 2kq/r, which is positive.",
+      "visual_hook": "Bring two equal outward field arrows to a midpoint where they cancel, then stack two positive potential contributions into one nonzero bar.",
+      "misconception": "Electric field and electric potential are different quantities and obey different addition rules.",
+      "solution_review_status": "concept-checked-pending-owner-subject-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume II",
+        "section": "Chapter 4, Electrostatics",
+        "local_path": "book/V2 - feynman-lectures-on-physics-vol 2 -electromagnetism-and-matter - volume 2 (1).md"
+      },
+      "narration": {
+        "vertical": "At the midpoint between two equal positive charges, the electric field is zero but the potential is not. Field is a vector; potential is a scalar.",
+        "horizontal": "This is one of the most important distinctions in electrostatics. The electric field is a vector quantity, so at the midpoint between two identical charges the two field arrows point in opposite directions and cancel exactly. But electric potential is a scalar, so the two positive contributions simply add. A zero vector sum does not imply a zero scalar sum."
+      }
+    },
+    {
+      "id": "b002-e04-circuit-branches",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "Find the current in the smaller branch",
+      "topic_id": "current_electricity",
+      "question": "A 12 V battery feeds a 2 ohm resistor in series with parallel 6 ohm and 3 ohm branches. Find the current in the 3 ohm branch.",
+      "answer": "2 A.",
+      "solution": "Parallel pair is 2 ohm, total resistance is 4 ohm, series current is 3 A. The 2 ohm series resistor drops 6 V, leaving 6 V across each parallel branch. The 3 ohm branch current is 6/3 = 2 A.",
+      "visual_hook": "Collapse the parallel network into one equivalent resistor, then expand it and show the same branch voltage across both paths.",
+      "misconception": "Parallel branches share voltage, not current; the branch currents are set by their individual resistances.",
+      "solution_review_status": "assistant-calculation-checked-pending-owner-subject-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume II",
+        "section": "Chapter 25, Electric circuits",
+        "local_path": "book/V2 - feynman-lectures-on-physics-vol 2 -electromagnetism-and-matter - volume 2 (1).md"
+      },
+      "narration": {
+        "vertical": "In a circuit with parallel branches, voltage is shared, not current. Each branch current depends on its own resistance.",
+        "horizontal": "To solve this circuit, first reduce the parallel network to its equivalent resistance. The 6 ohm and 3 ohm resistors in parallel give 2 ohms. Add the series 2 ohm resistor for a total of 4 ohms. The battery drives 3 A through the series path. The 2 ohm series resistor drops 6 V, leaving 6 V across the parallel pair. Since parallel branches share voltage, each branch sees 6 V. The 3 ohm branch therefore carries 6/3 = 2 A."
+      }
+    },
+    {
+      "id": "b002-e05-first-law-boundary",
+      "type": "concept",
+      "status": "approved-for-storyboarding",
+      "title": "Heat enters; work leaves; energy stays accounted for",
+      "topic_id": "thermodynamics",
+      "question": "When a monatomic ideal gas expands at constant pressure while absorbing heat, how much energy raises its internal energy and how much becomes expansion work?",
+      "answer": "For one mole, deltaU = (3/2)R deltaT and work is R deltaT, so Q = (5/2)R deltaT. Three fifths of Q raises internal energy and two fifths leaves as work.",
+      "solution": "At constant pressure W = p deltaV = nR deltaT. For monatomic ideal gas deltaU = (3/2)nR deltaT. First law gives Q = deltaU + W = (5/2)nR deltaT.",
+      "visual_hook": "Draw a system boundary around the gas; animate incoming heat splitting into an internal-energy bar and the shaded area under a pressure-volume path.",
+      "misconception": "Heat is energy in transit across a system boundary; it is not a state variable stored inside the gas.",
+      "solution_review_status": "concept-checked-pending-owner-subject-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 44, The laws of thermodynamics",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "narration": {
+        "vertical": "When a gas absorbs heat at constant pressure, the energy splits: some raises internal energy, some does expansion work. The first law keeps the ledger balanced.",
+        "horizontal": "Choose the gas as the system and draw a clear boundary. Heat crosses that boundary into the system. The gas then does work on the piston as it expands. The first law of thermodynamics says the heat in equals the increase in internal energy plus the work out. For a monatomic ideal gas at constant pressure, three fifths of the heat raises the internal energy and two fifths leaves as expansion work."
+      }
+    },
+    {
+      "id": "b002-e06-shm-kinematics",
+      "type": "concept",
+      "status": "approved-for-storyboarding",
+      "title": "At the midpoint, the oscillator is not half-speed",
+      "topic_id": "oscillations_waves",
+      "question": "At displacement x = A/2 in simple harmonic motion, what fraction of the total energy is kinetic, and why is the speed not simply half its maximum?",
+      "answer": "The kinetic-energy fraction is 3/4 and the speed is sqrt(3)/2 of the maximum speed omega A.",
+      "solution": "For a spring oscillator, total energy is (1/2)kA^2 and potential energy at x is (1/2)kx^2. At x = A/2, potential energy is one quarter of the total, leaving three quarters kinetic. Using v^2 = omega^2(A^2 - x^2) gives speed sqrt(3)/2 omega A.",
+      "visual_hook": "Move a dot on a sinusoidal position graph while a pair of energy bars exchange height; keep total bar height constant.",
+      "misconception": "Displacement is not proportional to speed in SHM; speed is greatest at equilibrium and zero at the turning points.",
+      "solution_review_status": "formula-checked-pending-owner-subject-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 21, The harmonic oscillator",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "narration": {
+        "vertical": "In simple harmonic motion, at half the amplitude the speed is not half the maximum. Energy is split between kinetic and potential in a nonlinear way.",
+        "horizontal": "At displacement x = A/2, the potential energy is (1/2)k(A/2)^2 = (1/8)kA^2, which is one quarter of the total energy (1/2)kA^2. So three quarters of the energy is kinetic. Since kinetic energy is proportional to v^2, the speed is sqrt(3/4) = sqrt(3)/2 of the maximum speed, not 1/2. This is because energy depends on the square of both displacement and velocity."
+      }
+    },
+    {
+      "id": "b002-e07-thin-lens",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "The image is twice as tall and inverted",
+      "topic_id": "optics",
+      "question": "A 3 cm object is 30 cm from a converging lens with focal length 20 cm. Find the image distance, orientation, and image height.",
+      "answer": "The real image is 60 cm on the far side, inverted, and 6 cm tall.",
+      "solution": "The lens equation gives 1/v = 1/20 - 1/30 = 1/60, so v = 60 cm. Magnification is -v/u = -2, so the image is inverted and twice the object's height: 6 cm.",
+      "visual_hook": "Construct the image with two rays; move the object across the focal point and watch the image cross from virtual to real.",
+      "misconception": "The negative magnification marks inversion; the image height magnitude is 6 cm, not negative physical size.",
+      "solution_review_status": "assistant-calculation-checked-pending-owner-subject-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 27, Geometrical optics",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "narration": {
+        "vertical": "A converging lens forms a real, inverted image when the object is outside the focal point. The lens equation relates object distance, image distance, and focal length.",
+        "horizontal": "Use the thin lens equation: 1/f = 1/u + 1/v. With f = 20 cm and u = 30 cm, we get 1/v = 1/20 - 1/30 = 1/60, so v = 60 cm. The magnification is m = -v/u = -60/30 = -2. The negative sign means the image is inverted, and the magnitude 2 means it's twice as tall as the object: 2 × 3 cm = 6 cm. The image is real because v is positive."
+      }
+    },
+    {
+      "id": "b002-e08-isobaric-gas-work",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "Read work from a constant-pressure path",
+      "topic_id": "thermodynamics",
+      "question": "Two moles of an ideal gas warm from 300 K to 450 K at constant pressure. With R = 8.31 J/(mol K), find the work done by the gas.",
+      "answer": "2.49 kJ.",
+      "solution": "At constant pressure, W = p deltaV. From the ideal-gas law, p deltaV = nR deltaT. Thus W = (2)(8.31)(150) = 2493 J, or 2.49 kJ.",
+      "visual_hook": "Show the gas path as a horizontal line on a pressure-volume graph; shade the rectangular area under the path and label it as work.",
+      "misconception": "Work is the signed area under the p-V path, not simply the final pressure or the temperature change.",
+      "solution_review_status": "assistant-calculation-checked-pending-owner-subject-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 44, The laws of thermodynamics",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
+      "narration": {
+        "vertical": "At constant pressure, the work done by a gas equals pressure times change in volume. Using the ideal gas law, this becomes nR times change in temperature.",
+        "horizontal": "For an isobaric process, work W = p deltaV. From the ideal gas law pV = nRT, at constant pressure p deltaV = nR deltaT. So W = nR deltaT = (2 mol)(8.31 J/mol·K)(150 K) = 2493 J, or about 2.49 kJ. On a p-V diagram, this work is the rectangular area under the horizontal path. The gas expands as it warms, so the work done by the gas is positive."
+      }
+    },
+    {
+      "id": "b002-e09-photoelectric-stop",
+      "type": "problem",
+      "status": "approved-for-storyboarding",
+      "title": "Which voltage stops the fastest photoelectrons?",
+      "topic_id": "modern_physics",
+      "question": "Photons of energy 5.0 eV illuminate a metal with a 2.0 eV work function. Find the maximum electron kinetic energy and the magnitude of the stopping potential.",
+      "answer": "3.0 eV and 3.0 V.",
+      "solution": "One photon supplies 5.0 eV; 2.0 eV is required to escape the metal. The maximum kinetic energy is 5.0 - 2.0 = 3.0 eV. A stopping potential of 3.0 V removes 3.0 eV of kinetic energy per electron charge.",
+      "visual_hook": "Show a photon-energy bar split into work-function and electron-kinetic parts, then use a retarding voltage to reduce the electron's kinetic-energy bar to zero.",
+      "misconception": "The work function is an energy threshold; it is subtracted from photon energy before finding the stopping voltage.",
+      "solution_review_status": "assistant-calculation-checked-pending-owner-subject-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume III",
+        "section": "The dependence of amplitudes on time; photoelectric effect",
+        "local_path": "book/V3- Feynman Lectures vol 3 on Quantum Mechanics 3.md"
+      },
+      "narration": {
+        "vertical": "In the photoelectric effect, photon energy minus work function gives the electron's maximum kinetic energy. The stopping potential equals that energy in electron-volts.",
+        "horizontal": "Einstein's photoelectric equation: K_max = hf - phi, where phi is the work function. Here K_max = 5.0 eV - 2.0 eV = 3.0 eV. The stopping potential V_stop is the voltage needed to bring the fastest electrons to rest: eV_stop = K_max, so V_stop = 3.0 V. This is a direct test of the quantum nature of light: the kinetic energy depends on photon frequency, not intensity."
+      }
+    },
+    {
+      "id": "b002-e10-electron-wavelength",
+      "type": "concept",
+      "status": "approved-for-storyboarding",
+      "title": "A particle can carry a wavelength",
+      "topic_id": "modern_physics",
+      "question": "Why does an electron accelerated through a voltage acquire a shorter de Broglie wavelength as the voltage increases?",
+      "answer": "The electron gains kinetic energy eV and momentum sqrt(2meV). Since lambda = h/p, its wavelength decreases as 1/sqrt(V).",
+      "solution": "Treat the electric field as an energy transfer: eV = p^2/(2m). Solve for momentum, p = sqrt(2meV), then use lambda = h/p. Doubling the accelerating voltage does not halve the wavelength; it changes it by a factor 1/sqrt(2).",
+      "visual_hook": "Increase the accelerating-voltage slider; draw the electron's momentum arrow longer while the wave crests squeeze closer together.",
+      "misconception": "Momentum grows with the square root of voltage, so wavelength does too in the inverse direction; the dependence is not 1/V.",
+      "solution_review_status": "formula-checked-pending-owner-subject-review",
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume III",
+        "section": "Quantum behavior of particles; de Broglie wavelength",
+        "local_path": "book/V3- Feynman Lectures vol 3 on Quantum Mechanics 3.md"
+      },
+      "narration": {
+        "vertical": "An electron accelerated through a voltage gains momentum, and its de Broglie wavelength shrinks. Higher voltage means shorter wavelength.",
+        "horizontal": "The de Broglie relation lambda = h/p connects a particle's wavelength to its momentum. When an electron is accelerated through voltage V, it gains kinetic energy eV = p^2/(2m), so p = sqrt(2meV). Therefore lambda = h/sqrt(2meV). The wavelength decreases as 1/sqrt(V), not as 1/V. This is why electron microscopes use high accelerating voltages: shorter wavelengths give better resolution."
+      }
+    }
+  ]
+}
