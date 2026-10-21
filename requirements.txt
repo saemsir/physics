@@ -20,7 +20,3 @@ scipy>=1.10.0
 
 # Audio processing (optional, for advanced features)
 soundfile>=0.12.0
-
-# Optional: For local voice cloning (install manually with: pip install -r requirements-local.txt)
-# torch
-# TTS
