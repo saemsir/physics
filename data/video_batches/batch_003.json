@@ -24,6 +24,11 @@
       "misconception": "Students often think both balls bounce back or that energy is lost in the collision.",
       "concept_ids": ["physics:laws_of_motion", "math:vectors"],
       "duration_seconds": 45,
+      "reference": {
+        "title": "The Feynman Lectures on Physics, Volume I",
+        "section": "Chapter 10, Conservation of momentum",
+        "local_path": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md"
+      },
       "narration": {
         "vertical": "When two objects crash, momentum is never lost, only transferred. In a perfectly elastic collision, they bounce apart with the exact same total energy they started with.",
         "horizontal": "Let's visualize a perfectly elastic collision. Imagine two identical billiard balls. One is moving, the other is still. When they collide, the first ball stops completely, and the second ball shoots forward with the exact same speed. Why? Because both momentum and kinetic energy must be conserved. The universe doesn't lose energy; it just passes it along."
