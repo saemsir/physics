@@ -43,7 +43,7 @@ def main():
     try:
         # FIXED: Using the correct, valid model name
         response = client.models.generate_content(
-            model="gemini-1.5-flash-latest", 
+            model="gemini-2.0-flash-exp", 
             contents=f"{system_instruction}\n\nUser brief: {prompt}"
         )
         raw_text = response.text.strip()
