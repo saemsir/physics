@@ -22,6 +22,7 @@
       "solution": "By conservation of momentum: m*v1 = m*v2'. By conservation of kinetic energy: 0.5*m*v1^2 = 0.5*m*v2'^2. Solving both equations gives v1' = 0 and v2' = v1.",
       "visual_hook": "Two identical billiard balls on a frictionless surface, one moving toward the other.",
       "misconception": "Students often think both balls bounce back or that energy is lost in the collision.",
+      "solution_review_status": "concept-checked-pending-owner-review",
       "concept_ids": [
         "physics:laws_of_motion",
         "math:vectors"
