@@ -136,7 +136,7 @@ def render(
         "quality": quality,
         "fps": fps,
         "narration": narration,
-        "voice_name": voice_name if narration == "google" else None,
+        "voice_name": voice_name if narration == "google" else ("saem-clone" if narration == "local" else None),
         "completed": [],
     }
     with tempfile.TemporaryDirectory(prefix="saemphysics-batch-plan-") as plan_dir:
@@ -145,16 +145,20 @@ def render(
         with tempfile.TemporaryDirectory(prefix="saemphysics-manim-") as media_dir:
             for item in selected:
                 destination = output_dir / f"{item['video_id']}.mp4"
+                
+                # Support both google and local for script extraction
                 narration_script = (
-                    narration_text(item) if narration == "google" else None
+                    narration_text(item) if narration in ("google", "local") else None
                 )
+                expected_voice_tag = voice_name if narration == "google" else "saem-clone"
                 narration_signature = (
                     hashlib.sha256(
-                        f"{voice_name}\0{narration_script}".encode("utf-8")
+                        f"{expected_voice_tag}\0{narration_script}".encode("utf-8")
                     ).hexdigest()
                     if narration_script is not None
                     else None
                 )
+                
                 if resume and destination.is_file():
                     metadata = _probe(destination)
                     contract_matches = (metadata["width"], metadata["height"]) == (
@@ -168,7 +172,7 @@ def render(
                         )
                     narration_matches = not metadata["has_audio"]
                     sidecar = destination.with_suffix(".narration.json")
-                    if narration == "google" and metadata["has_audio"]:
+                    if narration in ("google", "local") and metadata["has_audio"]:
                         try:
                             sidecar_data = json.loads(
                                 sidecar.read_text(encoding="utf-8")
@@ -176,7 +180,7 @@ def render(
                             narration_matches = isinstance(
                                 sidecar_data, dict
                             ) and (
-                                sidecar_data.get("voice_name") == voice_name
+                                sidecar_data.get("voice_name") == expected_voice_tag
                                 and sidecar_data.get("script_sha256")
                                 == narration_signature
                             )
@@ -189,9 +193,7 @@ def render(
                                 "path": destination.name,
                                 **metadata,
                                 "narration": narration,
-                                "voice_name": (
-                                    voice_name if narration == "google" else None
-                                ),
+                                "voice_name": expected_voice_tag,
                                 "sha256": _sha256(destination),
                                 "resumed": True,
                             }
@@ -265,6 +267,7 @@ def render(
                     "voice_name": None,
                     "narration_cached": False,
                 }
+                
                 if narration == "google":
                     text = narration_script or ""
                     language = batch["narration_language"]
@@ -341,16 +344,81 @@ def render(
                             "video; add a fuller format-specific script if desired.",
                             file=sys.stderr,
                         )
+                
+                elif narration == "local":
+                    from tools.local_narration import synthesize_local_wav, VOICE_TAG
+                    
+                    text = narration_script or ""
+                    voice_wav = ROOT / "saem_voice_sample.wav"
+                    cache_dir = output_dir / ".narration-cache"
+                    
+                    audio_path, cached = synthesize_local_wav(text, voice_wav, cache_dir)
+                    audio_metadata = _probe(audio_path)
+                    
+                    if audio_metadata["duration_seconds"] > (item["duration_seconds"] + tolerance):
+                        raise DataValidationError(
+                            f"{item['video_id']} narration is "
+                            f"{audio_metadata['duration_seconds']:.1f}s, longer than "
+                            f"the {item['duration_seconds']}s video; shorten the script."
+                        )
+                    
+                    muxed = destination.with_suffix(".narrated.mp4")
+                    subprocess.run(
+                        [
+                            shutil.which("ffmpeg") or "ffmpeg",
+                            "-v", "error", "-y",
+                            "-i", str(rendered),
+                            "-i", str(audio_path),
+                            "-map", "0:v:0",
+                            "-map", "1:a:0",
+                            "-c:v", "copy",
+                            "-c:a", "aac",
+                            "-b:a", "192k",
+                            "-af", "apad",
+                            "-t", str(item["duration_seconds"]),
+                            str(muxed),
+                        ],
+                        check=True,
+                        cwd=ROOT,
+                    )
+                    muxed_metadata = _probe(muxed)
+                    if not muxed_metadata["has_audio"]:
+                        raise DataValidationError(
+                            f"narration audio is missing from muxed video {muxed}"
+                        )
+                    if abs(muxed_metadata["duration_seconds"] - item["duration_seconds"]) > tolerance:
+                        raise DataValidationError(
+                            f"narrated video {muxed} does not match the duration contract"
+                        )
+                    rendered = muxed
+                    metadata = muxed_metadata
+                    
+                    narration_metadata = {
+                        "narration": "local-voice-clone-xtts",
+                        "narration_duration_seconds": audio_metadata["duration_seconds"],
+                        "narration_words": len(text.split()),
+                        "narration_coverage": round(
+                            audio_metadata["duration_seconds"] / item["duration_seconds"], 3
+                        ),
+                        "voice_name": VOICE_TAG,
+                        "narration_cached": cached,
+                    }
+                    if narration_metadata["narration_coverage"] < 0.75:
+                        print(
+                            f"Warning: {item['video_id']} narration covers "
+                            f"{narration_metadata['narration_coverage']:.0%} of the "
+                            "video; add a fuller format-specific script if desired.",
+                            file=sys.stderr,
+                        )
+
                 shutil.copy2(rendered, destination)
-                if narration == "google":
+                if narration in ("google", "local"):
                     destination.with_suffix(".narration.json").write_text(
                         json.dumps(
                             {
-                                "voice_name": voice_name,
+                                "voice_name": expected_voice_tag,
                                 "script_sha256": narration_signature,
-                                "narration_duration_seconds": (
-                                    narration_metadata["narration_duration_seconds"]
-                                ),
+                                "narration_duration_seconds": narration_metadata["narration_duration_seconds"],
                             },
                             indent=2,
                         ) + "\n",
@@ -399,9 +467,9 @@ def main() -> int:
     parser.add_argument("--quality", choices=("preview", "high"), default="preview")
     parser.add_argument(
         "--narration",
-        choices=("off", "google"),
+        choices=("off", "google", "local"),
         default="off",
-        help="synthesize and mux a Google Cloud TTS narration track",
+        help="synthesize and mux a narration track (local uses offline XTTS voice cloning)",
     )
     parser.add_argument(
         "--voice-name",
