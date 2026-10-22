@@ -1,0 +1,33 @@
+{
+  "history": [
+    {
+      "passed": false,
+      "rule": "missing_dep",
+      "ts": 1792700266
+    }
+  ],
+  "path_events": {
+    "data/video_batches/": [
+      {
+        "check": "batch-plan",
+        "failed": true,
+        "ts": 1792700264
+      }
+    ],
+    "tests/": [
+      {
+        "check": "unittest",
+        "failed": true,
+        "ts": 1792700264
+      }
+    ]
+  },
+  "rules": {
+    "missing_dep": {
+      "applied": 1,
+      "fixed": 0,
+      "last_used": 1792700264
+    }
+  },
+  "schema_version": 1
+}
