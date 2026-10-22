@@ -7,6 +7,7 @@ on:
         description: "Plain-language brief for the studio request"
         required: true
         default: "Create a JEE kinematics lesson plan for reading motion graphs."
+        type: string
       commit_request:
         description: "Commit the generated request for teacher review?"
         required: true
@@ -24,10 +25,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: Install system dependencies for Manim
         run: |
@@ -44,21 +55,30 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_PROMPT: ${{ inputs.prompt }}
           REQUEST_OUTPUT_PATH: config/generated_request.json
-        run: python scripts/gemini_generate_request.py
+        run: |
+          echo "🤖 Generating studio request for prompt:"
+          echo "${GEMINI_PROMPT}"
+          python scripts/gemini_generate_request.py
+          echo "✅ Generated request saved to config/generated_request.json"
 
       - name: Validate generated request
         run: |
+          echo "🔍 Validating generated request against schema..."
           python -m studio_engine validate --request config/generated_request.json
+          echo "✅ Request is valid"
 
       - name: Run studio engine
         run: |
+          echo "🚀 Running studio engine..."
           python -m studio_engine run --request config/generated_request.json
+          echo "✅ Studio engine completed successfully"
 
       - name: Upload run artifacts
         uses: actions/upload-artifact@v4
         with:
           name: studio-run-output
           path: output/studio/
+          retention-days: 30
 
       - name: Commit generated request (optional)
         if: ${{ inputs.commit_request }}
@@ -66,5 +86,22 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add config/generated_request.json
-          git commit -m "chore: add Gemini-generated studio request"
+          git diff --staged --quiet || git commit -m "chore: add Gemini-generated studio request
+
+          Prompt: ${{ inputs.prompt }}"
           git push
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## 🎯 Gemini Studio Automation Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Prompt:** \`${{ inputs.prompt }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Committed:** ${{ inputs.commit_request }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f config/generated_request.json ]; then
+            echo "✅ Generated request: \`config/generated_request.json\`" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ -d output/studio ]; then
+            echo "✅ Studio output: \`output/studio/\`" >> $GITHUB_STEP_SUMMARY
+          fi
