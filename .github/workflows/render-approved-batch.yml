@@ -26,18 +26,19 @@ on:
           - preview
           - high
       narration:
-        description: Narration source (off=silent, google=Cloud TTS, local=XTTS clone)
+        description: "Narration: off=silent, google=Cloud TTS, gemini=Flash TTS (multilingual), local=XTTS clone"
         required: true
         default: off
         type: choice
         options:
           - off
           - google
+          - gemini
           - local
       voice_name:
-        description: Google Cloud Text-to-Speech voice name
-        required: true
-        default: en-US-Neural2-J
+        description: "Voice. Gemini: charon/kore/leda/orus/aoede/puck/zephyr/fenrir. Google: e.g. en-US-Neural2-J. Leave blank for auto."
+        required: false
+        default: ""
         type: string
 
 permissions:
@@ -123,6 +124,7 @@ jobs:
           QUALITY: ${{ inputs.quality }}
           NARRATION: ${{ inputs.narration }}
           VOICE_NAME: ${{ inputs.voice_name }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           case "$FORMATS" in
             both) set -- vertical horizontal ;;
