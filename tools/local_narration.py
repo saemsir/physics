@@ -16,6 +16,25 @@ def _cache_key(voice: Path, text: str) -> str:
     return hashlib.sha256(f"{digest}\0{text}".encode("utf-8")).hexdigest()
 
 
+def _patch_torch_load_for_coqui() -> None:
+    """PyTorch >= 2.6 defaults torch.load(weights_only=True), which rejects the
+    pickled config objects inside the official Coqui XTTS checkpoint.
+    The checkpoint comes from the official Coqui/Hugging Face hub, so restore
+    the legacy loading behaviour for this synthesis path only."""
+    import torch
+
+    if getattr(torch, "_saem_load_patched", False):
+        return
+    original = torch.load
+
+    def permissive_load(*args, **kwargs):
+        kwargs.setdefault("weights_only", False)
+        return original(*args, **kwargs)
+
+    torch.load = permissive_load
+    torch._saem_load_patched = True
+
+
 def synthesize_local_wav(text: str, voice_wav: Path, cache_dir: Path) -> tuple[Path, bool]:
     """Return (wav_path, was_cached). Weights download once, then cache serves reruns."""
     if not text.strip():
@@ -34,6 +53,7 @@ def synthesize_local_wav(text: str, voice_wav: Path, cache_dir: Path) -> tuple[P
         return cached, True
 
     os.environ.setdefault("COQUI_TOS_AGREED", "1")
+    _patch_torch_load_for_coqui()
     import numpy as np
     import soundfile as sf
     import torch
