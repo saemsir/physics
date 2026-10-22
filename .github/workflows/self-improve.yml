@@ -1,0 +1,91 @@
+name: Self-improve repository
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 1"   # every Monday 03:00 UTC
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  learn:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check unit tests
+        id: tests
+        continue-on-error: true
+        run: python -m unittest discover -s tests > /tmp/tests.log 2>&1
+
+      - name: Check batch manifests
+        id: batches
+        continue-on-error: true
+        run: |
+          : > /tmp/batches.log
+          for f in data/video_batches/batch_*.json; do
+            python -m content_engine batch-plan --manifest "$f" --output /tmp/plan.json >> /tmp/batches.log 2>&1
+          done
+
+      - name: Ingest signals
+        if: always()
+        run: |
+          python tools/repo_learner.py ingest --path tests/ --check unittest \
+            --failed ${{ steps.tests.outcome == 'success' && 0 || 1 }} --error-file /tmp/tests.log
+          python tools/repo_learner.py ingest --path data/video_batches/ --check batch-plan \
+            --failed ${{ steps.batches.outcome == 'success' && 0 || 1 }} --error-file /tmp/batches.log
+
+      - name: Predict risky paths
+        run: |
+          echo "## 🔮 Predicted risk" >> $GITHUB_STEP_SUMMARY
+          python tools/repo_learner.py predict --top 6 | tee -a $GITHUB_STEP_SUMMARY
+
+      - name: Apply safe corrections
+        id: fix
+        run: |
+          cat /tmp/tests.log /tmp/batches.log > /tmp/all.log 2>/dev/null || true
+          python tools/repo_learner.py correct --error-file /tmp/all.log > /tmp/fix.json
+          cat /tmp/fix.json
+          echo "payload=$(cat /tmp/fix.json)" >> $GITHUB_OUTPUT
+
+      - name: Re-test after fix (reinforcement)
+        id: retest
+        if: fromJson(steps.fix.outputs.payload).rule != ''
+        continue-on-error: true
+        run: |
+          python -m unittest discover -s tests > /tmp/re.log 2>&1
+          for f in data/video_batches/batch_*.json; do
+            python -m content_engine batch-plan --manifest "$f" --output /tmp/plan.json >> /tmp/re.log 2>&1
+          done
+
+      - name: Learn outcome
+        if: fromJson(steps.fix.outputs.payload).rule != ''
+        run: |
+          python tools/repo_learner.py outcome \
+            --rule "${{ fromJson(steps.fix.outputs.payload).rule }}" \
+            --passed ${{ steps.retest.outcome == 'success' && 1 || 0 }}
+
+      - name: Commit memory; open PR for code fixes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "saem-sentinel[bot]"
+          git config user.email "saem-sentinel[bot]@users.noreply.github.com"
+          git add data/repo_learner_state.json
+          git commit -m "chore(learner): update centralised state [skip ci]" || true
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            git checkout -b self-improve/${{ github.run_id }}
+            git add -A
+            git commit -m "fix(learner): safe correction via rule ${{ fromJson(steps.fix.outputs.payload).rule }}"
+            git push -u origin self-improve/${{ github.run_id }}
+            gh pr create --title "Self-improve: ${{ fromJson(steps.fix.outputs.payload).rule }}" \
+              --body "Automated safe correction. Teacher review required before merge."
+          else
+            git push origin main || true
+          fi
