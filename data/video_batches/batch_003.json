@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch_id": "batch_003",
   "status": "approved-for-storyboarding",
-  "narration_language": "english",
+  "narration_language": "hindi",
   "source_file": "book/V1- The Feynman Lectures on Physics, Volume 1_ Mainly Mechanics.md",
   "originality_note": "All episode questions, examples, explanations, and visual directions are original drafts. Feynman references identify underlying ideas only; no textbook question, prose, or figure is reproduced.",
   "audience": {
