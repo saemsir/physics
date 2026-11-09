@@ -20,3 +20,4 @@ scipy>=1.10.0
 
 # Audio processing (optional, for advanced features)
 soundfile>=0.12.0
+pymupdf
